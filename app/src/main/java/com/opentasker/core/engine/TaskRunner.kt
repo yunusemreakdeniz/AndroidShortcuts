@@ -1281,6 +1281,9 @@ internal fun actionTimeoutMs(actionType: String): Long = when {
     // Playback and speech suspend until completion; a long sound file or near-limit TTS
     // text legitimately outlives the default 60 s budget.
     actionType == "sound.play" || actionType == "tts.speak" -> MEDIA_ACTION_TIMEOUT_MS
+    // Dialogs wait for a person; each reports its own 9-minute limit first.
+    actionType == "input.ask" || actionType == "menu.choose" ||
+        actionType == "alert.show" || actionType == "result.show" -> MEDIA_ACTION_TIMEOUT_MS
     else -> DEFAULT_ACTION_TIMEOUT_MS
 }
 

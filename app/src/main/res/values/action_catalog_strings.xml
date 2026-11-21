@@ -789,4 +789,42 @@
     <string name="catalog_action_shortcut_publish_field_mode_hint" formatted="false">Dynamic updates immediately; pinned asks the launcher</string>
     <string name="action_option_shortcut_dynamic" formatted="false">Dynamic</string>
     <string name="action_option_shortcut_pinned" formatted="false">Pinned</string>
+    <string name="catalog_category_dialog" formatted="false">Dialog</string>
+    <string name="catalog_action_input_ask_name" formatted="false">Ask for Input</string>
+    <string name="catalog_action_input_ask_description" formatted="false">Show a text field and store what the person types. Cancel stops the task</string>
+    <string name="catalog_action_input_ask_field_title_label" formatted="false">Question</string>
+    <string name="catalog_action_input_ask_field_title_hint" formatted="false">What should the dialog ask?</string>
+    <string name="catalog_action_input_ask_field_message_label" formatted="false">Message</string>
+    <string name="catalog_action_input_ask_field_message_hint" formatted="false">Optional text under the question</string>
+    <string name="catalog_action_input_ask_field_type_label" formatted="false">Input type</string>
+    <string name="catalog_action_input_ask_type_text" formatted="false">Text</string>
+    <string name="catalog_action_input_ask_type_number" formatted="false">Number</string>
+    <string name="catalog_action_input_ask_type_url" formatted="false">URL</string>
+    <string name="catalog_action_input_ask_type_multiline" formatted="false">Multi-line text</string>
+    <string name="catalog_action_input_ask_field_default_label" formatted="false">Default answer</string>
+    <string name="catalog_action_input_ask_field_default_hint" formatted="false">Text already in the field</string>
+    <string name="catalog_action_input_ask_field_var_label" formatted="false">Save answer to</string>
+    <string name="catalog_action_input_ask_field_var_hint" formatted="false">Variable name (default Input)</string>
+    <string name="catalog_action_menu_choose_name" formatted="false">Choose from Menu</string>
+    <string name="catalog_action_menu_choose_description" formatted="false">Show a list and store the item the person taps, with its position. Cancel stops the task</string>
+    <string name="catalog_action_menu_choose_field_title_label" formatted="false">Prompt</string>
+    <string name="catalog_action_menu_choose_field_title_hint" formatted="false">Title above the list</string>
+    <string name="catalog_action_menu_choose_field_items_label" formatted="false">Items</string>
+    <string name="catalog_action_menu_choose_field_items_hint" formatted="false">One item per line</string>
+    <string name="catalog_action_menu_choose_field_var_label" formatted="false">Save choice to</string>
+    <string name="catalog_action_menu_choose_field_var_hint" formatted="false">Variable name (default Choice; position in Choice_index)</string>
+    <string name="catalog_action_alert_show_name" formatted="false">Show Alert</string>
+    <string name="catalog_action_alert_show_description" formatted="false">Show a message with OK and Cancel. Cancel stops the task</string>
+    <string name="catalog_action_alert_show_field_title_label" formatted="false">Title</string>
+    <string name="catalog_action_alert_show_field_title_hint" formatted="false">Alert title</string>
+    <string name="catalog_action_alert_show_field_message_label" formatted="false">Message</string>
+    <string name="catalog_action_alert_show_field_message_hint" formatted="false">Alert text</string>
+    <string name="catalog_action_alert_show_field_cancel_button_label" formatted="false">Show Cancel button</string>
+    <string name="catalog_action_alert_show_field_cancel_button_hint" formatted="false">Off: OK only, and closing the alert continues the task</string>
+    <string name="catalog_action_result_show_name" formatted="false">Show Result</string>
+    <string name="catalog_action_result_show_description" formatted="false">Show text, usually a variable, with OK and Copy</string>
+    <string name="catalog_action_result_show_field_text_label" formatted="false">Text</string>
+    <string name="catalog_action_result_show_field_text_hint" formatted="false">What to show, for example {{ Input }}</string>
+    <string name="catalog_action_result_show_field_title_label" formatted="false">Title</string>
+    <string name="catalog_action_result_show_field_title_hint" formatted="false">Optional title</string>
 </resources>

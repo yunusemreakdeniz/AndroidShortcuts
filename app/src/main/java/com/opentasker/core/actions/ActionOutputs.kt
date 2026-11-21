@@ -349,6 +349,13 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
         output("enabled", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_ENABLED"),
         output("count", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_COUNT"),
     )
+    "input.ask" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Input"),
+    )
+    "menu.choose" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Choice"),
+        output("index", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Choice", suffix = "_index"),
+    )
     "clipboard.get" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var", "result"), defaultName = "Clipboard"),
         output("has_text", ActionValueType.BOOLEAN, nameArgumentKeys = listOf("var", "result"), defaultName = "Clipboard", suffix = "_has_text"),

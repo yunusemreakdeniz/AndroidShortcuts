@@ -75,6 +75,11 @@ object ActionCatalog {
         // which only reads.
         define("sun.times", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::SunTimesAction),
         define("tts.speak", ActionCategory.NOTIFICATION, ActionRetrySafety.NEVER, ::SayAction),
+        // NEVER: each one waits for a person; repeating it would ask them again.
+        define("input.ask", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::AskForInputAction),
+        define("menu.choose", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ChooseFromMenuAction),
+        define("alert.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowAlertAction),
+        define("result.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowResultAction),
         define("flow.wait", ActionCategory.FLOW, ActionRetrySafety.NEVER, ::WaitAction),
         // NEVER, not IDEMPOTENT: "toggle" reads the profile again, so a retry flips it back.
         define("profile.set", ActionCategory.FLOW, ActionRetrySafety.NEVER, ::ProfileStatusAction),

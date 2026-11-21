@@ -51,6 +51,11 @@ object ActionCapabilityRegistry {
         "var.clear",
         "clipboard.get",
         "clipboard.set",
+        // Dialogs: they only show UI and read what the person types or picks.
+        "input.ask",
+        "menu.choose",
+        "alert.show",
+        "result.show",
         "data.read",
         "datetime.format",
         "datetime.parse",

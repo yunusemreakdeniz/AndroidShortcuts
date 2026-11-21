@@ -39,7 +39,7 @@
 - **Profiles, contexts, tasks, actions**. A complete Room-backed automation pipeline with a Compose UI
 - **Companion presence triggers**. User-confirmed CompanionDeviceManager associations emit low-power present/absent events without a scanning loop, with setup-time revocation
 - **7 context families**. Application, Time, Day, Location, State, Event, and Plugin (Locale/Tasker condition)
-- **99 built-in actions** plus engine-handled flow control (`task.run` with named inputs, `task.stop`, `if`/`else`/`end if`, `for each`/`end for`, `try`/`catch`/`end try`, `stop`, `go to` and `anchor`)
+- **103 built-in actions** plus engine-handled flow control (`task.run` with named inputs, `task.stop`, `if`/`else`/`end if`, `for each`/`end for`, `try`/`catch`/`end try`, `stop`, `go to` and `anchor`)
 - **USB device contexts**. Attach/detach event pulses expose bounded device, vendor, product, and class fields for local input-device automations
 - **Template expressions**. Bounded `{{ ... }}` expansion with scoped variables, arrays, JSON paths, string/math/date functions, traces, and strict regex policy
 - **Side-effect-free preflight reviews**. Preview a task or profile with synthetic event variables, expanded inputs, branch decisions, setup gaps, intended effects, and explicit blockers before any action runs
@@ -83,7 +83,7 @@
 - Locale/Tasker condition plugins, polled as first-class context predicates with last-known-state caching, and asked again early when a plugin says its answer changed
 - Home Assistant bridge proof of concept, with bounded outbound JSON webhooks, HTTPS by default, redacted webhook secrets and retries with backoff
 
-### Actions (99 registered + 13 engine-handled)
+### Actions (103 registered + 13 engine-handled)
 
 | Category | Count | Examples |
 |----------|------:|---------|

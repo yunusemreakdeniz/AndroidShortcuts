@@ -1,0 +1,335 @@
+package com.opentasker.core.actions
+
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.text.InputType
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.FrameLayout
+import com.opentasker.core.engine.ActionContext
+import com.opentasker.core.engine.ActionResult
+import com.opentasker.core.model.VariableNamePolicy
+import com.opentasker.core.platform.BackgroundActivityStart
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.withTimeoutOrNull
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicLong
+
+/**
+ * Shortcuts-style steps that talk to the person running the task: ask for text, choose from a
+ * menu, show an alert, show a result. Each one opens [InteractiveDialogActivity] and suspends until
+ * it answers. Dismissing a dialog (Cancel, back, tapping outside) stops the task, the way Apple
+ * Shortcuts does, unless the step is set to continue after failure.
+ */
+internal object InteractiveDialogCoordinator {
+    const val EXTRA_REQUEST_ID = "com.opentasker.dialog.REQUEST_ID"
+    const val EXTRA_KIND = "com.opentasker.dialog.KIND"
+    const val EXTRA_TITLE = "com.opentasker.dialog.TITLE"
+    const val EXTRA_MESSAGE = "com.opentasker.dialog.MESSAGE"
+    const val EXTRA_ITEMS = "com.opentasker.dialog.ITEMS"
+    const val EXTRA_INPUT_TYPE = "com.opentasker.dialog.INPUT_TYPE"
+    const val EXTRA_DEFAULT = "com.opentasker.dialog.DEFAULT"
+    const val EXTRA_CANCELABLE = "com.opentasker.dialog.CANCELABLE"
+
+    const val KIND_INPUT = "input"
+    const val KIND_MENU = "menu"
+    const val KIND_ALERT = "alert"
+    const val KIND_RESULT = "result"
+
+    /** How long the dialog may take to appear before we assume Android blocked it. */
+    private const val SHOW_TIMEOUT_MS = 5_000L
+
+    /** How long a person may take to answer. Below the engine's step timeout for these actions. */
+    const val ANSWER_TIMEOUT_MS = 9 * 60_000L
+
+    private val nextId = AtomicLong(0)
+    private val pending = ConcurrentHashMap<String, Pending>()
+
+    private class Pending(
+        val shown: CompletableDeferred<Unit> = CompletableDeferred(),
+        val answer: CompletableDeferred<DialogAnswer> = CompletableDeferred(),
+    )
+
+    sealed class DialogAnswer {
+        data class Accepted(val text: String = "", val index: Int = -1) : DialogAnswer()
+        data object Dismissed : DialogAnswer()
+    }
+
+    sealed class Outcome {
+        data class Answered(val answer: DialogAnswer) : Outcome()
+        data object NotShown : Outcome()
+        data object TimedOut : Outcome()
+    }
+
+    suspend fun ask(context: Context, fill: Intent.() -> Unit): Outcome {
+        val requestId = "dialog-${nextId.incrementAndGet()}"
+        val entry = Pending()
+        pending[requestId] = entry
+        try {
+            context.startActivity(
+                Intent(context, InteractiveDialogActivity::class.java)
+                    .putExtra(EXTRA_REQUEST_ID, requestId)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    .apply(fill),
+            )
+            // Android silently drops activity starts from the background unless an exemption
+            // applies (a tile, widget, notification or home-screen tap, or the app on screen).
+            withTimeoutOrNull(SHOW_TIMEOUT_MS) { entry.shown.await() } ?: return Outcome.NotShown
+            val answer = withTimeoutOrNull(ANSWER_TIMEOUT_MS) { entry.answer.await() } ?: return Outcome.TimedOut
+            return Outcome.Answered(answer)
+        } finally {
+            pending.remove(requestId)
+            InteractiveDialogActivity.closeIfOpen(requestId)
+        }
+    }
+
+    fun markShown(requestId: String) {
+        pending[requestId]?.shown?.complete(Unit)
+    }
+
+    fun answer(requestId: String, answer: DialogAnswer) {
+        pending[requestId]?.answer?.complete(answer)
+    }
+
+    fun isPending(requestId: String): Boolean = pending.containsKey(requestId)
+}
+
+/** Translucent, non-exported host for the dialogs. It never outlives the step that opened it. */
+class InteractiveDialogActivity : Activity() {
+    private var requestId: String? = null
+    private var dialog: AlertDialog? = null
+    private var answered = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val id = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_REQUEST_ID)
+        if (id == null || !InteractiveDialogCoordinator.isPending(id)) {
+            finish()
+            return
+        }
+        requestId = id
+        open[id] = this
+        InteractiveDialogCoordinator.markShown(id)
+        dialog = buildDialog().also { it.show() }
+    }
+
+    private fun buildDialog(): AlertDialog {
+        val title = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_TITLE).orEmpty()
+        val message = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_MESSAGE).orEmpty()
+        val cancelable = intent.getBooleanExtra(InteractiveDialogCoordinator.EXTRA_CANCELABLE, true)
+        val builder = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_DayNight_Dialog_Alert)
+        if (title.isNotBlank()) builder.setTitle(title)
+        builder.setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed) }
+
+        when (intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_KIND)) {
+            InteractiveDialogCoordinator.KIND_INPUT -> {
+                val field = EditText(this).apply {
+                    setText(intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_DEFAULT).orEmpty())
+                    setSelection(text.length)
+                    inputType = when (intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_INPUT_TYPE)) {
+                        "number" -> InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED
+                        "url" -> InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
+                        "multiline" -> InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                        else -> InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                    }
+                }
+                val padding = (20 * resources.displayMetrics.density).toInt()
+                val frame = FrameLayout(this).apply {
+                    setPadding(padding, padding / 2, padding, 0)
+                    addView(field, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+                }
+                if (message.isNotBlank()) builder.setMessage(message)
+                builder.setView(frame)
+                builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(field.text.toString()))
+                }
+                builder.setNegativeButton(android.R.string.cancel) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+                }
+                return builder.create().also { created ->
+                    created.setOnShowListener {
+                        field.requestFocus()
+                        created.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+                    }
+                }
+            }
+
+            InteractiveDialogCoordinator.KIND_MENU -> {
+                val items = intent.getStringArrayExtra(InteractiveDialogCoordinator.EXTRA_ITEMS).orEmpty()
+                builder.setItems(items) { _, which ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(items[which], which))
+                }
+                builder.setNegativeButton(android.R.string.cancel) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+                }
+            }
+
+            InteractiveDialogCoordinator.KIND_RESULT -> {
+                builder.setMessage(message)
+                builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted())
+                }
+                builder.setNeutralButton(android.R.string.copy) { _, _ ->
+                    getSystemService(ClipboardManager::class.java)
+                        ?.setPrimaryClip(ClipData.newPlainText("OpenTasker", message))
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted())
+                }
+                builder.setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Accepted()) }
+            }
+
+            else -> { // alert
+                if (message.isNotBlank()) builder.setMessage(message)
+                builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted())
+                }
+                if (cancelable) {
+                    builder.setNegativeButton(android.R.string.cancel) { _, _ ->
+                        reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+                    }
+                } else {
+                    builder.setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Accepted()) }
+                }
+            }
+        }
+        return builder.create()
+    }
+
+    private fun reply(answer: InteractiveDialogCoordinator.DialogAnswer) {
+        if (answered) return
+        answered = true
+        requestId?.let { InteractiveDialogCoordinator.answer(it, answer) }
+        finish()
+    }
+
+    override fun onDestroy() {
+        dialog?.setOnDismissListener(null)
+        dialog?.dismiss()
+        dialog = null
+        // Leaving the screen any other way (home, recents) counts as dismissing the dialog.
+        if (!answered && isFinishing) reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+        requestId?.let { open.remove(it, this) }
+        super.onDestroy()
+    }
+
+    companion object {
+        private val open = ConcurrentHashMap<String, InteractiveDialogActivity>()
+
+        /** Closes a dialog whose step already ended (timed out or the task was stopped). */
+        fun closeIfOpen(requestId: String) {
+            open.remove(requestId)?.let { activity ->
+                activity.runOnUiThread {
+                    activity.answered = true
+                    activity.finish()
+                }
+            }
+        }
+    }
+}
+
+private const val MAX_DIALOG_TEXT = 4_000
+private const val MAX_MENU_ITEMS = 100
+private const val MAX_INPUT_CHARS = 16_000
+
+private fun dialogFailure(outcome: InteractiveDialogCoordinator.Outcome): ActionResult.Failure = when (outcome) {
+    InteractiveDialogCoordinator.Outcome.NotShown -> ActionResult.Failure(
+        BackgroundActivityStart.failureMessage("the dialog") +
+            " Running the task from a tile, widget, home-screen shortcut or notification also works.",
+    )
+    InteractiveDialogCoordinator.Outcome.TimedOut -> ActionResult.Failure("no answer within ${InteractiveDialogCoordinator.ANSWER_TIMEOUT_MS / 60_000} minutes")
+    is InteractiveDialogCoordinator.Outcome.Answered -> ActionResult.Failure("cancelled by the user")
+}
+
+private fun dialogOutput(args: Map<String, String>, defaultName: String): String? =
+    VariableNamePolicy.normalize(args["var"]?.takeIf(String::isNotBlank) ?: defaultName)
+
+/** Ask for Input: a text, number, URL or multi-line field; the answer goes into a variable. */
+class AskForInputAction : DeclaredAction(ActionCatalog.require("input.ask")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val title = args["title"].orEmpty().take(MAX_DIALOG_TEXT)
+        val output = dialogOutput(args, "Input") ?: return ActionResult.Failure("invalid output variable")
+        val type = args["type"]?.trim()?.lowercase().orEmpty().ifBlank { "text" }
+        if (type !in setOf("text", "number", "url", "multiline")) {
+            return ActionResult.Failure("type must be text, number, url or multiline")
+        }
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_INPUT)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, title)
+            putExtra(InteractiveDialogCoordinator.EXTRA_MESSAGE, args["message"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_INPUT_TYPE, type)
+            putExtra(InteractiveDialogCoordinator.EXTRA_DEFAULT, args["default"].orEmpty().take(MAX_INPUT_CHARS))
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        val text = answer.text.take(MAX_INPUT_CHARS)
+        if (type == "number" && text.isNotBlank() && text.toDoubleOrNull() == null) {
+            return ActionResult.Failure("the answer is not a number")
+        }
+        ctx.variables.set(output, text)
+        ctx.logger("Ask for Input: ${text.length} characters")
+        return ActionResult.Success
+    }
+}
+
+/** Choose from Menu: one tap picks an item; its text and 1-based position go into variables. */
+class ChooseFromMenuAction : DeclaredAction(ActionCatalog.require("menu.choose")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val items = args["items"].orEmpty()
+            .split('\n')
+            .map(String::trim)
+            .filter(String::isNotEmpty)
+        if (items.isEmpty()) return ActionResult.Failure("the menu has no items")
+        if (items.size > MAX_MENU_ITEMS) return ActionResult.Failure("a menu can hold at most $MAX_MENU_ITEMS items")
+        val output = dialogOutput(args, "Choice") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_MENU)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["title"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_ITEMS, items.map { it.take(MAX_DIALOG_TEXT) }.toTypedArray())
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text)
+        ctx.variables.set("${output}_index", (answer.index + 1).toString())
+        ctx.logger("Choose from Menu: item ${answer.index + 1} of ${items.size}")
+        return ActionResult.Success
+    }
+}
+
+/** Show Alert: a message with OK, and Cancel unless turned off; Cancel stops the task. */
+class ShowAlertAction : DeclaredAction(ActionCatalog.require("alert.show")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val showCancel = args["cancel_button"]?.trim()?.lowercase() != "false"
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_ALERT)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["title"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_MESSAGE, args["message"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_CANCELABLE, showCancel)
+        }
+        (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        return ActionResult.Success
+    }
+}
+
+/** Show Result: shows text (usually a variable) with OK and Copy. */
+class ShowResultAction : DeclaredAction(ActionCatalog.require("result.show")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val text = args["text"] ?: return ActionResult.Failure("missing text")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_RESULT)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["title"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_MESSAGE, text.take(MAX_INPUT_CHARS))
+        }
+        (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        return ActionResult.Success
+    }
+}

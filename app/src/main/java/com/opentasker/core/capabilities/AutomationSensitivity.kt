@@ -40,6 +40,10 @@ data class AutomationRiskSummary(
  */
 object AutomationSensitivityRegistry {
     private val localOnlyActionIds = setOf(
+        "input.ask",
+        "menu.choose",
+        "alert.show",
+        "result.show",
         "var.set",
         "var.set_multiple",
         "var.persist",

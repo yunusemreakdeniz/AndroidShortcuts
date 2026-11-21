@@ -213,6 +213,10 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "screen.off",
     "wake",
     "log",
+    "input.ask",
+    "menu.choose",
+    "alert.show",
+    "result.show",
     -> R.string.action_parameter_summary
     else -> error("No action summary resource declared for $actionId")
 }
@@ -281,6 +285,7 @@ private val wallpaperTargetOptions = listOf(
 
 fun registerActionMetadata() {
     // Built-in actions
+    registerInteractiveActionMetadata()
     ActionMetadataRegistry.register(
         ActionMetadata(
             id = "notify.show",
@@ -1912,6 +1917,70 @@ fun registerActionMetadata() {
             fields = listOf(
                 ActionField("message", R.string.catalog_action_log_field_message_label, FieldType.MULTILINE, required = true),
             )
+        )
+    )
+}
+
+private val inputTypeOptions = listOf(
+    option("text", R.string.catalog_action_input_ask_type_text),
+    option("number", R.string.catalog_action_input_ask_type_number),
+    option("url", R.string.catalog_action_input_ask_type_url),
+    option("multiline", R.string.catalog_action_input_ask_type_multiline),
+)
+
+/** Shortcuts-style steps that ask the person running the task something. */
+private fun registerInteractiveActionMetadata() {
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "input.ask",
+            nameRes = R.string.catalog_action_input_ask_name,
+            descriptionRes = R.string.catalog_action_input_ask_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_input_ask_field_title_label, required = true, hintRes = R.string.catalog_action_input_ask_field_title_hint),
+                ActionField("message", R.string.catalog_action_input_ask_field_message_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_input_ask_field_message_hint),
+                ActionField("type", R.string.catalog_action_input_ask_field_type_label, FieldType.DROPDOWN, options = inputTypeOptions),
+                ActionField("default", R.string.catalog_action_input_ask_field_default_label, hintRes = R.string.catalog_action_input_ask_field_default_hint),
+                ActionField("var", R.string.catalog_action_input_ask_field_var_label, hintRes = R.string.catalog_action_input_ask_field_var_hint, sensitive = false),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "menu.choose",
+            nameRes = R.string.catalog_action_menu_choose_name,
+            descriptionRes = R.string.catalog_action_menu_choose_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_menu_choose_field_title_label, hintRes = R.string.catalog_action_menu_choose_field_title_hint),
+                ActionField("items", R.string.catalog_action_menu_choose_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_menu_choose_field_items_hint),
+                ActionField("var", R.string.catalog_action_menu_choose_field_var_label, hintRes = R.string.catalog_action_menu_choose_field_var_hint, sensitive = false),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "alert.show",
+            nameRes = R.string.catalog_action_alert_show_name,
+            descriptionRes = R.string.catalog_action_alert_show_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_alert_show_field_title_label, required = true, hintRes = R.string.catalog_action_alert_show_field_title_hint),
+                ActionField("message", R.string.catalog_action_alert_show_field_message_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_alert_show_field_message_hint),
+                ActionField("cancel_button", R.string.catalog_action_alert_show_field_cancel_button_label, FieldType.CHECKBOX, hintRes = R.string.catalog_action_alert_show_field_cancel_button_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "result.show",
+            nameRes = R.string.catalog_action_result_show_name,
+            descriptionRes = R.string.catalog_action_result_show_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("text", R.string.catalog_action_result_show_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_result_show_field_text_hint),
+                ActionField("title", R.string.catalog_action_result_show_field_title_label, hintRes = R.string.catalog_action_result_show_field_title_hint),
+            ),
         )
     )
 }
