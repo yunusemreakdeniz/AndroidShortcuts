@@ -94,6 +94,7 @@
 | Media | 11 | play, beep, stop, pause, resume, play/pause, next, previous, rewind, fast forward, mute |
 | System | 7 | vibrate, clipboard set, reboot, lock, screen off, wake, log |
 | Notification | 4 | notify/toast, progress, cancel, TTS speak |
+| Dialog | 4 | ask for input, choose from menu, show alert, show result |
 | Variable | 24 | set variable, set several variables at once, variable clear (one, a pattern or all), clipboard get, contacts lookup, read data (JSON/CSV/XML/HTML), date-time (format/parse/add), text (match, replace or collect regex matches into an array, split, join, substring, length), Tasker's numbered arrays (variable split/join, array push/pop/clear/process), variable convert (sizes, units, dates, Base64, hashes and more), sunrise and sunset times |
 | Flow | 2+13 | wait, profile status; engine: task.run, task.stop, if/else/end if, for each/end for, try/catch/end try, stop, go to, anchor |
 | Plugin | 2 | Locale setting dispatch, Locale condition query |

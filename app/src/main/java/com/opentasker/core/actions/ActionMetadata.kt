@@ -1941,7 +1941,7 @@ private fun registerInteractiveActionMetadata() {
                 ActionField("message", R.string.catalog_action_input_ask_field_message_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_input_ask_field_message_hint),
                 ActionField("type", R.string.catalog_action_input_ask_field_type_label, FieldType.DROPDOWN, options = inputTypeOptions),
                 ActionField("default", R.string.catalog_action_input_ask_field_default_label, hintRes = R.string.catalog_action_input_ask_field_default_hint),
-                ActionField("var", R.string.catalog_action_input_ask_field_var_label, hintRes = R.string.catalog_action_input_ask_field_var_hint, sensitive = false),
+                ActionField("var", R.string.catalog_action_input_ask_field_var_label, hintRes = R.string.catalog_action_input_ask_field_var_hint),
             ),
         )
     )
@@ -1954,7 +1954,7 @@ private fun registerInteractiveActionMetadata() {
             fields = listOf(
                 ActionField("title", R.string.catalog_action_menu_choose_field_title_label, hintRes = R.string.catalog_action_menu_choose_field_title_hint),
                 ActionField("items", R.string.catalog_action_menu_choose_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_menu_choose_field_items_hint),
-                ActionField("var", R.string.catalog_action_menu_choose_field_var_label, hintRes = R.string.catalog_action_menu_choose_field_var_hint, sensitive = false),
+                ActionField("var", R.string.catalog_action_menu_choose_field_var_label, hintRes = R.string.catalog_action_menu_choose_field_var_hint),
             ),
         )
     )
