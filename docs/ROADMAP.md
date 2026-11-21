@@ -28,9 +28,9 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## C. Girdi ve çıktı
 - [x] Metin sor (metin, sayı, URL, çok satır)
 - [x] Menüden seç
-- [ ] Listeden seç (çoklu seçim)
-- [ ] Tarih/saat sor
-- [ ] Dikte et (konuşmayı metne çevir)
+- [x] Listeden seç (çoklu seçim)
+- [x] Tarih/saat sor
+- [x] Dikte et (konuşmayı metne çevir)
 - [~] Paylaş menüsünden girdi (Received Share tetikleyicisi var; kısayol girdisi olarak sunulacak)
 - [ ] Fotoğraf / dosya / kişi seç (sistem seçicileri)
 - [x] Sonucu göster, Uyarı göster
