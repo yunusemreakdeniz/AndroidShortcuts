@@ -1,0 +1,97 @@
+# Kısayollar — Yol haritası
+
+Hedef: Apple Kestirmeler (Shortcuts) ile yapılabilen her şeyi Android'de yapabilmek.
+Temel: [OpenTasker](https://github.com/SysAdminDoc/OpenTasker) (MIT). Tasarım: Kısayollarım, Düzenleyici, Eylem ekle, Otomasyon, Galeri.
+
+İşaretler: `[x]` bitti · `[~]` motor var, Kestirmeler tarzı arayüz/kolaylık eksik · `[ ]` yok.
+Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
+
+## A. Temel ve kimlik
+- [x] OpenTasker'ı geçmişiyle taşı, CI (derleme + 3100+ test + lint), release
+- [x] Diyalog adımları: Metin sor, Menüden seç, Uyarı göster, Sonucu göster
+- [x] Kendi paket adı (`io.github.yunusemreakdeniz.shortcuts`) ve uygulama adı "Kısayollar"
+- [ ] Kalıcı release imzası (repo sırları; kullanıcı izni gerekiyor)
+- [ ] Türkçe arayüz (`values-tr`, ~2.800 metin; %80 eşiği)
+- [ ] Uygulama simgesi ve marka
+
+## B. Arayüz (tasarıma göre)
+- [ ] Kısayollarım: renkli kart ızgarası, arama, tek dokunuşla çalıştır
+- [ ] Kısayol simgesi ve rengi seçici
+- [ ] Düzenleyici: blok görünümü, değişkenler renkli etiket, sürükle-bırak sıralama
+- [ ] Eylem ekle paneli: kategoriler, arama, önerilenler
+- [ ] Otomasyon sekmesi: "Ne zaman → ne yap" kartları, aç/kapat
+- [ ] Galeri: hazır kısayollar ve koleksiyonlar, tek dokunuşla ekle
+- [~] Ana ekrana ekle (shortcut.publish var; düzenleyicide düğme yok)
+- [ ] Ana ekran widget'ı (kısayol ızgarası)
+- [~] Hızlı Ayarlar kutucukları (4 yuva var; kısayol seçimi kolaylaştırılacak)
+
+## C. Girdi ve çıktı
+- [x] Metin sor (metin, sayı, URL, çok satır)
+- [x] Menüden seç
+- [ ] Listeden seç (çoklu seçim)
+- [ ] Tarih/saat sor
+- [ ] Dikte et (konuşmayı metne çevir)
+- [~] Paylaş menüsünden girdi (Received Share tetikleyicisi var; kısayol girdisi olarak sunulacak)
+- [ ] Fotoğraf / dosya / kişi seç (sistem seçicileri)
+- [x] Sonucu göster, Uyarı göster
+- [~] Bildirim göster, Sesli oku (var)
+- [ ] Hızlı bakış (dosya/görsel önizleme)
+
+## D. Değişkenler ve veri
+- [~] Sihirli değişkenler (çıktı değişkenleri var; otomatik adlandırma ve etiket arayüzü)
+- [~] Metin: birleştir, böl, değiştir, eşleştir (var)
+- [~] Liste/dizi, JSON/sözlük okuma (var)
+- [ ] Sözlük oluştur / değer ata
+- [ ] Hesapla (matematik ifadesi) ve sayı biçimlendir
+- [~] Tarih biçimlendir / ekle (var)
+- [ ] Rastgele sayı, listeden rastgele öğe
+- [ ] Base64/URL kodlama, hash (var.convert kısmen)
+
+## E. Akış
+- [~] Eğer / değilse, Her biri için tekrarla, Bekle, Durdur, Kısayol çalıştır (motor var)
+- [ ] N kez tekrarla
+- [ ] Menü dalları (seçeneğe göre farklı adımlar, tek blokta)
+- [ ] Kısayola girdi verip çıktısını alma (task.run girdileri var; çıktı dönüşü)
+
+## F. Web
+- [x] URL aç, HTTP isteği (GET/POST/…), webhook
+- [~] Web sayfası içeriği / HTML'den metin (data.read HTML var)
+- [ ] URL bileşenlerini al, URL kodla
+- [ ] Haritada ara / yol tarifi
+
+## G. Medya ve belgeler
+- [ ] Fotoğraf çek / video kaydet
+- [ ] Görseli yeniden boyutlandır, dönüştür, kırp
+- [ ] QR kod oluştur ve oku
+- [ ] Ses kaydı
+- [~] Müzik kontrolü (oynat/duraklat/sonraki var)
+- [ ] PDF oluştur (metin/görselden)
+- [ ] Metni çevir (çevrimdışı veya servis)
+
+## H. Cihaz
+- [x] Wi-Fi, Bluetooth, Rahatsız etme, parlaklık, ses, fener, duvar kağıdı (var)
+- [ ] Pil seviyesini al, şarj durumu
+- [ ] Ağ bilgisi (SSID, IP), cihaz bilgisi
+- [ ] Karanlık modu aç/kapat (izin gerektirir)
+- [ ] Ekranı kaydet / ekran görüntüsü (kısmen var)
+
+## I. Uygulamalar
+- [x] Uygulama aç, Intent gönder, SMS
+- [ ] E-posta oluştur, telefonla ara, WhatsApp mesajı (intent kolaylıkları)
+- [ ] Takvim etkinliği ekle, hatırlatıcı/not
+- [ ] Alarm ve zamanlayıcı kur
+- [ ] Dosyaya kaydet / dosya paylaş (Paylaşım sayfasını aç)
+
+## J. Otomasyon tetikleyicileri
+- [x] Saat, gün, konum, Wi-Fi, Bluetooth, şarj, uygulama, bildirim, NFC, USB, push (var)
+- [ ] Pil seviyesi eşiği tetikleyicisi (kolay şablon)
+- [ ] Otomasyonu çalıştırmadan önce sor (onay bildirimi)
+
+## K. Paylaşım ve sesli komut
+- [~] Kısayolu dosya olarak dışa/içe aktar (paketler var)
+- [ ] Kısayol bağlantısı / QR ile paylaş
+- [ ] "Hey Google, ... çalıştır" (App Actions / statik kısayollar)
+- [~] MacroDroid ve Tasker içe aktarma (var)
+
+## L. Yenilik turları (liste bitince)
+- Yeni Android sürüm özellikleri, kullanıcı geri bildirimi, performans, UI/UX iyileştirmeleri.

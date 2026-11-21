@@ -67,6 +67,7 @@ build.sh
 # re-include a file whose parent directory is excluded, so `docs/` plus a negation would leave
 # EXTERNAL_INTENTS.md ignored and the README link broken on github.com.
 docs/*
+!docs/ROADMAP.md
 !/docs/EXTERNAL_INTENTS.md
 
 # AI config
