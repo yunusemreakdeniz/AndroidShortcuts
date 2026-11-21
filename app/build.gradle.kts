@@ -230,7 +230,7 @@ android {
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
 
     defaultConfig {
-        applicationId = "com.opentasker.app"
+        applicationId = "io.github.yunusemreakdeniz.shortcuts"
         minSdk = 26
         targetSdk = 37
         versionCode = appVersionCode
