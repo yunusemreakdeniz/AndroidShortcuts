@@ -122,7 +122,10 @@ class InteractiveDialogActivity : Activity() {
         val title = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_TITLE).orEmpty()
         val message = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_MESSAGE).orEmpty()
         val cancelable = intent.getBooleanExtra(InteractiveDialogCoordinator.EXTRA_CANCELABLE, true)
-        val builder = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_DayNight_Dialog_Alert)
+        val night = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+            android.content.res.Configuration.UI_MODE_NIGHT_YES
+        val theme = if (night) android.R.style.Theme_DeviceDefault_Dialog_Alert else android.R.style.Theme_DeviceDefault_Light_Dialog_Alert
+        val builder = AlertDialog.Builder(this, theme)
         if (title.isNotBlank()) builder.setTitle(title)
         builder.setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed) }
 
