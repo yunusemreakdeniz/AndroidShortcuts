@@ -12,10 +12,11 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Kendi paket adı (`io.github.yunusemreakdeniz.shortcuts`) ve uygulama adı "Kısayollar"
 - [ ] Kalıcı release imzası (repo sırları; kullanıcı izni gerekiyor)
 - [ ] Türkçe arayüz (`values-tr`, ~2.800 metin; %80 eşiği)
-- [ ] Uygulama simgesi ve marka
+- [x] Uygulama simgesi, tasarım renkleri (tema), APK adı
 
 ## B. Arayüz (tasarıma göre)
-- [ ] Kısayollarım: renkli kart ızgarası, arama, tek dokunuşla çalıştır
+- [x] Kısayollarım: renkli kart ızgarası, tek dokunuşla çalıştır, açılış sekmesi
+- [ ] Kısayollarım: arama ve sıralama
 - [ ] Kısayol simgesi ve rengi seçici
 - [ ] Düzenleyici: blok görünümü, değişkenler renkli etiket, sürükle-bırak sıralama
 - [ ] Eylem ekle paneli: kategoriler, arama, önerilenler
