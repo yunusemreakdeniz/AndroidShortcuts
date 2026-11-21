@@ -2011,4 +2011,18 @@
     <string name="sub_task_input_error_duplicate">Another input already uses this name</string>
     <string name="sub_task_input_error_return_variable">returnVariable names where the returned value goes. Pick another name.</string>
     <string name="sub_task_input_error_reset_return_variable">resetReturnVariable is the switch that clears that variable first. Pick another name.</string>
+    <string name="nav_shortcuts">Shortcuts</string>
+    <plurals name="header_shortcuts_detail">
+        <item quantity="one">%1$d shortcut</item>
+        <item quantity="other">%1$d shortcuts</item>
+    </plurals>
+    <string name="shortcuts_empty_title">No shortcuts yet</string>
+    <string name="shortcuts_empty_body">Create a shortcut, add steps to it, then run it with one tap.</string>
+    <string name="shortcuts_create">New shortcut</string>
+    <string name="shortcuts_run">Run %1$s</string>
+    <string name="shortcuts_tile_description">%1$s, %2$s</string>
+    <plurals name="shortcuts_action_count">
+        <item quantity="one">%1$d action</item>
+        <item quantity="other">%1$d actions</item>
+    </plurals>
 </resources>

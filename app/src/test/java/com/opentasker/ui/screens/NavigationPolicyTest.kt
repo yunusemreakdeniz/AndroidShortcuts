@@ -10,11 +10,11 @@ class NavigationPolicyTest {
     private val moduleRoot: Path = listOf(Path.of("."), Path.of("app")).first { it.resolve("src").toFile().exists() }
 
     @Test
-    fun backFromEverySecondaryDestinationReturnsToProfiles() {
-        assertFalse(shouldNavigateBackToProfiles(OpenTaskerScreen.Profiles))
+    fun backFromEverySecondaryDestinationReturnsToShortcuts() {
+        assertFalse(shouldNavigateBackHome(OpenTaskerScreen.Shortcuts))
         OpenTaskerScreen.entries
-            .filterNot { it == OpenTaskerScreen.Profiles }
-            .forEach { screen -> assertTrue(shouldNavigateBackToProfiles(screen)) }
+            .filterNot { it == OpenTaskerScreen.Shortcuts }
+            .forEach { screen -> assertTrue(shouldNavigateBackHome(screen)) }
     }
 
     @Test

@@ -25,6 +25,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.AccountTree
 import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Key
@@ -65,6 +66,7 @@ import com.opentasker.ui.theme.DesignSystem
  */
 
 internal enum class OpenTaskerScreen(@StringRes val labelRes: Int) {
+    Shortcuts(R.string.nav_shortcuts),
     Profiles(R.string.nav_profiles),
     Tasks(R.string.nav_tasks),
     Vars(R.string.nav_variables),
@@ -77,9 +79,9 @@ internal enum class OpenTaskerScreen(@StringRes val labelRes: Int) {
     Settings(R.string.nav_settings),
 }
 internal val primaryNavigationScreens = listOf(
+    OpenTaskerScreen.Shortcuts,
     OpenTaskerScreen.Profiles,
     OpenTaskerScreen.Tasks,
-    OpenTaskerScreen.RunLog,
     OpenTaskerScreen.Setup,
 )
 
@@ -87,6 +89,7 @@ internal val secondaryNavigationScreens = OpenTaskerScreen.entries.filterNot { i
 internal val adaptiveNavigationScreens = OpenTaskerScreen.entries
 
 internal fun OpenTaskerScreen.icon(): ImageVector = when (this) {
+    OpenTaskerScreen.Shortcuts -> Icons.Outlined.GridView
     OpenTaskerScreen.Profiles -> Icons.Outlined.Tune
     OpenTaskerScreen.Tasks -> Icons.AutoMirrored.Outlined.PlaylistPlay
     OpenTaskerScreen.Vars -> Icons.Outlined.Key
@@ -99,8 +102,9 @@ internal fun OpenTaskerScreen.icon(): ImageVector = when (this) {
     OpenTaskerScreen.Settings -> Icons.Outlined.Tune
 }
 
-internal fun shouldNavigateBackToProfiles(screen: OpenTaskerScreen): Boolean =
-    screen != OpenTaskerScreen.Profiles
+/** Shortcuts is home: back from any other destination returns there. */
+internal fun shouldNavigateBackHome(screen: OpenTaskerScreen): Boolean =
+    screen != OpenTaskerScreen.Shortcuts
 
 @Composable
 internal fun OpenTaskerHeader(

@@ -93,6 +93,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
@@ -519,13 +520,14 @@ fun ActiveAutomationUi(
     }
 
     var showMoreDestinations by rememberSaveable { mutableStateOf(false) }
-    BackHandler(enabled = shouldNavigateBackToProfiles(screen)) {
-        screenOrdinal = OpenTaskerScreen.Profiles.ordinal
+    BackHandler(enabled = shouldNavigateBackHome(screen)) {
+        screenOrdinal = OpenTaskerScreen.Shortcuts.ordinal
         showMoreDestinations = false
     }
     val headerDetail = when (screen) {
         // Counted over the same project-scoped lists the screens render, or the header disagreed
         // with the list under it whenever a project was selected.
+        OpenTaskerScreen.Shortcuts -> pluralStringResource(R.plurals.header_shortcuts_detail, projectTasks.size, projectTasks.size)
         OpenTaskerScreen.Profiles -> stringResource(R.string.header_profiles_detail, projectProfiles.count { it.enabled }, projectProfiles.size)
         OpenTaskerScreen.Tasks -> stringResource(R.string.header_tasks_detail, projectTasks.sumOf { it.actions.size }, projectTasks.size)
         OpenTaskerScreen.Vars -> stringResource(R.string.header_variables_detail, projectVariables.size)
@@ -589,7 +591,7 @@ fun ActiveAutomationUi(
                     )
                 }
 
-                OpenTaskerScreen.Tasks -> ExtendedFloatingActionButton(
+                OpenTaskerScreen.Shortcuts, OpenTaskerScreen.Tasks -> ExtendedFloatingActionButton(
                     onClick = { showCreateTaskDialog = true },
                     shape = RoundedCornerShape(DesignSystem.Radii.lg),
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -709,6 +711,13 @@ fun ActiveAutomationUi(
             }
             Box(Modifier.weight(1f).fillMaxHeight()) {
         when (screen) {
+            OpenTaskerScreen.Shortcuts -> ShortcutsHomeScreen(
+                tasks = projectTasks,
+                contentPadding = innerPadding,
+                onRunTask = { viewModel.runTaskNow(it) },
+                onOpenTask = { openTaskDialog(it) },
+                onCreateTask = { showCreateTaskDialog = true },
+            )
             OpenTaskerScreen.Profiles -> ProfilesScreen(
                 profiles = projectProfiles,
                 tasks = projectTasks,
