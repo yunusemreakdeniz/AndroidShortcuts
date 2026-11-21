@@ -109,6 +109,10 @@ object AutomationSensitivityRegistry {
         "app.launch",
         "url.open",
         "sms.send",
+        "email.compose",
+        "phone.dial",
+        "share.text",
+        "maps.directions",
         "http.request",
         "http.get",
         "http.post",
@@ -120,6 +124,12 @@ object AutomationSensitivityRegistry {
     )
 
     private val deviceControlActionIds = setOf(
+        "alarm.set",
+        "timer.set",
+        "email.compose",
+        "phone.dial",
+        "share.text",
+        "maps.directions",
         "clipboard.set",
         "notify.show",
         "notify.cancel",

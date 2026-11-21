@@ -100,6 +100,13 @@ object ActionCapabilityRegistry {
         "shortcut.publish",
         "home.go",
         "url.open",
+        // Standard intents to the clock, mail, dialer, share sheet and maps apps.
+        "alarm.set",
+        "timer.set",
+        "email.compose",
+        "phone.dial",
+        "share.text",
+        "maps.directions",
         // Scoped file access inside the app's own sandbox.
         "file.read",
         "file.write",

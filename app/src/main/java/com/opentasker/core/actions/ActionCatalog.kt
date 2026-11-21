@@ -77,6 +77,13 @@ object ActionCatalog {
         define("tts.speak", ActionCategory.NOTIFICATION, ActionRetrySafety.NEVER, ::SayAction),
         // NEVER: each one waits for a person; repeating it would ask them again.
         // IDEMPOTENT: each only reads or computes; a retry sets the same kind of value again.
+        // NEVER: each opens another app; a retry would open it again.
+        define("alarm.set", ActionCategory.APP, ActionRetrySafety.NEVER, ::SetAlarmAction),
+        define("timer.set", ActionCategory.APP, ActionRetrySafety.NEVER, ::StartTimerAction),
+        define("email.compose", ActionCategory.APP, ActionRetrySafety.NEVER, ::ComposeEmailAction),
+        define("phone.dial", ActionCategory.APP, ActionRetrySafety.NEVER, ::DialNumberAction),
+        define("share.text", ActionCategory.APP, ActionRetrySafety.NEVER, ::ShareTextAction),
+        define("maps.directions", ActionCategory.APP, ActionRetrySafety.NEVER, ::DirectionsAction),
         define("battery.get", ActionCategory.SYSTEM, ActionRetrySafety.IDEMPOTENT, ::GetBatteryAction),
         define("math.calculate", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::CalculateAction),
         define("random.number", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomNumberAction),

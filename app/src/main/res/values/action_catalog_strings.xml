@@ -845,4 +845,49 @@
     <string name="catalog_action_random_number_field_max_hint" formatted="false">Default 100</string>
     <string name="catalog_action_random_number_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_random_number_field_var_hint" formatted="false">Variable name (default Random)</string>
+    <string name="catalog_action_alarm_set_name" formatted="false">Set Alarm</string>
+    <string name="catalog_action_alarm_set_description" formatted="false">Add an alarm in the clock app</string>
+    <string name="catalog_action_alarm_set_field_hour_label" formatted="false">Hour</string>
+    <string name="catalog_action_alarm_set_field_hour_hint" formatted="false">0-23</string>
+    <string name="catalog_action_alarm_set_field_minute_label" formatted="false">Minute</string>
+    <string name="catalog_action_alarm_set_field_minute_hint" formatted="false">0-59, default 0</string>
+    <string name="catalog_action_alarm_set_field_label_label" formatted="false">Label</string>
+    <string name="catalog_action_alarm_set_field_label_hint" formatted="false">Optional alarm name</string>
+    <string name="catalog_action_alarm_set_field_skip_ui_label" formatted="false">Save without opening the clock</string>
+    <string name="catalog_action_alarm_set_field_skip_ui_hint" formatted="false">On by default</string>
+    <string name="catalog_action_timer_set_name" formatted="false">Start Timer</string>
+    <string name="catalog_action_timer_set_description" formatted="false">Start a countdown in the clock app</string>
+    <string name="catalog_action_timer_set_field_seconds_label" formatted="false">Duration (seconds)</string>
+    <string name="catalog_action_timer_set_field_seconds_hint" formatted="false">For example 300 for 5 minutes</string>
+    <string name="catalog_action_timer_set_field_label_label" formatted="false">Label</string>
+    <string name="catalog_action_timer_set_field_label_hint" formatted="false">Optional timer name</string>
+    <string name="catalog_action_timer_set_field_skip_ui_label" formatted="false">Start without opening the clock</string>
+    <string name="catalog_action_timer_set_field_skip_ui_hint" formatted="false">On by default</string>
+    <string name="catalog_action_email_compose_name" formatted="false">Compose Email</string>
+    <string name="catalog_action_email_compose_description" formatted="false">Open a mail app with recipients, subject and body filled in</string>
+    <string name="catalog_action_email_compose_field_to_label" formatted="false">To</string>
+    <string name="catalog_action_email_compose_field_to_hint" formatted="false">Addresses separated by commas</string>
+    <string name="catalog_action_email_compose_field_subject_label" formatted="false">Subject</string>
+    <string name="catalog_action_email_compose_field_subject_hint" formatted="false">Email subject</string>
+    <string name="catalog_action_email_compose_field_body_label" formatted="false">Body</string>
+    <string name="catalog_action_email_compose_field_body_hint" formatted="false">Email text</string>
+    <string name="catalog_action_phone_dial_name" formatted="false">Call Phone Number</string>
+    <string name="catalog_action_phone_dial_description" formatted="false">Open the dialer with the number ready to call</string>
+    <string name="catalog_action_phone_dial_field_number_label" formatted="false">Phone number</string>
+    <string name="catalog_action_phone_dial_field_number_hint" formatted="false">For example +90 555 000 00 00</string>
+    <string name="catalog_action_share_text_name" formatted="false">Share</string>
+    <string name="catalog_action_share_text_description" formatted="false">Open the share sheet with the text</string>
+    <string name="catalog_action_share_text_field_text_label" formatted="false">Text</string>
+    <string name="catalog_action_share_text_field_text_hint" formatted="false">What to share</string>
+    <string name="catalog_action_share_text_field_title_label" formatted="false">Sheet title</string>
+    <string name="catalog_action_share_text_field_title_hint" formatted="false">Optional</string>
+    <string name="catalog_action_maps_directions_name" formatted="false">Get Directions</string>
+    <string name="catalog_action_maps_directions_description" formatted="false">Open maps with a route to the destination</string>
+    <string name="catalog_action_maps_directions_field_destination_label" formatted="false">Destination</string>
+    <string name="catalog_action_maps_directions_field_destination_hint" formatted="false">Address or place name</string>
+    <string name="catalog_action_maps_directions_field_mode_label" formatted="false">Travel mode</string>
+    <string name="catalog_action_maps_directions_mode_driving" formatted="false">Driving</string>
+    <string name="catalog_action_maps_directions_mode_walking" formatted="false">Walking</string>
+    <string name="catalog_action_maps_directions_mode_transit" formatted="false">Public transport</string>
+    <string name="catalog_action_maps_directions_mode_bicycling" formatted="false">Cycling</string>
 </resources>

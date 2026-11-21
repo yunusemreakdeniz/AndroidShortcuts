@@ -220,6 +220,12 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "battery.get",
     "math.calculate",
     "random.number",
+    "alarm.set",
+    "timer.set",
+    "email.compose",
+    "phone.dial",
+    "share.text",
+    "maps.directions",
     -> R.string.action_parameter_summary
     else -> error("No action summary resource declared for $actionId")
 }
@@ -290,6 +296,7 @@ fun registerActionMetadata() {
     // Built-in actions
     registerInteractiveActionMetadata()
     registerUtilityActionMetadata()
+    registerAppHelperActionMetadata()
     ActionMetadataRegistry.register(
         ActionMetadata(
             id = "notify.show",
@@ -2024,6 +2031,85 @@ private fun registerUtilityActionMetadata() {
                 ActionField("min", R.string.catalog_action_random_number_field_min_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_min_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
                 ActionField("max", R.string.catalog_action_random_number_field_max_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_max_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
                 ActionField("var", R.string.catalog_action_random_number_field_var_label, hintRes = R.string.catalog_action_random_number_field_var_hint),
+            ),
+        )
+    )
+}
+
+/** App helpers on standard intents: clock, mail, dialer, share sheet, maps. */
+private fun registerAppHelperActionMetadata() {
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "alarm.set",
+            nameRes = R.string.catalog_action_alarm_set_name,
+            descriptionRes = R.string.catalog_action_alarm_set_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("hour", R.string.catalog_action_alarm_set_field_hour_label, FieldType.NUMBER, required = true, hintRes = R.string.catalog_action_alarm_set_field_hour_hint, numberRule = integerRule(0, 23)),
+                ActionField("minute", R.string.catalog_action_alarm_set_field_minute_label, FieldType.NUMBER, hintRes = R.string.catalog_action_alarm_set_field_minute_hint, numberRule = integerRule(0, 59)),
+                ActionField("label", R.string.catalog_action_alarm_set_field_label_label, hintRes = R.string.catalog_action_alarm_set_field_label_hint),
+                ActionField("skip_ui", R.string.catalog_action_alarm_set_field_skip_ui_label, FieldType.CHECKBOX, hintRes = R.string.catalog_action_alarm_set_field_skip_ui_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "timer.set",
+            nameRes = R.string.catalog_action_timer_set_name,
+            descriptionRes = R.string.catalog_action_timer_set_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("seconds", R.string.catalog_action_timer_set_field_seconds_label, FieldType.NUMBER, required = true, hintRes = R.string.catalog_action_timer_set_field_seconds_hint, numberRule = integerRule(1, 86_400)),
+                ActionField("label", R.string.catalog_action_timer_set_field_label_label, hintRes = R.string.catalog_action_timer_set_field_label_hint),
+                ActionField("skip_ui", R.string.catalog_action_timer_set_field_skip_ui_label, FieldType.CHECKBOX, hintRes = R.string.catalog_action_timer_set_field_skip_ui_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "email.compose",
+            nameRes = R.string.catalog_action_email_compose_name,
+            descriptionRes = R.string.catalog_action_email_compose_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("to", R.string.catalog_action_email_compose_field_to_label, hintRes = R.string.catalog_action_email_compose_field_to_hint),
+                ActionField("subject", R.string.catalog_action_email_compose_field_subject_label, hintRes = R.string.catalog_action_email_compose_field_subject_hint),
+                ActionField("body", R.string.catalog_action_email_compose_field_body_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_email_compose_field_body_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "phone.dial",
+            nameRes = R.string.catalog_action_phone_dial_name,
+            descriptionRes = R.string.catalog_action_phone_dial_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("number", R.string.catalog_action_phone_dial_field_number_label, required = true, hintRes = R.string.catalog_action_phone_dial_field_number_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "share.text",
+            nameRes = R.string.catalog_action_share_text_name,
+            descriptionRes = R.string.catalog_action_share_text_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("text", R.string.catalog_action_share_text_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_share_text_field_text_hint),
+                ActionField("title", R.string.catalog_action_share_text_field_title_label, hintRes = R.string.catalog_action_share_text_field_title_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "maps.directions",
+            nameRes = R.string.catalog_action_maps_directions_name,
+            descriptionRes = R.string.catalog_action_maps_directions_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("destination", R.string.catalog_action_maps_directions_field_destination_label, required = true, hintRes = R.string.catalog_action_maps_directions_field_destination_hint),
+                ActionField("mode", R.string.catalog_action_maps_directions_field_mode_label, FieldType.DROPDOWN, options = listOf(option("driving", R.string.catalog_action_maps_directions_mode_driving), option("walking", R.string.catalog_action_maps_directions_mode_walking), option("transit", R.string.catalog_action_maps_directions_mode_transit), option("bicycling", R.string.catalog_action_maps_directions_mode_bicycling))),
             ),
         )
     )
