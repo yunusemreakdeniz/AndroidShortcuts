@@ -48,7 +48,8 @@ jobs:
       - name: Collect APK
         run: |
           mkdir -p out
-          find app/build/outputs/apk -name "*.apk" -exec cp {} out/ \;
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then name="Kisayollar-${GITHUB_REF_NAME}.apk"; else name="Kisayollar-dev-${GITHUB_RUN_NUMBER}.apk"; fi
+          cp app/build/outputs/apk/debug/app-debug.apk "out/$name"
           ls -la out
 
       - uses: actions/upload-artifact@v4
@@ -60,7 +61,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" out/*.apk --title "$GITHUB_REF_NAME" --notes "Test build"
+        run: gh release create "$GITHUB_REF_NAME" out/*.apk --title "$GITHUB_REF_NAME" --notes "Kısayollar ${GITHUB_REF_NAME}. Kurmak için APK dosyasını telefona indirip açın."
 
   # The project's guard tests and lint fail on unregistered actions, hardcoded UI text and the like.
   checks:

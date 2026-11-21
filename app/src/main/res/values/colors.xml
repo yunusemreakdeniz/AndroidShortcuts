@@ -10,15 +10,15 @@
     <!-- LightSurface -->
     <color name="widget_background">#FFFFFF</color>
     <!-- LightOutline -->
-    <color name="widget_border">#78879A</color>
+    <color name="widget_border">#7A7A86</color>
     <!-- LightCyan -->
-    <color name="widget_primary">#006A86</color>
+    <color name="widget_primary">#3B3BDB</color>
     <!-- LightText -->
-    <color name="widget_text_primary">#162033</color>
+    <color name="widget_text_primary">#15151A</color>
     <!-- LightSubtext -->
-    <color name="widget_text_secondary">#59677C</color>
+    <color name="widget_text_secondary">#55555F</color>
     <!-- LightBase: the splash and pre-composition window fill. -->
-    <color name="window_background">#F3F7FC</color>
+    <color name="window_background">#F4F4F7</color>
     <!-- BrandCyan: the notification accent, in both themes. -->
-    <color name="notification_accent">#13A8D5</color>
+    <color name="notification_accent">#A5A6FF</color>
 </resources>
