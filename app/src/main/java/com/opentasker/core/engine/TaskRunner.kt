@@ -1283,7 +1283,8 @@ internal fun actionTimeoutMs(actionType: String): Long = when {
     actionType == "sound.play" || actionType == "tts.speak" -> MEDIA_ACTION_TIMEOUT_MS
     // Dialogs wait for a person; each reports its own 9-minute limit first.
     actionType == "input.ask" || actionType == "menu.choose" ||
-        actionType == "alert.show" || actionType == "result.show" -> MEDIA_ACTION_TIMEOUT_MS
+        actionType == "alert.show" || actionType == "result.show" ||
+        actionType == "list.choose" || actionType == "date.ask" || actionType == "dictate.text" -> MEDIA_ACTION_TIMEOUT_MS
     else -> DEFAULT_ACTION_TIMEOUT_MS
 }
 

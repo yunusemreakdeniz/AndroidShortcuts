@@ -360,6 +360,16 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "random.number" -> listOf(
         output("number", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Random"),
     )
+    "list.choose" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Chosen"),
+        output("count", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Chosen", suffix = "_count"),
+    )
+    "date.ask" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Date"),
+    )
+    "dictate.text" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Dictation"),
+    )
     "input.ask" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Input"),
     )

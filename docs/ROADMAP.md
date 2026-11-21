@@ -42,9 +42,11 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [~] Metin: birleştir, böl, değiştir, eşleştir (var)
 - [~] Liste/dizi, JSON/sözlük okuma (var)
 - [ ] Sözlük oluştur / değer ata
-- [ ] Hesapla (matematik ifadesi) ve sayı biçimlendir
+- [x] Hesapla (matematik ifadesi)
+- [ ] Sayı biçimlendir
 - [~] Tarih biçimlendir / ekle (var)
-- [ ] Rastgele sayı, listeden rastgele öğe
+- [x] Rastgele sayı
+- [ ] Listeden rastgele öğe
 - [ ] Base64/URL kodlama, hash (var.convert kısmen)
 
 ## E. Akış
@@ -57,7 +59,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] URL aç, HTTP isteği (GET/POST/…), webhook
 - [~] Web sayfası içeriği / HTML'den metin (data.read HTML var)
 - [ ] URL bileşenlerini al, URL kodla
-- [ ] Haritada ara / yol tarifi
+- [x] Yol tarifi al (harita)
 
 ## G. Medya ve belgeler
 - [ ] Fotoğraf çek / video kaydet
@@ -70,17 +72,19 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 
 ## H. Cihaz
 - [x] Wi-Fi, Bluetooth, Rahatsız etme, parlaklık, ses, fener, duvar kağıdı (var)
-- [ ] Pil seviyesini al, şarj durumu
+- [x] Pil seviyesini al, şarj durumu
 - [ ] Ağ bilgisi (SSID, IP), cihaz bilgisi
 - [ ] Karanlık modu aç/kapat (izin gerektirir)
 - [ ] Ekranı kaydet / ekran görüntüsü (kısmen var)
 
 ## I. Uygulamalar
 - [x] Uygulama aç, Intent gönder, SMS
-- [ ] E-posta oluştur, telefonla ara, WhatsApp mesajı (intent kolaylıkları)
+- [x] E-posta oluştur, telefonla ara
+- [ ] WhatsApp / Telegram mesajı
 - [ ] Takvim etkinliği ekle, hatırlatıcı/not
-- [ ] Alarm ve zamanlayıcı kur
-- [ ] Dosyaya kaydet / dosya paylaş (Paylaşım sayfasını aç)
+- [x] Alarm ve zamanlayıcı kur
+- [x] Metni paylaş (paylaşım sayfası)
+- [ ] Dosyayı paylaş
 
 ## J. Otomasyon tetikleyicileri
 - [x] Saat, gün, konum, Wi-Fi, Bluetooth, şarj, uygulama, bildirim, NFC, USB, push (var)

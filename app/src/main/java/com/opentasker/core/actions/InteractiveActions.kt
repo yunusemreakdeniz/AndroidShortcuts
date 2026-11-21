@@ -40,6 +40,11 @@ internal object InteractiveDialogCoordinator {
     const val KIND_MENU = "menu"
     const val KIND_ALERT = "alert"
     const val KIND_RESULT = "result"
+    const val KIND_LIST_MULTI = "list_multi"
+    const val KIND_DATE = "date"
+    const val KIND_DICTATE = "dictate"
+    const val EXTRA_DATE_MODE = "com.opentasker.dialog.DATE_MODE"
+    const val EXTRA_LANGUAGE = "com.opentasker.dialog.LANGUAGE"
 
     /** How long the dialog may take to appear before we assume Android blocked it. */
     private const val SHOW_TIMEOUT_MS = 5_000L
@@ -58,6 +63,8 @@ internal object InteractiveDialogCoordinator {
     sealed class DialogAnswer {
         data class Accepted(val text: String = "", val index: Int = -1) : DialogAnswer()
         data object Dismissed : DialogAnswer()
+        /** The step could not ask at all (no speech recognizer, for example). */
+        data class Failed(val reason: String) : DialogAnswer()
     }
 
     sealed class Outcome {
@@ -115,7 +122,87 @@ class InteractiveDialogActivity : Activity() {
         requestId = id
         open[id] = this
         InteractiveDialogCoordinator.markShown(id)
-        dialog = buildDialog().also { it.show() }
+        when (intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_KIND)) {
+            InteractiveDialogCoordinator.KIND_DATE -> showDatePicker()
+            InteractiveDialogCoordinator.KIND_DICTATE -> startDictation()
+            else -> dialog = buildDialog().also { it.show() }
+        }
+    }
+
+    private fun dialogTheme(): Int {
+        val night = (resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+            android.content.res.Configuration.UI_MODE_NIGHT_YES
+        return if (night) android.R.style.Theme_DeviceDefault_Dialog_Alert else android.R.style.Theme_DeviceDefault_Light_Dialog_Alert
+    }
+
+    private fun showDatePicker() {
+        val mode = intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_DATE_MODE) ?: "date"
+        val now = java.util.Calendar.getInstance()
+        if (mode == "time") {
+            showTimePicker(null)
+            return
+        }
+        dialog = android.app.DatePickerDialog(
+            this, dialogTheme(),
+            { _, year, month, day ->
+                val date = "%04d-%02d-%02d".format(year, month + 1, day)
+                if (mode == "datetime") {
+                    dialog?.setOnCancelListener(null)
+                    showTimePicker(date)
+                } else {
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(date))
+                }
+            },
+            now.get(java.util.Calendar.YEAR), now.get(java.util.Calendar.MONTH), now.get(java.util.Calendar.DAY_OF_MONTH),
+        ).apply {
+            intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_TITLE)?.takeIf(String::isNotBlank)?.let(::setTitle)
+            setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed) }
+            show()
+        }
+    }
+
+    private fun showTimePicker(date: String?) {
+        val now = java.util.Calendar.getInstance()
+        dialog = android.app.TimePickerDialog(
+            this, dialogTheme(),
+            { _, hour, minute ->
+                val time = "%02d:%02d".format(hour, minute)
+                reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(if (date == null) time else "$date $time"))
+            },
+            now.get(java.util.Calendar.HOUR_OF_DAY), now.get(java.util.Calendar.MINUTE),
+            android.text.format.DateFormat.is24HourFormat(this),
+        ).apply {
+            setOnCancelListener { reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed) }
+            show()
+        }
+    }
+
+    private fun startDictation() {
+        val recognize = Intent(android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            .putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL, android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            .putExtra(android.speech.RecognizerIntent.EXTRA_MAX_RESULTS, 1)
+        intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_TITLE)?.takeIf(String::isNotBlank)
+            ?.let { recognize.putExtra(android.speech.RecognizerIntent.EXTRA_PROMPT, it) }
+        intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_LANGUAGE)?.takeIf(String::isNotBlank)
+            ?.let { recognize.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE, it) }
+        try {
+            @Suppress("DEPRECATION")
+            startActivityForResult(recognize, DICTATION_REQUEST)
+        } catch (_: android.content.ActivityNotFoundException) {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Failed("no speech recognizer is installed"))
+        }
+    }
+
+    @Deprecated("Activity result callback for the platform speech recognizer.")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != DICTATION_REQUEST) return
+        val text = data?.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS)?.firstOrNull()
+        if (resultCode == RESULT_OK && text != null) {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(text))
+        } else {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+        }
     }
 
     private fun buildDialog(): AlertDialog {
@@ -159,6 +246,19 @@ class InteractiveDialogActivity : Activity() {
                         field.requestFocus()
                         created.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
                     }
+                }
+            }
+
+            InteractiveDialogCoordinator.KIND_LIST_MULTI -> {
+                val items = intent.getStringArrayExtra(InteractiveDialogCoordinator.EXTRA_ITEMS).orEmpty()
+                val checked = BooleanArray(items.size)
+                builder.setMultiChoiceItems(items, checked) { _, which, isChecked -> checked[which] = isChecked }
+                builder.setPositiveButton(android.R.string.ok) { _, _ ->
+                    val chosen = items.filterIndexed { i, _ -> checked[i] }
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Accepted(chosen.joinToString("\n"), chosen.size))
+                }
+                builder.setNegativeButton(android.R.string.cancel) { _, _ ->
+                    reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
                 }
             }
 
@@ -220,6 +320,7 @@ class InteractiveDialogActivity : Activity() {
     }
 
     companion object {
+        private const val DICTATION_REQUEST = 7411
         private val open = ConcurrentHashMap<String, InteractiveDialogActivity>()
 
         /** Closes a dialog whose step already ended (timed out or the task was stopped). */
@@ -244,7 +345,10 @@ private fun dialogFailure(outcome: InteractiveDialogCoordinator.Outcome): Action
             " Running the task from a tile, widget, home-screen shortcut or notification also works.",
     )
     InteractiveDialogCoordinator.Outcome.TimedOut -> ActionResult.Failure("no answer within ${InteractiveDialogCoordinator.ANSWER_TIMEOUT_MS / 60_000} minutes")
-    is InteractiveDialogCoordinator.Outcome.Answered -> ActionResult.Failure("cancelled by the user")
+    is InteractiveDialogCoordinator.Outcome.Answered -> when (val answer = outcome.answer) {
+        is InteractiveDialogCoordinator.DialogAnswer.Failed -> ActionResult.Failure(answer.reason)
+        else -> ActionResult.Failure("cancelled by the user")
+    }
 }
 
 private fun dialogOutput(args: Map<String, String>, defaultName: String): String? =
@@ -333,6 +437,71 @@ class ShowResultAction : DeclaredAction(ActionCatalog.require("result.show")) {
         (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
             as? InteractiveDialogCoordinator.DialogAnswer.Accepted
             ?: return dialogFailure(outcome)
+        return ActionResult.Success
+    }
+}
+
+/** Choose from List: tick any number of items; the chosen ones go into a variable, one per line. */
+class ChooseFromListAction : DeclaredAction(ActionCatalog.require("list.choose")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val items = args["items"].orEmpty().split('\n').map(String::trim).filter(String::isNotEmpty)
+        if (items.isEmpty()) return ActionResult.Failure("the list has no items")
+        if (items.size > MAX_MENU_ITEMS) return ActionResult.Failure("a list can hold at most $MAX_MENU_ITEMS items")
+        val output = dialogOutput(args, "Chosen") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_LIST_MULTI)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["title"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_ITEMS, items.map { it.take(MAX_DIALOG_TEXT) }.toTypedArray())
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        val chosen = answer.text.split('\n').filter(String::isNotEmpty)
+        ctx.variables.set(output, answer.text)
+        ctx.variables.set("${output}_count", chosen.size.toString())
+        ctx.variables.setArray("${output}_items", chosen)
+        ctx.logger("Choose from List: ${chosen.size} of ${items.size}")
+        return ActionResult.Success
+    }
+}
+
+/** Ask for Date: the system date and/or time picker; the answer is yyyy-MM-dd, HH:mm or both. */
+class AskForDateAction : DeclaredAction(ActionCatalog.require("date.ask")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val mode = args["mode"]?.trim()?.lowercase().orEmpty().ifEmpty { "date" }
+        if (mode !in setOf("date", "time", "datetime")) return ActionResult.Failure("mode must be date, time or datetime")
+        val output = dialogOutput(args, "Date") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_DATE)
+            putExtra(InteractiveDialogCoordinator.EXTRA_DATE_MODE, mode)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["title"].orEmpty().take(MAX_DIALOG_TEXT))
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text)
+        return ActionResult.Success
+    }
+}
+
+/** Dictate Text: the system speech recognizer turns speech into text. */
+class DictateTextAction : DeclaredAction(ActionCatalog.require("dictate.text")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = dialogOutput(args, "Dictation") ?: return ActionResult.Failure("invalid output variable")
+        val language = args["language"]?.trim().orEmpty()
+        if (language.isNotEmpty() && !Regex("[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*").matches(language)) {
+            return ActionResult.Failure("language must be a tag such as tr-TR or en-US")
+        }
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_DICTATE)
+            putExtra(InteractiveDialogCoordinator.EXTRA_TITLE, args["prompt"].orEmpty().take(MAX_DIALOG_TEXT))
+            putExtra(InteractiveDialogCoordinator.EXTRA_LANGUAGE, language)
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text.take(MAX_INPUT_CHARS))
+        ctx.logger("Dictate Text: ${answer.text.length} characters")
         return ActionResult.Success
     }
 }

@@ -217,6 +217,9 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "menu.choose",
     "alert.show",
     "result.show",
+    "list.choose",
+    "date.ask",
+    "dictate.text",
     "battery.get",
     "math.calculate",
     "random.number",
@@ -1979,6 +1982,45 @@ private fun registerInteractiveActionMetadata() {
                 ActionField("title", R.string.catalog_action_alert_show_field_title_label, required = true, hintRes = R.string.catalog_action_alert_show_field_title_hint),
                 ActionField("message", R.string.catalog_action_alert_show_field_message_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_alert_show_field_message_hint),
                 ActionField("cancel_button", R.string.catalog_action_alert_show_field_cancel_button_label, FieldType.CHECKBOX, hintRes = R.string.catalog_action_alert_show_field_cancel_button_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "list.choose",
+            nameRes = R.string.catalog_action_list_choose_name,
+            descriptionRes = R.string.catalog_action_list_choose_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_list_choose_field_title_label, hintRes = R.string.catalog_action_list_choose_field_title_hint),
+                ActionField("items", R.string.catalog_action_list_choose_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_list_choose_field_items_hint),
+                ActionField("var", R.string.catalog_action_list_choose_field_var_label, hintRes = R.string.catalog_action_list_choose_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "date.ask",
+            nameRes = R.string.catalog_action_date_ask_name,
+            descriptionRes = R.string.catalog_action_date_ask_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_date_ask_field_title_label, hintRes = R.string.catalog_action_date_ask_field_title_hint),
+                ActionField("mode", R.string.catalog_action_date_ask_field_mode_label, FieldType.DROPDOWN, options = listOf(option("date", R.string.catalog_action_date_ask_mode_date), option("time", R.string.catalog_action_date_ask_mode_time), option("datetime", R.string.catalog_action_date_ask_mode_datetime))),
+                ActionField("var", R.string.catalog_action_date_ask_field_var_label, hintRes = R.string.catalog_action_date_ask_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "dictate.text",
+            nameRes = R.string.catalog_action_dictate_text_name,
+            descriptionRes = R.string.catalog_action_dictate_text_description,
+            categoryRes = R.string.catalog_category_dialog,
+            fields = listOf(
+                ActionField("prompt", R.string.catalog_action_dictate_text_field_prompt_label, hintRes = R.string.catalog_action_dictate_text_field_prompt_hint),
+                ActionField("language", R.string.catalog_action_dictate_text_field_language_label, hintRes = R.string.catalog_action_dictate_text_field_language_hint),
+                ActionField("var", R.string.catalog_action_dictate_text_field_var_label, hintRes = R.string.catalog_action_dictate_text_field_var_hint),
             ),
         )
     )

@@ -890,4 +890,30 @@
     <string name="catalog_action_maps_directions_mode_walking" formatted="false">Walking</string>
     <string name="catalog_action_maps_directions_mode_transit" formatted="false">Public transport</string>
     <string name="catalog_action_maps_directions_mode_bicycling" formatted="false">Cycling</string>
+    <string name="catalog_action_list_choose_name" formatted="false">Choose from List</string>
+    <string name="catalog_action_list_choose_description" formatted="false">Tick any number of items; the chosen ones are stored one per line. Cancel stops the task</string>
+    <string name="catalog_action_list_choose_field_title_label" formatted="false">Prompt</string>
+    <string name="catalog_action_list_choose_field_title_hint" formatted="false">Title above the list</string>
+    <string name="catalog_action_list_choose_field_items_label" formatted="false">Items</string>
+    <string name="catalog_action_list_choose_field_items_hint" formatted="false">One item per line</string>
+    <string name="catalog_action_list_choose_field_var_label" formatted="false">Save choices to</string>
+    <string name="catalog_action_list_choose_field_var_hint" formatted="false">Variable name (default Chosen; count in Chosen_count)</string>
+    <string name="catalog_action_date_ask_name" formatted="false">Ask for Date</string>
+    <string name="catalog_action_date_ask_description" formatted="false">Pick a date, a time or both with the system picker. Cancel stops the task</string>
+    <string name="catalog_action_date_ask_field_title_label" formatted="false">Prompt</string>
+    <string name="catalog_action_date_ask_field_title_hint" formatted="false">Title of the picker</string>
+    <string name="catalog_action_date_ask_field_mode_label" formatted="false">Ask for</string>
+    <string name="catalog_action_date_ask_mode_date" formatted="false">Date (yyyy-MM-dd)</string>
+    <string name="catalog_action_date_ask_mode_time" formatted="false">Time (HH:mm)</string>
+    <string name="catalog_action_date_ask_mode_datetime" formatted="false">Date and time</string>
+    <string name="catalog_action_date_ask_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_date_ask_field_var_hint" formatted="false">Variable name (default Date)</string>
+    <string name="catalog_action_dictate_text_name" formatted="false">Dictate Text</string>
+    <string name="catalog_action_dictate_text_description" formatted="false">Turn speech into text with the system speech recognizer</string>
+    <string name="catalog_action_dictate_text_field_prompt_label" formatted="false">Prompt</string>
+    <string name="catalog_action_dictate_text_field_prompt_hint" formatted="false">Shown while listening</string>
+    <string name="catalog_action_dictate_text_field_language_label" formatted="false">Language</string>
+    <string name="catalog_action_dictate_text_field_language_hint" formatted="false">For example tr-TR; empty uses the device language</string>
+    <string name="catalog_action_dictate_text_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_dictate_text_field_var_hint" formatted="false">Variable name (default Dictation)</string>
 </resources>
