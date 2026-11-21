@@ -349,6 +349,17 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
         output("enabled", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_ENABLED"),
         output("count", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_COUNT"),
     )
+    "battery.get" -> listOf(
+        output("level", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Battery"),
+        output("charging", ActionValueType.BOOLEAN, nameArgumentKeys = listOf("var"), defaultName = "Battery", suffix = "_charging"),
+        output("source", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Battery", suffix = "_source"),
+    )
+    "math.calculate" -> listOf(
+        output("result", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Result"),
+    )
+    "random.number" -> listOf(
+        output("number", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Random"),
+    )
     "input.ask" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Input"),
     )

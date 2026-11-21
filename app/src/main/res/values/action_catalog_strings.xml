@@ -827,4 +827,22 @@
     <string name="catalog_action_result_show_field_text_hint" formatted="false">What to show, for example {{ Input }}</string>
     <string name="catalog_action_result_show_field_title_label" formatted="false">Title</string>
     <string name="catalog_action_result_show_field_title_hint" formatted="false">Optional title</string>
+    <string name="catalog_action_battery_get_name" formatted="false">Get Battery Level</string>
+    <string name="catalog_action_battery_get_description" formatted="false">Store the battery percentage, whether it is charging and the power source</string>
+    <string name="catalog_action_battery_get_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_battery_get_field_var_hint" formatted="false">Variable name (default Battery; also Battery_charging, Battery_source)</string>
+    <string name="catalog_action_math_calculate_name" formatted="false">Calculate</string>
+    <string name="catalog_action_math_calculate_description" formatted="false">Work out an arithmetic expression with + - * / % ^ and parentheses</string>
+    <string name="catalog_action_math_calculate_field_expression_label" formatted="false">Expression</string>
+    <string name="catalog_action_math_calculate_field_expression_hint" formatted="false">For example {{ Price }} * 1.2</string>
+    <string name="catalog_action_math_calculate_field_var_label" formatted="false">Save result to</string>
+    <string name="catalog_action_math_calculate_field_var_hint" formatted="false">Variable name (default Result)</string>
+    <string name="catalog_action_random_number_name" formatted="false">Random Number</string>
+    <string name="catalog_action_random_number_description" formatted="false">Pick a whole number between a minimum and a maximum</string>
+    <string name="catalog_action_random_number_field_min_label" formatted="false">Minimum</string>
+    <string name="catalog_action_random_number_field_min_hint" formatted="false">Default 1</string>
+    <string name="catalog_action_random_number_field_max_label" formatted="false">Maximum</string>
+    <string name="catalog_action_random_number_field_max_hint" formatted="false">Default 100</string>
+    <string name="catalog_action_random_number_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_random_number_field_var_hint" formatted="false">Variable name (default Random)</string>
 </resources>

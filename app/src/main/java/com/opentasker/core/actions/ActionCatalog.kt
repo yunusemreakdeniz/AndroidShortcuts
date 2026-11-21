@@ -76,6 +76,10 @@ object ActionCatalog {
         define("sun.times", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::SunTimesAction),
         define("tts.speak", ActionCategory.NOTIFICATION, ActionRetrySafety.NEVER, ::SayAction),
         // NEVER: each one waits for a person; repeating it would ask them again.
+        // IDEMPOTENT: each only reads or computes; a retry sets the same kind of value again.
+        define("battery.get", ActionCategory.SYSTEM, ActionRetrySafety.IDEMPOTENT, ::GetBatteryAction),
+        define("math.calculate", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::CalculateAction),
+        define("random.number", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomNumberAction),
         define("input.ask", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::AskForInputAction),
         define("menu.choose", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ChooseFromMenuAction),
         define("alert.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowAlertAction),

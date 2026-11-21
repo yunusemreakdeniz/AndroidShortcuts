@@ -217,6 +217,9 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "menu.choose",
     "alert.show",
     "result.show",
+    "battery.get",
+    "math.calculate",
+    "random.number",
     -> R.string.action_parameter_summary
     else -> error("No action summary resource declared for $actionId")
 }
@@ -286,6 +289,7 @@ private val wallpaperTargetOptions = listOf(
 fun registerActionMetadata() {
     // Built-in actions
     registerInteractiveActionMetadata()
+    registerUtilityActionMetadata()
     ActionMetadataRegistry.register(
         ActionMetadata(
             id = "notify.show",
@@ -1980,6 +1984,46 @@ private fun registerInteractiveActionMetadata() {
             fields = listOf(
                 ActionField("text", R.string.catalog_action_result_show_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_result_show_field_text_hint),
                 ActionField("title", R.string.catalog_action_result_show_field_title_label, hintRes = R.string.catalog_action_result_show_field_title_hint),
+            ),
+        )
+    )
+}
+
+/** Everyday Shortcuts helpers: battery, arithmetic, random numbers. */
+private fun registerUtilityActionMetadata() {
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "battery.get",
+            nameRes = R.string.catalog_action_battery_get_name,
+            descriptionRes = R.string.catalog_action_battery_get_description,
+            categoryRes = R.string.catalog_category_system,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_battery_get_field_var_label, hintRes = R.string.catalog_action_battery_get_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "math.calculate",
+            nameRes = R.string.catalog_action_math_calculate_name,
+            descriptionRes = R.string.catalog_action_math_calculate_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("expression", R.string.catalog_action_math_calculate_field_expression_label, required = true, hintRes = R.string.catalog_action_math_calculate_field_expression_hint),
+                ActionField("var", R.string.catalog_action_math_calculate_field_var_label, hintRes = R.string.catalog_action_math_calculate_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "random.number",
+            nameRes = R.string.catalog_action_random_number_name,
+            descriptionRes = R.string.catalog_action_random_number_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("min", R.string.catalog_action_random_number_field_min_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_min_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
+                ActionField("max", R.string.catalog_action_random_number_field_max_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_max_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
+                ActionField("var", R.string.catalog_action_random_number_field_var_label, hintRes = R.string.catalog_action_random_number_field_var_hint),
             ),
         )
     )
