@@ -65,6 +65,7 @@ internal fun ShortcutsHomeScreen(
     onOpenTask: (Task) -> Unit,
     onCreateTask: () -> Unit,
 ) {
+    val styles = rememberShortcutStyles()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -103,15 +104,15 @@ internal fun ShortcutsHomeScreen(
             modifier = Modifier.fillMaxSize(),
         ) {
             items(tasks, key = { it.id }) { task ->
-                ShortcutTile(task = task, onRun = { onRunTask(task) }, onOpen = { onOpenTask(task) })
+                ShortcutTile(task = task, styles = styles, onRun = { onRunTask(task) }, onOpen = { onOpenTask(task) })
             }
         }
     }
 }
 
 @Composable
-private fun ShortcutTile(task: Task, onRun: () -> Unit, onOpen: () -> Unit) {
-    val color = shortcutColor(task.id)
+private fun ShortcutTile(task: Task, styles: Map<Long, ShortcutStyle>, onRun: () -> Unit, onOpen: () -> Unit) {
+    val color = styledColor(task, styles)
     val count = pluralStringResource(R.plurals.shortcuts_action_count, task.actions.size, task.actions.size)
     val tileDescription = stringResource(R.string.shortcuts_tile_description, task.name, count)
     Surface(
@@ -126,7 +127,7 @@ private fun ShortcutTile(task: Task, onRun: () -> Unit, onOpen: () -> Unit) {
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
             Row(verticalAlignment = Alignment.Top) {
-                Icon(shortcutIcon(task), contentDescription = null, modifier = Modifier.size(26.dp))
+                Icon(styledIcon(task, styles), contentDescription = null, modifier = Modifier.size(26.dp))
                 Spacer(Modifier.weight(1f))
                 FilledIconButton(
                     onClick = onRun,
@@ -166,6 +167,10 @@ private val shortcutPalette = listOf(
     Color(0xFF2563EB), Color(0xFF6D28D9), Color(0xFF0F766E), Color(0xFF4338CA),
     Color(0xFF15803D), Color(0xFFBE185D), Color(0xFFC2410C), Color(0xFF9A3412),
 )
+
+internal val shortcutPaletteIndices: List<Int> get() = shortcutPalette.indices.toList()
+
+internal fun shortcutPaletteColor(index: Int): Color = shortcutPalette[Math.floorMod(index, shortcutPalette.size)]
 
 internal fun shortcutColor(taskId: Long): Color =
     shortcutPalette[Math.floorMod(taskId, shortcutPalette.size.toLong()).toInt()]

@@ -2069,4 +2069,10 @@
     <string name="gallery_coin_name" formatted="false">Flip a Coin</string>
     <string name="gallery_coin_description" formatted="false">Heads or tails: 1 or 2</string>
     <string name="gallery_coin_result" formatted="false">{{ Coin }} (1 = heads, 2 = tails)</string>
+    <string name="shortcut_style_title">Icon and color</string>
+    <string name="shortcut_style_color">Color</string>
+    <string name="shortcut_style_icon">Icon</string>
+    <string name="shortcut_style_color_option">Color %1$d</string>
+    <string name="shortcut_style_icon_option">Icon %1$d</string>
+    <string name="shortcut_style_save">Save</string>
 </resources>

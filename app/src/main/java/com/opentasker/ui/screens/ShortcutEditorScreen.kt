@@ -66,6 +66,17 @@ internal fun ShortcutEditorScreen(
     onMoveAction: (Int, Int) -> Unit,
     onDeleteAction: (Int) -> Unit,
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val styles = rememberShortcutStyles()
+    var styling by remember { mutableStateOf(false) }
+    if (styling) {
+        ShortcutStyleDialog(
+            task = task,
+            current = styles[task.id] ?: ShortcutStyle(),
+            onDismiss = { styling = false },
+            onSave = { ShortcutStyles.set(context, task.id, it); styling = false },
+        )
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -95,13 +106,20 @@ internal fun ShortcutEditorScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .background(shortcutColor(task.id), RoundedCornerShape(18.dp)),
-                contentAlignment = Alignment.Center,
+            Surface(
+                onClick = { styling = true },
+                shape = RoundedCornerShape(18.dp),
+                color = styledColor(task, styles),
+                modifier = Modifier.size(60.dp),
             ) {
-                Icon(shortcutIcon(task), contentDescription = null, tint = Color.White, modifier = Modifier.size(30.dp))
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        styledIcon(task, styles),
+                        contentDescription = stringResource(R.string.shortcut_style_title),
+                        tint = Color.White,
+                        modifier = Modifier.size(30.dp),
+                    )
+                }
             }
             Column {
                 Text(

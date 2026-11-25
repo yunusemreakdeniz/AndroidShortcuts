@@ -74,4 +74,11 @@
     <string name="gallery_coin_name" formatted="false">Yazı tura</string>
     <string name="gallery_coin_description" formatted="false">Yazı mı tura mı: 1 veya 2</string>
     <string name="gallery_coin_result" formatted="false">{{ Coin }} (1 = yazı, 2 = tura)</string>
+    <string name="shortcut_style_title">Simge ve renk</string>
+    <string name="shortcut_style_color">Renk</string>
+    <string name="shortcut_style_icon">Simge</string>
+    <string name="shortcut_style_color_option">Renk %1$d</string>
+    <string name="shortcut_style_icon_option">Simge %1$d</string>
+    <string name="shortcut_style_save">Kaydet</string>
+    <string name="action_close">Kapat</string>
 </resources>
