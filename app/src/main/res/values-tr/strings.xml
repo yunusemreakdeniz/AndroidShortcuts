@@ -35,4 +35,9 @@
     <string name="shortcut_editor_move_up">Yukarı taşı</string>
     <string name="shortcut_editor_move_down">Aşağı taşı</string>
     <string name="shortcut_editor_delete">Kaldır</string>
+    <string name="action_picker_suggested">Önerilen</string>
+    <string name="dialog_add_action">Eylem ekle</string>
+    <string name="action_picker_search_label">Ara</string>
+    <string name="action_picker_search_hint">Eylem adı veya açıklaması</string>
+    <string name="action_picker_no_results">Eşleşen eylem yok</string>
 </resources>

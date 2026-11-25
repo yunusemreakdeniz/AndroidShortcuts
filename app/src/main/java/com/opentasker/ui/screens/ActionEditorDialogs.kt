@@ -136,109 +136,12 @@ internal fun ActionPickerDialog(
             .toList()
     }
     val filteredActions = remember(localizedActions, query) { filterActionPickerItems(localizedActions, query) }
-    val actionGroups = remember(filteredActions) {
-        filteredActions
-            .groupBy { it.category }
-            .toSortedMap()
-            .map { (category, actions) -> category to actions.sortedBy { it.name } }
-    }
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(stringResource(R.string.dialog_add_action)) },
-        text = {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(DesignSystem.Spacing.sm),
-            ) {
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = { query = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.action_picker_search_label)) },
-                    placeholder = { Text(stringResource(R.string.action_picker_search_hint)) },
-                    trailingIcon = if (query.isNotEmpty()) {
-                        {
-                            TextButton(onClick = { query = "" }) {
-                                Text(stringResource(R.string.action_picker_clear_search))
-                            }
-                        }
-                    } else {
-                        null
-                    },
-                    singleLine = true,
-                )
-                if (actionGroups.isEmpty()) {
-                    Text(
-                        stringResource(R.string.action_picker_no_results),
-                        modifier = Modifier.padding(vertical = 24.dp),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.heightIn(max = 360.dp),
-                        verticalArrangement = Arrangement.spacedBy(DesignSystem.Spacing.sm),
-                    ) {
-                        actionGroups.forEach { (category, actions) ->
-                            item(key = "category-$category") {
-                                Text(
-                                    category,
-                                    style = MaterialTheme.typography.labelLarge,
-                                    color = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.padding(top = 4.dp),
-                                )
-                            }
-                            items(actions, key = { it.metadata.id }) { localized ->
-                                val metadata = localized.metadata
-                                val capability = ActionCapabilityRegistry.get(metadata.id)
-                                Card(
-                                    onClick = { onSelect(metadata) },
-                                    enabled = capability.canAdd,
-                                    modifier = Modifier.fillMaxWidth(),
-                                    colors = CardDefaults.cardColors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                                    ),
-                                    // In every static scheme surfaceVariant IS the dialog's own
-                                    // container colour, so compositing it over itself at any alpha
-                                    // yields the same colour: the enabled/disabled distinction the
-                                    // two alphas were meant to draw was mathematically zero.
-                                    border = BorderStroke(
-                                        width = 1.dp,
-                                        color = if (capability.canAdd) {
-                                            MaterialTheme.colorScheme.outline
-                                        } else {
-                                            MaterialTheme.colorScheme.outlineVariant
-                                        },
-                                    ),
-                                    shape = RoundedCornerShape(14.dp),
-                                ) {
-                                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(DesignSystem.Spacing.xs)) {
-                                        Row(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            verticalAlignment = Alignment.CenterVertically,
-                                            horizontalArrangement = Arrangement.spacedBy(DesignSystem.Spacing.sm),
-                                        ) {
-                                            Text(localized.name, style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
-                                            if (capability.level != CapabilityLevel.Supported) {
-                                                StatusPill(
-                                                    if (capability.level == CapabilityLevel.Unsupported) stringResource(R.string.label_unsupported) else stringResource(R.string.label_setup),
-                                                    if (capability.level == CapabilityLevel.Unsupported) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
-                                                )
-                                            }
-                                        }
-                                        Text(localized.description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                        if (capability.level != CapabilityLevel.Supported) {
-                                            Text(stringResource(capability.reasonRes), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        confirmButton = {},
-        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_close)) } },
+    ActionPickerSheet(
+        query = query,
+        onQueryChange = { query = it },
+        actions = filteredActions,
+        onDismiss = onDismiss,
+        onSelect = onSelect,
     )
 }
 

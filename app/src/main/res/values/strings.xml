@@ -2034,4 +2034,5 @@
     <string name="shortcut_editor_move_up">Move up</string>
     <string name="shortcut_editor_move_down">Move down</string>
     <string name="shortcut_editor_delete">Remove</string>
+    <string name="action_picker_suggested">Suggested</string>
 </resources>

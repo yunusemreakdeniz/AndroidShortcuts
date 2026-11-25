@@ -237,7 +237,7 @@ private fun ActionBlock(
 }
 
 /** Block colors by what the step does; white icons pass contrast on each. */
-private fun actionColor(type: String): Color = when (type.substringBefore('.')) {
+internal fun actionColor(type: String): Color = when (type.substringBefore('.')) {
     "input", "menu", "list", "alert", "result", "date", "dictate" -> Color(0xFF6D28D9)
     "http", "url", "download", "ping", "mqtt", "wol", "integration" -> Color(0xFF2563EB)
     "flow", "task", "profile" -> Color(0xFF475569)
