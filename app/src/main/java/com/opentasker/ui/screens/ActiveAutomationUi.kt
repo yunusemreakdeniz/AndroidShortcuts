@@ -95,6 +95,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import com.opentasker.core.model.DEFAULT_PROJECT_ID
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.stateDescription
@@ -530,6 +531,7 @@ fun ActiveAutomationUi(
         // Counted over the same project-scoped lists the screens render, or the header disagreed
         // with the list under it whenever a project was selected.
         OpenTaskerScreen.Shortcuts -> pluralStringResource(R.plurals.header_shortcuts_detail, projectTasks.size, projectTasks.size)
+        OpenTaskerScreen.Gallery -> stringResource(R.string.header_gallery_detail)
         OpenTaskerScreen.Automation -> stringResource(R.string.header_profiles_detail, projectProfiles.count { it.enabled }, projectProfiles.size)
         OpenTaskerScreen.Profiles -> stringResource(R.string.header_profiles_detail, projectProfiles.count { it.enabled }, projectProfiles.size)
         OpenTaskerScreen.Tasks -> stringResource(R.string.header_tasks_detail, projectTasks.sumOf { it.actions.size }, projectTasks.size)
@@ -604,6 +606,7 @@ fun ActiveAutomationUi(
                     text = { Text(stringResource(R.string.task_new)) },
                 )
 
+                OpenTaskerScreen.Gallery,
                 OpenTaskerScreen.Vars,
                 OpenTaskerScreen.Flow,
                 OpenTaskerScreen.Scenes,
@@ -747,6 +750,19 @@ fun ActiveAutomationUi(
                         onCreateTask = { showCreateTaskDialog = true },
                     )
                 }
+            }
+            OpenTaskerScreen.Gallery -> {
+                val resources = LocalContext.current.resources
+                GalleryScreen(
+                    contentPadding = innerPadding,
+                    onAdd = { shortcut ->
+                        viewModel.createShortcutFromTemplate(
+                            name = resources.getString(shortcut.nameRes),
+                            actions = shortcut.actions { resources.getString(it) },
+                            projectId = selectedProjectId ?: DEFAULT_PROJECT_ID,
+                        )
+                    },
+                )
             }
             OpenTaskerScreen.Automation -> AutomationScreen(
                 profiles = projectProfiles,

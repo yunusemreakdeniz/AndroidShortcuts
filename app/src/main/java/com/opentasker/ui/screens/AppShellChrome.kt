@@ -25,6 +25,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.PlaylistPlay
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.GridView
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material.icons.outlined.AccountTree
@@ -69,6 +70,7 @@ import com.opentasker.ui.theme.DesignSystem
 internal enum class OpenTaskerScreen(@StringRes val labelRes: Int) {
     Shortcuts(R.string.nav_shortcuts),
     Automation(R.string.nav_automation),
+    Gallery(R.string.nav_gallery),
     Profiles(R.string.nav_profiles),
     Tasks(R.string.nav_tasks),
     Vars(R.string.nav_variables),
@@ -85,6 +87,7 @@ internal enum class OpenTaskerScreen(@StringRes val labelRes: Int) {
 internal val primaryNavigationScreens = listOf(
     OpenTaskerScreen.Shortcuts,
     OpenTaskerScreen.Automation,
+    OpenTaskerScreen.Gallery,
 )
 
 internal val secondaryNavigationScreens = OpenTaskerScreen.entries.filterNot { it in primaryNavigationScreens }
@@ -93,6 +96,7 @@ internal val adaptiveNavigationScreens = OpenTaskerScreen.entries
 internal fun OpenTaskerScreen.icon(): ImageVector = when (this) {
     OpenTaskerScreen.Shortcuts -> Icons.Outlined.GridView
     OpenTaskerScreen.Automation -> Icons.Outlined.Schedule
+    OpenTaskerScreen.Gallery -> Icons.Outlined.Explore
     OpenTaskerScreen.Profiles -> Icons.Outlined.Tune
     OpenTaskerScreen.Tasks -> Icons.AutoMirrored.Outlined.PlaylistPlay
     OpenTaskerScreen.Vars -> Icons.Outlined.Key

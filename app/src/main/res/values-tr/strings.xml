@@ -49,4 +49,29 @@
     <string name="automation_when">Ne zaman: %1$s</string>
     <string name="automation_switch_on">%1$s açık</string>
     <string name="automation_switch_off">%1$s kapalı</string>
+    <string name="nav_gallery" formatted="false">Galeri</string>
+    <string name="header_gallery_detail" formatted="false">Hazır kısayollar</string>
+    <string name="gallery_intro" formatted="false">Hazır bir kısayolu tek dokunuşla ekle, sonra dilediğin gibi değiştir.</string>
+    <string name="gallery_add" formatted="false">Ekle</string>
+    <string name="gallery_translate_name" formatted="false">Metni çevir</string>
+    <string name="gallery_translate_description" formatted="false">Metni sorar ve çeviri sayfasında açar</string>
+    <string name="gallery_translate_question" formatted="false">Çevrilecek metin</string>
+    <string name="gallery_timer_name" formatted="false">Hızlı zamanlayıcı</string>
+    <string name="gallery_timer_description" formatted="false">Kaç dakika olduğunu sorar ve zamanlayıcıyı başlatır</string>
+    <string name="gallery_timer_question" formatted="false">Kaç dakika?</string>
+    <string name="gallery_dice_name" formatted="false">Zar at</string>
+    <string name="gallery_dice_description" formatted="false">1 ile 6 arasında bir sayı tutar</string>
+    <string name="gallery_battery_name" formatted="false">Pil durumu</string>
+    <string name="gallery_battery_description" formatted="false">Pil yüzdesini gösterir</string>
+    <string name="gallery_share_name" formatted="false">Metin paylaş</string>
+    <string name="gallery_share_description" formatted="false">Metni sorar ve paylaşım menüsünü açar</string>
+    <string name="gallery_share_question" formatted="false">Ne paylaşmak istiyorsun?</string>
+    <string name="gallery_home_name" formatted="false">Eve yol tarifi</string>
+    <string name="gallery_home_description" formatted="false">Haritada eve rota açar</string>
+    <string name="gallery_home_destination" formatted="false">Ev</string>
+    <string name="gallery_alarm_name" formatted="false">Sabah alarmı</string>
+    <string name="gallery_alarm_description" formatted="false">07:00 için alarm kurar</string>
+    <string name="gallery_coin_name" formatted="false">Yazı tura</string>
+    <string name="gallery_coin_description" formatted="false">Yazı mı tura mı: 1 veya 2</string>
+    <string name="gallery_coin_result" formatted="false">{{ Coin }} (1 = yazı, 2 = tura)</string>
 </resources>

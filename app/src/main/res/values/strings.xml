@@ -2044,4 +2044,29 @@
     <string name="automation_when">When: %1$s</string>
     <string name="automation_switch_on">%1$s is on</string>
     <string name="automation_switch_off">%1$s is off</string>
+    <string name="nav_gallery" formatted="false">Gallery</string>
+    <string name="header_gallery_detail" formatted="false">Ready-made shortcuts</string>
+    <string name="gallery_intro" formatted="false">Add a ready-made shortcut with one tap, then change it as you like.</string>
+    <string name="gallery_add" formatted="false">Add</string>
+    <string name="gallery_translate_name" formatted="false">Translate Text</string>
+    <string name="gallery_translate_description" formatted="false">Asks for text and opens it in a translator</string>
+    <string name="gallery_translate_question" formatted="false">Text to translate</string>
+    <string name="gallery_timer_name" formatted="false">Quick Timer</string>
+    <string name="gallery_timer_description" formatted="false">Asks how many minutes and starts a timer</string>
+    <string name="gallery_timer_question" formatted="false">How many minutes?</string>
+    <string name="gallery_dice_name" formatted="false">Roll a Die</string>
+    <string name="gallery_dice_description" formatted="false">Picks a number from 1 to 6</string>
+    <string name="gallery_battery_name" formatted="false">Battery Level</string>
+    <string name="gallery_battery_description" formatted="false">Shows the battery percentage</string>
+    <string name="gallery_share_name" formatted="false">Share Text</string>
+    <string name="gallery_share_description" formatted="false">Asks for text and opens the share sheet</string>
+    <string name="gallery_share_question" formatted="false">What do you want to share?</string>
+    <string name="gallery_home_name" formatted="false">Directions Home</string>
+    <string name="gallery_home_description" formatted="false">Opens a route home in maps</string>
+    <string name="gallery_home_destination" formatted="false">Home</string>
+    <string name="gallery_alarm_name" formatted="false">Morning Alarm</string>
+    <string name="gallery_alarm_description" formatted="false">Sets an alarm for 07:00</string>
+    <string name="gallery_coin_name" formatted="false">Flip a Coin</string>
+    <string name="gallery_coin_description" formatted="false">Heads or tails: 1 or 2</string>
+    <string name="gallery_coin_result" formatted="false">{{ Coin }} (1 = heads, 2 = tails)</string>
 </resources>
