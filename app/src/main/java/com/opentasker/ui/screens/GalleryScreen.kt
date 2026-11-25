@@ -107,6 +107,14 @@ internal fun GalleryScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
+        item(key = "collection-on-the-road") {
+            GalleryCollectionCard(
+                titleRes = R.string.gallery_collection_road_title,
+                descriptionRes = R.string.gallery_collection_road_description,
+                shortcuts = galleryShortcuts.filter { it.id in roadCollectionIds },
+                onAddAll = { it.forEach(onAdd) },
+            )
+        }
         items(galleryShortcuts, key = { it.id }) { shortcut ->
             val firstType = shortcut.actions { "" }.firstOrNull()?.type.orEmpty()
             Surface(
@@ -145,6 +153,59 @@ internal fun GalleryScreen(
                         Text(stringResource(R.string.gallery_add))
                     }
                 }
+            }
+        }
+    }
+}
+
+/** "On the road": directions home, battery level and a quick timer for parking. */
+private val roadCollectionIds = listOf(6L, 4L, 2L)
+
+/** The design's featured collection: a dark card with its shortcuts as mini tiles and Add all. */
+@Composable
+private fun GalleryCollectionCard(
+    @StringRes titleRes: Int,
+    @StringRes descriptionRes: Int,
+    shortcuts: List<GalleryShortcut>,
+    onAddAll: (List<GalleryShortcut>) -> Unit,
+) {
+    Surface(
+        shape = RoundedCornerShape(24.dp),
+        color = Color(0xFF1E1B4B),
+        contentColor = Color.White,
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(
+                text = stringResource(R.string.gallery_collection_label),
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFFC7C4F5),
+            )
+            Text(stringResource(titleRes), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
+            Text(stringResource(descriptionRes), style = MaterialTheme.typography.bodyMedium, color = Color(0xFFDCDAF7))
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                shortcuts.forEach { shortcut ->
+                    val firstType = shortcut.actions { "" }.firstOrNull()?.type.orEmpty()
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .background(shortcutColor(shortcut.id), RoundedCornerShape(14.dp))
+                            .padding(10.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        Icon(
+                            shortcutIcon(Task(name = "", actions = listOf(ActionSpec(type = firstType)))),
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = Modifier.size(20.dp),
+                        )
+                        Text(stringResource(shortcut.nameRes), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, maxLines = 2)
+                    }
+                }
+            }
+            FilledTonalButton(onClick = { onAddAll(shortcuts) }, modifier = Modifier.fillMaxWidth()) {
+                Text(stringResource(R.string.gallery_collection_add_all))
             }
         }
     }

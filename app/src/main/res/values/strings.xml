@@ -2075,4 +2075,8 @@
     <string name="shortcut_style_color_option">Color %1$d</string>
     <string name="shortcut_style_icon_option">Icon %1$d</string>
     <string name="shortcut_style_save">Save</string>
+    <string name="gallery_collection_label">COLLECTION</string>
+    <string name="gallery_collection_road_title">On the road</string>
+    <string name="gallery_collection_road_description">Directions home, your battery at a glance and a quick timer for parking.</string>
+    <string name="gallery_collection_add_all">Add all</string>
 </resources>

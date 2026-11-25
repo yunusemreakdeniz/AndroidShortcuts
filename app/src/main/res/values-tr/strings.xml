@@ -81,4 +81,8 @@
     <string name="shortcut_style_icon_option">Simge %1$d</string>
     <string name="shortcut_style_save">Kaydet</string>
     <string name="action_close">Kapat</string>
+    <string name="gallery_collection_label">KOLEKSİYON</string>
+    <string name="gallery_collection_road_title">Yola çıkarken</string>
+    <string name="gallery_collection_road_description">Eve yol tarifi, pil durumu ve park için hızlı zamanlayıcı.</string>
+    <string name="gallery_collection_add_all">Hepsini ekle</string>
 </resources>
