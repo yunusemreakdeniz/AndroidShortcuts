@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="catalog_category_notification" formatted="false">Bildirim</string>
+    <string name="catalog_category_variable" formatted="false">Değişken</string>
+    <string name="catalog_category_flow" formatted="false">Akış</string>
+    <string name="catalog_category_app" formatted="false">Uygulama</string>
+    <string name="catalog_category_plugin" formatted="false">Eklenti</string>
+    <string name="catalog_category_script" formatted="false">Betik</string>
+    <string name="catalog_category_import" formatted="false">İçe aktarma</string>
+    <string name="catalog_category_settings" formatted="false">Ayarlar</string>
+    <string name="catalog_category_file" formatted="false">Dosya</string>
+    <string name="catalog_category_network" formatted="false">Ağ</string>
+    <string name="catalog_category_media" formatted="false">Medya</string>
+    <string name="catalog_category_system" formatted="false">Sistem</string>
+    <string name="catalog_category_dialog" formatted="false">Diyalog</string>
+    <string name="catalog_action_notify_show_name" formatted="false">Bildirim göster</string>
+    <string name="catalog_action_notify_show_description" formatted="false">Kanal, kalıcılık ve değiştirme seçenekleriyle bildirim gönderir</string>
+    <string name="catalog_action_notify_cancel_name" formatted="false">Bildirimi kaldır</string>
+    <string name="catalog_action_notify_cancel_description" formatted="false">Etiket ve/veya kimlikle bir bildirimi kaldırır</string>
+    <string name="catalog_action_var_set_name" formatted="false">Değişken ata</string>
+    <string name="catalog_action_var_set_description" formatted="false">Bir değişkene yeni değer verir</string>
+    <string name="catalog_action_var_set_multiple_name" formatted="false">Birden çok değişken ata</string>
+    <string name="catalog_action_var_set_multiple_description" formatted="false">Birkaç değişkeni tek adımda, her adı aynı sıradaki değere atar</string>
+    <string name="catalog_action_var_persist_name" formatted="false">Değişkeni kalıcı yap</string>
+    <string name="catalog_action_var_persist_description" formatted="false">Değişkenin değerini genel kapsama kopyalar; görev bittikten sonra da kalır</string>
+    <string name="catalog_action_var_clear_name" formatted="false">Değişkeni temizle</string>
+    <string name="catalog_action_var_clear_description" formatted="false">Bir değişkeni, bir desene uyanları ya da tüm yerel değişkenleri siler</string>
+    <string name="catalog_action_clipboard_get_name" formatted="false">Panodan al</string>
+    <string name="catalog_action_clipboard_get_description" formatted="false">Sistem panosundaki metni hassas bir değişkene okur</string>
+    <string name="catalog_action_clipboard_set_name" formatted="false">Panoya kopyala</string>
+    <string name="catalog_action_clipboard_set_description" formatted="false">Metni sistem panosuna yazar</string>
+    <string name="catalog_action_contacts_lookup_name" formatted="false">Kişi bul</string>
+    <string name="catalog_action_contacts_lookup_description" formatted="false">Kişi adını, telefonunu veya e-postasını hassas değişkenlere çözer</string>
+    <string name="catalog_action_data_read_name" formatted="false">Veri oku</string>
+    <string name="catalog_action_data_read_description" formatted="false">JSON, CSV, XML veya HTML’i değişkenlere ayrıştırır. HTTP yanıtları ve dosyalar için kullanışlı.</string>
+    <string name="catalog_action_datetime_format_name" formatted="false">Tarihi biçimlendir</string>
+    <string name="catalog_action_datetime_format_description" formatted="false">Bir zamanı (veya şimdiyi) metne dönüştürür</string>
+    <string name="catalog_action_datetime_parse_name" formatted="false">Tarihi çözümle</string>
+    <string name="catalog_action_datetime_parse_description" formatted="false">Tarih-saat metnini milisaniye zamanına çevirir</string>
+    <string name="catalog_action_datetime_add_name" formatted="false">Tarihe ekle</string>
+    <string name="catalog_action_datetime_add_description" formatted="false">Bir zamana süre ekler veya çıkarır</string>
+    <string name="catalog_action_text_match_name" formatted="false">Metinde eşleştir (regex)</string>
+    <string name="catalog_action_text_match_description" formatted="false">İlk düzenli ifade eşleşmesini bulur; gruplar çıktı dizisine yazılır</string>
+    <string name="catalog_action_text_replace_name" formatted="false">Metni değiştir (regex)</string>
+    <string name="catalog_action_text_replace_description" formatted="false">Eşleşmeleri değiştirir veya bir diziye toplar. $1 grup başvurularını destekler</string>
+    <string name="catalog_action_text_split_name" formatted="false">Metni böl</string>
+    <string name="catalog_action_text_split_description" formatted="false">Bir ayraca veya düzenli ifadeye göre diziye böler</string>
+    <string name="catalog_action_text_join_name" formatted="false">Metinleri birleştir</string>
+    <string name="catalog_action_text_join_description" formatted="false">Bir dizi değişkenini tek metinde birleştirir</string>
+    <string name="catalog_action_text_substring_name" formatted="false">Metin parçası al</string>
+    <string name="catalog_action_text_substring_description" formatted="false">Karakter sırasına göre metnin bir bölümünü alır</string>
+    <string name="catalog_action_text_length_name" formatted="false">Metin uzunluğu</string>
+    <string name="catalog_action_text_length_description" formatted="false">Metindeki karakterleri sayar</string>
+    <string name="catalog_action_var_split_name" formatted="false">Değişkeni böl</string>
+    <string name="catalog_action_var_split_description" formatted="false">Değişkeni Tasker’daki gibi numaralı öğelere böler (%text1, %text2, …)</string>
+    <string name="catalog_action_var_join_name" formatted="false">Değişkenleri birleştir</string>
+    <string name="catalog_action_var_join_description" formatted="false">Numaralı öğeleri (%arr1, %arr2, …) tek değişkende birleştirir</string>
+    <string name="catalog_action_var_convert_name" formatted="false">Değişkeni dönüştür</string>
+    <string name="catalog_action_var_convert_description" formatted="false">Değeri dönüştürür: bayttan megabayta, saniyeden tarihe, metinden Base64’e gibi</string>
+    <string name="catalog_action_array_push_name" formatted="false">Diziye ekle</string>
+    <string name="catalog_action_array_push_description" formatted="false">Diziye bir değer ekler, sonraki öğeleri kaydırır</string>
+    <string name="catalog_action_array_pop_name" formatted="false">Diziden çıkar</string>
+    <string name="catalog_action_array_pop_description" formatted="false">Diziden bir öğeyi çıkarır, sonrakileri geri kaydırır</string>
+    <string name="catalog_action_array_clear_name" formatted="false">Diziyi temizle</string>
+    <string name="catalog_action_array_clear_description" formatted="false">Dizinin tüm öğelerini siler</string>
+    <string name="catalog_action_array_process_name" formatted="false">Diziyi işle</string>
+    <string name="catalog_action_array_process_description" formatted="false">Diziyi sıralar, ters çevirir, karıştırır, tekrarları kaldırır</string>
+    <string name="catalog_action_sun_times_name" formatted="false">Gün doğumu/batımı</string>
+    <string name="catalog_action_sun_times_description" formatted="false">Bir yer ve gün için gün doğumu, batımı, alacakaranlık ve öğle saatini hesaplar</string>
+    <string name="catalog_action_tts_speak_name" formatted="false">Sesli oku</string>
+    <string name="catalog_action_tts_speak_description" formatted="false">Metni hoparlörden sesli okur</string>
+    <string name="catalog_action_flow_wait_name" formatted="false">Bekle</string>
+    <string name="catalog_action_flow_wait_description" formatted="false">Görevi belirtilen süre kadar duraklatır</string>
+    <string name="catalog_action_profile_set_name" formatted="false">Otomasyonu aç/kapat</string>
+    <string name="catalog_action_profile_set_description" formatted="false">Bir otomasyonu adıyla açar veya kapatır</string>
+    <string name="catalog_action_task_run_name" formatted="false">Kısayolu çalıştır</string>
+    <string name="catalog_action_task_run_description" formatted="false">Başka bir kısayolu alt görev olarak çalıştırır (8 seviyeye kadar). Eklediğin girdiler orada değişken olur.</string>
+    <string name="catalog_action_task_stop_name" formatted="false">Kısayolu durdur</string>
+    <string name="catalog_action_task_stop_description" formatted="false">Çalışan başka bir kısayolu durdurur. Bu kısayolun adı verilirse burada biter.</string>
+    <string name="catalog_action_flow_if_name" formatted="false">Eğer</string>
+    <string name="catalog_action_flow_if_description" formatted="false">Sonraki adımları yalnızca koşul doğruysa çalıştırır (Eğer sonu ile kapanır)</string>
+    <string name="catalog_action_flow_else_name" formatted="false">Değilse</string>
+    <string name="catalog_action_flow_else_description" formatted="false">Eşleşen Eğer yanlışsa çalışan dal</string>
+    <string name="catalog_action_flow_endif_name" formatted="false">Eğer sonu</string>
+    <string name="catalog_action_flow_endif_description" formatted="false">Eşleşen Eğer/Değilse bloğunu kapatır</string>
+    <string name="catalog_action_flow_foreach_name" formatted="false">Her biri için tekrarla</string>
+    <string name="catalog_action_flow_foreach_description" formatted="false">Sonraki adımları bir dizinin veya listenin her öğesi için çalıştırır (Tekrar sonu ile kapanır)</string>
+    <string name="catalog_action_flow_endfor_name" formatted="false">Tekrar sonu</string>
+    <string name="catalog_action_flow_endfor_description" formatted="false">Eşleşen Her biri için döngüsünü kapatır</string>
+    <string name="catalog_action_flow_stop_name" formatted="false">Durdur</string>
+    <string name="catalog_action_flow_stop_description" formatted="false">Kısayolun kalanını hemen durdurur</string>
+    <string name="catalog_action_flow_try_name" formatted="false">Dene</string>
+    <string name="catalog_action_flow_try_description" formatted="false">Bir bloğu çalıştırır, hata olursa Yakala ile ele alır</string>
+    <string name="catalog_action_flow_catch_name" formatted="false">Yakala</string>
+    <string name="catalog_action_flow_catch_description" formatted="false">Başarısız Dene bloğunu FLOW_ERROR_* değişkenleriyle ele alır</string>
+    <string name="catalog_action_flow_endtry_name" formatted="false">Dene sonu</string>
+    <string name="catalog_action_flow_endtry_description" formatted="false">Eşleşen Dene/Yakala bloğunu kapatır</string>
+    <string name="catalog_action_flow_goto_name" formatted="false">Git</string>
+    <string name="catalog_action_flow_goto_description" formatted="false">Bu kısayolda numarasıyla ya da etiketiyle başka bir adıma atlar</string>
+    <string name="catalog_action_flow_anchor_name" formatted="false">Çapa</string>
+    <string name="catalog_action_flow_anchor_description" formatted="false">Hiçbir şey yapmaz; Git’in atlayacağı bir etiket verir</string>
+    <string name="catalog_action_intent_launch_name" formatted="false">Intent gönder</string>
+    <string name="catalog_action_intent_launch_description" formatted="false">Bir etkinlik, yayın veya servis intent’i gönderir</string>
+    <string name="catalog_action_plugin_locale_fire_name" formatted="false">Locale eklenti ayarı</string>
+    <string name="catalog_action_plugin_locale_fire_description" formatted="false">Locale/Tasker uyumlu bir ayar eklentisini çalıştırır</string>
+    <string name="catalog_action_plugin_locale_query_name" formatted="false">Locale eklenti koşulu</string>
+    <string name="catalog_action_plugin_locale_query_description" formatted="false">Locale/Tasker uyumlu bir koşul eklentisini sorgular</string>
+    <string name="catalog_action_script_shizuku_run_name" formatted="false">Shizuku betiği çalıştır</string>
+    <string name="catalog_action_script_shizuku_run_description" formatted="false">Onaylı bir kabuk betiğini Shizuku ile çalıştırır</string>
+    <string name="catalog_action_script_termux_run_name" formatted="false">Termux betiği çalıştır</string>
+    <string name="catalog_action_script_termux_run_description" formatted="false">Onaylı bir Termux betiğini çalıştırır</string>
+    <string name="catalog_action_tasker_unsupported_name" formatted="false">Desteklenmeyen Tasker eylemi</string>
+    <string name="catalog_action_tasker_unsupported_description" formatted="false">İçe aktarırken güvenle eşlenemeyen Tasker eylemi için yer tutucu</string>
+    <string name="catalog_action_macrodroid_unsupported_name" formatted="false">Desteklenmeyen MacroDroid eylemi</string>
+    <string name="catalog_action_macrodroid_unsupported_description" formatted="false">İçe aktarırken güvenle eşlenemeyen MacroDroid eylemi için yer tutucu</string>
+    <string name="catalog_action_wifi_toggle_name" formatted="false">Wi-Fi</string>
+    <string name="catalog_action_wifi_toggle_description" formatted="false">Wi-Fi’yi açar veya kapatır</string>
+    <string name="catalog_action_bluetooth_toggle_name" formatted="false">Bluetooth</string>
+    <string name="catalog_action_bluetooth_toggle_description" formatted="false">Bluetooth’u açar veya kapatır</string>
+    <string name="catalog_action_brightness_set_name" formatted="false">Parlaklığı ayarla</string>
+    <string name="catalog_action_brightness_set_description" formatted="false">Ekran parlaklığını ayarlar</string>
+    <string name="catalog_action_state_temporary_name" formatted="false">Geçici ayar</string>
+    <string name="catalog_action_state_temporary_description" formatted="false">Bir ayarı değiştirir, sonra eski haline döndürür</string>
+    <string name="catalog_action_ime_info_name" formatted="false">Klavye bilgisi</string>
+    <string name="catalog_action_ime_info_description" formatted="false">Geçerli ve etkin klavyeleri bildirir</string>
+    <string name="catalog_action_ime_set_name" formatted="false">Klavye değiştir</string>
+    <string name="catalog_action_ime_set_description" formatted="false">Klavyeyi doğrular ve sistem seçicisini açar</string>
+    <string name="catalog_action_volume_set_name" formatted="false">Sesi ayarla</string>
+    <string name="catalog_action_volume_set_description" formatted="false">Bir ses akışının seviyesini ayarlar</string>
+    <string name="catalog_action_vpn_tunnel_name" formatted="false">VPN bağla/kes</string>
+    <string name="catalog_action_vpn_tunnel_description" formatted="false">WireGuard veya Tailscale tünelini açar ya da kapatır</string>
+    <string name="catalog_action_wifi_scan_name" formatted="false">Wi-Fi ağlarını tara</string>
+    <string name="catalog_action_wifi_scan_description" formatted="false">Yakındaki ağları değişkenlere listeler. Android tarama sıklığını sınırlar.</string>
+    <string name="catalog_action_aod_set_name" formatted="false">Her zaman açık ekran</string>
+    <string name="catalog_action_aod_set_description" formatted="false">Her zaman açık ekranı açar veya kapatır</string>
+    <string name="catalog_action_airplane_toggle_name" formatted="false">Uçak modu</string>
+    <string name="catalog_action_airplane_toggle_description" formatted="false">Uçak modunu açar veya kapatır</string>
+    <string name="catalog_action_hotspot_toggle_name" formatted="false">Wi-Fi erişim noktası</string>
+    <string name="catalog_action_hotspot_toggle_description" formatted="false">Erişim noktasını açar veya kapatır</string>
+    <string name="catalog_action_mobile_toggle_name" formatted="false">Mobil veri</string>
+    <string name="catalog_action_mobile_toggle_description" formatted="false">Mobil veriyi açar veya kapatır</string>
+    <string name="catalog_action_screen_timeout_name" formatted="false">Ekran zaman aşımı</string>
+    <string name="catalog_action_screen_timeout_description" formatted="false">Ekranın uyku süresini ayarlar</string>
+    <string name="catalog_action_settings_write_name" formatted="false">Ayar yaz</string>
+    <string name="catalog_action_settings_write_description" formatted="false">Bir Android ayarını adıyla değiştirir</string>
+    <string name="catalog_action_dnd_set_name" formatted="false">Rahatsız etmeyin</string>
+    <string name="catalog_action_dnd_set_description" formatted="false">Rahatsız etmeyin modunu ayarlar</string>
+    <string name="catalog_action_zen_rule_set_name" formatted="false">Odak kuralı ayarla</string>
+    <string name="catalog_action_zen_rule_set_description" formatted="false">Android’in Rahatsız etmeyin kuralını oluşturur veya günceller</string>
+    <string name="catalog_action_zen_rule_clear_name" formatted="false">Odak kuralını kaldır</string>
+    <string name="catalog_action_zen_rule_clear_description" formatted="false">Uygulamanın oluşturduğu Rahatsız etmeyin kuralını kaldırır</string>
+    <string name="catalog_action_ringer_set_name" formatted="false">Zil modu</string>
+    <string name="catalog_action_ringer_set_description" formatted="false">Zil modunu ayarlar</string>
+    <string name="catalog_action_torch_set_name" formatted="false">Fener</string>
+    <string name="catalog_action_torch_set_description" formatted="false">Feneri açar veya kapatır</string>
+    <string name="catalog_action_tile_set_name" formatted="false">Hızlı ayar kutucuğu</string>
+    <string name="catalog_action_tile_set_description" formatted="false">Hızlı Ayarlar kutucuğunun durumunu günceller</string>
+    <string name="catalog_action_wallpaper_set_name" formatted="false">Duvar kağıdı ayarla</string>
+    <string name="catalog_action_wallpaper_set_description" formatted="false">Ana veya kilit ekranı duvar kağıdını değiştirir</string>
+    <string name="catalog_action_app_launch_name" formatted="false">Uygulama aç</string>
+    <string name="catalog_action_app_launch_description" formatted="false">Yüklü bir uygulamayı açar</string>
+    <string name="catalog_action_app_kill_name" formatted="false">Uygulamayı kapat</string>
+    <string name="catalog_action_app_kill_description" formatted="false">Bir uygulamayı zorla kapatır</string>
+    <string name="catalog_action_app_archive_name" formatted="false">Uygulamayı arşivle</string>
+    <string name="catalog_action_app_archive_description" formatted="false">Verilerini koruyarak bir uygulamayı arşivler</string>
+    <string name="catalog_action_app_unarchive_name" formatted="false">Arşivden çıkar</string>
+    <string name="catalog_action_app_unarchive_description" formatted="false">Arşivlenmiş bir uygulamayı geri yükler</string>
+    <string name="catalog_action_home_go_name" formatted="false">Ana ekrana dön</string>
+    <string name="catalog_action_home_go_description" formatted="false">Ana ekrana döner</string>
+    <string name="catalog_action_url_open_name" formatted="false">URL aç</string>
+    <string name="catalog_action_url_open_description" formatted="false">Bağlantıyı tarayıcıda açar</string>
+    <string name="catalog_action_sms_send_name" formatted="false">SMS gönder</string>
+    <string name="catalog_action_sms_send_description" formatted="false">Kısa mesaj gönderir</string>
+    <string name="catalog_action_screenshot_take_name" formatted="false">Ekran görüntüsü al</string>
+    <string name="catalog_action_screenshot_take_description" formatted="false">Ekran görüntüsü alır</string>
+    <string name="catalog_action_file_read_name" formatted="false">Dosya oku</string>
+    <string name="catalog_action_file_read_description" formatted="false">Dosyanın içeriğini değişkene okur</string>
+    <string name="catalog_action_file_write_name" formatted="false">Dosyaya yaz</string>
+    <string name="catalog_action_file_write_description" formatted="false">İçeriği dosyaya yazar (üzerine yazar)</string>
+    <string name="catalog_action_file_append_name" formatted="false">Dosyaya ekle</string>
+    <string name="catalog_action_file_append_description" formatted="false">İçeriği dosyanın sonuna ekler</string>
+    <string name="catalog_action_file_delete_name" formatted="false">Dosya sil</string>
+    <string name="catalog_action_file_delete_description" formatted="false">Bir dosyayı siler</string>
+    <string name="catalog_action_file_list_name" formatted="false">Dosyaları listele</string>
+    <string name="catalog_action_file_list_description" formatted="false">Klasör içeriğini değişkene listeler</string>
+    <string name="catalog_action_http_request_name" formatted="false">İnternetten içerik al</string>
+    <string name="catalog_action_http_request_description" formatted="false">Başlıklar, yönlendirmeler ve zaman aşımlarıyla HTTP isteği gönderir</string>
+    <string name="catalog_action_http_get_name" formatted="false">HTTP GET</string>
+    <string name="catalog_action_http_get_description" formatted="false">HTTP GET isteği gönderir</string>
+    <string name="catalog_action_http_post_name" formatted="false">HTTP POST</string>
+    <string name="catalog_action_http_post_description" formatted="false">HTTP POST isteği gönderir</string>
+    <string name="catalog_action_home_assistant_webhook_name" formatted="false">Home Assistant webhook</string>
+    <string name="catalog_action_home_assistant_webhook_description" formatted="false">Home Assistant webhook’una JSON olay gönderir</string>
+    <string name="catalog_action_mqtt_publish_name" formatted="false">MQTT yayınla</string>
+    <string name="catalog_action_mqtt_publish_description" formatted="false">MQTT sunucusuna mesaj yayınlar</string>
+    <string name="catalog_action_ping_name" formatted="false">Ping</string>
+    <string name="catalog_action_ping_description" formatted="false">Bir ağ adresine ping atar</string>
+    <string name="catalog_action_download_name" formatted="false">Dosya indir</string>
+    <string name="catalog_action_download_description" formatted="false">URL’den dosya indirir</string>
+    <string name="catalog_action_wol_name" formatted="false">Wake-on-LAN</string>
+    <string name="catalog_action_wol_description" formatted="false">Yerel ağdaki bir cihazı uyandırmak için sihirli paket gönderir</string>
+    <string name="catalog_action_sound_play_name" formatted="false">Ses çal</string>
+    <string name="catalog_action_sound_play_description" formatted="false">Bir ses dosyası çalar</string>
+    <string name="catalog_action_sound_beep_name" formatted="false">Bip sesi</string>
+    <string name="catalog_action_sound_beep_description" formatted="false">Belirli bir tonda bip sesi çalar</string>
+    <string name="catalog_action_sound_stop_name" formatted="false">Sesi durdur</string>
+    <string name="catalog_action_sound_stop_description" formatted="false">Çalmayı durdurur</string>
+    <string name="catalog_action_sound_pause_name" formatted="false">Duraklat</string>
+    <string name="catalog_action_sound_pause_description" formatted="false">Çalmayı duraklatır</string>
+    <string name="catalog_action_track_next_name" formatted="false">Sonraki parça</string>
+    <string name="catalog_action_track_next_description" formatted="false">Sonraki parçayı çalar</string>
+    <string name="catalog_action_track_previous_name" formatted="false">Önceki parça</string>
+    <string name="catalog_action_track_previous_description" formatted="false">Önceki parçayı çalar</string>
+    <string name="catalog_action_sound_resume_name" formatted="false">Devam et</string>
+    <string name="catalog_action_sound_resume_description" formatted="false">Çalmaya devam eder</string>
+    <string name="catalog_action_sound_toggle_name" formatted="false">Oynat/Duraklat</string>
+    <string name="catalog_action_sound_toggle_description" formatted="false">Oynatma ve duraklatma arasında geçer</string>
+    <string name="catalog_action_track_rewind_name" formatted="false">Geri sar</string>
+    <string name="catalog_action_track_rewind_description" formatted="false">Geçerli parçayı geri sarar</string>
+    <string name="catalog_action_track_fastforward_name" formatted="false">İleri sar</string>
+    <string name="catalog_action_track_fastforward_description" formatted="false">Geçerli parçayı ileri sarar</string>
+    <string name="catalog_action_media_mute_name" formatted="false">Sessize al</string>
+    <string name="catalog_action_media_mute_description" formatted="false">Sesi kapatır</string>
+    <string name="catalog_action_vibrate_name" formatted="false">Titret</string>
+    <string name="catalog_action_vibrate_description" formatted="false">Cihazı titretir</string>
+    <string name="catalog_action_reboot_name" formatted="false">Yeniden başlat</string>
+    <string name="catalog_action_reboot_description" formatted="false">Cihazı yeniden başlatır</string>
+    <string name="catalog_action_lock_name" formatted="false">Cihazı kilitle</string>
+    <string name="catalog_action_lock_description" formatted="false">Ekranı kilitler</string>
+    <string name="catalog_action_screen_off_name" formatted="false">Ekranı kapat</string>
+    <string name="catalog_action_screen_off_description" formatted="false">Ekranı kapatır</string>
+    <string name="catalog_action_wake_name" formatted="false">Cihazı uyandır</string>
+    <string name="catalog_action_wake_description" formatted="false">Ekranı açar</string>
+    <string name="catalog_action_log_name" formatted="false">Kayda yaz</string>
+    <string name="catalog_action_log_description" formatted="false">Çalışma kaydına mesaj yazar</string>
+    <string name="catalog_action_notify_progress_name" formatted="false">İlerleme bildirimi</string>
+    <string name="catalog_action_notify_progress_description" formatted="false">İlerleme çubuklu bildirim gösterir</string>
+    <string name="catalog_action_shortcut_publish_name" formatted="false">Ana ekrana ekle</string>
+    <string name="catalog_action_shortcut_publish_description" formatted="false">Bir kısayol için ana ekran kısayolu oluşturur</string>
+    <string name="catalog_action_input_ask_name" formatted="false">Metin sor</string>
+    <string name="catalog_action_input_ask_description" formatted="false">Bir metin alanı gösterir ve yazılanı kaydeder. İptal kısayolu durdurur</string>
+    <string name="catalog_action_menu_choose_name" formatted="false">Menüden seç</string>
+    <string name="catalog_action_menu_choose_description" formatted="false">Bir liste gösterir, dokunulan öğeyi ve sırasını kaydeder. İptal kısayolu durdurur</string>
+    <string name="catalog_action_alert_show_name" formatted="false">Uyarı göster</string>
+    <string name="catalog_action_alert_show_description" formatted="false">Tamam ve İptal ile mesaj gösterir. İptal kısayolu durdurur</string>
+    <string name="catalog_action_result_show_name" formatted="false">Sonucu göster</string>
+    <string name="catalog_action_result_show_description" formatted="false">Bir metni veya değişkeni Tamam ve Kopyala ile gösterir</string>
+    <string name="catalog_action_battery_get_name" formatted="false">Pil seviyesini al</string>
+    <string name="catalog_action_battery_get_description" formatted="false">Pil yüzdesini, şarj durumunu ve güç kaynağını kaydeder</string>
+    <string name="catalog_action_math_calculate_name" formatted="false">Hesapla</string>
+    <string name="catalog_action_math_calculate_description" formatted="false">+ - * / % ^ ve parantezlerle bir işlemi hesaplar</string>
+    <string name="catalog_action_random_number_name" formatted="false">Rastgele sayı</string>
+    <string name="catalog_action_random_number_description" formatted="false">En küçük ve en büyük arasında bir tam sayı seçer</string>
+    <string name="catalog_action_alarm_set_name" formatted="false">Alarm kur</string>
+    <string name="catalog_action_alarm_set_description" formatted="false">Saat uygulamasına alarm ekler</string>
+    <string name="catalog_action_timer_set_name" formatted="false">Zamanlayıcı başlat</string>
+    <string name="catalog_action_timer_set_description" formatted="false">Saat uygulamasında geri sayım başlatır</string>
+    <string name="catalog_action_email_compose_name" formatted="false">E-posta oluştur</string>
+    <string name="catalog_action_email_compose_description" formatted="false">Alıcı, konu ve metni doldurulmuş e-posta açar</string>
+    <string name="catalog_action_phone_dial_name" formatted="false">Telefonla ara</string>
+    <string name="catalog_action_phone_dial_description" formatted="false">Numarayı arama ekranında hazır açar</string>
+    <string name="catalog_action_share_text_name" formatted="false">Paylaş</string>
+    <string name="catalog_action_share_text_description" formatted="false">Metinle paylaşım sayfasını açar</string>
+    <string name="catalog_action_maps_directions_name" formatted="false">Yol tarifi al</string>
+    <string name="catalog_action_maps_directions_description" formatted="false">Haritada hedefe rota açar</string>
+    <string name="catalog_action_list_choose_name" formatted="false">Listeden seç</string>
+    <string name="catalog_action_list_choose_description" formatted="false">İstediğin kadar öğe işaretlenir; seçilenler satır satır kaydedilir. İptal kısayolu durdurur</string>
+    <string name="catalog_action_date_ask_name" formatted="false">Tarih sor</string>
+    <string name="catalog_action_date_ask_description" formatted="false">Sistem seçicisiyle tarih, saat veya ikisini seçtirir. İptal kısayolu durdurur</string>
+    <string name="catalog_action_dictate_text_name" formatted="false">Dikte et</string>
+    <string name="catalog_action_dictate_text_description" formatted="false">Konuşmayı sistem ses tanıyıcısıyla metne çevirir</string>
+</resources>
