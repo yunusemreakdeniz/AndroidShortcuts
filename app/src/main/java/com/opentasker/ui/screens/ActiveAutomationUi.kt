@@ -755,10 +755,9 @@ fun ActiveAutomationUi(
                 val resources = LocalContext.current.resources
                 GalleryScreen(
                     contentPadding = innerPadding,
-                    onAdd = { shortcut ->
-                        viewModel.createShortcutFromTemplate(
-                            name = resources.getString(shortcut.nameRes),
-                            actions = shortcut.actions { resources.getString(it) },
+                    onAdd = { shortcuts ->
+                        viewModel.createShortcutsFromTemplates(
+                            items = shortcuts.map { resources.getString(it.nameRes) to it.actions { id -> resources.getString(id) } },
                             projectId = selectedProjectId ?: DEFAULT_PROJECT_ID,
                         )
                     },

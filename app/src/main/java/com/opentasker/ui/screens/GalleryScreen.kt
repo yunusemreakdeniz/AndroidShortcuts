@@ -91,7 +91,7 @@ internal val galleryShortcuts = listOf(
 @Composable
 internal fun GalleryScreen(
     contentPadding: PaddingValues,
-    onAdd: (GalleryShortcut) -> Unit,
+    onAdd: (List<GalleryShortcut>) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -112,7 +112,7 @@ internal fun GalleryScreen(
                 titleRes = R.string.gallery_collection_road_title,
                 descriptionRes = R.string.gallery_collection_road_description,
                 shortcuts = galleryShortcuts.filter { it.id in roadCollectionIds },
-                onAddAll = { it.forEach(onAdd) },
+                onAddAll = onAdd,
             )
         }
         items(galleryShortcuts, key = { it.id }) { shortcut ->
@@ -149,7 +149,7 @@ internal fun GalleryScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    FilledTonalButton(onClick = { onAdd(shortcut) }) {
+                    FilledTonalButton(onClick = { onAdd(listOf(shortcut)) }) {
                         Text(stringResource(R.string.gallery_add))
                     }
                 }
