@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kısayollar</string>
+    <string name="nav_shortcuts">Kısayollar</string>
+    <string name="nav_profiles">Otomasyon</string>
+    <string name="nav_more">Gelişmiş</string>
+    <string name="nav_tasks">Görevler</string>
+    <string name="nav_variables">Değişkenler</string>
+    <string name="nav_flow">Akış</string>
+    <string name="nav_scenes">Sahneler</string>
+    <string name="nav_inspector">Denetleyici</string>
+    <string name="nav_setup">Kurulum</string>
+    <string name="nav_run_log">Çalışma kaydı</string>
+    <string name="nav_diagnostics">Tanılama</string>
+    <string name="nav_settings">Ayarlar</string>
+    <plurals name="header_shortcuts_detail">
+        <item quantity="one">%1$d kısayol</item>
+        <item quantity="other">%1$d kısayol</item>
+    </plurals>
+    <string name="shortcuts_empty_title">Henüz kısayol yok</string>
+    <string name="shortcuts_empty_body">Bir kısayol oluştur, adımlarını ekle, sonra tek dokunuşla çalıştır.</string>
+    <string name="shortcuts_create">Yeni kısayol</string>
+    <string name="shortcuts_run">%1$s çalıştır</string>
+    <string name="shortcuts_tile_description">%1$s, %2$s</string>
+    <plurals name="shortcuts_action_count">
+        <item quantity="one">%1$d eylem</item>
+        <item quantity="other">%1$d eylem</item>
+    </plurals>
+</resources>

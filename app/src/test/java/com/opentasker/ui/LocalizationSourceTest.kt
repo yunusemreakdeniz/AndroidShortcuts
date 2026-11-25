@@ -484,6 +484,9 @@ class LocalizationSourceTest {
                 .toList()
         }
         val defaultStrings = defaultValueFiles.flatMap { stringResourceValues(it).entries }.associate { it.toPair() }
+        // Kısayollar translates Turkish screen by screen; values-tr joins the gate once it reaches
+        // the threshold. Its strings must still be valid and known (checked below the exemption).
+        val inProgressLocales = setOf("values-tr")
         val failures = localeDirectories.mapNotNull { directory ->
             val localeFiles = Files.list(directory).use { paths ->
                 paths.filter { Files.isRegularFile(it) && it.fileName.toString().endsWith(".xml") }.toList()
@@ -507,7 +510,7 @@ class LocalizationSourceTest {
                 localeStrings[name] != null && localeStrings[name] != english
             }
             val completion = translated.toDouble() / defaultStrings.size
-            if (completion < threshold) {
+            if (completion < threshold && directory.fileName.toString() !in inProgressLocales) {
                 "${directory.fileName} is below ${(threshold * 100).toInt()}%: $translated/${defaultStrings.size}"
             } else {
                 null

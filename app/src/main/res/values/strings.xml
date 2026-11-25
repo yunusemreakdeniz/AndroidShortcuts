@@ -77,7 +77,7 @@
     <string name="locale_setting_blurb">Run task: %1$s</string>
     <string name="locale_setting_no_tasks">No tasks available. Create a task in OpenTasker first.</string>
     <string name="locale_setting_task_id">Task #%1$d</string>
-    <string name="nav_profiles">Profiles</string>
+    <string name="nav_profiles">Automation</string>
     <string name="nav_tasks">Tasks</string>
     <string name="nav_run_log">Run Log</string>
     <string name="nav_setup">Setup</string>
@@ -1585,7 +1585,7 @@
     <string name="action_option_convert_json_encode">JSON encode</string>
 
     <!-- Secondary-surface localization -->
-    <string name="nav_more">More</string>
+    <string name="nav_more">Advanced</string>
     <string name="header_profiles_detail">%1$d enabled • %2$d total</string>
     <string name="header_tasks_detail">%1$d actions • %2$d tasks</string>
     <string name="header_variables_detail">%1$d global variables</string>

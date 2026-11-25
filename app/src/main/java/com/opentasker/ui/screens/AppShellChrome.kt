@@ -78,11 +78,11 @@ internal enum class OpenTaskerScreen(@StringRes val labelRes: Int) {
     Diagnostics(R.string.nav_diagnostics),
     Settings(R.string.nav_settings),
 }
+// Kısayollar keeps the Shortcuts-style bar: shortcuts and automations. Tasks, variables, flow,
+// scenes, the inspector, setup and logs stay one tap away under Advanced.
 internal val primaryNavigationScreens = listOf(
     OpenTaskerScreen.Shortcuts,
     OpenTaskerScreen.Profiles,
-    OpenTaskerScreen.Tasks,
-    OpenTaskerScreen.Setup,
 )
 
 internal val secondaryNavigationScreens = OpenTaskerScreen.entries.filterNot { it in primaryNavigationScreens }
