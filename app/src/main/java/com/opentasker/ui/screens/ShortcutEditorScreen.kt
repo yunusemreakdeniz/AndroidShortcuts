@@ -3,6 +3,8 @@ package com.opentasker.ui.screens
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -180,6 +182,7 @@ internal fun ShortcutEditorScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ActionBlock(
     action: ActionSpec,
@@ -192,7 +195,8 @@ private fun ActionBlock(
 ) {
     val metadata = ActionMetadataRegistry.get(action.type)
     val name = metadata?.let { stringResource(it.nameRes) } ?: stringResource(R.string.action_unknown_name)
-    val details = ActionArgumentSensitivity.summarize(actionType = action.type, args = action.args)
+    val parts = remember(action) { blockParts(action) }
+    val output = remember(action) { blockOutputName(action) }
     var menuOpen by remember { mutableStateOf(false) }
     Surface(
         onClick = onEdit,
@@ -226,14 +230,36 @@ private fun ActionBlock(
                     fontWeight = FontWeight.Bold,
                     color = if (action.enabled) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                 )
-                if (details.isNotBlank()) {
-                    Text(
-                        text = details,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 3,
-                        overflow = TextOverflow.Ellipsis,
-                    )
+                if (parts.isNotEmpty() || output != null) {
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                        modifier = Modifier.padding(top = 4.dp),
+                    ) {
+                        parts.forEach { part ->
+                            if (part.variable) {
+                                VariablePill(part.text)
+                            } else {
+                                Text(
+                                    text = part.text,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    maxLines = 2,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.align(Alignment.CenterVertically),
+                                )
+                            }
+                        }
+                        if (output != null) {
+                            Text(
+                                text = "→",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                            )
+                            VariablePill(output)
+                        }
+                    }
                 }
             }
             Box {
@@ -264,4 +290,59 @@ internal fun actionColor(type: String): Color = when (type.substringBefore('.'))
     "alarm", "timer", "email", "phone", "share", "maps", "app", "sms", "intent", "home", "shortcut" -> Color(0xFFC2410C)
     "notify" -> Color(0xFF0F766E)
     else -> Color(0xFF15803D)
+}
+
+private data class BlockPart(val text: String, val variable: Boolean)
+
+private val VARIABLE_REFERENCE = Regex("""\{\{\s*([A-Za-z_][A-Za-z0-9_.]*)\s*\}\}""")
+
+/** The block's arguments as text with `{{ Name }}` references split out as variable pills. */
+private fun blockParts(action: ActionSpec): List<BlockPart> {
+    val parts = mutableListOf<BlockPart>()
+    action.args.entries
+        .filter { (key, value) -> value.isNotBlank() && key != "var" }
+        .take(3)
+        .forEach { (key, value) ->
+            if (ActionArgumentSensitivity.isSensitive(action.type, key, action.args)) {
+                parts += BlockPart(ActionArgumentSensitivity.REDACTED, variable = false)
+                return@forEach
+            }
+            var last = 0
+            VARIABLE_REFERENCE.findAll(value).forEach { match ->
+                value.substring(last, match.range.first).trim().takeIf(String::isNotEmpty)?.let { parts += BlockPart(it.take(60), false) }
+                parts += BlockPart(match.groupValues[1], true)
+                last = match.range.last + 1
+            }
+            value.substring(last).trim().takeIf(String::isNotEmpty)?.let { parts += BlockPart(it.take(60), false) }
+        }
+    return parts
+}
+
+/** The variable the block writes first, as Shortcuts shows a step's result. */
+private fun blockOutputName(action: ActionSpec): String? {
+    val output = ActionMetadataRegistry.get(action.type)?.outputs?.firstOrNull() ?: return null
+    val base = output.nameArgumentKeys.firstNotNullOfOrNull { key -> action.args[key]?.takeIf(String::isNotBlank) }
+        ?: output.defaultName
+        ?: return null
+    return base + output.suffix
+}
+
+/** Soft, readable pill colours; dark text on each passes contrast in both themes. */
+private val pillColors = listOf(
+    Color(0xFFEDE7FB) to Color(0xFF5B21B6), Color(0xFFFDEBDD) to Color(0xFF9A3412),
+    Color(0xFFDDF2EF) to Color(0xFF0F5F58), Color(0xFFDCE7FD) to Color(0xFF1D4ED8),
+)
+
+@Composable
+private fun VariablePill(name: String) {
+    val (background, text) = pillColors[Math.floorMod(name.hashCode(), pillColors.size)]
+    Text(
+        text = name,
+        style = MaterialTheme.typography.labelLarge,
+        fontWeight = FontWeight.Bold,
+        color = text,
+        modifier = Modifier
+            .background(background, RoundedCornerShape(9.dp))
+            .padding(horizontal = 10.dp, vertical = 4.dp),
+    )
 }
