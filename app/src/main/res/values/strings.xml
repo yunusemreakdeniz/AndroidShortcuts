@@ -2025,4 +2025,13 @@
         <item quantity="one">%1$d action</item>
         <item quantity="other">%1$d actions</item>
     </plurals>
+    <string name="shortcut_editor_back">Back to shortcuts</string>
+    <string name="shortcut_editor_details">Shortcut details</string>
+    <string name="shortcut_editor_run">Run</string>
+    <string name="shortcut_editor_empty">This shortcut has no actions yet. Add the first one below.</string>
+    <string name="shortcut_editor_add_action">Add action</string>
+    <string name="shortcut_editor_action_menu">Options for %1$s</string>
+    <string name="shortcut_editor_move_up">Move up</string>
+    <string name="shortcut_editor_move_down">Move down</string>
+    <string name="shortcut_editor_delete">Remove</string>
 </resources>

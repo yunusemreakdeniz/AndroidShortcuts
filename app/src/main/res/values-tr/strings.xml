@@ -26,4 +26,13 @@
         <item quantity="one">%1$d eylem</item>
         <item quantity="other">%1$d eylem</item>
     </plurals>
+    <string name="shortcut_editor_back">Kısayollara dön</string>
+    <string name="shortcut_editor_details">Kısayol ayrıntıları</string>
+    <string name="shortcut_editor_run">Çalıştır</string>
+    <string name="shortcut_editor_empty">Bu kısayolda henüz eylem yok. İlkini aşağıdan ekle.</string>
+    <string name="shortcut_editor_add_action">Eylem ekle</string>
+    <string name="shortcut_editor_action_menu">%1$s seçenekleri</string>
+    <string name="shortcut_editor_move_up">Yukarı taşı</string>
+    <string name="shortcut_editor_move_down">Aşağı taşı</string>
+    <string name="shortcut_editor_delete">Kaldır</string>
 </resources>

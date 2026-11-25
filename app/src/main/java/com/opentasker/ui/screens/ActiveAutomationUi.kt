@@ -253,6 +253,8 @@ fun ActiveAutomationUi(
     val projectVariables = remember(globalVariables, selectedProjectId) { globalVariables.filter { selectedProjectId == null || it.projectId == selectedProjectId } }
     val screen = OpenTaskerScreen.entries.getOrElse(screenOrdinal) { OpenTaskerScreen.Profiles }
     var taskDialogId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
+    // The shortcut open in the Shortcuts-style editor on the Shortcuts tab, if any.
+    var editingShortcutId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
     var showCreateTaskDialog by rememberSaveable { mutableStateOf(false) }
     var profileDialogId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
     var showCreateProfileDialog by rememberSaveable { mutableStateOf(false) }
@@ -711,13 +713,40 @@ fun ActiveAutomationUi(
             }
             Box(Modifier.weight(1f).fillMaxHeight()) {
         when (screen) {
-            OpenTaskerScreen.Shortcuts -> ShortcutsHomeScreen(
-                tasks = projectTasks,
-                contentPadding = innerPadding,
-                onRunTask = { viewModel.runTaskNow(it) },
-                onOpenTask = { openTaskDialog(it) },
-                onCreateTask = { showCreateTaskDialog = true },
-            )
+            OpenTaskerScreen.Shortcuts -> {
+                val editing = projectTasks.firstOrNull { it.id == editingShortcutId }
+                if (editing != null) {
+                    BackHandler { editingShortcutId = NO_DIALOG_ENTITY_ID }
+                    ShortcutEditorScreen(
+                        task = editing,
+                        contentPadding = innerPadding,
+                        onBack = { editingShortcutId = NO_DIALOG_ENTITY_ID },
+                        onRun = { viewModel.runTaskNow(editing) },
+                        onOpenDetails = { openTaskDialog(editing) },
+                        onAddAction = { openActionPicker(editing) },
+                        onEditAction = { index, action ->
+                            val metadata = ActionMetadataRegistry.get(action.type)
+                            if (metadata != null) {
+                                openActionEdit(editing, metadata, index)
+                            } else {
+                                scope.launch { snackbarHostState.showSnackbarOverReason(unsupportedActionTypeMessage) }
+                            }
+                        },
+                        onMoveAction = { from, to -> viewModel.moveTaskAction(editing.id, from, to) },
+                        onDeleteAction = { index ->
+                            if (editing.actions.getOrNull(index) != null) viewModel.removeTaskAction(editing, index)
+                        },
+                    )
+                } else {
+                    ShortcutsHomeScreen(
+                        tasks = projectTasks,
+                        contentPadding = innerPadding,
+                        onRunTask = { viewModel.runTaskNow(it) },
+                        onOpenTask = { editingShortcutId = it.id },
+                        onCreateTask = { showCreateTaskDialog = true },
+                    )
+                }
+            }
             OpenTaskerScreen.Profiles -> ProfilesScreen(
                 profiles = projectProfiles,
                 tasks = projectTasks,
