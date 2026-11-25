@@ -55,6 +55,7 @@ import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,8 +120,11 @@ internal fun OpenTaskerHeader(
     detail: String,
     onOpenSearch: () -> Unit,
 ) {
+    // The Shortcuts-style tabs use the design's large title on the page background; the
+    // Advanced workspaces keep the compact header with its status line and divider.
+    val designScreen = screen in designHeaderScreens
     Surface(
-        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        color = if (designScreen) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.surfaceContainerLow,
         tonalElevation = 0.dp,
     ) {
         Column(
@@ -144,13 +148,22 @@ internal fun OpenTaskerHeader(
                     Text(
                         stringResource(screen.labelRes),
                         style = MaterialTheme.typography.headlineSmall.copy(
-                            fontSize = 28.sp,
-                            lineHeight = 33.sp,
+                            fontSize = if (designScreen) 32.sp else 28.sp,
+                            lineHeight = if (designScreen) 38.sp else 33.sp,
+                            fontWeight = if (designScreen) FontWeight.ExtraBold else null,
                         ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
-                    Row(
+                    if (designScreen) {
+                        Text(
+                            text = detail,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    } else Row(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -183,7 +196,7 @@ internal fun OpenTaskerHeader(
                     )
                 }
                 // Decoration: the title beside it already names the screen.
-                Icon(
+                if (!designScreen) Icon(
                     imageVector = screen.icon(),
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurface,
@@ -192,15 +205,19 @@ internal fun OpenTaskerHeader(
                         .size(24.dp),
                 )
             }
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(MaterialTheme.colorScheme.outlineVariant),
-            )
+            if (!designScreen) {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(MaterialTheme.colorScheme.outlineVariant),
+                )
+            }
         }
     }
 }
+
+private val designHeaderScreens = setOf(OpenTaskerScreen.Shortcuts, OpenTaskerScreen.Automation, OpenTaskerScreen.Gallery)
 
 @Composable
 internal fun OpenTaskerNavigationItem(
