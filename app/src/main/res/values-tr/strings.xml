@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Kısayollar</string>
     <string name="nav_shortcuts">Kısayollar</string>
-    <string name="nav_profiles">Otomasyon</string>
+    <string name="nav_profiles">Profiller</string>
     <string name="nav_more">Gelişmiş</string>
     <string name="nav_tasks">Görevler</string>
     <string name="nav_variables">Değişkenler</string>
@@ -40,4 +40,13 @@
     <string name="action_picker_search_label">Ara</string>
     <string name="action_picker_search_hint">Eylem adı veya açıklaması</string>
     <string name="action_picker_no_results">Eşleşen eylem yok</string>
+    <string name="nav_automation">Otomasyon</string>
+    <string name="automation_intro">Bir şey olduğunda kısayollar kendiliğinden çalışır.</string>
+    <string name="automation_empty">Henüz otomasyon yok. Oluşturmak için Yeni\'ye dokun.</string>
+    <string name="automation_edit_triggers">Tetikleyicileri ayrıntılı düzenle</string>
+    <string name="automation_no_trigger">Henüz tetikleyici yok</string>
+    <string name="automation_no_shortcut">Kısayol seçilmedi</string>
+    <string name="automation_when">Ne zaman: %1$s</string>
+    <string name="automation_switch_on">%1$s açık</string>
+    <string name="automation_switch_off">%1$s kapalı</string>
 </resources>

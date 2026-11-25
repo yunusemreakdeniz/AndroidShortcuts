@@ -530,6 +530,7 @@ fun ActiveAutomationUi(
         // Counted over the same project-scoped lists the screens render, or the header disagreed
         // with the list under it whenever a project was selected.
         OpenTaskerScreen.Shortcuts -> pluralStringResource(R.plurals.header_shortcuts_detail, projectTasks.size, projectTasks.size)
+        OpenTaskerScreen.Automation -> stringResource(R.string.header_profiles_detail, projectProfiles.count { it.enabled }, projectProfiles.size)
         OpenTaskerScreen.Profiles -> stringResource(R.string.header_profiles_detail, projectProfiles.count { it.enabled }, projectProfiles.size)
         OpenTaskerScreen.Tasks -> stringResource(R.string.header_tasks_detail, projectTasks.sumOf { it.actions.size }, projectTasks.size)
         OpenTaskerScreen.Vars -> stringResource(R.string.header_variables_detail, projectVariables.size)
@@ -570,7 +571,7 @@ fun ActiveAutomationUi(
         },
         floatingActionButton = {
             when (screen) {
-                OpenTaskerScreen.Profiles -> {
+                OpenTaskerScreen.Automation, OpenTaskerScreen.Profiles -> {
                     val createLabel = stringResource(if (projectTasks.isEmpty()) R.string.task_new else R.string.profile_new)
                     ExtendedFloatingActionButton(
                         onClick = {
@@ -747,6 +748,23 @@ fun ActiveAutomationUi(
                     )
                 }
             }
+            OpenTaskerScreen.Automation -> AutomationScreen(
+                profiles = projectProfiles,
+                tasks = projectTasks,
+                contentPadding = innerPadding,
+                onToggle = { profile, enabled ->
+                    if (enabled && profile.requiresRiskAcknowledgement) {
+                        importedProfileReviewId = profile.id
+                    } else {
+                        viewModel.updateProfile(
+                            profile.copy(enabled = enabled),
+                            if (enabled) R.string.ui_message_profile_enabled else R.string.ui_message_profile_disabled,
+                        )
+                    }
+                },
+                onOpen = { openProfileDialog(it) },
+                onEditTriggers = { screenOrdinal = OpenTaskerScreen.Profiles.ordinal },
+            )
             OpenTaskerScreen.Profiles -> ProfilesScreen(
                 profiles = projectProfiles,
                 tasks = projectTasks,

@@ -77,7 +77,7 @@
     <string name="locale_setting_blurb">Run task: %1$s</string>
     <string name="locale_setting_no_tasks">No tasks available. Create a task in OpenTasker first.</string>
     <string name="locale_setting_task_id">Task #%1$d</string>
-    <string name="nav_profiles">Automation</string>
+    <string name="nav_profiles">Profiles</string>
     <string name="nav_tasks">Tasks</string>
     <string name="nav_run_log">Run Log</string>
     <string name="nav_setup">Setup</string>
@@ -2035,4 +2035,13 @@
     <string name="shortcut_editor_move_down">Move down</string>
     <string name="shortcut_editor_delete">Remove</string>
     <string name="action_picker_suggested">Suggested</string>
+    <string name="nav_automation">Automation</string>
+    <string name="automation_intro">Shortcuts run by themselves when something happens.</string>
+    <string name="automation_empty">No automations yet. Tap New to create one.</string>
+    <string name="automation_edit_triggers">Edit triggers in detail</string>
+    <string name="automation_no_trigger">No trigger yet</string>
+    <string name="automation_no_shortcut">No shortcut chosen</string>
+    <string name="automation_when">When: %1$s</string>
+    <string name="automation_switch_on">%1$s is on</string>
+    <string name="automation_switch_off">%1$s is off</string>
 </resources>
