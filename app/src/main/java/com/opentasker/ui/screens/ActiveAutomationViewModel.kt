@@ -474,14 +474,9 @@ class ActiveAutomationViewModel(
         )
     }
 
-    /** Adds a ready-made shortcut from the Gallery with its steps already in place. */
-    fun createShortcutFromTemplate(
-        name: String,
-        actions: List<ActionSpec>,
-        projectId: Long = DEFAULT_PROJECT_ID,
-    ) = launchCreate(R.string.ui_message_task_created) {
-        db.taskDao().insert(Task(name = name.trim(), actions = actions, projectId = projectId).toEntity())
-    }
+    /** Gallery: adds a ready-made shortcut with its steps in place. */
+    fun createShortcutFromTemplate(name: String, actions: List<ActionSpec>, projectId: Long = DEFAULT_PROJECT_ID) =
+        launchCreate(R.string.ui_message_task_created) { db.taskDao().insert(Task(name = name.trim(), actions = actions, projectId = projectId).toEntity()) }
 
     fun duplicateTask(task: Task) {
         viewModelScope.launch {
