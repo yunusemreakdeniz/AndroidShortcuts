@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -164,7 +165,8 @@ private fun ShortcutTile(
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .height(116.dp)
+            // Grows with large text so long names are not cut off.
+            .heightIn(min = 116.dp)
             .clip(RoundedCornerShape(22.dp))
             .combinedClickable(
                 role = Role.Button,
@@ -194,7 +196,7 @@ private fun ShortcutTile(
                     )
                 }
             }
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.height(12.dp))
             Text(
                 text = task.name,
                 style = MaterialTheme.typography.titleMedium,
