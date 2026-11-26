@@ -1642,13 +1642,13 @@ class ActiveAutomationViewModel(
         }
     }
 
-    fun pinTaskShortcut(task: Task) {
+    fun pinTaskShortcut(task: Task, icon: android.graphics.Bitmap? = null) {
         viewModelScope.launch {
             if (!TaskShortcutHelper.canPinShortcut(appContext)) {
                 events.send(message(R.string.ui_message_shortcut_unsupported))
                 return@launch
             }
-            val requested = TaskShortcutHelper.requestPinShortcut(appContext, task)
+            val requested = TaskShortcutHelper.requestPinShortcut(appContext, task, icon)
             if (requested) {
                 events.send(message(R.string.ui_message_shortcut_pinning, task.name))
             } else {

@@ -22,7 +22,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [ ] Eylem ekle paneli: kategoriler, arama, önerilenler
 - [ ] Otomasyon sekmesi: "Ne zaman → ne yap" kartları, aç/kapat
 - [ ] Galeri: hazır kısayollar ve koleksiyonlar, tek dokunuşla ekle
-- [~] Ana ekrana ekle (shortcut.publish var; düzenleyicide düğme yok)
+- [x] Ana ekrana ekle: düzenleyici ⋮ ve uzun basma menüsünde; simge kısayolun kendi renk ve simgesi
 - [ ] Ana ekran widget'ı (kısayol ızgarası)
 - [~] Hızlı Ayarlar kutucukları (4 yuva var; kısayol seçimi kolaylaştırılacak)
 

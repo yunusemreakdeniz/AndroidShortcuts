@@ -69,9 +69,11 @@ internal fun ShortcutEditorScreen(
     onEditAction: (Int, ActionSpec) -> Unit,
     onMoveAction: (Int, Int) -> Unit,
     onDeleteAction: (Int) -> Unit,
+    onPin: (android.graphics.Bitmap) -> Unit = {},
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val styles = rememberShortcutStyles()
+    val pinIcon = rememberPinIcon(task, styles)
     var styling by remember { mutableStateOf(false) }
     if (styling) {
         ShortcutStyleDialog(
@@ -104,6 +106,7 @@ internal fun ShortcutEditorScreen(
                 DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
                     DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_rename)) }, onClick = { menuOpen = false; onRename() })
                     DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_style_title)) }, onClick = { menuOpen = false; styling = true })
+                    DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_add_to_home)) }, onClick = { menuOpen = false; onPin(pinIcon()) })
                     DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_details)) }, onClick = { menuOpen = false; onOpenDetails() })
                     DropdownMenuItem(
                         text = { Text(stringResource(R.string.shortcut_editor_delete_shortcut), color = MaterialTheme.colorScheme.error) },

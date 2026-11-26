@@ -75,6 +75,7 @@ internal fun ShortcutsHomeScreen(
     onOpenTask: (Task) -> Unit,
     onCreateTask: () -> Unit,
     onDeleteTask: (Task) -> Unit = {},
+    onPinTask: (Task, android.graphics.Bitmap) -> Unit = { _, _ -> },
 ) {
     val styles = rememberShortcutStyles()
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -137,6 +138,7 @@ internal fun ShortcutsHomeScreen(
                     onOpen = { onOpenTask(task) },
                     onStyle = { styling = task },
                     onDelete = { deleting = task },
+                    onPin = { onPinTask(task, it) },
                 )
             }
         }
@@ -152,8 +154,10 @@ private fun ShortcutTile(
     onOpen: () -> Unit,
     onStyle: () -> Unit,
     onDelete: () -> Unit,
+    onPin: (android.graphics.Bitmap) -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
+    val pinIcon = rememberPinIcon(task, styles)
     val longPressLabel = stringResource(R.string.shortcuts_tile_menu)
     val color = styledColor(task, styles)
     val count = pluralStringResource(R.plurals.shortcuts_action_count, task.actions.size, task.actions.size)
@@ -215,6 +219,7 @@ private fun ShortcutTile(
         DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_run)) }, onClick = { menuOpen = false; onRun() })
         DropdownMenuItem(text = { Text(stringResource(R.string.action_edit)) }, onClick = { menuOpen = false; onOpen() })
         DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_style_title)) }, onClick = { menuOpen = false; onStyle() })
+        DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_add_to_home)) }, onClick = { menuOpen = false; onPin(pinIcon()) })
         DropdownMenuItem(
             text = { Text(stringResource(R.string.shortcut_editor_delete_shortcut), color = MaterialTheme.colorScheme.error) },
             onClick = { menuOpen = false; onDelete() },

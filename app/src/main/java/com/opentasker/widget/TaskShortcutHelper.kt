@@ -20,7 +20,7 @@ object TaskShortcutHelper {
     fun canPinShortcut(context: Context): Boolean =
         ShortcutManagerCompat.isRequestPinShortcutSupported(context)
 
-    fun requestPinShortcut(context: Context, task: Task): Boolean {
+    fun requestPinShortcut(context: Context, task: Task, icon: android.graphics.Bitmap? = null): Boolean {
         if (!canPinShortcut(context)) return false
 
         val runIntent = Intent(context, TaskRunActivity::class.java).apply {
@@ -31,8 +31,8 @@ object TaskShortcutHelper {
 
         val shortcut = ShortcutInfoCompat.Builder(context, "task_${task.id}")
             .setShortLabel(task.name)
-            .setLongLabel("Run: ${task.name}")
-            .setIcon(IconCompat.createWithResource(context, R.mipmap.ic_launcher))
+            .setLongLabel(task.name)
+            .setIcon(icon?.let(IconCompat::createWithAdaptiveBitmap) ?: IconCompat.createWithResource(context, R.mipmap.ic_launcher))
             .setIntent(runIntent)
             .build()
 

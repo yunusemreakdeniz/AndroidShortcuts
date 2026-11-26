@@ -754,6 +754,7 @@ fun ActiveAutomationUi(
                         onOpenDetails = { openTaskDialog(editing) },
                         onRename = { renamingShortcut = true },
                         onDelete = { deletingShortcut = true },
+                        onPin = { viewModel.pinTaskShortcut(editing, it) },
                         onAddAction = { openActionPicker(editing) },
                         onEditAction = { index, action ->
                             val metadata = ActionMetadataRegistry.get(action.type)
@@ -794,6 +795,7 @@ fun ActiveAutomationUi(
                         onRunTask = { viewModel.runTaskNow(it) },
                         onOpenTask = { editingShortcutId = it.id },
                         onDeleteTask = { openDeleteTask(it) },
+                        onPinTask = { task, icon -> viewModel.pinTaskShortcut(task, icon) },
                         onCreateTask = { showNewShortcutDialog = true },
                     )
                 }

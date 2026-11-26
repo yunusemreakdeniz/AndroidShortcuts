@@ -854,4 +854,5 @@
     <string name="share_pick_empty">Henüz kısayol yok. Önce uygulamada bir tane oluşturun.</string>
     <string name="share_invalid">Kısayollar bu paylaşımı okuyamadı.</string>
     <string name="share_uri_unreadable">Kısayollar paylaşılan dosyayı okuyamadı. Okuma izniyle yeniden paylaşın.</string>
+    <string name="shortcut_add_to_home">Ana ekrana ekle</string>
 </resources>
