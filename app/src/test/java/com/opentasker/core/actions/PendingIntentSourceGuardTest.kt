@@ -19,7 +19,9 @@ import kotlin.streams.toList
 class PendingIntentSourceGuardTest {
 
     /** Files permitted to build a mutable PendingIntent, with the reason each is allowed. */
-    private val mutableAllowlist = setOf("TermuxCommandBroker.kt", "PackageArchiveActions.kt")
+    // ShortcutGridWidget.kt: a collection widget's click template must be mutable so each tile can
+    // fill in its own task id (setOnClickFillInIntent); the template only opens TaskRunActivity.
+    private val mutableAllowlist = setOf("TermuxCommandBroker.kt", "PackageArchiveActions.kt", "ShortcutGridWidget.kt")
 
     // Every production source root: pointing this at app/ alone stopped covering the files the
     // core modules own, and a guard that scans less still reports green.
