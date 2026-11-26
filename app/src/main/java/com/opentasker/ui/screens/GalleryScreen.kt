@@ -35,6 +35,7 @@ internal data class GalleryShortcut(
     val id: Long,
     @StringRes val nameRes: Int,
     @StringRes val descriptionRes: Int,
+    val iconKey: String,
     val actions: (title: (Int) -> String) -> List<ActionSpec>,
 )
 
@@ -42,44 +43,44 @@ private fun step(type: String, vararg args: Pair<String, String>) = ActionSpec(t
 
 /** Built from the Shortcuts-style steps; every one works without extra setup. */
 internal val galleryShortcuts = listOf(
-    GalleryShortcut(1, R.string.gallery_translate_name, R.string.gallery_translate_description) { t ->
+    GalleryShortcut(1, R.string.gallery_translate_name, R.string.gallery_translate_description, "translate") { t ->
         listOf(
             step("input.ask", "title" to t(R.string.gallery_translate_question), "type" to "multiline", "var" to "Input"),
             step("url.open", "url" to "https://translate.google.com/?sl=auto&tl=en&op=translate&text={{ Input }}"),
         )
     },
-    GalleryShortcut(2, R.string.gallery_timer_name, R.string.gallery_timer_description) { t ->
+    GalleryShortcut(2, R.string.gallery_timer_name, R.string.gallery_timer_description, "timer") { t ->
         listOf(
             step("input.ask", "title" to t(R.string.gallery_timer_question), "type" to "number", "default" to "5", "var" to "Minutes"),
             step("math.calculate", "expression" to "{{ Minutes }} * 60", "var" to "Seconds"),
             step("timer.set", "seconds" to "{{ Seconds }}", "skip_ui" to "true"),
         )
     },
-    GalleryShortcut(3, R.string.gallery_dice_name, R.string.gallery_dice_description) { t ->
+    GalleryShortcut(3, R.string.gallery_dice_name, R.string.gallery_dice_description, "star") { t ->
         listOf(
             step("random.number", "min" to "1", "max" to "6", "var" to "Dice"),
             step("result.show", "title" to t(R.string.gallery_dice_name), "text" to "{{ Dice }}"),
         )
     },
-    GalleryShortcut(4, R.string.gallery_battery_name, R.string.gallery_battery_description) { t ->
+    GalleryShortcut(4, R.string.gallery_battery_name, R.string.gallery_battery_description, "battery") { t ->
         listOf(
             step("battery.get", "var" to "Battery"),
             step("result.show", "title" to t(R.string.gallery_battery_name), "text" to "{{ Battery }}%"),
         )
     },
-    GalleryShortcut(5, R.string.gallery_share_name, R.string.gallery_share_description) { t ->
+    GalleryShortcut(5, R.string.gallery_share_name, R.string.gallery_share_description, "share") { t ->
         listOf(
             step("input.ask", "title" to t(R.string.gallery_share_question), "type" to "multiline", "var" to "Input"),
             step("share.text", "text" to "{{ Input }}"),
         )
     },
-    GalleryShortcut(6, R.string.gallery_home_name, R.string.gallery_home_description) { t ->
+    GalleryShortcut(6, R.string.gallery_home_name, R.string.gallery_home_description, "home") { t ->
         listOf(step("maps.directions", "destination" to t(R.string.gallery_home_destination), "mode" to "driving"))
     },
-    GalleryShortcut(7, R.string.gallery_alarm_name, R.string.gallery_alarm_description) { t ->
+    GalleryShortcut(7, R.string.gallery_alarm_name, R.string.gallery_alarm_description, "alarm") { t ->
         listOf(step("alarm.set", "hour" to "7", "minute" to "0", "label" to t(R.string.gallery_alarm_name), "skip_ui" to "true"))
     },
-    GalleryShortcut(8, R.string.gallery_coin_name, R.string.gallery_coin_description) { t ->
+    GalleryShortcut(8, R.string.gallery_coin_name, R.string.gallery_coin_description, "idea") { t ->
         listOf(
             step("random.number", "min" to "1", "max" to "2", "var" to "Coin"),
             step("result.show", "title" to t(R.string.gallery_coin_name), "text" to t(R.string.gallery_coin_result)),
@@ -116,7 +117,6 @@ internal fun GalleryScreen(
             )
         }
         items(galleryShortcuts, key = { it.id }) { shortcut ->
-            val firstType = shortcut.actions { "" }.firstOrNull()?.type.orEmpty()
             Surface(
                 shape = RoundedCornerShape(18.dp),
                 color = MaterialTheme.colorScheme.surfaceContainerLowest,
@@ -135,7 +135,7 @@ internal fun GalleryScreen(
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
-                            shortcutIcon(Task(name = "", actions = listOf(ActionSpec(type = firstType)))),
+                            galleryIcon(shortcut),
                             contentDescription = null,
                             tint = Color.White,
                             modifier = Modifier.size(24.dp),
@@ -186,8 +186,7 @@ private fun GalleryCollectionCard(
             Text(stringResource(descriptionRes), style = MaterialTheme.typography.bodyMedium, color = Color(0xFFDCDAF7))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 shortcuts.forEach { shortcut ->
-                    val firstType = shortcut.actions { "" }.firstOrNull()?.type.orEmpty()
-                    Column(
+                            Column(
                         modifier = Modifier
                             .weight(1f)
                             .background(shortcutColor(shortcut.id), RoundedCornerShape(14.dp))
@@ -195,7 +194,7 @@ private fun GalleryCollectionCard(
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
                         Icon(
-                            shortcutIcon(Task(name = "", actions = listOf(ActionSpec(type = firstType)))),
+                            galleryIcon(shortcut),
                             contentDescription = null,
                             tint = Color.White,
                             modifier = Modifier.size(20.dp),
@@ -210,3 +209,6 @@ private fun GalleryCollectionCard(
         }
     }
 }
+
+private fun galleryIcon(shortcut: GalleryShortcut) =
+    shortcutIconChoices.firstOrNull { it.first == shortcut.iconKey }?.second ?: shortcutIconChoices.first().second

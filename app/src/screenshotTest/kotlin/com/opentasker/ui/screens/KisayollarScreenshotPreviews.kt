@@ -39,8 +39,11 @@ private val sampleProfiles = listOf(
     Profile(id = 2, name = "Şarja takılınca", enabled = false, enterTaskId = 3, contexts = listOf(ContextSpec(type = ContextType.STATE))),
 )
 
+private val catalogue by lazy { runCatching { com.opentasker.core.actions.registerActionMetadata() } }
+
 @Composable
 private fun Frame(dark: Boolean, content: @Composable () -> Unit) {
+    catalogue
     OpenTaskerTheme(darkTheme = dark) {
         Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) { content() }
     }

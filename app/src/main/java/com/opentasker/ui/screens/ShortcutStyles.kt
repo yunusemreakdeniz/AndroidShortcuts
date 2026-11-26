@@ -90,13 +90,14 @@ internal object ShortcutStyles {
         if (!loaded) {
             loaded = true
             // Previews and screenshot tests have no real preferences; fall back to automatic looks.
-            val prefs = runCatching { context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE) }.getOrNull()
-                ?: return state
-            state.value = prefs.all.mapNotNull { (key, value) ->
-                val id = key.toLongOrNull() ?: return@mapNotNull null
-                val parts = (value as? String)?.split('|') ?: return@mapNotNull null
-                id to ShortcutStyle(parts.getOrNull(0)?.toIntOrNull(), parts.getOrNull(1)?.takeIf(String::isNotEmpty))
-            }.toMap()
+            state.value = runCatching {
+                val prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+                prefs.all.orEmpty().mapNotNull { (key, value) ->
+                    val id = key.toLongOrNull() ?: return@mapNotNull null
+                    val parts = (value as? String)?.split('|') ?: return@mapNotNull null
+                    id to ShortcutStyle(parts.getOrNull(0)?.toIntOrNull(), parts.getOrNull(1)?.takeIf(String::isNotEmpty))
+                }.toMap()
+            }.getOrDefault(emptyMap())
         }
         return state
     }

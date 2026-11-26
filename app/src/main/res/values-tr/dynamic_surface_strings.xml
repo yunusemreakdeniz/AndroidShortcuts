@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="context_type_application_title" formatted="false">Uygulama</string>
+    <string name="context_type_application_description" formatted="false">Bir uygulama ön plandayken tetiklenir.</string>
+    <string name="context_type_time_title" formatted="false">Saat</string>
+    <string name="context_type_time_description" formatted="false">Belirli bir saat aralığında tetiklenir.</string>
+    <string name="context_type_day_title" formatted="false">Gün</string>
+    <string name="context_type_day_description" formatted="false">Seçilen günlerde, hazır ayarlarda veya hafta içi/hafta sonu aralıklarında tetiklenir.</string>
+    <string name="context_type_location_title" formatted="false">Konum</string>
+    <string name="context_type_location_description" formatted="false">Bir konumun çevresine girince tetiklenir; doğruluk ve bekleme denetimleri isteğe bağlı.</string>
+    <string name="context_type_state_title" formatted="false">Cihaz durumu</string>
+    <string name="context_type_state_description" formatted="false">Pil, şarj, medya, yön, yakınlık, hareket, hız, dolaşım, internet paylaşımı veya arama durumuna göre tetiklenir.</string>
+    <string name="context_type_event_title" formatted="false">Olay</string>
+    <string name="context_type_event_description" formatted="false">Açılış, bildirim, NFC, Bluetooth bağlantısı, takvim, güneş, sallama gibi tek seferlik bir olayda tetiklenir.</string>
+    <string name="context_type_plugin_title" formatted="false">Eklenti</string>
+    <string name="context_type_plugin_description" formatted="false">Bir Locale/Tasker koşul eklentisi sağlandı dediğinde tetiklenir. Eklenti düzenli sorgulanır.</string>
+</resources>
