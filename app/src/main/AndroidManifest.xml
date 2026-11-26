@@ -211,6 +211,7 @@
 
         <activity
             android:name="com.opentasker.core.contexts.ShareReceiverActivity"
+            android:label="@string/share_automation_label"
             android:exported="true"
             android:excludeFromRecents="true"
             android:grantUriPermissions="true"
@@ -234,6 +235,27 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Share sheet: pick a shortcut and run it with the shared text as {{ ShortcutInput }}. -->
+        <activity
+            android:name="com.opentasker.ui.share.ShareToShortcutActivity"
+            android:label="@string/share_target_label"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
 

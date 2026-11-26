@@ -848,4 +848,10 @@
     <string name="share_draft_default_description">Yerel bir Kısayollar otomasyon paylaşım taslağı.</string>
     <string name="share_draft_default_name">Kısayollar Topluluk Paylaşımı</string>
     <string name="share_draft_default_title">Kısayollar Paylaşımı</string>
+    <string name="share_target_label">Kısayolla çalıştır</string>
+    <string name="share_automation_label">Otomasyonlara gönder</string>
+    <string name="share_pick_title">Kısayol çalıştır</string>
+    <string name="share_pick_empty">Henüz kısayol yok. Önce uygulamada bir tane oluşturun.</string>
+    <string name="share_invalid">Kısayollar bu paylaşımı okuyamadı.</string>
+    <string name="share_uri_unreadable">Kısayollar paylaşılan dosyayı okuyamadı. Okuma izniyle yeniden paylaşın.</string>
 </resources>

@@ -32,7 +32,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Listeden seç (çoklu seçim)
 - [x] Tarih/saat sor
 - [x] Dikte et (konuşmayı metne çevir)
-- [~] Paylaş menüsünden girdi (Received Share tetikleyicisi var; kısayol girdisi olarak sunulacak)
+- [x] Paylaş menüsünden girdi: Paylaş → "Kısayolla çalıştır" → kısayol seç; metin/bağlantı {{ ShortcutInput }} olur
 - [ ] Fotoğraf / dosya / kişi seç (sistem seçicileri)
 - [x] Sonucu göster, Uyarı göster
 - [~] Bildirim göster, Sesli oku (var)

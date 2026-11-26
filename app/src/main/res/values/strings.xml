@@ -2093,4 +2093,8 @@
     <string name="shortcuts_tile_menu">Show shortcut options</string>
     <string name="automation_trigger_with_detail">%1$s %2$s</string>
     <string name="action_picker_needs_setup">Needs a permission or setup</string>
+    <string name="share_target_label">Run shortcut</string>
+    <string name="share_automation_label">Send to automations</string>
+    <string name="share_pick_title">Run a shortcut</string>
+    <string name="share_pick_empty">No shortcuts yet. Create one in the app first.</string>
 </resources>
