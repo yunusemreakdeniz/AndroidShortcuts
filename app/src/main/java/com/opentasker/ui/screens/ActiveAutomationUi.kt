@@ -1364,7 +1364,7 @@ fun ActiveAutomationUi(
             onSave = { action ->
                 val updatedActions = state.index?.let { index ->
                     state.task.actions.mapIndexed { i, existing -> if (i == index) action else existing }
-                } ?: (state.task.actions + action)
+                } ?: appendWithBlockCloser(state.task.actions, action)
                 viewModel.updateTask(
                     state.task.copy(actions = updatedActions),
                     if (state.index == null) R.string.ui_message_action_added else R.string.ui_message_action_updated,

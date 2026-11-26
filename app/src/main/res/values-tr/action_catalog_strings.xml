@@ -714,7 +714,7 @@
     <string name="catalog_action_task_stop_field_task_hint" formatted="false">Tekrarlayan alarm</string>
     <string name="catalog_action_flow_if_field_condition_hint" formatted="false">%battery &lt; 20</string>
     <string name="catalog_action_flow_foreach_field_list_hint" formatted="false">listem</string>
-    <string name="catalog_action_flow_foreach_field_values_hint" formatted="false">1:10, elma, %fruit, %arr()</string>
+    <string name="catalog_action_flow_foreach_field_values_hint" formatted="false">1:10 = 10 kez tekrarla, elma, %fruit, %arr()</string>
     <string name="catalog_action_flow_foreach_field_var_hint" formatted="false">item</string>
     <string name="catalog_action_flow_stop_field_value_hint" formatted="false">%total</string>
     <string name="catalog_action_flow_try_field_max_attempts_hint" formatted="false">1 ile 5 arası. Aşağıdaki blok özeti yeniden denenebilecek eylemleri listeler.</string>
