@@ -1,5 +1,14 @@
 package com.opentasker.ui.screens
 
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -64,8 +73,23 @@ internal fun ShortcutsHomeScreen(
     onRunTask: (Task) -> Unit,
     onOpenTask: (Task) -> Unit,
     onCreateTask: () -> Unit,
+    onDeleteTask: (Task) -> Unit = {},
 ) {
     val styles = rememberShortcutStyles()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var styling by remember { mutableStateOf<Task?>(null) }
+    var deleting by remember { mutableStateOf<Task?>(null) }
+    styling?.let { task ->
+        ShortcutStyleDialog(
+            task = task,
+            current = styles[task.id] ?: ShortcutStyle(),
+            onDismiss = { styling = null },
+            onSave = { ShortcutStyles.set(context, task.id, it); styling = null },
+        )
+    }
+    deleting?.let { task ->
+        DeleteShortcutDialog(task.name, onDismiss = { deleting = null }, onDelete = { deleting = null; onDeleteTask(task) })
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -105,25 +129,49 @@ internal fun ShortcutsHomeScreen(
             modifier = Modifier.fillMaxSize(),
         ) {
             items(tasks, key = { it.id }) { task ->
-                ShortcutTile(task = task, styles = styles, onRun = { onRunTask(task) }, onOpen = { onOpenTask(task) })
+                ShortcutTile(
+                    task = task,
+                    styles = styles,
+                    onRun = { onRunTask(task) },
+                    onOpen = { onOpenTask(task) },
+                    onStyle = { styling = task },
+                    onDelete = { deleting = task },
+                )
             }
         }
     }
 }
 
+@OptIn(androidx.compose.foundation.ExperimentalFoundationApi::class)
 @Composable
-private fun ShortcutTile(task: Task, styles: Map<Long, ShortcutStyle>, onRun: () -> Unit, onOpen: () -> Unit) {
+private fun ShortcutTile(
+    task: Task,
+    styles: Map<Long, ShortcutStyle>,
+    onRun: () -> Unit,
+    onOpen: () -> Unit,
+    onStyle: () -> Unit,
+    onDelete: () -> Unit,
+) {
+    var menuOpen by remember { mutableStateOf(false) }
+    val longPressLabel = stringResource(R.string.shortcuts_tile_menu)
     val color = styledColor(task, styles)
     val count = pluralStringResource(R.plurals.shortcuts_action_count, task.actions.size, task.actions.size)
     val tileDescription = stringResource(R.string.shortcuts_tile_description, task.name, count)
+    Box {
     Surface(
-        onClick = onOpen,
         color = color,
         contentColor = Color.White,
         shape = RoundedCornerShape(22.dp),
         modifier = Modifier
             .fillMaxWidth()
             .height(116.dp)
+            .clip(RoundedCornerShape(22.dp))
+            .combinedClickable(
+                role = Role.Button,
+                onClick = onOpen,
+                onLongClick = { menuOpen = true },
+                onLongClickLabel = longPressLabel,
+            )
             .semantics { contentDescription = tileDescription },
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
@@ -160,6 +208,16 @@ private fun ShortcutTile(task: Task, styles: Map<Long, ShortcutStyle>, onRun: ()
                 color = Color.White.copy(alpha = 0.88f),
             )
         }
+    }
+    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+        DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_run)) }, onClick = { menuOpen = false; onRun() })
+        DropdownMenuItem(text = { Text(stringResource(R.string.action_edit)) }, onClick = { menuOpen = false; onOpen() })
+        DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_style_title)) }, onClick = { menuOpen = false; onStyle() })
+        DropdownMenuItem(
+            text = { Text(stringResource(R.string.shortcut_editor_delete_shortcut), color = MaterialTheme.colorScheme.error) },
+            onClick = { menuOpen = false; onDelete() },
+        )
+    }
     }
 }
 

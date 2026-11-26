@@ -670,4 +670,5 @@
     <string name="collision_mode_run_both_body">Kısayol otomasyonlar ve elle başlatmalar arasında aynı anda çalışabilir.</string>
     <string name="collision_mode_wait_title">Sırayla bekle</string>
     <string name="collision_mode_wait_body">İstekleri sıraya alır, geliş sırasına göre birer birer çalıştırır.</string>
+    <string name="shortcuts_tile_menu">Kısayol seçeneklerini göster</string>
 </resources>

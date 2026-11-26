@@ -793,6 +793,7 @@ fun ActiveAutomationUi(
                         contentPadding = innerPadding,
                         onRunTask = { viewModel.runTaskNow(it) },
                         onOpenTask = { editingShortcutId = it.id },
+                        onDeleteTask = { openDeleteTask(it) },
                         onCreateTask = { showNewShortcutDialog = true },
                     )
                 }

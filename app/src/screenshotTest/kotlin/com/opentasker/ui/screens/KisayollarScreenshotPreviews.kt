@@ -110,3 +110,41 @@ fun KisayollarGalleryLight() = Frame(false) {
 fun KisayollarGalleryDark() = Frame(true) {
     GalleryScreen(PaddingValues(), onAdd = {})
 }
+
+@PreviewTest
+@Preview(name = "Kisayollar Home Large Text", locale = "tr", widthDp = 390, heightDp = 844, fontScale = 1.5f, showBackground = true)
+@Composable
+fun KisayollarHomeLargeText() = Frame(false) {
+    ShortcutsHomeScreen(sampleTasks, PaddingValues(), onRunTask = {}, onOpenTask = {}, onCreateTask = {})
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar Editor Large Text", locale = "tr", widthDp = 390, heightDp = 844, fontScale = 1.5f, showBackground = true)
+@Composable
+fun KisayollarEditorLargeText() = Frame(false) {
+    ShortcutEditorScreen(
+        task = sampleTasks[0], contentPadding = PaddingValues(), onBack = {}, onRun = {}, onOpenDetails = {},
+        onRename = {}, onDelete = {}, onAddAction = {}, onEditAction = { _, _ -> }, onMoveAction = { _, _ -> }, onDeleteAction = {},
+    )
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar New Shortcut Dialog", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarNewShortcutDialog() = Frame(false) {
+    ShortcutNameDialog(title = "Yeni kısayol", confirmLabel = "Oluştur", initialName = "", existingNames = emptyList(), onDismiss = {}, onConfirm = {})
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar Style Dialog", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarStyleDialog() = Frame(false) {
+    ShortcutStyleDialog(task = sampleTasks[0], current = ShortcutStyle(colorIndex = 1, iconKey = "translate"), onDismiss = {}, onSave = {})
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar Automation Dark", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarAutomationDark() = Frame(true) {
+    AutomationScreen(sampleProfiles, sampleTasks, PaddingValues(), onToggle = { _, _ -> }, onOpen = {}, onEditTriggers = {}, onNewAutomation = {})
+}
