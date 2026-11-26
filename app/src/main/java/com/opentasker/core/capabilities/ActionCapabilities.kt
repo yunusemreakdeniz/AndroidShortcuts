@@ -59,6 +59,7 @@ object ActionCapabilityRegistry {
         "list.choose",
         "date.ask",
         "dictate.text",
+        "photo.pick",
         // Read the battery broadcast or compute locally.
         "battery.get",
         "math.calculate",

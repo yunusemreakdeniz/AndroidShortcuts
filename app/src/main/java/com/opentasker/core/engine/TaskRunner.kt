@@ -1284,7 +1284,8 @@ internal fun actionTimeoutMs(actionType: String): Long = when {
     // Dialogs wait for a person; each reports its own 9-minute limit first.
     actionType == "input.ask" || actionType == "menu.choose" ||
         actionType == "alert.show" || actionType == "result.show" ||
-        actionType == "list.choose" || actionType == "date.ask" || actionType == "dictate.text" -> MEDIA_ACTION_TIMEOUT_MS
+        actionType == "list.choose" || actionType == "date.ask" || actionType == "dictate.text" ||
+        actionType == "photo.pick" -> MEDIA_ACTION_TIMEOUT_MS
     else -> DEFAULT_ACTION_TIMEOUT_MS
 }
 

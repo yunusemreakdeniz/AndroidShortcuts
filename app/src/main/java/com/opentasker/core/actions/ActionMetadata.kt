@@ -220,6 +220,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "list.choose",
     "date.ask",
     "dictate.text",
+    "photo.pick",
     "battery.get",
     "math.calculate",
     "random.number",
@@ -2008,6 +2009,17 @@ private fun registerInteractiveActionMetadata() {
                 ActionField("title", R.string.catalog_action_date_ask_field_title_label, hintRes = R.string.catalog_action_date_ask_field_title_hint),
                 ActionField("mode", R.string.catalog_action_date_ask_field_mode_label, FieldType.DROPDOWN, options = listOf(option("date", R.string.catalog_action_date_ask_mode_date), option("time", R.string.catalog_action_date_ask_mode_time), option("datetime", R.string.catalog_action_date_ask_mode_datetime))),
                 ActionField("var", R.string.catalog_action_date_ask_field_var_label, hintRes = R.string.catalog_action_date_ask_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "photo.pick",
+            nameRes = R.string.catalog_action_photo_pick_name,
+            descriptionRes = R.string.catalog_action_photo_pick_description,
+            categoryRes = R.string.catalog_category_media,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_photo_pick_field_var_label, hintRes = R.string.catalog_action_photo_pick_field_var_hint),
             ),
         )
     )

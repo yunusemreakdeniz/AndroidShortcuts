@@ -43,6 +43,7 @@ internal object InteractiveDialogCoordinator {
     const val KIND_LIST_MULTI = "list_multi"
     const val KIND_DATE = "date"
     const val KIND_DICTATE = "dictate"
+    const val KIND_PHOTO = "photo"
     const val EXTRA_DATE_MODE = "com.opentasker.dialog.DATE_MODE"
     const val EXTRA_LANGUAGE = "com.opentasker.dialog.LANGUAGE"
 
@@ -125,6 +126,7 @@ class InteractiveDialogActivity : Activity() {
         when (intent.getStringExtra(InteractiveDialogCoordinator.EXTRA_KIND)) {
             InteractiveDialogCoordinator.KIND_DATE -> showDatePicker()
             InteractiveDialogCoordinator.KIND_DICTATE -> startDictation()
+            InteractiveDialogCoordinator.KIND_PHOTO -> startPhotoPicker()
             else -> dialog = buildDialog().also { it.show() }
         }
     }
@@ -193,9 +195,62 @@ class InteractiveDialogActivity : Activity() {
         }
     }
 
-    @Deprecated("Activity result callback for the platform speech recognizer.")
+    private fun startPhotoPicker() {
+        val pick = if (android.os.Build.VERSION.SDK_INT >= 33) {
+            Intent(android.provider.MediaStore.ACTION_PICK_IMAGES)
+        } else {
+            Intent(Intent.ACTION_GET_CONTENT).setType("image/*").addCategory(Intent.CATEGORY_OPENABLE)
+        }
+        try {
+            @Suppress("DEPRECATION")
+            startActivityForResult(pick, PHOTO_REQUEST)
+        } catch (_: android.content.ActivityNotFoundException) {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Failed("no photo picker is available"))
+        }
+    }
+
+    /** Copies the picked photo into the shortcut files (Photos/), since the picker's grant is temporary. */
+    private fun keepPhoto(uri: android.net.Uri) {
+        val resolver = contentResolver
+        Thread {
+            val answer = runCatching {
+                val ext = when (resolver.getType(uri)) {
+                    "image/png" -> "png"
+                    "image/webp" -> "webp"
+                    "image/gif" -> "gif"
+                    "image/heic", "image/heif" -> "heic"
+                    else -> "jpg"
+                }
+                val dir = java.io.File(filesDir, "user_files/Photos").apply { mkdirs() }
+                val name = "photo_${System.currentTimeMillis()}.$ext"
+                val input = resolver.openInputStream(uri) ?: error("the photo could not be opened")
+                input.use { source ->
+                    java.io.File(dir, name).outputStream().use { target ->
+                        var total = 0L
+                        val buffer = ByteArray(64 * 1024)
+                        while (true) {
+                            val read = source.read(buffer)
+                            if (read < 0) break
+                            total += read
+                            if (total > MAX_PHOTO_BYTES) error("the photo is larger than 50 MB")
+                            target.write(buffer, 0, read)
+                        }
+                    }
+                }
+                InteractiveDialogCoordinator.DialogAnswer.Accepted("Photos/$name")
+            }.getOrElse { InteractiveDialogCoordinator.DialogAnswer.Failed(it.message ?: "the photo could not be saved") }
+            runOnUiThread { reply(answer) }
+        }.start()
+    }
+
+    @Deprecated("Activity result callback for the platform speech recognizer and photo picker.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PHOTO_REQUEST) {
+            val uri = data?.data
+            if (resultCode == RESULT_OK && uri != null) keepPhoto(uri) else reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+            return
+        }
         if (requestCode != DICTATION_REQUEST) return
         val text = data?.getStringArrayListExtra(android.speech.RecognizerIntent.EXTRA_RESULTS)?.firstOrNull()
         if (resultCode == RESULT_OK && text != null) {
@@ -321,6 +376,8 @@ class InteractiveDialogActivity : Activity() {
 
     companion object {
         private const val DICTATION_REQUEST = 7411
+        private const val PHOTO_REQUEST = 7412
+        private const val MAX_PHOTO_BYTES = 50L * 1024 * 1024
         private val open = ConcurrentHashMap<String, InteractiveDialogActivity>()
 
         /** Closes a dialog whose step already ended (timed out or the task was stopped). */
@@ -502,6 +559,22 @@ class DictateTextAction : DeclaredAction(ActionCatalog.require("dictate.text")) 
             ?: return dialogFailure(outcome)
         ctx.variables.set(output, answer.text.take(MAX_INPUT_CHARS))
         ctx.logger("Dictate Text: ${answer.text.length} characters")
+        return ActionResult.Success
+    }
+}
+
+/** Select Photos: pick one photo; it is copied into the shortcut files and its path saved. */
+class PickPhotoAction : DeclaredAction(ActionCatalog.require("photo.pick")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = dialogOutput(args, "Photo") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_PHOTO)
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text)
+        ctx.logger("Select Photo: saved ${answer.text}")
         return ActionResult.Success
     }
 }

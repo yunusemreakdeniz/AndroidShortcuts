@@ -367,6 +367,9 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "date.ask" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Date"),
     )
+    "photo.pick" -> listOf(
+        output("path", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Photo"),
+    )
     "dictate.text" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Dictation"),
     )

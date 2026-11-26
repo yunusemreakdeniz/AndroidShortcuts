@@ -50,6 +50,7 @@ object AutomationSensitivityRegistry {
         "list.choose",
         "date.ask",
         "dictate.text",
+        "photo.pick",
         "var.set",
         "var.set_multiple",
         "var.persist",

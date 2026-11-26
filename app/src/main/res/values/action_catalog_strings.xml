@@ -916,4 +916,8 @@
     <string name="catalog_action_dictate_text_field_language_hint" formatted="false">For example tr-TR; empty uses the device language</string>
     <string name="catalog_action_dictate_text_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_dictate_text_field_var_hint" formatted="false">Variable name (default Dictation)</string>
+    <string name="catalog_action_photo_pick_name" formatted="false">Select Photo</string>
+    <string name="catalog_action_photo_pick_description" formatted="false">Pick a photo from the gallery; it is saved in the shortcut files</string>
+    <string name="catalog_action_photo_pick_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_photo_pick_field_var_hint" formatted="false">Variable name (default Photo; holds a path like Photos/photo.jpg)</string>
 </resources>

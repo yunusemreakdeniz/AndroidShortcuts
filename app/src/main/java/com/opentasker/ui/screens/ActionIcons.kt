@@ -34,6 +34,7 @@ import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Phone
+import androidx.compose.material.icons.outlined.Photo
 import androidx.compose.material.icons.outlined.PlayCircleOutline
 import androidx.compose.material.icons.outlined.RecordVoiceOver
 import androidx.compose.material.icons.outlined.Repeat
@@ -63,6 +64,7 @@ private val exactIcons: Map<String, ImageVector> = mapOf(
     "result.show" to Icons.Outlined.ChatBubbleOutline,
     "date.ask" to Icons.Outlined.Event,
     "dictate.text" to Icons.Outlined.Mic,
+    "photo.pick" to Icons.Outlined.Photo,
     "tts.speak" to Icons.Outlined.RecordVoiceOver,
     "random.number" to Icons.Outlined.Casino,
     "timer.set" to Icons.Outlined.Timer,

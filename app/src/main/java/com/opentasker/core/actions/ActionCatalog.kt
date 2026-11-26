@@ -93,6 +93,7 @@ object ActionCatalog {
         define("list.choose", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ChooseFromListAction),
         define("date.ask", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::AskForDateAction),
         define("dictate.text", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::DictateTextAction),
+        define("photo.pick", ActionCategory.MEDIA, ActionRetrySafety.NEVER, ::PickPhotoAction),
         define("result.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowResultAction),
         define("flow.wait", ActionCategory.FLOW, ActionRetrySafety.NEVER, ::WaitAction),
         // NEVER, not IDEMPOTENT: "toggle" reads the profile again, so a retry flips it back.

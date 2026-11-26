@@ -914,4 +914,8 @@
     <string name="catalog_action_dictate_text_field_prompt_hint" formatted="false">Dinlerken gösterilir</string>
     <string name="catalog_action_dictate_text_field_language_hint" formatted="false">Örneğin tr-TR; boşsa cihaz dili kullanılır</string>
     <string name="catalog_action_dictate_text_field_var_hint" formatted="false">Değişken adı (varsayılan Dictation)</string>
+    <string name="catalog_action_photo_pick_name" formatted="false">Fotoğraf seç</string>
+    <string name="catalog_action_photo_pick_description" formatted="false">Galeriden bir fotoğraf seçer; kısayol dosyalarına kaydedilir</string>
+    <string name="catalog_action_photo_pick_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_photo_pick_field_var_hint" formatted="false">Değişken adı (varsayılan Photo; Photos/photo.jpg gibi bir yol tutar)</string>
 </resources>
