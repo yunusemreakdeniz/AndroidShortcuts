@@ -10,6 +10,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material.icons.automirrored.outlined.Sort
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -83,6 +85,8 @@ internal fun ShortcutsHomeScreen(
     androidx.compose.runtime.LaunchedEffect(tasks, styles) { com.opentasker.widget.ShortcutGridWidgetProvider.refresh(context) }
     var styling by remember { mutableStateOf<Task?>(null) }
     var deleting by remember { mutableStateOf<Task?>(null) }
+    var query by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf("") }
+    var sort by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf(ShortcutSort.NAME) }
     styling?.let { task ->
         ShortcutStyleDialog(
             task = task,
@@ -125,6 +129,7 @@ internal fun ShortcutsHomeScreen(
             }
             return@Box
         }
+        val shown = remember(tasks, query, sort) { filterAndSortShortcuts(tasks, query, sort) }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 156.dp),
             contentPadding = PaddingValues(16.dp),
@@ -132,7 +137,19 @@ internal fun ShortcutsHomeScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize(),
         ) {
-            items(tasks, key = { it.id }) { task ->
+            item(span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
+                ShortcutSearchBar(query = query, onQuery = { query = it }, sort = sort, onSort = { sort = it })
+            }
+            if (shown.isEmpty()) {
+                item(span = { androidx.compose.foundation.lazy.grid.GridItemSpan(maxLineSpan) }) {
+                    Text(
+                        text = stringResource(R.string.shortcuts_search_no_results),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(vertical = 24.dp),
+                    )
+                }
+            }
+            items(shown, key = { it.id }) { task ->
                 ShortcutTile(
                     task = task,
                     styles = styles,
@@ -246,3 +263,52 @@ internal fun shortcutColor(taskId: Long): Color =
 /** Picks an icon from what the shortcut does first. */
 internal fun shortcutIcon(task: Task): ImageVector =
     actionIcon(task.actions.firstOrNull { it.enabled }?.type.orEmpty())
+
+internal enum class ShortcutSort(@androidx.annotation.StringRes val labelRes: Int) {
+    NAME(R.string.shortcuts_sort_name),
+    NEWEST(R.string.shortcuts_sort_newest),
+    MOST_ACTIONS(R.string.shortcuts_sort_actions),
+}
+
+/** Name search (any part, ignoring case) and the chosen order. */
+internal fun filterAndSortShortcuts(tasks: List<Task>, query: String, sort: ShortcutSort): List<Task> {
+    val needle = query.trim().lowercase(java.util.Locale.ROOT)
+    val matching = if (needle.isEmpty()) tasks else tasks.filter { it.name.lowercase(java.util.Locale.ROOT).contains(needle) }
+    return when (sort) {
+        ShortcutSort.NAME -> matching.sortedBy { it.name.lowercase(java.util.Locale.ROOT) }
+        ShortcutSort.NEWEST -> matching.sortedByDescending { it.id }
+        ShortcutSort.MOST_ACTIONS -> matching.sortedWith(compareByDescending<Task> { it.actions.size }.thenBy { it.name.lowercase(java.util.Locale.ROOT) })
+    }
+}
+
+@Composable
+private fun ShortcutSearchBar(query: String, onQuery: (String) -> Unit, sort: ShortcutSort, onSort: (ShortcutSort) -> Unit) {
+    var sortOpen by remember { mutableStateOf(false) }
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        androidx.compose.material3.OutlinedTextField(
+            value = query,
+            onValueChange = onQuery,
+            singleLine = true,
+            placeholder = { Text(stringResource(R.string.shortcuts_search_hint)) },
+            leadingIcon = { Icon(androidx.compose.material.icons.Icons.Outlined.Search, contentDescription = null) },
+            shape = RoundedCornerShape(14.dp),
+            modifier = Modifier.weight(1f),
+        )
+        Box {
+            androidx.compose.material3.IconButton(onClick = { sortOpen = true }) {
+                Icon(
+                    androidx.compose.material.icons.Icons.AutoMirrored.Outlined.Sort,
+                    contentDescription = stringResource(R.string.shortcuts_sort_label, stringResource(sort.labelRes)),
+                )
+            }
+            DropdownMenu(expanded = sortOpen, onDismissRequest = { sortOpen = false }) {
+                ShortcutSort.entries.forEach { option ->
+                    DropdownMenuItem(
+                        text = { Text(stringResource(option.labelRes), fontWeight = if (option == sort) FontWeight.Bold else null) },
+                        onClick = { sortOpen = false; onSort(option) },
+                    )
+                }
+            }
+        }
+    }
+}

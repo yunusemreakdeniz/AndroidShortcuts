@@ -2101,4 +2101,10 @@
     <string name="widget_grid_label">Shortcuts</string>
     <string name="widget_grid_description">Your shortcuts as a grid; tap one to run it</string>
     <string name="widget_grid_empty">No shortcuts yet</string>
+    <string name="shortcuts_search_hint">Search shortcuts</string>
+    <string name="shortcuts_search_no_results">No shortcut matches the search</string>
+    <string name="shortcuts_sort_label">Sort: %1$s</string>
+    <string name="shortcuts_sort_name">Name</string>
+    <string name="shortcuts_sort_newest">Newest first</string>
+    <string name="shortcuts_sort_actions">Most actions</string>
 </resources>

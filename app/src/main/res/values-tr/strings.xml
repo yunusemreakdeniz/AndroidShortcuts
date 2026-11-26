@@ -858,4 +858,10 @@
     <string name="widget_grid_label">Kısayollar</string>
     <string name="widget_grid_description">Kısayollarınız ızgara halinde; çalıştırmak için dokunun</string>
     <string name="widget_grid_empty">Henüz kısayol yok</string>
+    <string name="shortcuts_search_hint">Kısayollarda ara</string>
+    <string name="shortcuts_search_no_results">Aramayla eşleşen kısayol yok</string>
+    <string name="shortcuts_sort_label">Sırala: %1$s</string>
+    <string name="shortcuts_sort_name">Ad</string>
+    <string name="shortcuts_sort_newest">Önce en yeni</string>
+    <string name="shortcuts_sort_actions">En çok eylem</string>
 </resources>

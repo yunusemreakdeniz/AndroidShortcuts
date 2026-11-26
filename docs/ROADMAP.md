@@ -16,7 +16,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 
 ## B. Arayüz (tasarıma göre)
 - [x] Kısayollarım: renkli kart ızgarası, tek dokunuşla çalıştır, açılış sekmesi
-- [~] Kısayollarım: renkli ızgara, uzun basma menüsü (arama ve sıralama sırada)
+- [x] Kısayollarım: renkli ızgara, uzun basma menüsü, arama ve sıralama (ad, en yeni, en çok eylem)
 - [x] Kısayol simgesi ve rengi seçici
 - [~] Düzenleyici: blok görünümü, renkli değişken etiketleri (sürükle-bırak sırada; şimdilik yukarı/aşağı)
 - [x] Eylem ekle paneli: kategoriler, arama, önerilenler
