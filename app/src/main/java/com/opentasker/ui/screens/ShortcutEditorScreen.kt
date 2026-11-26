@@ -231,7 +231,7 @@ private fun ActionBlock(
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    shortcutIcon(Task(name = "", actions = listOf(action.copy(enabled = true)))),
+                    actionIcon(action.type),
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(18.dp),

@@ -171,7 +171,7 @@ private fun ActionPickerRow(item: LocalizedActionMetadata, onSelect: () -> Unit)
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
-                    shortcutIcon(Task(name = "", actions = listOf(ActionSpec(type = item.metadata.id)))),
+                    actionIcon(item.metadata.id),
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(20.dp),

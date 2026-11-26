@@ -237,23 +237,5 @@ internal fun shortcutColor(taskId: Long): Color =
     shortcutPalette[Math.floorMod(taskId, shortcutPalette.size.toLong()).toInt()]
 
 /** Picks an icon from what the shortcut does first. */
-internal fun shortcutIcon(task: Task): ImageVector {
-    val type = task.actions.firstOrNull { it.enabled }?.type.orEmpty()
-    return when {
-        type.startsWith("wifi") || type.startsWith("bluetooth") -> Icons.Outlined.Wifi
-        type.startsWith("input.") || type.startsWith("menu.") || type.startsWith("list.") ||
-            type.startsWith("alert.") || type.startsWith("result.") || type.startsWith("date.") ||
-            type.startsWith("dictate.") -> Icons.Outlined.ChatBubbleOutline
-        type.startsWith("http") || type.startsWith("url.") || type.startsWith("download") -> Icons.Outlined.Language
-        type.startsWith("notify.") || type.startsWith("tts.") -> Icons.Outlined.Notifications
-        type.startsWith("sound.") || type.startsWith("track.") || type.startsWith("media.") -> Icons.Outlined.MusicNote
-        type.startsWith("alarm.") || type.startsWith("timer.") -> Icons.Outlined.Alarm
-        type.startsWith("battery.") -> Icons.Outlined.BatteryStd
-        type.startsWith("math.") || type.startsWith("random.") -> Icons.Outlined.Calculate
-        type.startsWith("share.") -> Icons.Outlined.Share
-        type.startsWith("maps.") -> Icons.Outlined.Map
-        type.startsWith("email.") -> Icons.Outlined.Email
-        type.startsWith("phone.") || type.startsWith("sms.") -> Icons.Outlined.Phone
-        else -> Icons.Outlined.Bolt
-    }
-}
+internal fun shortcutIcon(task: Task): ImageVector =
+    actionIcon(task.actions.firstOrNull { it.enabled }?.type.orEmpty())
