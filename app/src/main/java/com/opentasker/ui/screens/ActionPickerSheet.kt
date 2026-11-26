@@ -65,6 +65,24 @@ internal fun ActionPickerSheet(
     onDismiss: () -> Unit,
     onSelect: (ActionMetadata) -> Unit,
 ) {
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    ) {
+        ActionPickerContent(query, onQueryChange, actions, onSelect, Modifier.fillMaxHeight(0.92f))
+    }
+}
+
+/** The sheet's content, separate so previews and screenshot tests can render it without a window. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun ActionPickerContent(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    actions: List<LocalizedActionMetadata>,
+    onSelect: (ActionMetadata) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     var category by rememberSaveable { mutableStateOf(SUGGESTED) }
     val categories = remember(actions) { actions.map { it.category }.distinct().sorted() }
     val shown = remember(actions, category, query) {
@@ -74,11 +92,8 @@ internal fun ActionPickerSheet(
             else -> actions.filter { it.category == category }.sortedBy { it.name }
         }
     }
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-    ) {
-        Column(modifier = Modifier.fillMaxHeight(0.92f)) {
+    run {
+        Column(modifier = modifier) {
             Text(
                 text = stringResource(R.string.dialog_add_action),
                 style = MaterialTheme.typography.headlineSmall,

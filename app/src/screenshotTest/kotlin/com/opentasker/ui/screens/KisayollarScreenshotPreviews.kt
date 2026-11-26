@@ -148,3 +148,22 @@ fun KisayollarStyleDialog() = Frame(false) {
 fun KisayollarAutomationDark() = Frame(true) {
     AutomationScreen(sampleProfiles, sampleTasks, PaddingValues(), onToggle = { _, _ -> }, onOpen = {}, onEditTriggers = {}, onNewAutomation = {})
 }
+
+@Composable
+private fun PickerPreview(query: String) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val all = com.opentasker.core.actions.ActionMetadataRegistry.all().filter { it.pickerVisible }.map {
+        LocalizedActionMetadata(it, context.getString(it.nameRes), context.getString(it.descriptionRes), context.getString(it.categoryRes))
+    }
+    ActionPickerContent(query, {}, filterActionPickerItems(all, query), {})
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar Action Picker", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarActionPicker() = Frame(false) { PickerPreview("") }
+
+@PreviewTest
+@Preview(name = "Kisayollar Action Picker Search Dark", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarActionPickerSearchDark() = Frame(true) { PickerPreview("pil") }
