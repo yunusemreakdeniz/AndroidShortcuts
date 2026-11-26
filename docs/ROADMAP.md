@@ -33,7 +33,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Tarih/saat sor
 - [x] Dikte et (konuşmayı metne çevir)
 - [x] Paylaş menüsünden girdi: Paylaş → "Kısayolla çalıştır" → kısayol seç; metin/bağlantı {{ ShortcutInput }} olur
-- [~] Fotoğraf / dosya / kişi seç: Fotoğraf seç eklendi (Photos/ altına kopyalar); dosya ve kişi seçici sırada
+- [x] Fotoğraf / dosya / kişi seç: Fotoğraf seç (Photos/), Dosya seç (Files/), kişi için contacts.lookup seçici modu
 - [x] Sonucu göster, Uyarı göster
 - [~] Bildirim göster, Sesli oku (var)
 - [ ] Hızlı bakış (dosya/görsel önizleme)

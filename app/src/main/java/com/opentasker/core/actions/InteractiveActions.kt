@@ -44,6 +44,7 @@ internal object InteractiveDialogCoordinator {
     const val KIND_DATE = "date"
     const val KIND_DICTATE = "dictate"
     const val KIND_PHOTO = "photo"
+    const val KIND_FILE = "file"
     const val EXTRA_DATE_MODE = "com.opentasker.dialog.DATE_MODE"
     const val EXTRA_LANGUAGE = "com.opentasker.dialog.LANGUAGE"
 
@@ -127,6 +128,7 @@ class InteractiveDialogActivity : Activity() {
             InteractiveDialogCoordinator.KIND_DATE -> showDatePicker()
             InteractiveDialogCoordinator.KIND_DICTATE -> startDictation()
             InteractiveDialogCoordinator.KIND_PHOTO -> startPhotoPicker()
+            InteractiveDialogCoordinator.KIND_FILE -> startFilePicker()
             else -> dialog = buildDialog().also { it.show() }
         }
     }
@@ -209,21 +211,52 @@ class InteractiveDialogActivity : Activity() {
         }
     }
 
+    private fun startFilePicker() {
+        val pick = Intent(Intent.ACTION_OPEN_DOCUMENT).setType("*/*").addCategory(Intent.CATEGORY_OPENABLE)
+        try {
+            @Suppress("DEPRECATION")
+            startActivityForResult(pick, FILE_REQUEST)
+        } catch (_: android.content.ActivityNotFoundException) {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Failed("no file picker is available"))
+        }
+    }
+
+    /** The picked file's own name, made safe for the shortcut files folder. */
+    private fun displayName(uri: android.net.Uri): String {
+        val raw = runCatching {
+            contentResolver.query(uri, arrayOf(android.provider.OpenableColumns.DISPLAY_NAME), null, null, null)?.use { c ->
+                if (c.moveToFirst()) c.getString(0) else null
+            }
+        }.getOrNull().orEmpty()
+        val safe = raw.replace(Regex("[^A-Za-z0-9._ -]"), "_").trim().trimStart('.').take(80)
+        return safe.ifEmpty { "file_${System.currentTimeMillis()}" }
+    }
+
     /** Copies the picked photo into the shortcut files (Photos/), since the picker's grant is temporary. */
     private fun keepPhoto(uri: android.net.Uri) {
+        val ext = when (contentResolver.getType(uri)) {
+            "image/png" -> "png"
+            "image/webp" -> "webp"
+            "image/gif" -> "gif"
+            "image/heic", "image/heif" -> "heic"
+            else -> "jpg"
+        }
+        keepPicked(uri, "Photos", "photo_${System.currentTimeMillis()}.$ext")
+    }
+
+    /** Copies a picked document into Files/, keeping its name; an existing name gets a time prefix. */
+    private fun keepFile(uri: android.net.Uri) {
+        val name = displayName(uri)
+        val taken = java.io.File(filesDir, "user_files/Files/$name").exists()
+        keepPicked(uri, "Files", if (taken) "${System.currentTimeMillis()}_$name" else name)
+    }
+
+    private fun keepPicked(uri: android.net.Uri, folder: String, name: String) {
         val resolver = contentResolver
         Thread {
             val answer = runCatching {
-                val ext = when (resolver.getType(uri)) {
-                    "image/png" -> "png"
-                    "image/webp" -> "webp"
-                    "image/gif" -> "gif"
-                    "image/heic", "image/heif" -> "heic"
-                    else -> "jpg"
-                }
-                val dir = java.io.File(filesDir, "user_files/Photos").apply { mkdirs() }
-                val name = "photo_${System.currentTimeMillis()}.$ext"
-                val input = resolver.openInputStream(uri) ?: error("the photo could not be opened")
+                val dir = java.io.File(filesDir, "user_files/$folder").apply { mkdirs() }
+                val input = resolver.openInputStream(uri) ?: error("the file could not be opened")
                 input.use { source ->
                     java.io.File(dir, name).outputStream().use { target ->
                         var total = 0L
@@ -232,13 +265,13 @@ class InteractiveDialogActivity : Activity() {
                             val read = source.read(buffer)
                             if (read < 0) break
                             total += read
-                            if (total > MAX_PHOTO_BYTES) error("the photo is larger than 50 MB")
+                            if (total > MAX_PHOTO_BYTES) error("the file is larger than 50 MB")
                             target.write(buffer, 0, read)
                         }
                     }
                 }
-                InteractiveDialogCoordinator.DialogAnswer.Accepted("Photos/$name")
-            }.getOrElse { InteractiveDialogCoordinator.DialogAnswer.Failed(it.message ?: "the photo could not be saved") }
+                InteractiveDialogCoordinator.DialogAnswer.Accepted("$folder/$name")
+            }.getOrElse { InteractiveDialogCoordinator.DialogAnswer.Failed(it.message ?: "the file could not be saved") }
             runOnUiThread { reply(answer) }
         }.start()
     }
@@ -246,9 +279,13 @@ class InteractiveDialogActivity : Activity() {
     @Deprecated("Activity result callback for the platform speech recognizer and photo picker.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PHOTO_REQUEST) {
+        if (requestCode == PHOTO_REQUEST || requestCode == FILE_REQUEST) {
             val uri = data?.data
-            if (resultCode == RESULT_OK && uri != null) keepPhoto(uri) else reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+            when {
+                resultCode != RESULT_OK || uri == null -> reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+                requestCode == PHOTO_REQUEST -> keepPhoto(uri)
+                else -> keepFile(uri)
+            }
             return
         }
         if (requestCode != DICTATION_REQUEST) return
@@ -377,6 +414,7 @@ class InteractiveDialogActivity : Activity() {
     companion object {
         private const val DICTATION_REQUEST = 7411
         private const val PHOTO_REQUEST = 7412
+        private const val FILE_REQUEST = 7413
         private const val MAX_PHOTO_BYTES = 50L * 1024 * 1024
         private val open = ConcurrentHashMap<String, InteractiveDialogActivity>()
 
@@ -575,6 +613,22 @@ class PickPhotoAction : DeclaredAction(ActionCatalog.require("photo.pick")) {
             ?: return dialogFailure(outcome)
         ctx.variables.set(output, answer.text)
         ctx.logger("Select Photo: saved ${answer.text}")
+        return ActionResult.Success
+    }
+}
+
+/** Select File: pick any document; it is copied into the shortcut files (Files/) and its path saved. */
+class PickFileAction : DeclaredAction(ActionCatalog.require("file.pick")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = dialogOutput(args, "File") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_FILE)
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text)
+        ctx.logger("Select File: saved ${answer.text}")
         return ActionResult.Success
     }
 }
