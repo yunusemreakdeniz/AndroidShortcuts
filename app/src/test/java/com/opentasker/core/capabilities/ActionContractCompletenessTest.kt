@@ -96,7 +96,7 @@ class ActionContractCompletenessTest {
                 "app.archive", "app.unarchive", "array.clear", "battery.get", "brightness.set", "clipboard.get", "clipboard.set",
                 "contacts.lookup", "data.read", "datetime.add", "datetime.format", "datetime.parse",
                 "dnd.set", "download", "file.delete", "file.list", "file.read", "file.write",
-                "http.get", "ime.info", "lock", "math.calculate", "media.mute", "notify.cancel", "ping", "plugin.locale.query",
+                "http.get", "ime.info", "list.random", "lock", "math.calculate", "media.mute", "notify.cancel", "number.format", "ping", "plugin.locale.query",
                 "random.number", "screen.off", "screen.timeout", "settings.write", "sound.pause", "sound.resume", "sound.stop", "sun.times", "text.join", "text.match",
                 "text.length", "text.replace", "text.split", "text.substring", "tile.set", "var.clear", "var.persist", "var.set", "var.set_multiple",
                 "volume.set", "vpn.tunnel", "wake", "wallpaper.set", "wifi.scan", "wol", "zen.rule.clear", "ringer.set",
