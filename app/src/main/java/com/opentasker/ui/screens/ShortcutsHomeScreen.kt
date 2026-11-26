@@ -89,6 +89,7 @@ internal fun ShortcutsHomeScreen(
                     text = stringResource(R.string.shortcuts_empty_body),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                 )
                 FilledTonalButton(onClick = onCreateTask) {
                     Text(stringResource(R.string.shortcuts_create))
