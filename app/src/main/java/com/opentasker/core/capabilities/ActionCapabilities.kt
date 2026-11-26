@@ -65,6 +65,8 @@ object ActionCapabilityRegistry {
         "battery.get",
         "math.calculate",
         "random.number",
+        "list.random",
+        "number.format",
         "data.read",
         "datetime.format",
         "datetime.parse",

@@ -225,6 +225,8 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "battery.get",
     "math.calculate",
     "random.number",
+    "list.random",
+    "number.format",
     "alarm.set",
     "timer.set",
     "email.compose",
@@ -2097,6 +2099,32 @@ private fun registerUtilityActionMetadata() {
                 ActionField("min", R.string.catalog_action_random_number_field_min_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_min_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
                 ActionField("max", R.string.catalog_action_random_number_field_max_label, FieldType.NUMBER, hintRes = R.string.catalog_action_random_number_field_max_hint, numberRule = integerRule(Long.MIN_VALUE, Long.MAX_VALUE)),
                 ActionField("var", R.string.catalog_action_random_number_field_var_label, hintRes = R.string.catalog_action_random_number_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "list.random",
+            nameRes = R.string.catalog_action_list_random_name,
+            descriptionRes = R.string.catalog_action_list_random_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("items", R.string.catalog_action_list_random_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_list_random_field_items_hint),
+                ActionField("var", R.string.catalog_action_list_random_field_var_label, hintRes = R.string.catalog_action_list_random_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "number.format",
+            nameRes = R.string.catalog_action_number_format_name,
+            descriptionRes = R.string.catalog_action_number_format_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("number", R.string.catalog_action_number_format_field_number_label, required = true, hintRes = R.string.catalog_action_number_format_field_number_hint),
+                ActionField("decimals", R.string.catalog_action_number_format_field_decimals_label, FieldType.NUMBER, hintRes = R.string.catalog_action_number_format_field_decimals_hint, numberRule = integerRule(0L, 10L)),
+                ActionField("grouping", R.string.catalog_action_number_format_field_grouping_label, FieldType.CHECKBOX, hintRes = R.string.catalog_action_number_format_field_grouping_hint),
+                ActionField("var", R.string.catalog_action_number_format_field_var_label, hintRes = R.string.catalog_action_number_format_field_var_hint),
             ),
         )
     )

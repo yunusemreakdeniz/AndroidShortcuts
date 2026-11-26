@@ -11,17 +11,17 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Diyalog adımları: Metin sor, Menüden seç, Uyarı göster, Sonucu göster
 - [x] Kendi paket adı (`io.github.yunusemreakdeniz.shortcuts`) ve uygulama adı "Kısayollar"
 - [ ] Kalıcı release imzası (repo sırları; kullanıcı izni gerekiyor)
-- [ ] Türkçe arayüz (`values-tr`, ~2.800 metin; %80 eşiği)
+- [~] Türkçe arayüz: tüm kullanıcı ekranları Türkçe; Gelişmiş ekranlarda ~1.000 metin kaldı
 - [x] Uygulama simgesi, tasarım renkleri (tema), APK adı
 
 ## B. Arayüz (tasarıma göre)
 - [x] Kısayollarım: renkli kart ızgarası, tek dokunuşla çalıştır, açılış sekmesi
-- [ ] Kısayollarım: arama ve sıralama
-- [ ] Kısayol simgesi ve rengi seçici
-- [ ] Düzenleyici: blok görünümü, değişkenler renkli etiket, sürükle-bırak sıralama
-- [ ] Eylem ekle paneli: kategoriler, arama, önerilenler
-- [ ] Otomasyon sekmesi: "Ne zaman → ne yap" kartları, aç/kapat
-- [ ] Galeri: hazır kısayollar ve koleksiyonlar, tek dokunuşla ekle
+- [~] Kısayollarım: renkli ızgara, uzun basma menüsü (arama ve sıralama sırada)
+- [x] Kısayol simgesi ve rengi seçici
+- [~] Düzenleyici: blok görünümü, renkli değişken etiketleri (sürükle-bırak sırada; şimdilik yukarı/aşağı)
+- [x] Eylem ekle paneli: kategoriler, arama, önerilenler
+- [x] Otomasyon sekmesi: "Ne zaman → ne yap" kartları, aç/kapat
+- [x] Galeri: hazır kısayollar ve koleksiyonlar, tek dokunuşla ekle
 - [x] Ana ekrana ekle: düzenleyici ⋮ ve uzun basma menüsünde; simge kısayolun kendi renk ve simgesi
 - [x] Ana ekran widget'ı: kısayol ızgarası (renkli kartlar, dokununca çalışır)
 - [~] Hızlı Ayarlar kutucukları (4 yuva var; kısayol seçimi kolaylaştırılacak)
@@ -44,10 +44,10 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [~] Liste/dizi, JSON/sözlük okuma (var)
 - [ ] Sözlük oluştur / değer ata
 - [x] Hesapla (matematik ifadesi)
-- [ ] Sayı biçimlendir
+- [x] Sayı biçimlendir
 - [~] Tarih biçimlendir / ekle (var)
 - [x] Rastgele sayı
-- [ ] Listeden rastgele öğe
+- [x] Listeden rastgele öğe
 - [ ] Base64/URL kodlama, hash (var.convert kısmen)
 
 ## E. Akış

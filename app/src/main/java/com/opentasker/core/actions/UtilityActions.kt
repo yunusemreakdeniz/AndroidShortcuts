@@ -177,3 +177,43 @@ internal object MathExpression {
         }
     }
 }
+
+/** Get Random Item from List: one line picked at random. */
+class RandomItemAction : DeclaredAction(ActionCatalog.require("list.random")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val items = args["items"].orEmpty().lines().map(String::trim).filter(String::isNotEmpty)
+        if (items.isEmpty()) return ActionResult.Failure("the list is empty")
+        val output = utilityOutput(args, "Item") ?: return ActionResult.Failure("invalid output variable")
+        ctx.variables.set(output, items.random())
+        return ActionResult.Success
+    }
+}
+
+/** Format Number: fixed decimals and the device's digit grouping, e.g. 1.234,50 in Turkish. */
+class FormatNumberAction : DeclaredAction(ActionCatalog.require("number.format")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = utilityOutput(args, "Formatted") ?: return ActionResult.Failure("invalid output variable")
+        val formatted = NumberFormatting.format(
+            args["number"].orEmpty(),
+            args["decimals"]?.trim().orEmpty().ifEmpty { "2" }.toIntOrNull() ?: return ActionResult.Failure("decimals must be a whole number"),
+            args["grouping"]?.trim()?.lowercase() != "false",
+            java.util.Locale.getDefault(),
+        ) ?: return ActionResult.Failure("number is not a number, or decimals is outside 0 to 10")
+        ctx.variables.set(output, formatted)
+        return ActionResult.Success
+    }
+}
+
+internal object NumberFormatting {
+    fun format(raw: String, decimals: Int, grouping: Boolean, locale: java.util.Locale): String? {
+        if (decimals !in 0..10) return null
+        val value = raw.trim().replace(',', '.').toBigDecimalOrNull() ?: return null
+        val format = java.text.NumberFormat.getNumberInstance(locale).apply {
+            minimumFractionDigits = decimals
+            maximumFractionDigits = decimals
+            isGroupingUsed = grouping
+            roundingMode = RoundingMode.HALF_UP
+        }
+        return format.format(value)
+    }
+}

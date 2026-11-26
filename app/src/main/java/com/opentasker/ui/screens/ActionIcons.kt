@@ -68,6 +68,8 @@ private val exactIcons: Map<String, ImageVector> = mapOf(
     "file.pick" to Icons.Outlined.Folder,
     "tts.speak" to Icons.Outlined.RecordVoiceOver,
     "random.number" to Icons.Outlined.Casino,
+    "list.random" to Icons.Outlined.Casino,
+    "number.format" to Icons.Outlined.Calculate,
     "timer.set" to Icons.Outlined.Timer,
     "flow.wait" to Icons.Outlined.HourglassEmpty,
     "flow.foreach" to Icons.Outlined.Repeat,

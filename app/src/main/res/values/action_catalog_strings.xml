@@ -924,4 +924,20 @@
     <string name="catalog_action_file_pick_description" formatted="false">Pick any file; it is copied into the shortcut files</string>
     <string name="catalog_action_file_pick_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_file_pick_field_var_hint" formatted="false">Variable name (default File; holds a path like Files/report.pdf)</string>
+    <string name="catalog_action_list_random_name" formatted="false">Get Random Item from List</string>
+    <string name="catalog_action_list_random_description" formatted="false">Pick one line of a list at random</string>
+    <string name="catalog_action_list_random_field_items_label" formatted="false">List</string>
+    <string name="catalog_action_list_random_field_items_hint" formatted="false">One item per line</string>
+    <string name="catalog_action_list_random_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_list_random_field_var_hint" formatted="false">Variable name (default Item)</string>
+    <string name="catalog_action_number_format_name" formatted="false">Format Number</string>
+    <string name="catalog_action_number_format_description" formatted="false">Round a number and group its digits the way the device language writes them</string>
+    <string name="catalog_action_number_format_field_number_label" formatted="false">Number</string>
+    <string name="catalog_action_number_format_field_number_hint" formatted="false">For example {{ Result }} or 1234.5</string>
+    <string name="catalog_action_number_format_field_decimals_label" formatted="false">Decimal places</string>
+    <string name="catalog_action_number_format_field_decimals_hint" formatted="false">0 to 10, default 2</string>
+    <string name="catalog_action_number_format_field_grouping_label" formatted="false">Group digits</string>
+    <string name="catalog_action_number_format_field_grouping_hint" formatted="false">Thousands separators, like 1,234</string>
+    <string name="catalog_action_number_format_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_number_format_field_var_hint" formatted="false">Variable name (default Formatted)</string>
 </resources>

@@ -922,4 +922,20 @@
     <string name="catalog_action_file_pick_description" formatted="false">Herhangi bir dosya seçer; kısayol dosyalarına kopyalanır</string>
     <string name="catalog_action_file_pick_field_var_label" formatted="false">Şuraya kaydet</string>
     <string name="catalog_action_file_pick_field_var_hint" formatted="false">Değişken adı (varsayılan File; Files/rapor.pdf gibi bir yol tutar)</string>
+    <string name="catalog_action_list_random_name" formatted="false">Listeden rastgele öğe al</string>
+    <string name="catalog_action_list_random_description" formatted="false">Listeden rastgele bir satır seçer</string>
+    <string name="catalog_action_list_random_field_items_label" formatted="false">Liste</string>
+    <string name="catalog_action_list_random_field_items_hint" formatted="false">Her satıra bir öğe</string>
+    <string name="catalog_action_list_random_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_list_random_field_var_hint" formatted="false">Değişken adı (varsayılan Item)</string>
+    <string name="catalog_action_number_format_name" formatted="false">Sayıyı biçimlendir</string>
+    <string name="catalog_action_number_format_description" formatted="false">Sayıyı yuvarlar ve basamakları cihaz dilindeki gibi gruplar</string>
+    <string name="catalog_action_number_format_field_number_label" formatted="false">Sayı</string>
+    <string name="catalog_action_number_format_field_number_hint" formatted="false">Örneğin {{ Result }} veya 1234.5</string>
+    <string name="catalog_action_number_format_field_decimals_label" formatted="false">Ondalık basamak</string>
+    <string name="catalog_action_number_format_field_decimals_hint" formatted="false">0 ile 10 arası, varsayılan 2</string>
+    <string name="catalog_action_number_format_field_grouping_label" formatted="false">Basamakları grupla</string>
+    <string name="catalog_action_number_format_field_grouping_hint" formatted="false">Binlik ayırıcı, örneğin 1.234</string>
+    <string name="catalog_action_number_format_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_number_format_field_var_hint" formatted="false">Değişken adı (varsayılan Formatted)</string>
 </resources>

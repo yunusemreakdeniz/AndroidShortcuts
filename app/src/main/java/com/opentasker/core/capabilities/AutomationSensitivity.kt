@@ -43,6 +43,8 @@ object AutomationSensitivityRegistry {
         "battery.get",
         "math.calculate",
         "random.number",
+        "list.random",
+        "number.format",
         "input.ask",
         "menu.choose",
         "alert.show",

@@ -357,6 +357,12 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "math.calculate" -> listOf(
         output("result", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Result"),
     )
+    "list.random" -> listOf(
+        output("item", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Item"),
+    )
+    "number.format" -> listOf(
+        output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Formatted"),
+    )
     "random.number" -> listOf(
         output("number", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Random"),
     )
