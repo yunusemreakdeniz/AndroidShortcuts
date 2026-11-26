@@ -63,4 +63,14 @@
     <string name="capability_media_key_ready" formatted="false">Medya tuşu gönderimi kullanılabilir.</string>
     <string name="capability_volume_restricted" formatted="false">Android 17, uygun bir ön plan hizmeti olmadan ses düzeyi değişikliklerini kısıtlar.</string>
     <string name="capability_volume_policy" formatted="false">Rahatsız Etmeyin politika erişimi gerekebilir.</string>
+    <string name="widget_choose_task_title" formatted="false">Widget kısayolunu seçin</string>
+    <string name="widget_choose_task_subtitle" formatted="false">Bu ana ekran widget\'ına atamak için bir kısayola dokunun</string>
+    <string name="widget_setup_required" formatted="false">Kurulum gerekli</string>
+    <string name="widget_empty_title" formatted="false">Önce bir kısayol oluşturun</string>
+    <string name="widget_empty_body" formatted="false">Widget\'lar kaydedilmiş kısayolları ana ekrandan çalıştırır. Uygulamada bir kısayol oluşturun, sonra atamak için buraya dönün.</string>
+    <string name="widget_selectable_task" formatted="false">Seçilebilir kısayol</string>
+    <string name="widget_assign" formatted="false">Ata</string>
+    <string name="widget_action_title" formatted="false">Widget eylemi</string>
+    <string name="widget_run_selected_task" formatted="false">Seçili kısayolu çalıştır</string>
+    <string name="widget_tap_to_run" formatted="false">Çalıştırmak için dokunun</string>
 </resources>

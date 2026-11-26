@@ -601,4 +601,22 @@
     <string name="catalog_action_dictate_text_field_prompt_label" formatted="false">Başlık</string>
     <string name="catalog_action_dictate_text_field_language_label" formatted="false">Dil</string>
     <string name="catalog_action_dictate_text_field_var_label" formatted="false">Kaydet</string>
+    <string name="action_option_contacts_permission" formatted="false">İzinle (gözetimsiz)</string>
+    <string name="action_option_contacts_picker" formatted="false">Sistem seçicisi (Android 17+)</string>
+    <string name="action_option_intent_activity" formatted="false">Etkinlik</string>
+    <string name="action_option_intent_broadcast" formatted="false">Yayın</string>
+    <string name="action_option_intent_service" formatted="false">Hizmet</string>
+    <string name="action_option_vpn_wireguard" formatted="false">WireGuard</string>
+    <string name="action_option_vpn_tailscale" formatted="false">Tailscale</string>
+    <string name="action_option_vpn_up" formatted="false">Bağlan</string>
+    <string name="action_option_vpn_down" formatted="false">Bağlantıyı kes</string>
+    <string name="action_option_tile_icon_play" formatted="false">Oynat</string>
+    <string name="action_option_tile_icon_star" formatted="false">Yıldız</string>
+    <string name="action_option_tile_icon_settings" formatted="false">Ayarlar</string>
+    <string name="action_option_tile_icon_bolt" formatted="false">Şimşek</string>
+    <string name="action_option_wallpaper_both" formatted="false">Ana ve kilit ekranı</string>
+    <string name="action_option_wallpaper_home" formatted="false">Ana ekran</string>
+    <string name="action_option_wallpaper_lock" formatted="false">Kilit ekranı</string>
+    <string name="action_option_shortcut_dynamic" formatted="false">Dinamik</string>
+    <string name="action_option_shortcut_pinned" formatted="false">Sabitlenmiş</string>
 </resources>
