@@ -129,7 +129,7 @@
     <string name="action_label_hint">Kısayol adımlarında ve çalışma kaydında görünür.</string>
     <string name="action_unknown_name">Bilinmeyen eylem</string>
     <string name="action_condition_label">Yalnızca şu durumda çalıştır</string>
-    <string name="action_condition_helper">İsteğe bağlı. Eylem yalnızca bir değişken denetimi geçerse çalışır, örneğin %armed == true. Denetim yanlışsa ya da okunamazsa eylem atlanır.</string>
+    <string name="action_condition_helper" formatted="false">İsteğe bağlı. Eylem yalnızca bir değişken denetimi geçerse çalışır, örneğin %armed == true. Denetim yanlışsa ya da okunamazsa eylem atlanır.</string>
     <string name="action_variable_picker_label">Değişken ekle</string>
     <string name="action_variable_chip_step">%1$d. adım: %2$s</string>
     <string name="action_variable_chip_event">Olay: %1$s</string>
