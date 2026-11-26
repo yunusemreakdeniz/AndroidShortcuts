@@ -53,7 +53,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## E. Akış
 - [~] Eğer / değilse, Her biri için tekrarla, Bekle, Durdur, Kısayol çalıştır (motor var)
 - [x] N kez tekrarla: Her biri için + 1:N aralığı; Eğer/Her biri için/Dene eklenince kapanış adımı da otomatik eklenir
-- [ ] Menü dalları (seçeneğe göre farklı adımlar, tek blokta)
+- [x] Menü dalları: Menüden seç eklenince her seçenek için bir Eğer bloğu (Seçim == seçenek) kendiliğinden eklenir
 - [ ] Kısayola girdi verip çıktısını alma (task.run girdileri var; çıktı dönüşü)
 
 ## F. Web

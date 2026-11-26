@@ -14,6 +14,25 @@ private val blockClosers = mapOf(
  * Shortcuts, so the shortcut is never left with an open block; steps move into it with up/down.
  */
 internal fun appendWithBlockCloser(actions: List<ActionSpec>, added: ActionSpec): List<ActionSpec> {
+    if (added.type == "menu.choose") return actions + added + menuBranches(added)
     val closer = blockClosers[added.type] ?: return actions + added
     return actions + added + ActionSpec(type = closer)
+}
+
+private const val MAX_MENU_BRANCHES = 12
+
+/**
+ * Shortcuts' Choose from Menu holds one branch per item. Here each item gets its own If block right
+ * after the menu, so the steps for an item go inside its block. A plain item is compared by name,
+ * which reads well in the editor; one with characters a condition would treat as operators is
+ * compared by its position instead.
+ */
+internal fun menuBranches(menu: ActionSpec): List<ActionSpec> {
+    val output = menu.args["var"]?.trim()?.takeIf(String::isNotEmpty) ?: "Choice"
+    val items = menu.args["items"].orEmpty().split('\n').map(String::trim).filter(String::isNotEmpty)
+    return items.take(MAX_MENU_BRANCHES).flatMapIndexed { index, item ->
+        val plain = item.none { it in "=!<>~&|{}%()" }
+        val condition = if (plain) "{{ $output }} == $item" else "{{ ${output}_index }} == ${index + 1}"
+        listOf(ActionSpec(type = "flow.if", args = mapOf("condition" to condition)), ActionSpec(type = "flow.endif"))
+    }
 }
