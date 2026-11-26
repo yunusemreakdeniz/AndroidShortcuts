@@ -619,4 +619,299 @@
     <string name="action_option_wallpaper_lock" formatted="false">Kilit ekranı</string>
     <string name="action_option_shortcut_dynamic" formatted="false">Dinamik</string>
     <string name="action_option_shortcut_pinned" formatted="false">Sabitlenmiş</string>
+    <string name="catalog_action_notify_show_field_title_hint" formatted="false">Bildirim başlığı</string>
+    <string name="catalog_action_notify_show_field_text_hint" formatted="false">Bildirim metni</string>
+    <string name="catalog_action_notify_show_field_channel_hint" formatted="false">quiet (sessiz) / default (varsayılan) / urgent (acil)</string>
+    <string name="catalog_action_notify_show_field_persistent_hint" formatted="false">Kaldırılana kadar kalsın</string>
+    <string name="catalog_action_notify_show_field_tag_hint" formatted="false">Değiştirme etiketi (aynı etiket öncekinin yerini alır)</string>
+    <string name="catalog_action_notify_show_field_id_hint" formatted="false">Bildirim kimliği (aynı kimlik öncekinin yerini alır)</string>
+    <string name="catalog_action_notify_show_field_button1_label_hint" formatted="false">Düğme yazısı</string>
+    <string name="catalog_action_notify_show_field_button1_task_id_hint" formatted="false">Dokununca çalışacak kısayol</string>
+    <string name="catalog_action_notify_show_field_button2_label_hint" formatted="false">İkinci düğme yazısı</string>
+    <string name="catalog_action_notify_show_field_button2_task_id_hint" formatted="false">Dokununca çalışacak kısayol</string>
+    <string name="catalog_action_notify_show_field_button3_label_hint" formatted="false">Üçüncü düğme yazısı</string>
+    <string name="catalog_action_notify_show_field_button3_task_id_hint" formatted="false">Dokununca çalışacak kısayol</string>
+    <string name="catalog_action_notify_show_field_button1_url_hint" formatted="false">Kısayol seçilmemişse dokununca açılacak web adresi</string>
+    <string name="catalog_action_notify_show_field_button2_url_hint" formatted="false">Kısayol seçilmemişse dokununca açılacak web adresi</string>
+    <string name="catalog_action_notify_show_field_button3_url_hint" formatted="false">Kısayol seçilmemişse dokununca açılacak web adresi</string>
+    <string name="catalog_action_notify_cancel_field_tag_hint" formatted="false">Kaldırılacak bildirimin etiketi</string>
+    <string name="catalog_action_notify_cancel_field_id_hint" formatted="false">Kaldırılacak bildirimin kimliği</string>
+    <string name="catalog_action_var_set_field_name_hint" formatted="false">%değişken adı</string>
+    <string name="catalog_action_var_set_field_value_hint" formatted="false">%değişken kullanılabilir</string>
+    <string name="catalog_action_var_set_multiple_field_names_hint" formatted="false">Her satıra bir %ad. Değer yoksa ve iki veya daha fazla satır varsa, ad kendi değerini ayırıcıdan sonra alabilir, örneğin %count,0</string>
+    <string name="catalog_action_var_set_multiple_field_values_hint" formatted="false">Her satıra bir değer, adlarla aynı sırada. Değeri olmayan ad silinir</string>
+    <string name="catalog_action_var_set_multiple_field_splitter_hint" formatted="false">Girdiler arasındaki metin. Yeni satır için boş bırakın; tek satır varsa virgül kullanılır</string>
+    <string name="catalog_action_var_set_multiple_field_keep_existing_hint" formatted="false">Değeri olan değişkene dokunma</string>
+    <string name="catalog_action_var_persist_field_name_hint" formatted="false">yerel değişken adı</string>
+    <string name="catalog_action_var_persist_field_global_name_hint" formatted="false">Boş bırakılırsa kaynak addan büyük harfle oluşturulur</string>
+    <string name="catalog_action_var_clear_field_name_hint" formatted="false">%ad veya desenle %item*. Tüm yerel değişkenleri silmek için boş bırakın</string>
+    <string name="catalog_action_var_clear_field_pattern_hint" formatted="false">Adı eşleşen her değişkeni siler, örneğin %item* veya %a/%b</string>
+    <string name="catalog_action_var_clear_field_local_only_hint" formatted="false">Desen eşleşmesinde genel değişkenlere dokunma</string>
+    <string name="catalog_action_var_clear_field_clear_all_hint" formatted="false">Ad yoksa tüm genel değişkenleri de sil</string>
+    <string name="catalog_action_clipboard_get_field_var_hint" formatted="false">varsayılan: Clipboard (%Clipboard_has_text de ayarlanır)</string>
+    <string name="catalog_action_clipboard_set_field_text_hint" formatted="false">En fazla 64 KiB; pano içeriği kayda yazılmaz</string>
+    <string name="catalog_action_contacts_lookup_field_query_hint" formatted="false">Arama metni; en fazla 128 karakter</string>
+    <string name="catalog_action_contacts_lookup_field_mode_hint" formatted="false">Android 17+ cihazlarda varsayılan seçicidir; izin gözetimsiz çalışmalar içindir</string>
+    <string name="catalog_action_contacts_lookup_field_var_hint" formatted="false">varsayılan: Contact; ad, telefon, e-posta, diziler ve sayı da ayarlanır</string>
+    <string name="catalog_action_data_read_field_source_hint" formatted="false">%response veya dosya içeriği</string>
+    <string name="catalog_action_data_read_field_format_hint" formatted="false">json (varsayılan), csv, xml veya html</string>
+    <string name="catalog_action_data_read_field_path_hint" formatted="false">JSON items[0].name · CSV sütun c veya hücre r,c · XML root/item/name · HTML CSS seçicisi</string>
+    <string name="catalog_action_data_read_field_var_hint" formatted="false">varsayılan: data (%var dizisi ve %var_count da ayarlanır)</string>
+    <string name="catalog_action_datetime_format_field_time_hint" formatted="false">epoch milisaniye veya \'now\' (varsayılan)</string>
+    <string name="catalog_action_datetime_format_field_format_hint" formatted="false">varsayılan yyyy-MM-dd HH:mm:ss</string>
+    <string name="catalog_action_datetime_format_field_zone_hint" formatted="false">örn. UTC veya Europe/Istanbul (isteğe bağlı)</string>
+    <string name="catalog_action_datetime_format_field_var_hint" formatted="false">varsayılan: datetime</string>
+    <string name="catalog_action_datetime_parse_field_text_hint" formatted="false">örn. 2026-07-14 09:30</string>
+    <string name="catalog_action_datetime_parse_field_format_hint" formatted="false">örn. yyyy-MM-dd HH:mm</string>
+    <string name="catalog_action_datetime_parse_field_zone_hint" formatted="false">isteğe bağlı</string>
+    <string name="catalog_action_datetime_parse_field_var_hint" formatted="false">varsayılan: datetime (epoch milisaniye)</string>
+    <string name="catalog_action_datetime_add_field_time_hint" formatted="false">epoch milisaniye veya \'now\' (varsayılan)</string>
+    <string name="catalog_action_datetime_add_field_amount_hint" formatted="false">tam sayı, negatif olabilir</string>
+    <string name="catalog_action_datetime_add_field_unit_hint" formatted="false">saniye/dakika/saat/gün/hafta/ay/yıl</string>
+    <string name="catalog_action_datetime_add_field_var_hint" formatted="false">varsayılan: datetime (epoch milisaniye)</string>
+    <string name="catalog_action_text_match_field_pattern_hint" formatted="false">doğrusal zamanlı RE2 düzenli ifadesi</string>
+    <string name="catalog_action_text_match_field_var_hint" formatted="false">varsayılan: match (dizi ve %var_count da ayarlanır)</string>
+    <string name="catalog_action_text_replace_field_replacement_hint" formatted="false">$1, $2, ... kullanılabilir</string>
+    <string name="catalog_action_text_replace_field_var_hint" formatted="false">varsayılan: result</string>
+    <string name="catalog_action_text_replace_field_first_only_hint" formatted="false">Yalnızca ilk eşleşmeyi değiştir ve kaydet</string>
+    <string name="catalog_action_text_replace_field_matches_hint" formatted="false">%found her eşleşmeyi %found1, %found2, ... olarak alır</string>
+    <string name="catalog_action_text_replace_field_search_only_hint" formatted="false">Eşleşmeleri kaydet, çıktı değişkenini olduğu gibi bırak</string>
+    <string name="catalog_action_text_split_field_delimiter_hint" formatted="false">sabit ayırıcı (veya düzenli ifade deseni kullanın)</string>
+    <string name="catalog_action_text_split_field_pattern_hint" formatted="false">düzenli ifade ayırıcısı (önceliklidir)</string>
+    <string name="catalog_action_text_split_field_var_hint" formatted="false">varsayılan: parts (dizi + %var_count)</string>
+    <string name="catalog_action_text_join_field_array_hint" formatted="false">bir dizinin adı (bölme/okumadan)</string>
+    <string name="catalog_action_text_join_field_delimiter_hint" formatted="false">varsayılan: ,</string>
+    <string name="catalog_action_text_join_field_var_hint" formatted="false">varsayılan: joined</string>
+    <string name="catalog_action_text_substring_field_start_hint" formatted="false">0\'dan başlar</string>
+    <string name="catalog_action_text_substring_field_end_hint" formatted="false">dahil değil; metnin sonu için boş bırakın</string>
+    <string name="catalog_action_text_substring_field_var_hint" formatted="false">varsayılan: substring</string>
+    <string name="catalog_action_text_length_field_var_hint" formatted="false">varsayılan: length</string>
+    <string name="catalog_action_var_split_field_name_hint" formatted="false">%text, %text1, %text2, … olur</string>
+    <string name="catalog_action_var_split_field_values_hint" formatted="false">değişkenin kendi değeri yerine bu metni böl</string>
+    <string name="catalog_action_var_split_field_splitter_hint" formatted="false">boşsa boşluk ve satır sonlarından böler</string>
+    <string name="catalog_action_var_join_field_name_hint" formatted="false">%arr, %arr1, %arr2, … öğelerini %arr içinde birleştirir</string>
+    <string name="catalog_action_var_convert_field_name_hint" formatted="false">değeri dönüştürülecek %ad</string>
+    <string name="catalog_action_var_convert_field_var_hint" formatted="false">Değişkenin kendi değerinin yerine yazmak için boş bırakın</string>
+    <string name="catalog_action_array_push_field_array_hint" formatted="false">%arr, öğeleri %arr1, %arr2, …</string>
+    <string name="catalog_action_array_push_field_position_hint" formatted="false">varsayılan: 1; sondan ötesi sona ekler</string>
+    <string name="catalog_action_array_push_field_fill_spaces_hint" formatted="false">öğeleri yalnızca ilk boşluğa kadar kaydır</string>
+    <string name="catalog_action_array_pop_field_array_hint" formatted="false">%arr, öğeleri %arr1, %arr2, …</string>
+    <string name="catalog_action_array_pop_field_position_hint" formatted="false">varsayılan: 1; sondan ötesi son öğeyi çıkarır</string>
+    <string name="catalog_action_array_pop_field_to_var_hint" formatted="false">isteğe bağlı, çıkarılan değeri alır</string>
+    <string name="catalog_action_array_clear_field_array_hint" formatted="false">%arr, öğeleri %arr1, %arr2, …</string>
+    <string name="catalog_action_array_process_field_array_hint" formatted="false">%arr, öğeleri %arr1, %arr2, …</string>
+    <string name="catalog_action_sun_times_field_latitude_hint" formatted="false">Kuzey derece, güney için negatif. Telefonun konumu için boş bırakın</string>
+    <string name="catalog_action_sun_times_field_longitude_hint" formatted="false">Doğu derece, batı için negatif. Telefonun konumu için boş bırakın</string>
+    <string name="catalog_action_sun_times_field_time_hint" formatted="false">Günün herhangi bir anı, 1970\'ten beri saniye. Bugün için boş bırakın</string>
+    <string name="catalog_action_sun_times_field_elevations_hint" formatted="false">Ufkun üstünde derece, altı için negatif; her satıra bir tane veya virgülle. Saatleri %ss_custom_morning ve %ss_custom_evening içine yazılır</string>
+    <string name="catalog_action_sun_times_field_var_hint" formatted="false">varsayılan ss; %ss_sunrise, %ss_sunset ve diğerlerini verir. Saatler 1970\'ten beri saniyedir</string>
+    <string name="catalog_action_tts_speak_field_stream_hint" formatted="false">Varsayılan Müzik. Zil ve Bildirimler zil veya bildirim sesini kullanır; titreşimde, sessizde ve Rahatsız Etmeyin\'de duyulmayabilir. Android 17\'de arka planda başlayan bir kısayol yalnızca Alarm akışında duyulur; bu tam alarm izni ister ve alarm sesini izler.</string>
+    <string name="catalog_action_flow_wait_field_millis_hint" formatted="false">Süre (ms)</string>
+    <string name="catalog_action_profile_set_field_profile_hint" formatted="false">Otomasyon listesinde göründüğü gibi. Uygulamanın açmayacağı bir otomasyon, örneğin incelemesi bekleyen, burada da kapalı kalır.</string>
+    <string name="catalog_action_task_run_field_task_hint" formatted="false">Wi-Fi\'yi aç/kapat</string>
+    <string name="catalog_action_task_run_field_return_variable_hint" formatted="false">%result</string>
+    <string name="catalog_action_task_run_field_reset_return_variable_hint" formatted="false">Kısayol bir şey döndürmezse değişken eski değeri tutmak yerine boş kalır</string>
+    <string name="catalog_action_task_stop_field_task_hint" formatted="false">Tekrarlayan alarm</string>
+    <string name="catalog_action_flow_if_field_condition_hint" formatted="false">%battery &lt; 20</string>
+    <string name="catalog_action_flow_foreach_field_list_hint" formatted="false">listem</string>
+    <string name="catalog_action_flow_foreach_field_values_hint" formatted="false">1:10, elma, %fruit, %arr()</string>
+    <string name="catalog_action_flow_foreach_field_var_hint" formatted="false">item</string>
+    <string name="catalog_action_flow_stop_field_value_hint" formatted="false">%total</string>
+    <string name="catalog_action_flow_try_field_max_attempts_hint" formatted="false">1 ile 5 arası. Aşağıdaki blok özeti yeniden denenebilecek eylemleri listeler.</string>
+    <string name="catalog_action_flow_try_field_backoff_hint" formatted="false">0 ile 60000 arası; denemeler arasında katlanarak artar</string>
+    <string name="flow_try_retry_summary_empty" formatted="false">Yeniden deneme yalnızca bu bloğa eklenen tekrarlanabilir eylemlere uygulanır.</string>
+    <string name="flow_try_retryable_summary" formatted="false">Yeniden denenebilir eylemler: %1$s</string>
+    <string name="flow_try_non_retryable_summary" formatted="false">Yeniden denenmeyecek: %1$s</string>
+    <string name="catalog_action_flow_goto_field_step_hint" formatted="false">1\'den sayar. %step gibi bir değişken de olur.</string>
+    <string name="catalog_action_flow_goto_field_label_hint" formatted="false">Bu etiketi taşıyan ilk adıma atlar. Verilirse numara yerine kullanılır.</string>
+    <string name="catalog_action_flow_goto_field_to_hint" formatted="false">Hiçbiri: adım numarası veya etiketle atlar. Diğerleri bu adımın içinde olduğu Her biri veya Eğer bloğuna uygulanır ve numara ile etiketten önceliklidir.</string>
+    <string name="catalog_action_flow_goto_to_loop_top" formatted="false">Döngünün başı (sonraki öğe)</string>
+    <string name="catalog_action_flow_goto_to_loop_end" formatted="false">Döngüden çık</string>
+    <string name="catalog_action_flow_goto_to_if_end" formatted="false">Eğer bloğunun sonu</string>
+    <string name="catalog_action_intent_launch_field_package_hint" formatted="false">com.example.app</string>
+    <string name="catalog_action_intent_launch_field_action_hint" formatted="false">MAIN, VIEW vb.</string>
+    <string name="catalog_action_intent_launch_field_category_hint" formatted="false">İsteğe bağlı</string>
+    <string name="catalog_action_intent_launch_field_mode_hint" formatted="false">Android bileşen türünü seçin</string>
+    <string name="catalog_action_intent_launch_field_component_hint" formatted="false">com.example.app.MainActivity</string>
+    <string name="catalog_action_intent_launch_field_uri_hint" formatted="false">https://example.com veya content://…</string>
+    <string name="catalog_action_intent_launch_field_mime_hint" formatted="false">text/plain veya */*</string>
+    <string name="catalog_action_intent_launch_field_flags_hint" formatted="false">activity_clear_top, grant_read_uri (veri URI\'si ile gerekli)</string>
+    <string name="catalog_action_intent_launch_field_extras_hint" formatted="false">key=string:değer, key=int:1 veya key=bool:true</string>
+    <string name="catalog_action_intent_launch_field_result_variable_hint" formatted="false">Yayın sonuç kodu için isteğe bağlı değişken</string>
+    <string name="catalog_action_plugin_locale_fire_field_package_hint" formatted="false">com.example.plugin</string>
+    <string name="catalog_action_plugin_locale_fire_field_bundlejson_hint" formatted="false">{&quot;key&quot;:&quot;value&quot;,&quot;count&quot;:{&quot;int&quot;:3}}</string>
+    <string name="catalog_action_plugin_locale_fire_field_blurb_hint" formatted="false">Kullanıcıya görünen kısa özet</string>
+    <string name="catalog_action_plugin_locale_fire_field_timeoutms_hint" formatted="false">5000</string>
+    <string name="catalog_action_plugin_locale_query_field_package_hint" formatted="false">com.example.plugin</string>
+    <string name="catalog_action_plugin_locale_query_field_bundlejson_hint" formatted="false">{&quot;key&quot;:&quot;value&quot;,&quot;count&quot;:{&quot;int&quot;:3}}</string>
+    <string name="catalog_action_plugin_locale_query_field_blurb_hint" formatted="false">Kullanıcıya görünen kısa özet</string>
+    <string name="catalog_action_plugin_locale_query_field_timeoutms_hint" formatted="false">5000</string>
+    <string name="catalog_action_plugin_locale_query_field_resultvariable_hint" formatted="false">%plugin_state</string>
+    <string name="catalog_action_script_shizuku_run_field_path_hint" formatted="false">/data/local/tmp/my_script.sh</string>
+    <string name="catalog_action_script_shizuku_run_field_arguments_hint" formatted="false">İsteğe bağlı kabuk argümanları</string>
+    <string name="catalog_action_script_shizuku_run_field_captureprefix_hint" formatted="false">%script</string>
+    <string name="catalog_action_script_shizuku_run_field_timeoutms_hint" formatted="false">30000 (1000 ile 120000 arası)</string>
+    <string name="catalog_action_script_termux_run_field_executable_hint" formatted="false">~/.termux/tasker/my_script</string>
+    <string name="catalog_action_script_termux_run_field_arguments_hint" formatted="false">İsteğe bağlı kabuk argümanları</string>
+    <string name="catalog_action_script_termux_run_field_workingdirectory_hint" formatted="false">İsteğe bağlı Termux çalışma klasörü</string>
+    <string name="catalog_action_script_termux_run_field_stdin_hint" formatted="false">İsteğe bağlı standart girdi</string>
+    <string name="catalog_action_script_termux_run_field_captureprefix_hint" formatted="false">%script</string>
+    <string name="catalog_action_script_termux_run_field_timeoutms_hint" formatted="false">30000 (1000 ile 120000 arası)</string>
+    <string name="catalog_action_wifi_toggle_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_bluetooth_toggle_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_state_temporary_field_target_args_hint" formatted="false">Örnek: {&quot;brightness&quot;:&quot;80&quot;}</string>
+    <string name="catalog_action_state_temporary_field_key_hint" formatted="false">Benzersiz kanal, örn. sessiz-saatler</string>
+    <string name="catalog_action_state_temporary_field_duration_hint" formatted="false">1 ile 604800 saniye</string>
+    <string name="catalog_action_ime_info_field_var_hint" formatted="false">Varsayılan IME; _CURRENT, _ENABLED ve _COUNT yazar</string>
+    <string name="catalog_action_ime_set_field_ime_id_hint" formatted="false">ime.info\'dan bileşen kimliği</string>
+    <string name="catalog_action_volume_set_field_stream_hint" formatted="false">music (müzik), call (arama), alarm</string>
+    <string name="catalog_action_vpn_tunnel_field_client_hint" formatted="false">Tüneli yöneten uygulama</string>
+    <string name="catalog_action_vpn_tunnel_field_state_hint" formatted="false">Bağlan veya bağlantıyı kes</string>
+    <string name="catalog_action_vpn_tunnel_field_tunnel_hint" formatted="false">Yalnızca WireGuard; uygulamada göründüğü gibi</string>
+    <string name="catalog_action_wifi_scan_field_var_hint" formatted="false">wifi</string>
+    <string name="catalog_action_wifi_scan_field_limit_hint" formatted="false">1-64, varsayılan 20</string>
+    <string name="catalog_action_aod_set_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_airplane_toggle_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_hotspot_toggle_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_mobile_toggle_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_screen_timeout_field_millis_hint" formatted="false">1000, 30000 vb.</string>
+    <string name="catalog_action_settings_write_field_table_hint" formatted="false">Ayarın bulunduğu yer. Çoğu Secure veya Global\'dir.</string>
+    <string name="catalog_action_settings_write_table_global" formatted="false">Global (tüm kullanıcılar)</string>
+    <string name="catalog_action_settings_write_table_secure" formatted="false">Secure (bu kullanıcı)</string>
+    <string name="catalog_action_settings_write_table_system" formatted="false">System (ekran ve ses)</string>
+    <string name="catalog_action_settings_write_field_key_hint" formatted="false">location_mode, screen_off_timeout vb.</string>
+    <string name="catalog_action_settings_write_field_value_hint" formatted="false">Yazdıktan sonra geri okunur; Android\'in yok saydığı değer hata olarak bildirilir.</string>
+    <string name="catalog_action_dnd_set_field_mode_hint" formatted="false">off / priority / alarms / total_silence</string>
+    <string name="catalog_action_zen_rule_set_field_id_hint" formatted="false">sabit anahtar, örneğin aksam_odak</string>
+    <string name="catalog_action_zen_rule_set_field_name_hint" formatted="false">Android Rahatsız Etmeyin ayarlarında görünen ad</string>
+    <string name="catalog_action_zen_rule_set_field_mode_hint" formatted="false">off / priority / alarms / total_silence</string>
+    <string name="catalog_action_zen_rule_set_field_enabled_hint" formatted="false">Android bu kuralı etkinleştirebilir mi</string>
+    <string name="catalog_action_zen_rule_clear_field_id_hint" formatted="false">Odak kuralı ayarla eyleminde kullanılan sabit anahtar</string>
+    <string name="catalog_action_ringer_set_field_mode_hint" formatted="false">normal / vibrate (titreşim) / silent (sessiz)</string>
+    <string name="catalog_action_torch_set_field_state_hint" formatted="false">on (aç) / off (kapat) / toggle (değiştir)</string>
+    <string name="catalog_action_tile_set_field_state_hint" formatted="false">active (etkin) / inactive (etkin değil)</string>
+    <string name="catalog_action_tile_set_field_label_hint" formatted="false">Kutucuk yazısı</string>
+    <string name="catalog_action_tile_set_field_slot_hint" formatted="false">Ayarlı kutucuk yuvası, 1-4</string>
+    <string name="catalog_action_tile_set_field_subtitle_hint" formatted="false">İsteğe bağlı alt yazı</string>
+    <string name="catalog_action_tile_set_field_icon_hint" formatted="false">İsteğe bağlı hazır simge</string>
+    <string name="catalog_action_wallpaper_set_field_path_hint" formatted="false">Yeniden başlatmadan sonra da okunabilmesi için Gözat ile seçin</string>
+    <string name="catalog_action_wallpaper_set_field_target_hint" formatted="false">Varsayılan ikisi birden</string>
+    <string name="catalog_action_app_launch_field_package_hint" formatted="false">com.example.app</string>
+    <string name="catalog_action_url_open_field_url_hint" formatted="false">https://example.com</string>
+    <string name="catalog_action_screenshot_take_field_path_hint" formatted="false">isteğe bağlı çıktı yolu</string>
+    <string name="catalog_action_file_read_field_var_hint" formatted="false">%var</string>
+    <string name="catalog_action_file_list_field_var_hint" formatted="false">%var</string>
+    <string name="catalog_action_file_list_field_pattern_hint" formatted="false">*.txt</string>
+    <string name="catalog_action_http_request_field_method_hint" formatted="false">GET, HEAD, POST, PUT, PATCH, DELETE veya OPTIONS</string>
+    <string name="catalog_action_http_request_field_query_hint" formatted="false">Her satıra bir ad=değer çifti</string>
+    <string name="catalog_action_http_request_field_headers_hint" formatted="false">Her satıra bir Ad: Değer başlığı; çalışma kaydında gizlenir</string>
+    <string name="catalog_action_http_request_field_authorization_hint" formatted="false">Örneğin Bearer %SECRET_TOKEN; kayıtlarda her zaman gizlenir</string>
+    <string name="catalog_action_http_request_field_body_file_hint" formatted="false">Kısayollar Dosyaları içinde göreli yol; satır içi gövdeyle birlikte kullanılamaz</string>
+    <string name="catalog_action_http_request_field_content_type_hint" formatted="false">Örneğin application/json</string>
+    <string name="catalog_action_http_request_field_response_var_hint" formatted="false">Varsayılan %result; çıktı dosyasıyla birlikte kullanılamaz</string>
+    <string name="catalog_action_http_request_field_status_var_hint" formatted="false">%status gibi isteğe bağlı değişken</string>
+    <string name="catalog_action_http_request_field_headers_var_hint" formatted="false">İsteğe bağlı değişken; her satıra bir Ad: Değer</string>
+    <string name="catalog_action_http_request_field_output_file_hint" formatted="false">Kısayollar Dosyaları içinde göreli yol; tek seferde yazılır</string>
+    <string name="catalog_action_http_request_field_max_response_bytes_hint" formatted="false">Değişken için en fazla 1 MiB, dosya için 50 MiB</string>
+    <string name="catalog_action_http_request_field_redirects_hint" formatted="false">none (varsayılan) veya same_origin; başka kaynağa yönlendirme izlenmez</string>
+    <string name="catalog_action_http_request_field_network_hint" formatted="false">Cihaz seçilen bağlantı türünde değilse isteği gönderme</string>
+    <string name="catalog_action_http_request_field_allow_http_hint" formatted="false">Düz HTTP\'ye yalnızca tüm adresler özel ağ/yerel ağdaysa izin ver</string>
+    <string name="catalog_action_http_request_field_timeout_hint" formatted="false">1 ile 120 saniye. Ayrı zaman aşımı alanları bu değeri geçersiz kılar.</string>
+    <string name="catalog_action_http_get_field_var_hint" formatted="false">%var</string>
+    <string name="catalog_action_http_get_field_allow_http_hint" formatted="false">Düz HTTP\'ye yalnızca yerel/özel ağ sunucuları için izin ver</string>
+    <string name="catalog_action_http_post_field_var_hint" formatted="false">%var</string>
+    <string name="catalog_action_http_post_field_allow_http_hint" formatted="false">Düz HTTP\'ye yalnızca yerel/özel ağ sunucuları için izin ver</string>
+    <string name="catalog_action_home_assistant_webhook_field_url_hint" formatted="false">HTTPS webhook adresi; gizli yol ekranda saklanır</string>
+    <string name="catalog_action_home_assistant_webhook_field_payload_hint" formatted="false">JSON nesnesi, en fazla 16 KB; içerik ekranda saklanır</string>
+    <string name="catalog_action_home_assistant_webhook_field_message_hint" formatted="false">İsteğe bağlı Companion bildirim mesajı, örn. command_broadcast_intent; data ile kullanın</string>
+    <string name="catalog_action_home_assistant_webhook_field_data_hint" formatted="false">message ile eşleşen isteğe bağlı JSON nesnesi; gizli bilgiler ekranda saklanır</string>
+    <string name="catalog_action_home_assistant_webhook_field_timeout_hint" formatted="false">Varsayılan: 15 (1-30)</string>
+    <string name="catalog_action_home_assistant_webhook_field_retries_hint" formatted="false">Yalnızca geçici hatalar; varsayılan: 2 (0-3)</string>
+    <string name="catalog_action_home_assistant_webhook_field_backoff_hint" formatted="false">İlk bekleme; katlanarak artar, en fazla 10 saniye (100-5000)</string>
+    <string name="catalog_action_home_assistant_webhook_field_allow_http_hint" formatted="false">Yalnızca özel yerel ağ uç noktaları için; yerel ağ izni ve sunucu kuralları yine geçerlidir</string>
+    <string name="catalog_action_mqtt_publish_field_host_hint" formatted="false">Sunucu adı veya IP adresi</string>
+    <string name="catalog_action_mqtt_publish_field_port_hint" formatted="false">Varsayılan: TLS ile 8883, TLS olmadan 1883</string>
+    <string name="catalog_action_mqtt_publish_field_tls_hint" formatted="false">Varsayılan açık; şifresiz bağlantı yalnızca özel/yerel sunuculara</string>
+    <string name="catalog_action_mqtt_publish_field_topic_hint" formatted="false">Yayın konusu, + veya # joker karakteri olmadan</string>
+    <string name="catalog_action_mqtt_publish_field_payload_hint" formatted="false">UTF-8 içerik, en fazla 64 KB; ekranda saklanır</string>
+    <string name="catalog_action_mqtt_publish_field_qos_hint" formatted="false">0 veya 1; QoS 1 PUBACK bekler</string>
+    <string name="catalog_action_mqtt_publish_field_retain_hint" formatted="false">Aracıdan son mesajı saklamasını iste</string>
+    <string name="catalog_action_mqtt_publish_field_username_hint" formatted="false">İsteğe bağlı aracı kullanıcı adı</string>
+    <string name="catalog_action_mqtt_publish_field_password_hint" formatted="false">İsteğe bağlı aracı şifresi; her zaman gizlenir</string>
+    <string name="catalog_action_mqtt_publish_field_timeout_hint" formatted="false">Bağlantı, el sıkışma ve onay zaman aşımı (1-30)</string>
+    <string name="catalog_action_ping_field_timeout_hint" formatted="false">Varsayılan: 5 (1-30)</string>
+    <string name="catalog_action_ping_field_var_hint" formatted="false">true/false kaydeder (varsayılan: result)</string>
+    <string name="catalog_action_download_field_allow_http_hint" formatted="false">Düz HTTP\'ye yalnızca yerel/özel ağ sunucuları için izin ver</string>
+    <string name="catalog_action_download_field_timeout_hint" formatted="false">Varsayılan: 30 (1-300)</string>
+    <string name="catalog_action_download_field_max_bytes_hint" formatted="false">Varsayılan ve en fazla: 52428800 (50 MB)</string>
+    <string name="catalog_action_wol_field_mac_hint" formatted="false">örn. AA:BB:CC:DD:EE:FF</string>
+    <string name="catalog_action_wol_field_broadcast_hint" formatted="false">Varsayılan: 255.255.255.255</string>
+    <string name="catalog_action_wol_field_port_hint" formatted="false">Varsayılan: 9</string>
+    <string name="catalog_action_sound_play_field_volume_hint" formatted="false">İsteğe bağlı; boşsa mevcut ses düzeyi kullanılır</string>
+    <string name="catalog_action_sound_play_field_stream_hint" formatted="false">Varsayılan Müzik. Zil ve Bildirimler zil veya bildirim sesini kullanır; titreşimde, sessizde ve Rahatsız Etmeyin\'de duyulmayabilir. Android 17\'de arka planda başlayan bir kısayol yalnızca Alarm akışında duyulur; bu tam alarm izni ister ve alarm sesini izler.</string>
+    <string name="catalog_action_sound_beep_field_frequency_hint" formatted="false">Sesin perdesi, 0 ile 10000 arası. 440, orta Do\'nun üstündeki La\'dır.</string>
+    <string name="catalog_action_sound_beep_field_amplitude_hint" formatted="false">Boşsa 50</string>
+    <string name="catalog_action_media_mute_field_stream_hint" formatted="false">music, ring, notification, alarm, system, call (varsayılan: music)</string>
+    <string name="catalog_action_notify_progress_field_title_hint" formatted="false">Bildirim başlığı</string>
+    <string name="catalog_action_notify_progress_field_text_hint" formatted="false">İsteğe bağlı durum metni</string>
+    <string name="catalog_action_notify_progress_field_progress_hint" formatted="false">0 ile 100</string>
+    <string name="catalog_action_notify_progress_field_segments_hint" formatted="false">İsteğe bağlı, virgülle ayrılmış pozitif uzunluklar</string>
+    <string name="catalog_action_notify_progress_field_channel_hint" formatted="false">quiet, default veya urgent</string>
+    <string name="catalog_action_notify_progress_field_tag_hint" formatted="false">İsteğe bağlı değiştirme etiketi</string>
+    <string name="catalog_action_notify_progress_field_id_hint" formatted="false">İsteğe bağlı bildirim kimliği</string>
+    <string name="catalog_action_shortcut_publish_field_id_hint" formatted="false">Bu kestirmeyi güncellemek için sabit kimlik</string>
+    <string name="catalog_action_shortcut_publish_field_task_id_hint" formatted="false">Kestirmeye dokununca çalışacak kısayol</string>
+    <string name="catalog_action_shortcut_publish_field_label_hint" formatted="false">Başlatıcıda görünen ad</string>
+    <string name="catalog_action_shortcut_publish_field_mode_hint" formatted="false">Dinamik hemen güncellenir; sabitlenmiş, başlatıcıya sorar</string>
+    <string name="catalog_action_input_ask_field_title_hint" formatted="false">Pencere ne sorsun?</string>
+    <string name="catalog_action_input_ask_field_message_hint" formatted="false">Sorunun altında isteğe bağlı metin</string>
+    <string name="catalog_action_input_ask_type_text" formatted="false">Metin</string>
+    <string name="catalog_action_input_ask_type_number" formatted="false">Sayı</string>
+    <string name="catalog_action_input_ask_type_url" formatted="false">URL</string>
+    <string name="catalog_action_input_ask_type_multiline" formatted="false">Çok satırlı metin</string>
+    <string name="catalog_action_input_ask_field_default_hint" formatted="false">Alanda hazır duran metin</string>
+    <string name="catalog_action_input_ask_field_var_hint" formatted="false">Değişken adı (varsayılan Input)</string>
+    <string name="catalog_action_menu_choose_field_title_hint" formatted="false">Listenin üstündeki başlık</string>
+    <string name="catalog_action_menu_choose_field_items_hint" formatted="false">Her satıra bir öğe</string>
+    <string name="catalog_action_menu_choose_field_var_hint" formatted="false">Değişken adı (varsayılan Choice; sırası Choice_index içinde)</string>
+    <string name="catalog_action_alert_show_field_title_hint" formatted="false">Uyarı başlığı</string>
+    <string name="catalog_action_alert_show_field_message_hint" formatted="false">Uyarı metni</string>
+    <string name="catalog_action_alert_show_field_cancel_button_hint" formatted="false">Kapalı: yalnızca Tamam; uyarıyı kapatmak kısayola devam eder</string>
+    <string name="catalog_action_result_show_field_text_hint" formatted="false">Gösterilecek şey, örneğin {{ Input }}</string>
+    <string name="catalog_action_result_show_field_title_hint" formatted="false">İsteğe bağlı başlık</string>
+    <string name="catalog_action_battery_get_field_var_hint" formatted="false">Değişken adı (varsayılan Battery; ayrıca Battery_charging, Battery_source)</string>
+    <string name="catalog_action_math_calculate_field_expression_hint" formatted="false">Örneğin {{ Price }} * 1.2</string>
+    <string name="catalog_action_math_calculate_field_var_hint" formatted="false">Değişken adı (varsayılan Result)</string>
+    <string name="catalog_action_random_number_field_min_hint" formatted="false">Varsayılan 1</string>
+    <string name="catalog_action_random_number_field_max_hint" formatted="false">Varsayılan 100</string>
+    <string name="catalog_action_random_number_field_var_hint" formatted="false">Değişken adı (varsayılan Random)</string>
+    <string name="catalog_action_alarm_set_field_hour_hint" formatted="false">0-23</string>
+    <string name="catalog_action_alarm_set_field_minute_hint" formatted="false">0-59, varsayılan 0</string>
+    <string name="catalog_action_alarm_set_field_label_hint" formatted="false">İsteğe bağlı alarm adı</string>
+    <string name="catalog_action_alarm_set_field_skip_ui_hint" formatted="false">Varsayılan açık</string>
+    <string name="catalog_action_timer_set_field_seconds_hint" formatted="false">Örneğin 5 dakika için 300</string>
+    <string name="catalog_action_timer_set_field_label_hint" formatted="false">İsteğe bağlı zamanlayıcı adı</string>
+    <string name="catalog_action_timer_set_field_skip_ui_hint" formatted="false">Varsayılan açık</string>
+    <string name="catalog_action_email_compose_field_to_hint" formatted="false">Virgülle ayrılmış adresler</string>
+    <string name="catalog_action_email_compose_field_subject_hint" formatted="false">E-posta konusu</string>
+    <string name="catalog_action_email_compose_field_body_hint" formatted="false">E-posta metni</string>
+    <string name="catalog_action_phone_dial_field_number_hint" formatted="false">Örneğin +90 555 000 00 00</string>
+    <string name="catalog_action_share_text_field_text_hint" formatted="false">Paylaşılacak şey</string>
+    <string name="catalog_action_share_text_field_title_hint" formatted="false">İsteğe bağlı</string>
+    <string name="catalog_action_maps_directions_field_destination_hint" formatted="false">Adres veya yer adı</string>
+    <string name="catalog_action_maps_directions_mode_driving" formatted="false">Araçla</string>
+    <string name="catalog_action_maps_directions_mode_walking" formatted="false">Yürüyerek</string>
+    <string name="catalog_action_maps_directions_mode_transit" formatted="false">Toplu taşıma</string>
+    <string name="catalog_action_maps_directions_mode_bicycling" formatted="false">Bisikletle</string>
+    <string name="catalog_action_list_choose_field_title_hint" formatted="false">Listenin üstündeki başlık</string>
+    <string name="catalog_action_list_choose_field_items_hint" formatted="false">Her satıra bir öğe</string>
+    <string name="catalog_action_list_choose_field_var_hint" formatted="false">Değişken adı (varsayılan Chosen; sayısı Chosen_count içinde)</string>
+    <string name="catalog_action_date_ask_field_title_hint" formatted="false">Seçicinin başlığı</string>
+    <string name="catalog_action_date_ask_mode_date" formatted="false">Tarih (yyyy-AA-gg)</string>
+    <string name="catalog_action_date_ask_mode_time" formatted="false">Saat (SS:dd)</string>
+    <string name="catalog_action_date_ask_mode_datetime" formatted="false">Tarih ve saat</string>
+    <string name="catalog_action_date_ask_field_var_hint" formatted="false">Değişken adı (varsayılan Date)</string>
+    <string name="catalog_action_dictate_text_field_prompt_hint" formatted="false">Dinlerken gösterilir</string>
+    <string name="catalog_action_dictate_text_field_language_hint" formatted="false">Örneğin tr-TR; boşsa cihaz dili kullanılır</string>
+    <string name="catalog_action_dictate_text_field_var_hint" formatted="false">Değişken adı (varsayılan Dictation)</string>
 </resources>
