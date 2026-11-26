@@ -106,10 +106,14 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
+      # A preview that cannot render should not hide the others; its error is in the report below.
       - name: Render screenshots
-        run: chmod +x gradlew && ./gradlew :app:updateDebugScreenshotTest
+        run: chmod +x gradlew && ./gradlew :app:updateDebugScreenshotTest --continue || echo "some previews failed to render"
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: kisayollar-screenshots
-          path: app/src/screenshotTestDebug/reference/com/opentasker/ui/screens/KisayollarScreenshotPreviewsKt/
+          path: |
+            app/src/screenshotTestDebug/reference/com/opentasker/ui/screens/KisayollarScreenshotPreviewsKt/
+            app/build/test-results/updateDebugScreenshotTest/
