@@ -2098,4 +2098,7 @@
     <string name="share_pick_title">Run a shortcut</string>
     <string name="share_pick_empty">No shortcuts yet. Create one in the app first.</string>
     <string name="shortcut_add_to_home">Add to Home Screen</string>
+    <string name="widget_grid_label">Shortcuts</string>
+    <string name="widget_grid_description">Your shortcuts as a grid; tap one to run it</string>
+    <string name="widget_grid_empty">No shortcuts yet</string>
 </resources>

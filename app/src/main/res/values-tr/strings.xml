@@ -855,4 +855,7 @@
     <string name="share_invalid">Kısayollar bu paylaşımı okuyamadı.</string>
     <string name="share_uri_unreadable">Kısayollar paylaşılan dosyayı okuyamadı. Okuma izniyle yeniden paylaşın.</string>
     <string name="shortcut_add_to_home">Ana ekrana ekle</string>
+    <string name="widget_grid_label">Kısayollar</string>
+    <string name="widget_grid_description">Kısayollarınız ızgara halinde; çalıştırmak için dokunun</string>
+    <string name="widget_grid_empty">Henüz kısayol yok</string>
 </resources>

@@ -23,7 +23,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [ ] Otomasyon sekmesi: "Ne zaman → ne yap" kartları, aç/kapat
 - [ ] Galeri: hazır kısayollar ve koleksiyonlar, tek dokunuşla ekle
 - [x] Ana ekrana ekle: düzenleyici ⋮ ve uzun basma menüsünde; simge kısayolun kendi renk ve simgesi
-- [ ] Ana ekran widget'ı (kısayol ızgarası)
+- [x] Ana ekran widget'ı: kısayol ızgarası (renkli kartlar, dokununca çalışır)
 - [~] Hızlı Ayarlar kutucukları (4 yuva var; kısayol seçimi kolaylaştırılacak)
 
 ## C. Girdi ve çıktı

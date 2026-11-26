@@ -79,6 +79,8 @@ internal fun ShortcutsHomeScreen(
 ) {
     val styles = rememberShortcutStyles()
     val context = androidx.compose.ui.platform.LocalContext.current
+    // Keep placed home-screen grids in step with the list and its colours.
+    androidx.compose.runtime.LaunchedEffect(tasks, styles) { com.opentasker.widget.ShortcutGridWidgetProvider.refresh(context) }
     var styling by remember { mutableStateOf<Task?>(null) }
     var deleting by remember { mutableStateOf<Task?>(null) }
     styling?.let { task ->
