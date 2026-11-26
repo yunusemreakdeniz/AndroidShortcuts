@@ -940,4 +940,10 @@
     <string name="catalog_action_number_format_field_grouping_hint" formatted="false">Thousands separators, like 1,234</string>
     <string name="catalog_action_number_format_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_number_format_field_var_hint" formatted="false">Variable name (default Formatted)</string>
+    <string name="catalog_action_file_share_name" formatted="false">Share File</string>
+    <string name="catalog_action_file_share_description" formatted="false">Share a file from the shortcut files, such as a selected photo</string>
+    <string name="catalog_action_file_share_field_path_label" formatted="false">File</string>
+    <string name="catalog_action_file_share_field_path_hint" formatted="false">For example {{ Photo }} or Files/report.pdf</string>
+    <string name="catalog_action_file_share_field_title_label" formatted="false">Title</string>
+    <string name="catalog_action_file_share_field_title_hint" formatted="false">Optional</string>
 </resources>

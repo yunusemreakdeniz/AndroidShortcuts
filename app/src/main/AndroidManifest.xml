@@ -295,6 +295,17 @@
              the permission and V3_SUPPORT entries but leaves the provider to the app, and without it
              pingBinder stays false however the server was started or the permission granted. The
              system-only permission keeps ordinary apps out of the exported surface. -->
+        <!-- Share File: hands out read-only grants for files under user_files, nothing else. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.files"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/shortcut_file_paths" />
+        </provider>
+
         <provider
             android:name="rikka.shizuku.ShizukuProvider"
             android:authorities="${applicationId}.shizuku"

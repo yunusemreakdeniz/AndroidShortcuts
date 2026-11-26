@@ -85,7 +85,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [ ] Takvim etkinliği ekle, hatırlatıcı/not
 - [x] Alarm ve zamanlayıcı kur
 - [x] Metni paylaş (paylaşım sayfası)
-- [ ] Dosyayı paylaş
+- [x] Dosyayı paylaş: kısayol dosyalarından (Photos/, Files/) paylaşım menüsüyle
 
 ## J. Otomasyon tetikleyicileri
 - [x] Saat, gün, konum, Wi-Fi, Bluetooth, şarj, uygulama, bildirim, NFC, USB, push (var)

@@ -938,4 +938,10 @@
     <string name="catalog_action_number_format_field_grouping_hint" formatted="false">Binlik ayırıcı, örneğin 1.234</string>
     <string name="catalog_action_number_format_field_var_label" formatted="false">Şuraya kaydet</string>
     <string name="catalog_action_number_format_field_var_hint" formatted="false">Değişken adı (varsayılan Formatted)</string>
+    <string name="catalog_action_file_share_name" formatted="false">Dosyayı paylaş</string>
+    <string name="catalog_action_file_share_description" formatted="false">Kısayol dosyalarından bir dosyayı paylaşır, örneğin seçilen fotoğrafı</string>
+    <string name="catalog_action_file_share_field_path_label" formatted="false">Dosya</string>
+    <string name="catalog_action_file_share_field_path_hint" formatted="false">Örneğin {{ Photo }} veya Files/rapor.pdf</string>
+    <string name="catalog_action_file_share_field_title_label" formatted="false">Başlık</string>
+    <string name="catalog_action_file_share_field_title_hint" formatted="false">İsteğe bağlı</string>
 </resources>

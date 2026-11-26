@@ -103,3 +103,29 @@ class DirectionsAction : DeclaredAction(ActionCatalog.require("maps.directions")
         return launch(ctx, Intent(Intent.ACTION_VIEW, uri), "maps")
     }
 }
+
+/** Share File: a file from the shortcut files (e.g. what Select Photo saved) through the share sheet. */
+class ShareFileAction : DeclaredAction(ActionCatalog.require("file.share")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val path = args["path"]?.trim()?.takeIf(String::isNotEmpty) ?: return ActionResult.Failure("missing file path")
+        val base = java.io.File(ctx.app.filesDir, "user_files").canonicalFile
+        val file = resolveSandboxTarget(base, path, mustExist = true)?.takeIf { it.isFile }
+            ?: return ActionResult.Failure("no file at $path in the shortcut files")
+        val uri = try {
+            androidx.core.content.FileProvider.getUriForFile(ctx.app, ctx.app.packageName + ".files", file)
+        } catch (e: IllegalArgumentException) {
+            return ActionResult.Failure("the file cannot be shared: ${e.message}")
+        }
+        val mime = android.webkit.MimeTypeMap.getSingleton()
+            .getMimeTypeFromExtension(file.extension.lowercase())
+            ?: "application/octet-stream"
+        val send = Intent(Intent.ACTION_SEND)
+            .setType(mime)
+            .putExtra(Intent.EXTRA_STREAM, uri)
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        send.clipData = android.content.ClipData.newRawUri(file.name, uri)
+        val chooser = Intent.createChooser(send, args["title"]?.takeIf(String::isNotBlank)?.take(200))
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        return launch(ctx, chooser, "the share sheet")
+    }
+}

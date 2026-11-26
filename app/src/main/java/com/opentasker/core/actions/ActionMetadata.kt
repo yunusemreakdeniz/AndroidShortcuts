@@ -232,6 +232,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "email.compose",
     "phone.dial",
     "share.text",
+    "file.share",
     "maps.directions",
     -> R.string.action_parameter_summary
     else -> error("No action summary resource declared for $actionId")
@@ -2192,6 +2193,18 @@ private fun registerAppHelperActionMetadata() {
             fields = listOf(
                 ActionField("text", R.string.catalog_action_share_text_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_share_text_field_text_hint),
                 ActionField("title", R.string.catalog_action_share_text_field_title_label, hintRes = R.string.catalog_action_share_text_field_title_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "file.share",
+            nameRes = R.string.catalog_action_file_share_name,
+            descriptionRes = R.string.catalog_action_file_share_description,
+            categoryRes = R.string.catalog_category_file,
+            fields = listOf(
+                ActionField("path", R.string.catalog_action_file_share_field_path_label, required = true, hintRes = R.string.catalog_action_file_share_field_path_hint),
+                ActionField("title", R.string.catalog_action_file_share_field_title_label, hintRes = R.string.catalog_action_file_share_field_title_hint),
             ),
         )
     )
