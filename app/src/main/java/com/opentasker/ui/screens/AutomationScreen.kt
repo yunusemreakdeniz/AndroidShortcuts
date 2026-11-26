@@ -15,11 +15,18 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.Bolt
+import androidx.compose.material.icons.outlined.CalendarMonth
+import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.NotificationsActive
+import androidx.compose.material.icons.outlined.PhoneAndroid
+import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.opentasker.app.R
+import com.opentasker.core.model.ContextType
 import com.opentasker.core.model.Profile
 import com.opentasker.core.model.Task
 
@@ -48,6 +56,7 @@ internal fun AutomationScreen(
     onToggle: (Profile, Boolean) -> Unit,
     onOpen: (Profile) -> Unit,
     onEditTriggers: () -> Unit,
+    onNewAutomation: (ContextType) -> Unit,
 ) {
     val tasksById = tasks.associateBy { it.id }
     LazyColumn(
@@ -80,6 +89,46 @@ internal fun AutomationScreen(
                 onToggle = { onToggle(profile, it) },
                 onOpen = { onOpen(profile) },
             )
+        }
+        item {
+            Text(
+                text = stringResource(R.string.automation_new_title),
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(top = 12.dp),
+            )
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                newAutomationTriggers.chunked(3).forEach { row ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        row.forEach { (type, icon) ->
+                            Surface(
+                                onClick = { onNewAutomation(type) },
+                                shape = RoundedCornerShape(16.dp),
+                                color = MaterialTheme.colorScheme.surfaceContainerLowest,
+                                tonalElevation = 1.dp,
+                                modifier = Modifier.weight(1f),
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(vertical = 14.dp, horizontal = 6.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                                ) {
+                                    Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+                                    Text(
+                                        text = stringResource(contextTitleRes(type)),
+                                        style = MaterialTheme.typography.labelMedium,
+                                        maxLines = 2,
+                                        overflow = TextOverflow.Ellipsis,
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         item {
             TextButton(onClick = onEditTriggers) {
@@ -157,4 +206,48 @@ private fun AutomationCard(profile: Profile, task: Task?, onToggle: (Boolean) ->
             )
         }
     }
+}
+
+/** The design's "New automation" tiles; each starts the automation with that kind of trigger. */
+private val newAutomationTriggers = listOf(
+    ContextType.TIME to Icons.Outlined.Schedule,
+    ContextType.DAY to Icons.Outlined.CalendarMonth,
+    ContextType.LOCATION to Icons.Outlined.LocationOn,
+    ContextType.APPLICATION to Icons.Outlined.Apps,
+    ContextType.STATE to Icons.Outlined.PhoneAndroid,
+    ContextType.EVENT to Icons.Outlined.NotificationsActive,
+)
+
+/** Second step of a new automation: which shortcut it runs. */
+@Composable
+internal fun NewAutomationShortcutDialog(
+    type: ContextType,
+    tasks: List<Task>,
+    onDismiss: () -> Unit,
+    onPick: (Task) -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.automation_pick_shortcut_title, stringResource(contextTitleRes(type)))) },
+        text = {
+            if (tasks.isEmpty()) {
+                Text(stringResource(R.string.automation_pick_shortcut_empty))
+            } else {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    items(tasks, key = { it.id }) { task ->
+                        Surface(
+                            onClick = { onPick(task) },
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(task.name, modifier = Modifier.padding(14.dp), style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_close)) } },
+    )
 }

@@ -2079,4 +2079,7 @@
     <string name="gallery_collection_road_title">On the road</string>
     <string name="gallery_collection_road_description">Directions home, your battery at a glance and a quick timer for parking.</string>
     <string name="gallery_collection_add_all">Add all</string>
+    <string name="automation_new_title">New automation</string>
+    <string name="automation_pick_shortcut_title">%1$s: which shortcut runs?</string>
+    <string name="automation_pick_shortcut_empty">Create a shortcut first, then come back to automate it.</string>
 </resources>

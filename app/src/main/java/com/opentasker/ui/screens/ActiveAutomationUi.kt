@@ -254,6 +254,9 @@ fun ActiveAutomationUi(
     val projectVariables = remember(globalVariables, selectedProjectId) { globalVariables.filter { selectedProjectId == null || it.projectId == selectedProjectId } }
     val screen = OpenTaskerScreen.entries.getOrElse(screenOrdinal) { OpenTaskerScreen.Profiles }
     var taskDialogId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
+    // New automation from the Automation tab: chosen trigger type, then the profile waiting for it.
+    var newAutomationType by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingTriggerProfile by rememberSaveable { mutableStateOf<String?>(null) }
     // The shortcut open in the Shortcuts-style editor on the Shortcuts tab, if any.
     var editingShortcutId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
     var showCreateTaskDialog by rememberSaveable { mutableStateOf(false) }
@@ -763,7 +766,27 @@ fun ActiveAutomationUi(
                     },
                 )
             }
-            OpenTaskerScreen.Automation -> AutomationScreen(
+            OpenTaskerScreen.Automation -> {
+                newAutomationType?.let { typeName ->
+                    val type = ContextType.valueOf(typeName)
+                    val triggerLabel = stringResource(contextTitleRes(type))
+                    NewAutomationShortcutDialog(type = type, tasks = projectTasks, onDismiss = { newAutomationType = null }, onPick = { task ->
+                        val name = "$triggerLabel → ${task.name}"
+                        // Created off until its trigger is set; the trigger editor opens once it exists.
+                        viewModel.createProfile(name = name, enabled = false, enterTaskId = task.id, exitTaskId = null, cooldownSec = 0,
+                            automationMode = AutomationMode.SINGLE, projectId = selectedProjectId ?: DEFAULT_PROJECT_ID)
+                        pendingTriggerProfile = "$typeName|$name"
+                        newAutomationType = null
+                    })
+                }
+                LaunchedEffect(projectProfiles, pendingTriggerProfile) {
+                    val (typeName, name) = pendingTriggerProfile?.split('|', limit = 2) ?: return@LaunchedEffect
+                    projectProfiles.filter { it.name == name && it.contexts.isEmpty() }.maxByOrNull { it.id }?.let {
+                        pendingTriggerProfile = null
+                        openContextEdit(it, ContextType.valueOf(typeName))
+                    }
+                }
+                AutomationScreen(
                 profiles = projectProfiles,
                 tasks = projectTasks,
                 contentPadding = innerPadding,
@@ -779,7 +802,9 @@ fun ActiveAutomationUi(
                 },
                 onOpen = { openProfileDialog(it) },
                 onEditTriggers = { screenOrdinal = OpenTaskerScreen.Profiles.ordinal },
+                onNewAutomation = { newAutomationType = it.name },
             )
+            }
             OpenTaskerScreen.Profiles -> ProfilesScreen(
                 profiles = projectProfiles,
                 tasks = projectTasks,

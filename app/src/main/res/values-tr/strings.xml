@@ -85,4 +85,7 @@
     <string name="gallery_collection_road_title">Yola çıkarken</string>
     <string name="gallery_collection_road_description">Eve yol tarifi, pil durumu ve park için hızlı zamanlayıcı.</string>
     <string name="gallery_collection_add_all">Hepsini ekle</string>
+    <string name="automation_new_title">Yeni otomasyon</string>
+    <string name="automation_pick_shortcut_title">%1$s: hangi kısayol çalışsın?</string>
+    <string name="automation_pick_shortcut_empty">Önce bir kısayol oluştur, sonra otomatikleştirmek için geri gel.</string>
 </resources>
