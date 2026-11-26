@@ -2026,7 +2026,7 @@
         <item quantity="other">%1$d actions</item>
     </plurals>
     <string name="shortcut_editor_back">Back to shortcuts</string>
-    <string name="shortcut_editor_details">Shortcut details</string>
+    <string name="shortcut_editor_details">Advanced settings</string>
     <string name="shortcut_editor_run">Run</string>
     <string name="shortcut_editor_empty">This shortcut has no actions yet. Add the first one below.</string>
     <string name="shortcut_editor_add_action">Add action</string>
@@ -2082,4 +2082,12 @@
     <string name="automation_new_title">New automation</string>
     <string name="automation_pick_shortcut_title">%1$s: which shortcut runs?</string>
     <string name="automation_pick_shortcut_empty">Create a shortcut first, then come back to automate it.</string>
+    <string name="shortcut_name_label">Name</string>
+    <string name="shortcut_name_hint">For example Good morning</string>
+    <string name="shortcut_name_duplicate">A shortcut with this name already exists.</string>
+    <string name="shortcut_delete_title">Delete “%1$s”?</string>
+    <string name="shortcut_delete_body">The shortcut and its actions are removed. If an automation still uses it, you are asked what to do first.</string>
+    <string name="shortcut_editor_more">More options</string>
+    <string name="shortcut_editor_rename">Rename</string>
+    <string name="shortcut_editor_delete_shortcut">Delete shortcut</string>
 </resources>

@@ -139,6 +139,7 @@ import com.opentasker.core.location.LocationDwellStateStore
 import com.opentasker.core.model.ActionSpec
 import com.opentasker.core.model.AutomationMode
 import com.opentasker.core.model.ContextSpec
+import com.opentasker.core.model.CollisionMode
 import com.opentasker.core.model.ContextType
 import com.opentasker.core.model.Profile
 import com.opentasker.core.model.RunLogEntry
@@ -257,6 +258,11 @@ fun ActiveAutomationUi(
     // New automation from the Automation tab: chosen trigger type, then the profile waiting for it.
     var newAutomationType by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingTriggerProfile by rememberSaveable { mutableStateOf<String?>(null) }
+    // Kısayollar' own dialogs: new shortcut (then open it), rename and delete from the editor.
+    var showNewShortcutDialog by rememberSaveable { mutableStateOf(false) }
+    var pendingOpenShortcut by rememberSaveable { mutableStateOf<String?>(null) }
+    var renamingShortcut by rememberSaveable { mutableStateOf(false) }
+    var deletingShortcut by rememberSaveable { mutableStateOf(false) }
     // The shortcut open in the Shortcuts-style editor on the Shortcuts tab, if any.
     var editingShortcutId by rememberSaveable { mutableLongStateOf(NO_DIALOG_ENTITY_ID) }
     var showCreateTaskDialog by rememberSaveable { mutableStateOf(false) }
@@ -599,8 +605,9 @@ fun ActiveAutomationUi(
                     )
                 }
 
-                OpenTaskerScreen.Shortcuts, OpenTaskerScreen.Tasks -> ExtendedFloatingActionButton(
-                    onClick = { showCreateTaskDialog = true },
+                // No FAB over the open shortcut editor; it has its own Add action button.
+                OpenTaskerScreen.Shortcuts, OpenTaskerScreen.Tasks -> if (screen == OpenTaskerScreen.Tasks || editingShortcutId == NO_DIALOG_ENTITY_ID) ExtendedFloatingActionButton(
+                    onClick = { if (screen == OpenTaskerScreen.Shortcuts) showNewShortcutDialog = true else showCreateTaskDialog = true },
                     shape = RoundedCornerShape(DesignSystem.Radii.lg),
                     containerColor = MaterialTheme.colorScheme.primary,
                     contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -724,12 +731,29 @@ fun ActiveAutomationUi(
                 val editing = projectTasks.firstOrNull { it.id == editingShortcutId }
                 if (editing != null) {
                     BackHandler { editingShortcutId = NO_DIALOG_ENTITY_ID }
+                    if (renamingShortcut) {
+                        ShortcutNameDialog(
+                            title = stringResource(R.string.shortcut_editor_rename), confirmLabel = stringResource(R.string.action_save),
+                            initialName = editing.name, existingNames = projectTasks.map { it.name },
+                            onDismiss = { renamingShortcut = false },
+                            onConfirm = { viewModel.updateTask(editing.copy(name = it)); renamingShortcut = false },
+                        )
+                    }
+                    if (deletingShortcut) {
+                        DeleteShortcutDialog(editing.name, onDismiss = { deletingShortcut = false }, onDelete = {
+                            deletingShortcut = false
+                            editingShortcutId = NO_DIALOG_ENTITY_ID
+                            openDeleteTask(editing)
+                        })
+                    }
                     ShortcutEditorScreen(
                         task = editing,
                         contentPadding = innerPadding,
                         onBack = { editingShortcutId = NO_DIALOG_ENTITY_ID },
                         onRun = { viewModel.runTaskNow(editing) },
                         onOpenDetails = { openTaskDialog(editing) },
+                        onRename = { renamingShortcut = true },
+                        onDelete = { deletingShortcut = true },
                         onAddAction = { openActionPicker(editing) },
                         onEditAction = { index, action ->
                             val metadata = ActionMetadataRegistry.get(action.type)
@@ -745,12 +769,31 @@ fun ActiveAutomationUi(
                         },
                     )
                 } else {
+                    if (showNewShortcutDialog) {
+                        ShortcutNameDialog(
+                            title = stringResource(R.string.shortcuts_create), confirmLabel = stringResource(R.string.action_create),
+                            initialName = "", existingNames = projectTasks.map { it.name },
+                            onDismiss = { showNewShortcutDialog = false },
+                            onConfirm = { name ->
+                                viewModel.createTask(name, 5, CollisionMode.ABORT_NEW, selectedProjectId ?: DEFAULT_PROJECT_ID)
+                                pendingOpenShortcut = name
+                                showNewShortcutDialog = false
+                            },
+                        )
+                    }
+                    LaunchedEffect(projectTasks, pendingOpenShortcut) {
+                        val name = pendingOpenShortcut ?: return@LaunchedEffect
+                        projectTasks.filter { it.name == name }.maxByOrNull { it.id }?.let {
+                            pendingOpenShortcut = null
+                            editingShortcutId = it.id
+                        }
+                    }
                     ShortcutsHomeScreen(
                         tasks = projectTasks,
                         contentPadding = innerPadding,
                         onRunTask = { viewModel.runTaskNow(it) },
                         onOpenTask = { editingShortcutId = it.id },
-                        onCreateTask = { showCreateTaskDialog = true },
+                        onCreateTask = { showNewShortcutDialog = true },
                     )
                 }
             }

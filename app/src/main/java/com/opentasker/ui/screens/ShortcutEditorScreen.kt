@@ -63,6 +63,8 @@ internal fun ShortcutEditorScreen(
     onBack: () -> Unit,
     onRun: () -> Unit,
     onOpenDetails: () -> Unit,
+    onRename: () -> Unit,
+    onDelete: () -> Unit,
     onAddAction: () -> Unit,
     onEditAction: (Int, ActionSpec) -> Unit,
     onMoveAction: (Int, Int) -> Unit,
@@ -94,8 +96,20 @@ internal fun ShortcutEditorScreen(
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.shortcut_editor_back))
             }
             Spacer(Modifier.weight(1f))
-            IconButton(onClick = onOpenDetails) {
-                Icon(Icons.Outlined.Tune, contentDescription = stringResource(R.string.shortcut_editor_details))
+            Box {
+                var menuOpen by remember { mutableStateOf(false) }
+                IconButton(onClick = { menuOpen = true }) {
+                    Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.shortcut_editor_more))
+                }
+                DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                    DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_rename)) }, onClick = { menuOpen = false; onRename() })
+                    DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_style_title)) }, onClick = { menuOpen = false; styling = true })
+                    DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_details)) }, onClick = { menuOpen = false; onOpenDetails() })
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.shortcut_editor_delete_shortcut), color = MaterialTheme.colorScheme.error) },
+                        onClick = { menuOpen = false; onDelete() },
+                    )
+                }
             }
             Button(onClick = onRun, enabled = task.actions.isNotEmpty(), modifier = Modifier.padding(end = 12.dp)) {
                 Icon(Icons.Filled.PlayArrow, contentDescription = null, modifier = Modifier.size(18.dp))

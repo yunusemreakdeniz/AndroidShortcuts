@@ -27,7 +27,7 @@
         <item quantity="other">%1$d eylem</item>
     </plurals>
     <string name="shortcut_editor_back">Kısayollara dön</string>
-    <string name="shortcut_editor_details">Kısayol ayrıntıları</string>
+    <string name="shortcut_editor_details">Gelişmiş ayarlar</string>
     <string name="shortcut_editor_run">Çalıştır</string>
     <string name="shortcut_editor_empty">Bu kısayolda henüz eylem yok. İlkini aşağıdan ekle.</string>
     <string name="shortcut_editor_add_action">Eylem ekle</string>
@@ -654,4 +654,20 @@
     <string name="workspace_exit_task_only">%1$s, eşleşme bitince</string>
     <string name="workspace_profile_cannot_match">Otomasyon henüz tetiklenemez</string>
     <string name="workspace_profile_cannot_match_body">Bu otomasyona güvenmeden önce en az bir tetikleyici ekle.</string>
+    <string name="shortcut_name_label">Ad</string>
+    <string name="shortcut_name_hint">Örneğin Günaydın</string>
+    <string name="shortcut_name_duplicate">Bu adda bir kısayol zaten var.</string>
+    <string name="shortcut_delete_title">“%1$s” silinsin mi?</string>
+    <string name="shortcut_delete_body">Kısayol ve eylemleri kaldırılır. Onu kullanan bir otomasyon varsa önce ne yapılacağı sorulur.</string>
+    <string name="shortcut_editor_more">Diğer seçenekler</string>
+    <string name="shortcut_editor_rename">Yeniden adlandır</string>
+    <string name="shortcut_editor_delete_shortcut">Kısayolu sil</string>
+    <string name="collision_mode_abort_new_title">Yeniyi atla</string>
+    <string name="collision_mode_abort_new_body">Çalışan devam eder, yeni istek atlandı olarak kaydedilir.</string>
+    <string name="collision_mode_abort_existing_title">Çalışanı durdur</string>
+    <string name="collision_mode_abort_existing_body">Çalışanı iptal eder, sonra yenisini başlatır.</string>
+    <string name="collision_mode_run_both_title">İkisini de çalıştır</string>
+    <string name="collision_mode_run_both_body">Kısayol otomasyonlar ve elle başlatmalar arasında aynı anda çalışabilir.</string>
+    <string name="collision_mode_wait_title">Sırayla bekle</string>
+    <string name="collision_mode_wait_body">İstekleri sıraya alır, geliş sırasına göre birer birer çalıştırır.</string>
 </resources>
