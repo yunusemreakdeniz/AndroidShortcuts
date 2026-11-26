@@ -73,4 +73,119 @@
     <string name="widget_action_title" formatted="false">Widget eylemi</string>
     <string name="widget_run_selected_task" formatted="false">Seçili kısayolu çalıştır</string>
     <string name="widget_tap_to_run" formatted="false">Çalıştırmak için dokunun</string>
+    <string name="context_field_application_package_label" formatted="false">Paket adı</string>
+    <string name="context_field_application_package_hint" formatted="false">com.example.app (iş profili uygulamaları görünmez)</string>
+    <string name="context_field_application_component_label" formatted="false">Ön plandaki bileşen (isteğe bağlı)</string>
+    <string name="context_field_application_component_hint" formatted="false">com.example.app.PlayerActivity veya com.example.app.*</string>
+    <string name="context_field_time_start_label" formatted="false">Başlangıç SS:dd</string>
+    <string name="context_field_time_start_hint" formatted="false">09:00 veya %Sunrise gibi genel bir değişken</string>
+    <string name="context_field_time_end_label" formatted="false">Bitiş SS:dd</string>
+    <string name="context_field_time_end_hint" formatted="false">17:00 veya %Sunset gibi genel bir değişken</string>
+    <string name="context_field_day_days_label" formatted="false">Günler</string>
+    <string name="context_field_day_days_hint" formatted="false">weekdays (hafta içi), weekends (hafta sonu), MON-FRI</string>
+    <string name="context_field_location_latitude_label" formatted="false">Enlem</string>
+    <string name="context_field_location_longitude_label" formatted="false">Boylam</string>
+    <string name="context_field_location_radius_label" formatted="false">Yarıçap (metre)</string>
+    <string name="context_field_location_radius_hint" formatted="false">100</string>
+    <string name="context_field_location_accuracy_label" formatted="false">En fazla doğruluk payı (metre)</string>
+    <string name="context_field_location_accuracy_hint" formatted="false">50</string>
+    <string name="context_field_location_dwell_label" formatted="false">Bekleme (saniye)</string>
+    <string name="context_field_location_dwell_hint" formatted="false">300</string>
+    <string name="context_field_location_outside_label" formatted="false">Dışarıdayken eşleş</string>
+    <string name="context_field_location_outside_hint" formatted="false">Bu yerdeyken değil, buradan uzaktayken tetiklenir (beklemeyle)</string>
+    <string name="context_field_state_key_label" formatted="false">Durum anahtarı</string>
+    <string name="context_field_state_key_hint" formatted="false">battery_level, charging, orientation, proximity, activity, speed, roaming, tethering, call_state, bt_near, health_steps, health_heart_rate, health_sleep_minutes, health_exercise_minutes</string>
+    <string name="context_field_state_poll_minutes_label" formatted="false">Denetim aralığı (dakika)</string>
+    <string name="context_field_state_poll_minutes_hint" formatted="false">Yalnızca sağlık verileri. 15 ile 1440 arası, varsayılan 15</string>
+    <string name="context_field_state_operator_label" formatted="false">İşleç</string>
+    <string name="context_field_state_operator_hint" formatted="false">=, &gt;=, &lt;=, &gt;, &lt;, ~ (Wi-Fi adı deseni)</string>
+    <string name="context_field_state_value_label" formatted="false">Beklenen değer</string>
+    <string name="context_field_state_value_hint" formatted="false">portrait, near, walking, 10, true, ringing, bir Bluetooth cihaz adı veya adresi ya da var olan bir durum değeri</string>
+    <string name="context_state_preset_orientation" formatted="false">Dikey</string>
+    <string name="context_state_preset_proximity" formatted="false">Yakında</string>
+    <string name="context_state_preset_activity" formatted="false">Yürürken</string>
+    <string name="context_state_preset_speed" formatted="false">Hız ≥ 10 m/sn</string>
+    <string name="context_state_preset_roaming" formatted="false">Dolaşımda</string>
+    <string name="context_state_preset_tethering" formatted="false">İnternet paylaşımı</string>
+    <string name="context_state_preset_call" formatted="false">Gelen arama</string>
+    <string name="context_state_preset_bt_near" formatted="false">Bluetooth cihazı yakında</string>
+    <string name="context_state_preset_health_steps" formatted="false">Bugün 10.000 adım</string>
+    <string name="context_state_preset_health_heart_rate" formatted="false">Nabız 100\'ün üstünde</string>
+    <string name="context_state_preset_health_sleep" formatted="false">6 saatten az uyku</string>
+    <string name="context_state_preset_health_exercise" formatted="false">Bugün 30 dk egzersiz</string>
+    <string name="context_field_event_type_label" formatted="false">Olay türü</string>
+    <string name="context_field_event_type_hint" formatted="false">boot_completed, notification, nfc, bluetooth, bluetooth_key_missing, bluetooth_encryption_change, calendar, sunrise, sunset, shake, camera, mic, package_added, package_removed, package_replaced</string>
+    <string name="context_field_event_state_label" formatted="false">Olay durumu</string>
+    <string name="context_field_event_state_hint" formatted="false">during, upcoming, connected, disconnected</string>
+    <string name="context_field_event_calendar_label" formatted="false">Takvim adı</string>
+    <string name="context_field_event_calendar_hint" formatted="false">İş</string>
+    <string name="context_field_event_before_label" formatted="false">Kaç dakika önce</string>
+    <string name="context_field_event_before_hint" formatted="false">15</string>
+    <string name="context_field_event_package_label" formatted="false">İzin verilen paketler</string>
+    <string name="context_field_event_package_hint" formatted="false">com.example.app, com.chat.app</string>
+    <string name="context_field_event_tag_label" formatted="false">NFC etiket kimliği</string>
+    <string name="context_field_event_tag_hint" formatted="false">04AABBCC</string>
+    <string name="context_field_event_latitude_label" formatted="false">Enlem</string>
+    <string name="context_field_event_latitude_hint" formatted="false">41.0082</string>
+    <string name="context_field_event_longitude_label" formatted="false">Boylam</string>
+    <string name="context_field_event_longitude_hint" formatted="false">28.9784</string>
+    <string name="context_field_event_offset_label" formatted="false">Güneş kayması (dakika)</string>
+    <string name="context_field_event_offset_hint" formatted="false">-30</string>
+    <string name="context_field_event_window_label" formatted="false">Güneş penceresi (dakika)</string>
+    <string name="context_field_event_window_hint" formatted="false">5</string>
+    <string name="context_field_event_elevation_label" formatted="false">Güneş yüksekliği</string>
+    <string name="context_field_event_elevation_hint" formatted="false">Gün doğumu/batımı için boş; civil, nautical, astronomical ya da -4 gibi derece</string>
+    <string name="context_field_event_topic_label" formatted="false">Anlık bildirim konusu</string>
+    <string name="context_field_event_topic_hint" formatted="false">konu-adi</string>
+    <string name="context_field_event_id_label" formatted="false">Anlık bildirim olay kimliği</string>
+    <string name="context_field_event_id_hint" formatted="false">isteğe bağlı tam teslim kimliği</string>
+    <string name="context_field_event_title_label" formatted="false">Başlık şunu içerir</string>
+    <string name="context_field_event_title_hint" formatted="false">İsteğe bağlı bildirim başlığı metni</string>
+    <string name="context_field_event_body_label" formatted="false">Gövde şunu içerir</string>
+    <string name="context_field_event_body_hint" formatted="false">İsteğe bağlı bildirim gövdesi metni</string>
+    <string name="context_field_event_filter_label" formatted="false">Herhangi bir üst veri filtresi</string>
+    <string name="context_field_event_filter_hint" formatted="false">İsteğe bağlı metin/paket/eylem filtresi</string>
+    <string name="context_field_event_regex_label" formatted="false">Düzenli ifadeyle eşleştir</string>
+    <string name="context_field_plugin_package_label" formatted="false">Eklenti paketi</string>
+    <string name="context_field_plugin_package_hint" formatted="false">com.example.plugin</string>
+    <string name="context_field_plugin_bundle_label" formatted="false">Eklenti ayarı (JSON)</string>
+    <string name="context_field_plugin_bundle_hint" formatted="false">{&quot;key&quot;:&quot;value&quot;,&quot;count&quot;:{&quot;int&quot;:3}}</string>
+    <string name="locale_plugin_configure">Eklentide ayarla</string>
+    <string name="locale_plugin_configure_missing">Bu uygulamanın Kısayollar\'ın açabileceği bir eklenti ayar ekranı yok.</string>
+    <string name="locale_plugin_configure_failed">Eklenti ayarları kaydedilemedi: %1$s</string>
+    <string name="locale_plugin_configure_refused">Kısayollar eklenti ayarlarını açmadı: %1$s</string>
+    <string name="context_field_plugin_blurb_label" formatted="false">Açıklama</string>
+    <string name="context_field_plugin_blurb_hint" formatted="false">Eklenti ayarından isteğe bağlı etiket</string>
+    <string name="context_field_plugin_timeout_label" formatted="false">Sorgu zaman aşımı (ms)</string>
+    <string name="context_field_plugin_timeout_hint" formatted="false">5000</string>
+    <string name="context_day_mon" formatted="false">PZT</string>
+    <string name="context_day_tue" formatted="false">SAL</string>
+    <string name="context_day_wed" formatted="false">ÇAR</string>
+    <string name="context_day_thu" formatted="false">PER</string>
+    <string name="context_day_fri" formatted="false">CUM</string>
+    <string name="context_day_sat" formatted="false">CMT</string>
+    <string name="context_day_sun" formatted="false">PAZ</string>
+    <string name="context_preset_during_meeting" formatted="false">Toplantı sırasında</string>
+    <string name="context_preset_15_before" formatted="false">15 dk önce</string>
+    <string name="context_preset_30_before" formatted="false">30 dk önce</string>
+    <string name="context_preset_all_day_busy" formatted="false">Tüm gün meşgul</string>
+    <string name="context_preset_at_sunrise" formatted="false">Gün doğumunda</string>
+    <string name="context_preset_at_sunset" formatted="false">Gün batımında</string>
+    <string name="context_preset_30_after" formatted="false">30 dk sonra</string>
+    <string name="context_preset_civil_dawn" formatted="false">Sivil şafak</string>
+    <string name="context_preset_nautical_dawn" formatted="false">Denizcilik şafağı</string>
+    <string name="context_preset_astronomical_dawn" formatted="false">Astronomik şafak</string>
+    <string name="context_preset_civil_dusk" formatted="false">Sivil alacakaranlık</string>
+    <string name="context_preset_nautical_dusk" formatted="false">Denizcilik alacakaranlığı</string>
+    <string name="context_preset_astronomical_dusk" formatted="false">Astronomik alacakaranlık</string>
+    <string name="context_preset_all_bluetooth_disconnected" formatted="false">Tüm Bluetooth cihazlarının bağlantısı kesildi</string>
+    <string name="context_preset_bluetooth_key_missing" formatted="false">Bluetooth anahtarı eksik</string>
+    <string name="context_preset_bluetooth_encrypted" formatted="false">Bluetooth bağlantısı şifreli</string>
+    <string name="context_preset_bluetooth_unencrypted" formatted="false">Bluetooth bağlantısı şifresiz</string>
+    <string name="context_preset_screen_recording_visible" formatted="false">Ekran kaydı görünür</string>
+    <string name="context_preset_screen_recording_not_visible" formatted="false">Ekran kaydı görünmez</string>
+    <string name="scene_overlay_default_button" formatted="false">Düğme</string>
+    <string name="scene_overlay_unsupported_element">%1$s kullanılamıyor</string>
+    <string name="scene_overlay_notification_title" formatted="false">Sahne katmanı etkin</string>
+    <string name="scene_overlay_channel_name" formatted="false">Sahne katmanları</string>
 </resources>
