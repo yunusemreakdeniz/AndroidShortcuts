@@ -89,7 +89,9 @@ internal object ShortcutStyles {
     fun styles(context: Context): StateFlow<Map<Long, ShortcutStyle>> {
         if (!loaded) {
             loaded = true
-            val prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+            // Previews and screenshot tests have no real preferences; fall back to automatic looks.
+            val prefs = runCatching { context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE) }.getOrNull()
+                ?: return state
             state.value = prefs.all.mapNotNull { (key, value) ->
                 val id = key.toLongOrNull() ?: return@mapNotNull null
                 val parts = (value as? String)?.split('|') ?: return@mapNotNull null
