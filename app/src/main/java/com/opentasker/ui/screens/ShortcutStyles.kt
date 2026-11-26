@@ -1,6 +1,7 @@
 package com.opentasker.ui.screens
 
 import android.content.Context
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -184,4 +185,11 @@ internal fun ShortcutStyleDialog(task: Task, current: ShortcutStyle, onDismiss: 
         },
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_close)) } },
     )
+}
+
+/** Card colour for our screens: white on the light grey background, a raised grey in dark mode. */
+@androidx.compose.runtime.Composable
+internal fun shortcutCardColor(): androidx.compose.ui.graphics.Color {
+    val scheme = MaterialTheme.colorScheme
+    return if (scheme.background.luminance() > 0.5f) scheme.surfaceContainerLowest else scheme.surfaceContainerHigh
 }

@@ -35,7 +35,7 @@ private val sampleTasks = listOf(
 )
 
 private val sampleProfiles = listOf(
-    Profile(id = 1, name = "Sabah", enabled = true, enterTaskId = 5, contexts = listOf(ContextSpec(type = ContextType.TIME))),
+    Profile(id = 1, name = "Sabah", enabled = true, enterTaskId = 5, contexts = listOf(ContextSpec(type = ContextType.TIME, config = mapOf("start" to "07:00", "end" to "08:00")))),
     Profile(id = 2, name = "Şarja takılınca", enabled = false, enterTaskId = 3, contexts = listOf(ContextSpec(type = ContextType.STATE))),
 )
 

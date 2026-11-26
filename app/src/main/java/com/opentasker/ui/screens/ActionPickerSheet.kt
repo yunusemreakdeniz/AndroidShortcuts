@@ -140,7 +140,7 @@ private fun ActionPickerRow(item: LocalizedActionMetadata, onSelect: () -> Unit)
         onClick = onSelect,
         enabled = capability.canAdd,
         shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest,
+        color = shortcutCardColor(),
         tonalElevation = 1.dp,
         modifier = Modifier.fillMaxWidth(),
     ) {

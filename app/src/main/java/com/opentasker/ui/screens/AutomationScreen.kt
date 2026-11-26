@@ -107,7 +107,7 @@ internal fun AutomationScreen(
                             Surface(
                                 onClick = { onNewAutomation(type) },
                                 shape = RoundedCornerShape(16.dp),
-                                color = MaterialTheme.colorScheme.surfaceContainerLowest,
+                                color = shortcutCardColor(),
                                 tonalElevation = 1.dp,
                                 modifier = Modifier.weight(1f),
                             ) {
@@ -140,7 +140,11 @@ internal fun AutomationScreen(
 
 @Composable
 private fun AutomationCard(profile: Profile, task: Task?, onToggle: (Boolean) -> Unit, onOpen: () -> Unit) {
-    val triggers = profile.contexts.map { stringResource(contextTitleRes(it.type)) }
+    val triggers = profile.contexts.map { spec ->
+        val title = stringResource(contextTitleRes(spec.type))
+        val detail = triggerDetail(spec)
+        if (detail == null) title else stringResource(R.string.automation_trigger_with_detail, title, detail)
+    }
     val whenText = if (triggers.isEmpty()) stringResource(R.string.automation_no_trigger) else triggers.joinToString(" + ")
     val thenText = task?.name ?: stringResource(R.string.automation_no_shortcut)
     val switchLabel = stringResource(
@@ -150,7 +154,7 @@ private fun AutomationCard(profile: Profile, task: Task?, onToggle: (Boolean) ->
     Surface(
         onClick = onOpen,
         shape = RoundedCornerShape(18.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest,
+        color = shortcutCardColor(),
         tonalElevation = 1.dp,
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -250,4 +254,15 @@ internal fun NewAutomationShortcutDialog(
         confirmButton = {},
         dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.action_close)) } },
     )
+}
+
+/** A short detail for a trigger, such as "07:00–08:00" for a time trigger, or null. */
+private fun triggerDetail(spec: com.opentasker.core.model.ContextSpec): String? {
+    if (spec.type != ContextType.TIME) return null
+    val start = (spec.config["start"] ?: spec.config["from"])?.trim()?.takeIf(String::isNotEmpty)
+    val end = (spec.config["end"] ?: spec.config["to"])?.trim()?.takeIf(String::isNotEmpty)
+    return when {
+        start != null && end != null -> "$start–$end"
+        else -> start ?: end
+    }
 }

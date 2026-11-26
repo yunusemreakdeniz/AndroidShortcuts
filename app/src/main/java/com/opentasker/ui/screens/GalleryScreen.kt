@@ -119,7 +119,7 @@ internal fun GalleryScreen(
         items(galleryShortcuts, key = { it.id }) { shortcut ->
             Surface(
                 shape = RoundedCornerShape(18.dp),
-                color = MaterialTheme.colorScheme.surfaceContainerLowest,
+                color = shortcutCardColor(),
                 tonalElevation = 1.dp,
                 modifier = Modifier.fillMaxWidth(),
             ) {

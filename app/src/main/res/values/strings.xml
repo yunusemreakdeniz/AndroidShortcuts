@@ -2091,4 +2091,5 @@
     <string name="shortcut_editor_rename">Rename</string>
     <string name="shortcut_editor_delete_shortcut">Delete shortcut</string>
     <string name="shortcuts_tile_menu">Show shortcut options</string>
+    <string name="automation_trigger_with_detail">%1$s %2$s</string>
 </resources>
