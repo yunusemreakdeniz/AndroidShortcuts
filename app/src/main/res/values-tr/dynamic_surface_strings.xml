@@ -14,4 +14,53 @@
     <string name="context_type_event_description" formatted="false">Açılış, bildirim, NFC, Bluetooth bağlantısı, takvim, güneş, sallama gibi tek seferlik bir olayda tetiklenir.</string>
     <string name="context_type_plugin_title" formatted="false">Eklenti</string>
     <string name="context_type_plugin_description" formatted="false">Bir Locale/Tasker koşul eklentisi sağlandı dediğinde tetiklenir. Eklenti düzenli sorgulanır.</string>
+    <string name="capability_ready" formatted="false">Hazır</string>
+    <string name="capability_unknown_action">Bilinmeyen eylemler sınıflandırılmaz; eklenemez, içe aktarılamaz ve etkinleştirilemez.</string>
+    <string name="capability_notification_permission" formatted="false">Android 13 ve sonrasında bildirim izni gerekir.</string>
+    <string name="capability_notification_cancel_permission" formatted="false">Gönderilmiş bir bildirimi etiket ve/veya kimlikle kaldırır. Android 13 ve sonrasında bildirim izni gerekir.</string>
+    <string name="capability_notification_progress" formatted="false">Android 13 ve sonrasında bildirim izni gerekir; Android 16+ cihazlarda ilerleme stili kullanılır, diğerlerinde standart ilerleme çubuğu gösterilir.</string>
+    <string name="capability_locale_fire_setup" formatted="false">Yüklü bir Locale uyumlu eklenti gerekir; istekler yalnızca belirtilen pakete gönderilir.</string>
+    <string name="capability_locale_query_setup" formatted="false">Yüklü bir Locale uyumlu koşul eklentisi gerekir; sorgular zaman aşımı denetimiyle gönderilir.</string>
+    <string name="capability_wifi_unsupported" formatted="false">Android 10 ve sonrası, normal uygulamaların Wi-Fi\'yi doğrudan açıp kapatmasına izin vermez.</string>
+    <string name="capability_bluetooth_unsupported" formatted="false">Android 13 ve sonrası, normal uygulamaların Bluetooth\'u doğrudan açıp kapatmasına izin vermez.</string>
+    <string name="capability_bluetooth_permission" formatted="false">Bluetooth izni gerekir.</string>
+    <string name="capability_write_settings" formatted="false">Sistem ayarlarını değiştirme izni gerekir.</string>
+    <string name="capability_settings_write_setup" formatted="false">Global veya Secure ayar yazmak için bilgisayardan kabloyla bir kez verilen erişim gerekir (Kurulum ekranında). System tablosu bunun yerine sistem ayarlarını değiştirme iznini kullanır.</string>
+    <string name="capability_app_kill_unsupported" formatted="false">Başka bir uygulamayı zorla durdurmak, normal uygulamalara verilmeyen ayrıcalıklı bir erişim gerektirir.</string>
+    <string name="capability_app_archive_ready" formatted="false">Android 15+ paket arşivleme isteğini kullanır. Android her isteği ekranda onaylamanızı ister; bu eylemi Kısayollar açıkken çalıştırın.</string>
+    <string name="capability_app_archive_unsupported" formatted="false">Paket arşivleme Android 15 (API 35) veya sonrasını gerektirir.</string>
+    <string name="capability_local_network_setup" formatted="false">Android 17 ve sonrası yerel ağ yayını için yerel ağ erişimi ister; Kurulum ekranından verin.</string>
+    <string name="capability_dnd_access" formatted="false">Rahatsız Etmeyin erişimi gerekir.</string>
+    <string name="capability_zen_rule_access" formatted="false">Rahatsız Etmeyin erişimi gerekir; Android 15+ cihazlarda uygulamaya ait odak kuralları kullanılır.</string>
+    <string name="capability_torch_ready" formatted="false">Kamera fenerini kullanır.</string>
+    <string name="capability_aod_unsupported" formatted="false">Her zaman açık ekran ayarı için Shizuku izni gerekir; bazı cihazlar bu ayarı yok sayar. Açık kalan ekran daha çok pil harcar.</string>
+    <string name="capability_sun_times_setup" formatted="false">Enlem veya boylam boş bırakılırsa telefonun konumunu okumak için konum izni gerekir.</string>
+    <string name="capability_wifi_scan_setup" formatted="false">Tarama için konum izni ve Android 13+ cihazlarda Yakındaki Wi-Fi cihazları izni gerekir. Android taramaları sınırlar; sonuç son önbellekteki tarama olabilir.</string>
+    <string name="capability_airplane_unsupported" formatted="false">Uçak modu için Shizuku izni gerekir. Açılınca aramalar, mobil veri ve genellikle Wi-Fi tekrar kapatılana kadar kesilir.</string>
+    <string name="capability_mobile_data_unsupported" formatted="false">Mobil veri için Shizuku izni gerekir. Kapatılınca veri gerektiren her şey, telefona uzaktan erişim dahil, durur.</string>
+    <string name="capability_hotspot_unsupported" formatted="false">Wi-Fi erişim noktası Android 11+ ve Shizuku izni gerektirir. Şifreyi bilen herkes bağlanabilir ve bağlı cihazlar mobil verinizi kullanır.</string>
+    <string name="capability_hotspot_android_version" formatted="false">Wi-Fi erişim noktası eylemi Android 11 veya sonrasını gerektirir.</string>
+    <string name="capability_screenshot_unsupported" formatted="false">Ekran görüntüsü için Shizuku izni gerekir. Her görüntü, şifreler ve mesajlar dahil ekrandaki her şeyi Kısayollar\'ın deposuna kaydeder.</string>
+    <string name="capability_reboot_unsupported" formatted="false">Yeniden başlatma için Shizuku izni gerekir. Telefon uyarısız hemen yeniden başlar, kaydedilmemiş işler kaybolur. Açılış tetikleyicisine bağlı bir yeniden başlatma döngüye girebilir.</string>
+    <string name="capability_lock_setup" formatted="false">Kurulum ekranından açılan Ekran kilidi cihaz yöneticisi gerekir.</string>
+    <string name="capability_tile_ready" formatted="false">Ayarlanmış bir Hızlı Ayarlar kutucuğunu günceller.</string>
+    <string name="capability_temporary_state_ready" formatted="false">Geri alınabilir bir ayar uygular ve geri yüklemeyi zamanlar.</string>
+    <string name="capability_ime_info_ready" formatted="false">Geçerli ve etkin klavyeleri bildirir.</string>
+    <string name="capability_ime_set_unsupported" formatted="false">Android, normal bir uygulamanın etkin klavyeyi değiştirmesi için kullanıcının seçmesini ister.</string>
+    <string name="capability_screen_off_unsupported" formatted="false">Ekranı kapatmak için Shizuku izni gerekir. Telefonu biri kullanıyor olsa bile ekran kararır ve kilitlenebilir.</string>
+    <string name="capability_wake_unsupported" formatted="false">Uyandırmak için Shizuku izni gerekir. Ekran dokunulmadan açılır, kilit ekranındakini gösterir ve pil harcar.</string>
+    <string name="capability_vpn_tunnel_setup" formatted="false">WireGuard veya Tailscale gerekir. WireGuard ayrıca denetim izni ve uzaktan denetim seçeneğinin açık olmasını ister.</string>
+    <string name="capability_shizuku_script_setup" formatted="false">Shizuku erişimi ve onaylanmış bir betik özeti gerekir.</string>
+    <string name="capability_termux_setup" formatted="false">Termux 0.109 veya sonrası, RUN_COMMAND izni ve onaylanmış bir betik özeti gerekir.</string>
+    <string name="capability_tasker_import_unsupported" formatted="false">İçe aktarılan Tasker eylemi desteklenen bir eyleme dönüştürülemedi.</string>
+    <string name="capability_macrodroid_import_unsupported" formatted="false">İçe aktarılan MacroDroid eylemi desteklenen bir eyleme dönüştürülemedi.</string>
+    <string name="capability_sms_permission" formatted="false">SMS izni gerekir; Play sürümlerinde SMS eylemleri bulunmaz.</string>
+    <string name="capability_sms_distribution_unsupported" formatted="false">Bu sürümde SMS kullanılamaz; Play politikası gereği SMS ve telefon durumu izinleri çıkarıldı.</string>
+    <string name="capability_contacts_permission" formatted="false">Gözetimsiz arama için Kişiler izni gerekir; Android 17+ alan bazlı sistem seçicisini de destekler.</string>
+    <string name="capability_audio_output_restricted" formatted="false">Android 17, uygun bir ön plan hizmeti olmadan ses çıkışını kısıtlar.</string>
+    <string name="capability_audio_output_ready" formatted="false">Ses çıkışı kullanılabilir.</string>
+    <string name="capability_media_key_restricted" formatted="false">Android 17, uygun bir ön plan hizmeti olmadan medya tuşu gönderimini kısıtlar.</string>
+    <string name="capability_media_key_ready" formatted="false">Medya tuşu gönderimi kullanılabilir.</string>
+    <string name="capability_volume_restricted" formatted="false">Android 17, uygun bir ön plan hizmeti olmadan ses düzeyi değişikliklerini kısıtlar.</string>
+    <string name="capability_volume_policy" formatted="false">Rahatsız Etmeyin politika erişimi gerekebilir.</string>
 </resources>

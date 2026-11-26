@@ -180,12 +180,19 @@ private fun ActionPickerRow(item: LocalizedActionMetadata, onSelect: () -> Unit)
             Column(modifier = Modifier.weight(1f)) {
                 Text(item.name, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 Text(
-                    text = if (capability.level == CapabilityLevel.Supported) item.description else stringResource(capability.reasonRes),
+                    text = if (capability.canAdd) item.description else stringResource(capability.reasonRes),
                     style = MaterialTheme.typography.bodySmall,
-                    color = if (capability.level == CapabilityLevel.Supported) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error,
+                    color = if (capability.canAdd) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
+                if (capability.canAdd && capability.level != CapabilityLevel.Supported) {
+                    Text(
+                        text = stringResource(R.string.action_picker_needs_setup),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.tertiary,
+                    )
+                }
             }
             if (capability.canAdd) {
                 Icon(Icons.Filled.Add, contentDescription = null, tint = MaterialTheme.colorScheme.primary)

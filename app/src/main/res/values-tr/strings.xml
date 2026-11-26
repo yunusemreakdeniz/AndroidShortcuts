@@ -672,4 +672,5 @@
     <string name="collision_mode_wait_body">İstekleri sıraya alır, geliş sırasına göre birer birer çalıştırır.</string>
     <string name="shortcuts_tile_menu">Kısayol seçeneklerini göster</string>
     <string name="automation_trigger_with_detail">%1$s %2$s</string>
+    <string name="action_picker_needs_setup">İzin veya kurulum gerekir</string>
 </resources>

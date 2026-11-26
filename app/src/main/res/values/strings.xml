@@ -2092,4 +2092,5 @@
     <string name="shortcut_editor_delete_shortcut">Delete shortcut</string>
     <string name="shortcuts_tile_menu">Show shortcut options</string>
     <string name="automation_trigger_with_detail">%1$s %2$s</string>
+    <string name="action_picker_needs_setup">Needs a permission or setup</string>
 </resources>
