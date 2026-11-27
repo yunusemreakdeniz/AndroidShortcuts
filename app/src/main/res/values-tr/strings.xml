@@ -880,4 +880,6 @@
     <string name="gallery_tip_description" formatted="false">Hesap için yüzde 10 bahşişi hesaplar</string>
     <string name="gallery_tip_question" formatted="false">Hesap tutarı</string>
     <string name="gallery_tip_result" formatted="false">Bahşiş: {{ TipText }} ₺</string>
+    <string name="gallery_collection_everyday_title">Günlük yardımcılar</string>
+    <string name="gallery_collection_everyday_description">Ne yesek, bahşiş hesabı ve takvime hızlıca toplantı.</string>
 </resources>

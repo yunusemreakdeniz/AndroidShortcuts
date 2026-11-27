@@ -5,6 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -190,11 +193,23 @@ internal fun GalleryScreen(
                 }
             }
         }
+        item(key = "collection-everyday") {
+            GalleryCollectionCard(
+                titleRes = R.string.gallery_collection_everyday_title,
+                descriptionRes = R.string.gallery_collection_everyday_description,
+                shortcuts = galleryShortcuts.filter { it.id in everydayCollectionIds },
+                onAddAll = onAdd,
+                color = Color(0xFF0F3B36),
+            )
+        }
     }
 }
 
 /** "On the road": directions home, battery level and a quick timer for parking. */
 private val roadCollectionIds = listOf(6L, 4L, 2L)
+
+/** "Everyday helpers": what to eat, tip calculator and a meeting in the calendar. */
+private val everydayCollectionIds = listOf(10L, 13L, 12L)
 
 /** The design's featured collection: a dark card with its shortcuts as mini tiles and Add all. */
 @Composable
@@ -203,10 +218,11 @@ private fun GalleryCollectionCard(
     @StringRes descriptionRes: Int,
     shortcuts: List<GalleryShortcut>,
     onAddAll: (List<GalleryShortcut>) -> Unit,
+    color: Color = Color(0xFF1E1B4B),
 ) {
     Surface(
         shape = RoundedCornerShape(24.dp),
-        color = Color(0xFF1E1B4B),
+        color = color,
         contentColor = Color.White,
         modifier = Modifier.fillMaxWidth(),
     ) {
@@ -219,11 +235,12 @@ private fun GalleryCollectionCard(
             )
             Text(stringResource(titleRes), style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
             Text(stringResource(descriptionRes), style = MaterialTheme.typography.bodyMedium, color = Color(0xFFDCDAF7))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.height(IntrinsicSize.Max)) {
                 shortcuts.forEach { shortcut ->
-                            Column(
+                    Column(
                         modifier = Modifier
                             .weight(1f)
+                            .fillMaxHeight()
                             .background(shortcutColor(shortcut.id), RoundedCornerShape(14.dp))
                             .padding(10.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp),

@@ -2123,4 +2123,6 @@
     <string name="gallery_tip_description" formatted="false">Works out a 10 percent tip for the bill</string>
     <string name="gallery_tip_question" formatted="false">Bill amount</string>
     <string name="gallery_tip_result" formatted="false">Tip: {{ TipText }}</string>
+    <string name="gallery_collection_everyday_title">Everyday helpers</string>
+    <string name="gallery_collection_everyday_description">What to eat, a tip calculator and a meeting straight into the calendar.</string>
 </resources>
