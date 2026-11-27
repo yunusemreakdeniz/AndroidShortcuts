@@ -86,6 +86,41 @@ internal val galleryShortcuts = listOf(
             step("result.show", "title" to t(R.string.gallery_coin_name), "text" to t(R.string.gallery_coin_result)),
         )
     },
+    GalleryShortcut(9, R.string.gallery_photo_name, R.string.gallery_photo_description, "photo") { _ ->
+        listOf(
+            step("photo.pick", "var" to "Photo"),
+            step("image.resize", "path" to "{{ Photo }}", "width" to "1280", "format" to "jpg", "var" to "Image"),
+            step("file.share", "path" to "{{ Image }}"),
+        )
+    },
+    GalleryShortcut(10, R.string.gallery_meal_name, R.string.gallery_meal_description, "heart") { t ->
+        listOf(
+            step("list.random", "items" to t(R.string.gallery_meal_items), "var" to "Meal"),
+            step("result.show", "title" to t(R.string.gallery_meal_name), "text" to "{{ Meal }}"),
+        )
+    },
+    GalleryShortcut(11, R.string.gallery_device_name, R.string.gallery_device_description, "phone") { t ->
+        listOf(
+            step("device.info", "var" to "Device"),
+            step("network.info", "var" to "Network"),
+            step("result.show", "title" to t(R.string.gallery_device_name), "text" to t(R.string.gallery_device_result)),
+        )
+    },
+    GalleryShortcut(12, R.string.gallery_meeting_name, R.string.gallery_meeting_description, "work") { t ->
+        listOf(
+            step("input.ask", "title" to t(R.string.gallery_meeting_question), "var" to "Title"),
+            step("date.ask", "title" to t(R.string.gallery_meeting_when), "mode" to "datetime", "var" to "When"),
+            step("calendar.add", "title" to "{{ Title }}", "start" to "{{ When }}", "minutes" to "60"),
+        )
+    },
+    GalleryShortcut(13, R.string.gallery_tip_name, R.string.gallery_tip_description, "calc") { t ->
+        listOf(
+            step("input.ask", "title" to t(R.string.gallery_tip_question), "type" to "number", "var" to "Bill"),
+            step("math.calculate", "expression" to "{{ Bill }} * 0.1", "var" to "Tip"),
+            step("number.format", "number" to "{{ Tip }}", "decimals" to "2", "var" to "TipText"),
+            step("result.show", "title" to t(R.string.gallery_tip_name), "text" to t(R.string.gallery_tip_result)),
+        )
+    },
 )
 
 /** Shortcuts-style Gallery: ready-made shortcuts, each added with one tap. */

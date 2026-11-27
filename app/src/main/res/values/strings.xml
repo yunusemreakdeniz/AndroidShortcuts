@@ -2107,4 +2107,20 @@
     <string name="shortcuts_sort_name">Name</string>
     <string name="shortcuts_sort_newest">Newest first</string>
     <string name="shortcuts_sort_actions">Most actions</string>
+    <string name="gallery_photo_name" formatted="false">Shrink and share photo</string>
+    <string name="gallery_photo_description" formatted="false">Pick a photo, make it 1280 pixels wide and share it</string>
+    <string name="gallery_meal_name" formatted="false">What should we eat?</string>
+    <string name="gallery_meal_description" formatted="false">Picks a meal at random</string>
+    <string name="gallery_meal_items" formatted="false">Pizza\nBurger\nPasta\nSalad\nSoup\nKebab</string>
+    <string name="gallery_device_name" formatted="false">My device</string>
+    <string name="gallery_device_description" formatted="false">Shows the model, Android version and IP address</string>
+    <string name="gallery_device_result" formatted="false">{{ Device_maker }} {{ Device_model }}\nAndroid {{ Device_android }}\n{{ Network }}: {{ Network_ip }}</string>
+    <string name="gallery_meeting_name" formatted="false">Add a meeting</string>
+    <string name="gallery_meeting_description" formatted="false">Asks for a name and time, then opens the calendar</string>
+    <string name="gallery_meeting_question" formatted="false">Meeting name</string>
+    <string name="gallery_meeting_when" formatted="false">When?</string>
+    <string name="gallery_tip_name" formatted="false">Tip calculator</string>
+    <string name="gallery_tip_description" formatted="false">Works out a 10 percent tip for the bill</string>
+    <string name="gallery_tip_question" formatted="false">Bill amount</string>
+    <string name="gallery_tip_result" formatted="false">Tip: {{ TipText }}</string>
 </resources>

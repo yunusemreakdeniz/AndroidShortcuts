@@ -864,4 +864,20 @@
     <string name="shortcuts_sort_name">Ad</string>
     <string name="shortcuts_sort_newest">Önce en yeni</string>
     <string name="shortcuts_sort_actions">En çok eylem</string>
+    <string name="gallery_photo_name" formatted="false">Fotoğrafı küçült ve paylaş</string>
+    <string name="gallery_photo_description" formatted="false">Bir fotoğraf seçer, 1280 piksel genişliğe küçültür ve paylaşır</string>
+    <string name="gallery_meal_name" formatted="false">Ne yesek?</string>
+    <string name="gallery_meal_description" formatted="false">Rastgele bir yemek seçer</string>
+    <string name="gallery_meal_items" formatted="false">Pizza\nDöner\nMantı\nKöfte\nLahmacun\nMercimek çorbası</string>
+    <string name="gallery_device_name" formatted="false">Cihazım</string>
+    <string name="gallery_device_description" formatted="false">Modeli, Android sürümünü ve IP adresini gösterir</string>
+    <string name="gallery_device_result" formatted="false">{{ Device_maker }} {{ Device_model }}\nAndroid {{ Device_android }}\n{{ Network }}: {{ Network_ip }}</string>
+    <string name="gallery_meeting_name" formatted="false">Toplantı ekle</string>
+    <string name="gallery_meeting_description" formatted="false">Ad ve saat sorar, sonra takvimi açar</string>
+    <string name="gallery_meeting_question" formatted="false">Toplantının adı</string>
+    <string name="gallery_meeting_when" formatted="false">Ne zaman?</string>
+    <string name="gallery_tip_name" formatted="false">Bahşiş hesapla</string>
+    <string name="gallery_tip_description" formatted="false">Hesap için yüzde 10 bahşişi hesaplar</string>
+    <string name="gallery_tip_question" formatted="false">Hesap tutarı</string>
+    <string name="gallery_tip_result" formatted="false">Bahşiş: {{ TipText }} ₺</string>
 </resources>
