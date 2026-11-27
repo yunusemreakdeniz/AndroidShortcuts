@@ -202,12 +202,16 @@ internal fun ShortcutEditorScreen(
                     )
                 }
             }
+            val depths = blockDepths(task.actions)
             itemsIndexed(task.actions, key = { index, action -> "${action.id}-$index" }) { index, action ->
                 val metadata = ActionMetadataRegistry.get(action.type)
+                val indent = (depths.getOrElse(index) { 0 }.coerceAtMost(4) * 18).dp
                 val inline = metadata != null && metadata.fields.isNotEmpty() && editableInline(metadata)
                 val dragging = dragFrom == index
                 ActionBlock(
+                    marker = isBlockMarker(action.type),
                     modifier = Modifier
+                        .padding(start = indent)
                         .zIndex(if (dragging) 1f else 0f)
                         .graphicsLayer {
                             translationY = if (dragging) dragOffset else 0f
@@ -292,6 +296,7 @@ internal fun ShortcutEditorScreen(
 @Composable
 private fun ActionBlock(
     modifier: Modifier = Modifier,
+    marker: Boolean = false,
     action: ActionSpec,
     isFirst: Boolean,
     isLast: Boolean,
@@ -308,6 +313,40 @@ private fun ActionBlock(
     val parts = remember(action) { blockParts(action) }
     val output = remember(action) { blockOutputName(action) }
     var menuOpen by remember { mutableStateOf(false) }
+    if (marker) {
+        Surface(
+            shape = RoundedCornerShape(10.dp),
+            color = actionColor(action.type).copy(alpha = 0.14f),
+            modifier = modifier.fillMaxWidth(),
+        ) {
+            Row(
+                modifier = Modifier.padding(start = 14.dp, end = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.weight(1f),
+                )
+                Box {
+                    IconButton(onClick = { menuOpen = true }) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.shortcut_editor_action_menu, name))
+                    }
+                    DropdownMenu(expanded = menuOpen, onDismissRequest = { menuOpen = false }) {
+                        if (!isFirst) {
+                            DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_move_up)) }, onClick = { menuOpen = false; onMoveUp() })
+                        }
+                        if (!isLast) {
+                            DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_move_down)) }, onClick = { menuOpen = false; onMoveDown() })
+                        }
+                        DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_delete)) }, onClick = { menuOpen = false; onDelete() })
+                    }
+                }
+            }
+        }
+        return
+    }
     Surface(
         onClick = onEdit,
         shape = RoundedCornerShape(18.dp),

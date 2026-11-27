@@ -206,3 +206,21 @@ fun KisayollarWizardTime() = Frame(false) {
 fun KisayollarWizardStateDark() = Frame(true) {
     AutomationWizardDialog(type = ContextType.STATE, tasks = sampleTasks, onDismiss = {}, onCreate = { _, _ -> })
 }
+
+private val menuTask = Task(id = 9, name = "Kahve mi çay mı", actions = appendWithBlockCloser(
+    emptyList(),
+    ActionSpec(type = "menu.choose", args = mapOf("title" to "Ne içelim?", "items" to "Kahve\nÇay")),
+).toMutableList().apply {
+    add(2, ActionSpec(type = "result.show", args = mapOf("text" to "Kahve hazırlanıyor")))
+    add(5, ActionSpec(type = "result.show", args = mapOf("text" to "Çay demleniyor")))
+})
+
+@PreviewTest
+@Preview(name = "Kisayollar Editor Blocks", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarEditorBlocks() = Frame(false) {
+    ShortcutEditorScreen(
+        task = menuTask, contentPadding = PaddingValues(), onBack = {}, onRun = {}, onOpenDetails = {},
+        onRename = {}, onDelete = {}, onAddAction = {}, onEditAction = { _, _ -> }, onMoveAction = { _, _ -> }, onDeleteAction = {},
+    )
+}

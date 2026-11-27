@@ -36,3 +36,27 @@ internal fun menuBranches(menu: ActionSpec): List<ActionSpec> {
         listOf(ActionSpec(type = "flow.if", args = mapOf("condition" to condition)), ActionSpec(type = "flow.endif"))
     }
 }
+
+private val OPENERS = setOf("flow.if", "flow.foreach", "flow.try")
+private val MIDDLES = setOf("flow.else", "flow.catch")
+private val CLOSERS = setOf("flow.endif", "flow.endfor", "flow.endtry")
+
+/** True for the steps that only close or split a block (shown as a slim line, like Shortcuts). */
+internal fun isBlockMarker(type: String): Boolean = type in CLOSERS || type in MIDDLES
+
+/**
+ * How deep each step sits inside If / Repeat / Try blocks, so the editor can indent it like
+ * Shortcuts. "Otherwise" and the end markers line up with their opener. Unbalanced lists never
+ * go below zero.
+ */
+internal fun blockDepths(actions: List<com.opentasker.core.model.ActionSpec>): List<Int> {
+    var depth = 0
+    return actions.map { action ->
+        when (action.type) {
+            in OPENERS -> depth.also { depth++ }
+            in MIDDLES -> (depth - 1).coerceAtLeast(0)
+            in CLOSERS -> { depth = (depth - 1).coerceAtLeast(0); depth }
+            else -> depth
+        }
+    }
+}

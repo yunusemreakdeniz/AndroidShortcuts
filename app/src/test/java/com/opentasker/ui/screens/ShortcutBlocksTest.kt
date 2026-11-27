@@ -42,4 +42,15 @@ class ShortcutBlocksTest {
         val menu = ActionSpec(type = "menu.choose", args = mapOf("items" to "Evet", "var" to "Answer"))
         assertEquals("{{ Answer }} == Evet", appendWithBlockCloser(emptyList(), menu)[1].args["condition"])
     }
+
+    @Test
+    fun stepsInsideBlocksAreIndented() {
+        val types = listOf("input.ask", "flow.if", "log", "flow.foreach", "log", "flow.endfor", "flow.else", "log", "flow.endif", "log")
+        assertEquals(listOf(0, 0, 1, 1, 2, 1, 0, 1, 0, 0), blockDepths(types.map { ActionSpec(type = it) }))
+    }
+
+    @Test
+    fun anUnbalancedEndNeverGoesNegative() {
+        assertEquals(listOf(0, 0), blockDepths(listOf(ActionSpec(type = "flow.endif"), ActionSpec(type = "log"))))
+    }
 }
