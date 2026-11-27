@@ -83,6 +83,7 @@ object ActionCatalog {
         define("email.compose", ActionCategory.APP, ActionRetrySafety.NEVER, ::ComposeEmailAction),
         define("phone.dial", ActionCategory.APP, ActionRetrySafety.NEVER, ::DialNumberAction),
         define("share.text", ActionCategory.APP, ActionRetrySafety.NEVER, ::ShareTextAction),
+        define("message.send", ActionCategory.APP, ActionRetrySafety.NEVER, ::SendMessageAction),
         define("file.share", ActionCategory.FILE, ActionRetrySafety.NEVER, ::ShareFileAction),
         define("maps.directions", ActionCategory.APP, ActionRetrySafety.NEVER, ::DirectionsAction),
         define("battery.get", ActionCategory.SYSTEM, ActionRetrySafety.IDEMPOTENT, ::GetBatteryAction),

@@ -121,6 +121,7 @@ object ActionCapabilityRegistry {
         "email.compose",
         "phone.dial",
         "share.text",
+        "message.send",
         "file.share",
         "maps.directions",
         // Scoped file access inside the app's own sandbox.

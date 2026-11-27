@@ -1007,4 +1007,14 @@
     <string name="catalog_action_photo_take_description" formatted="false">Open the camera; the photo is saved in the shortcut files</string>
     <string name="catalog_action_photo_take_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_photo_take_field_var_hint" formatted="false">Variable name (default Photo; holds a path like Photos/photo.jpg)</string>
+    <string name="catalog_action_message_send_name" formatted="false">Send Message</string>
+    <string name="catalog_action_message_send_description" formatted="false">Open WhatsApp, Telegram or SMS with the message ready to send</string>
+    <string name="catalog_action_message_send_field_app_label" formatted="false">App</string>
+    <string name="catalog_action_message_send_app_whatsapp" formatted="false">WhatsApp</string>
+    <string name="catalog_action_message_send_app_telegram" formatted="false">Telegram</string>
+    <string name="catalog_action_message_send_app_sms" formatted="false">SMS</string>
+    <string name="catalog_action_message_send_field_to_label" formatted="false">To</string>
+    <string name="catalog_action_message_send_field_to_hint" formatted="false">Phone number with country code, e.g. +90 555 000 00 00; empty lets you pick</string>
+    <string name="catalog_action_message_send_field_text_label" formatted="false">Message</string>
+    <string name="catalog_action_message_send_field_text_hint" formatted="false">For example On my way, {{ Battery }}% battery</string>
 </resources>

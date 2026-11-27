@@ -81,7 +81,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## I. Uygulamalar
 - [x] Uygulama aç, Intent gönder, SMS
 - [x] E-posta oluştur, telefonla ara
-- [ ] WhatsApp / Telegram mesajı
+- [x] WhatsApp / Telegram / SMS mesajı (message.send; mesaj hazır açılır, Gönder kullanıcıda)
 - [~] Takvim etkinliği ekle (takvim uygulamasında onayla); hatırlatıcı/not sırada
 - [x] Alarm ve zamanlayıcı kur
 - [x] Metni paylaş (paylaşım sayfası)

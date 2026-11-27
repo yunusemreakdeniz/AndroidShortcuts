@@ -89,6 +89,7 @@ private val exactIcons: Map<String, ImageVector> = mapOf(
     "home.go" to Icons.Outlined.Home,
     "url.open" to Icons.Outlined.Link,
     "url.parts" to Icons.Outlined.Link,
+    "message.send" to Icons.Outlined.Sms,
     "torch.set" to Icons.Outlined.FlashlightOn,
     "brightness.set" to Icons.Outlined.Brightness6,
     "vpn.tunnel" to Icons.Outlined.VpnKey,

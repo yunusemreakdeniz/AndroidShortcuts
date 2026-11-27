@@ -240,6 +240,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "email.compose",
     "phone.dial",
     "share.text",
+    "message.send",
     "file.share",
     "maps.directions",
     -> R.string.action_parameter_summary
@@ -2316,6 +2317,19 @@ private fun registerAppHelperActionMetadata() {
             fields = listOf(
                 ActionField("path", R.string.catalog_action_file_share_field_path_label, required = true, hintRes = R.string.catalog_action_file_share_field_path_hint),
                 ActionField("title", R.string.catalog_action_file_share_field_title_label, hintRes = R.string.catalog_action_file_share_field_title_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "message.send",
+            nameRes = R.string.catalog_action_message_send_name,
+            descriptionRes = R.string.catalog_action_message_send_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("app", R.string.catalog_action_message_send_field_app_label, FieldType.DROPDOWN, options = listOf(option("whatsapp", R.string.catalog_action_message_send_app_whatsapp), option("telegram", R.string.catalog_action_message_send_app_telegram), option("sms", R.string.catalog_action_message_send_app_sms))),
+                ActionField("to", R.string.catalog_action_message_send_field_to_label, hintRes = R.string.catalog_action_message_send_field_to_hint),
+                ActionField("text", R.string.catalog_action_message_send_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_message_send_field_text_hint),
             ),
         )
     )

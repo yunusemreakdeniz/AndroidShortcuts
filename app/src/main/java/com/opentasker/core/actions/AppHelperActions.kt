@@ -165,3 +165,44 @@ internal object CalendarTimes {
         return null
     }
 }
+
+/** Send Message: opens WhatsApp, Telegram or the SMS app with the message ready; the person taps Send. */
+class SendMessageAction : DeclaredAction(ActionCatalog.require("message.send")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val text = args["text"]?.takeIf(String::isNotEmpty)?.take(MAX_HELPER_TEXT) ?: return ActionResult.Failure("missing message")
+        val app = args["app"]?.trim()?.lowercase().orEmpty().ifEmpty { "whatsapp" }
+        val intent = MessageLinks.intent(app, args["to"].orEmpty(), text)
+            ?: return ActionResult.Failure("app must be whatsapp, telegram or sms")
+        return launch(ctx, intent, app)
+    }
+}
+
+internal object MessageLinks {
+    /** Digits only, keeping a leading country code; "+90 555 000 00 00" becomes "905550000000". */
+    fun digits(phone: String): String = phone.filter(Char::isDigit)
+
+    fun uri(app: String, to: String, text: String): Uri? {
+        val number = digits(to)
+        return when (app) {
+            "whatsapp" -> Uri.parse("https://wa.me/").buildUpon()
+                .apply { if (number.isNotEmpty()) appendPath(number) }
+                .appendQueryParameter("text", text)
+                .build()
+            "telegram" -> Uri.parse("tg://msg").buildUpon()
+                .appendQueryParameter("text", text)
+                .apply { if (number.isNotEmpty()) appendQueryParameter("to", "+$number") }
+                .build()
+            "sms" -> Uri.parse("smsto:$number")
+            else -> null
+        }
+    }
+
+    fun intent(app: String, to: String, text: String): Intent? {
+        val uri = uri(app, to, text) ?: return null
+        return if (app == "sms") {
+            Intent(Intent.ACTION_SENDTO, uri).putExtra("sms_body", text)
+        } else {
+            Intent(Intent.ACTION_VIEW, uri)
+        }
+    }
+}
