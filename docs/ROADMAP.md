@@ -95,7 +95,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## K. Paylaşım ve sesli komut
 - [~] Kısayolu dosya olarak dışa/içe aktar (paketler var)
 - [ ] Kısayol bağlantısı / QR ile paylaş
-- [ ] "Hey Google, ... çalıştır" (App Actions / statik kısayollar)
+- [~] Uygulama simgesine uzun basınca en yeni 4 kısayol (dinamik kısayollar; asistan bunları görebilir). Tam App Actions sırada
 - [~] MacroDroid ve Tasker içe aktarma (var)
 
 ## L. Yenilik turları (liste bitince)

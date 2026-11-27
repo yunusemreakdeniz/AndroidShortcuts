@@ -64,7 +64,7 @@ object TaskShortcutHelper {
         }
         val shortcut = ShortcutInfoCompat.Builder(context, shortcutId)
             .setShortLabel(label)
-            .setLongLabel("Run: $label")
+            .setLongLabel(label)
             .setIcon(IconCompat.createWithResource(context, R.mipmap.ic_launcher))
             .setIntent(runIntent)
             .build()

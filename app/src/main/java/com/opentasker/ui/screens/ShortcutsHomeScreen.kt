@@ -83,6 +83,8 @@ internal fun ShortcutsHomeScreen(
     val context = androidx.compose.ui.platform.LocalContext.current
     // Keep placed home-screen grids in step with the list and its colours.
     androidx.compose.runtime.LaunchedEffect(tasks, styles) { com.opentasker.widget.ShortcutGridWidgetProvider.refresh(context) }
+    // The app icon's long-press menu offers the newest shortcuts.
+    androidx.compose.runtime.LaunchedEffect(tasks) { com.opentasker.widget.LauncherShortcuts.sync(context, tasks) }
     var styling by remember { mutableStateOf<Task?>(null) }
     var deleting by remember { mutableStateOf<Task?>(null) }
     var query by androidx.compose.runtime.saveable.rememberSaveable { mutableStateOf("") }
