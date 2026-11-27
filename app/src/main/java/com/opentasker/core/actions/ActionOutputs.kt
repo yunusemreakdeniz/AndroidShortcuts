@@ -376,6 +376,9 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "list.random" -> listOf(
         output("item", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Item"),
     )
+    "dict.set" -> listOf(
+        output("dictionary", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Dictionary"),
+    )
     "url.parts" -> listOf(
         output("host", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url"),
         output("scheme", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_scheme"),

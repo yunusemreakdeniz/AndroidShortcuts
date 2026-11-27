@@ -48,6 +48,7 @@ object AutomationSensitivityRegistry {
         "list.random",
         "number.format",
         "url.parts",
+        "dict.set",
         "input.ask",
         "menu.choose",
         "alert.show",

@@ -42,7 +42,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [~] Sihirli değişkenler (çıktı değişkenleri var; otomatik adlandırma ve etiket arayüzü)
 - [~] Metin: birleştir, böl, değiştir, eşleştir (var)
 - [~] Liste/dizi, JSON/sözlük okuma (var)
-- [ ] Sözlük oluştur / değer ata
+- [x] Sözlük oluştur / değer ata (dict.set; okuma Veri oku ile)
 - [x] Hesapla (matematik ifadesi)
 - [x] Sayı biçimlendir
 - [~] Tarih biçimlendir / ekle (var)

@@ -983,4 +983,12 @@
     <string name="catalog_action_url_parts_field_param_hint" formatted="false">İsteğe bağlı ad, örn. ?q=kedi için q; sonuç Url_param içinde</string>
     <string name="catalog_action_url_parts_field_var_label" formatted="false">Şuraya kaydet</string>
     <string name="catalog_action_url_parts_field_var_hint" formatted="false">Değişken adı (varsayılan Url = sunucu; ayrıca Url_path, Url_query ve diğerleri)</string>
+    <string name="catalog_action_dict_set_name" formatted="false">Sözlük değeri ata</string>
+    <string name="catalog_action_dict_set_description" formatted="false">Bir değişkende tutulan sözlüğün (JSON) bir anahtarını ayarlar; Veri oku ile geri okunur</string>
+    <string name="catalog_action_dict_set_field_var_label" formatted="false">Sözlük</string>
+    <string name="catalog_action_dict_set_field_var_hint" formatted="false">Değişken adı (varsayılan Dictionary); boşsa yenisi başlar</string>
+    <string name="catalog_action_dict_set_field_key_label" formatted="false">Anahtar</string>
+    <string name="catalog_action_dict_set_field_key_hint" formatted="false">Örneğin ad</string>
+    <string name="catalog_action_dict_set_field_value_label" formatted="false">Değer</string>
+    <string name="catalog_action_dict_set_field_value_hint" formatted="false">Metin, sayı, true/false veya JSON; boş bırakılırsa anahtar silinir</string>
 </resources>

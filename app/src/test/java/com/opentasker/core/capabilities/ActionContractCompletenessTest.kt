@@ -90,11 +90,11 @@ class ActionContractCompletenessTest {
             .map { it.id }
             .toSet()
 
-        assertEquals("all built-in actions must remain registered", 125, registered.size)
+        assertEquals("all built-in actions must remain registered", 126, registered.size)
         assertEquals(
             setOf(
                 "app.archive", "app.unarchive", "array.clear", "battery.get", "brightness.set", "clipboard.get", "clipboard.set",
-                "contacts.lookup", "data.read", "device.info", "datetime.add", "datetime.format", "datetime.parse",
+                "contacts.lookup", "data.read", "device.info", "datetime.add", "datetime.format", "datetime.parse", "dict.set",
                 "dnd.set", "download", "file.delete", "file.list", "file.read", "file.write",
                 "http.get", "image.resize", "ime.info", "list.random", "lock", "math.calculate", "media.mute", "network.info", "notify.cancel", "number.format", "ping", "plugin.locale.query",
                 "random.number", "screen.off", "screen.timeout", "settings.write", "sound.pause", "sound.resume", "sound.stop", "sun.times", "text.join", "text.match", "url.parts",
@@ -110,7 +110,7 @@ class ActionContractCompletenessTest {
 
     @Test
     fun runtimeMetadataAndCapabilitiesResolveFromTheCanonicalDeclaration() {
-        assertEquals(125, ActionCatalog.all.size)
+        assertEquals(126, ActionCatalog.all.size)
         ActionCatalog.all.forEach { definition ->
             val action = definition.factory()
             assertSame(definition, action.definition)

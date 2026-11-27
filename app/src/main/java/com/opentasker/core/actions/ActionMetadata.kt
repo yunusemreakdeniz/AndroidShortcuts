@@ -232,6 +232,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "list.random",
     "number.format",
     "url.parts",
+    "dict.set",
     "alarm.set",
     "timer.set",
     "email.compose",
@@ -2169,6 +2170,19 @@ private fun registerUtilityActionMetadata() {
             fields = listOf(
                 ActionField("items", R.string.catalog_action_list_random_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_list_random_field_items_hint),
                 ActionField("var", R.string.catalog_action_list_random_field_var_label, hintRes = R.string.catalog_action_list_random_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "dict.set",
+            nameRes = R.string.catalog_action_dict_set_name,
+            descriptionRes = R.string.catalog_action_dict_set_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_dict_set_field_var_label, hintRes = R.string.catalog_action_dict_set_field_var_hint),
+                ActionField("key", R.string.catalog_action_dict_set_field_key_label, required = true, hintRes = R.string.catalog_action_dict_set_field_key_hint),
+                ActionField("value", R.string.catalog_action_dict_set_field_value_label, hintRes = R.string.catalog_action_dict_set_field_value_hint),
             ),
         )
     )

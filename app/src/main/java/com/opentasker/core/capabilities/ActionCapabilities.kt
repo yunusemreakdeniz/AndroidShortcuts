@@ -72,6 +72,7 @@ object ActionCapabilityRegistry {
         "list.random",
         "number.format",
         "url.parts",
+        "dict.set",
         "data.read",
         "datetime.format",
         "datetime.parse",

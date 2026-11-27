@@ -985,4 +985,12 @@
     <string name="catalog_action_url_parts_field_param_hint" formatted="false">Optional name, e.g. q in ?q=cats; result in Url_param</string>
     <string name="catalog_action_url_parts_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_url_parts_field_var_hint" formatted="false">Variable name (default Url = host; also Url_path, Url_query and more)</string>
+    <string name="catalog_action_dict_set_name" formatted="false">Set Dictionary Value</string>
+    <string name="catalog_action_dict_set_description" formatted="false">Set one key of a dictionary (JSON) kept in a variable; read it back with Read Data</string>
+    <string name="catalog_action_dict_set_field_var_label" formatted="false">Dictionary</string>
+    <string name="catalog_action_dict_set_field_var_hint" formatted="false">Variable name (default Dictionary); empty starts a new one</string>
+    <string name="catalog_action_dict_set_field_key_label" formatted="false">Key</string>
+    <string name="catalog_action_dict_set_field_key_hint" formatted="false">For example name</string>
+    <string name="catalog_action_dict_set_field_value_label" formatted="false">Value</string>
+    <string name="catalog_action_dict_set_field_value_hint" formatted="false">Text, number, true/false or JSON; empty removes the key</string>
 </resources>

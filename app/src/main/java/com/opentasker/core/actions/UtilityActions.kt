@@ -298,3 +298,46 @@ internal object UrlParts {
         )
     }
 }
+
+/** Set Dictionary Value: a JSON object kept in a variable gets one key set (or removed). */
+class SetDictionaryValueAction : DeclaredAction(ActionCatalog.require("dict.set")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val name = utilityOutput(args, "Dictionary") ?: return ActionResult.Failure("invalid dictionary variable")
+        val key = args["key"]?.trim()?.takeIf(String::isNotEmpty) ?: return ActionResult.Failure("missing key")
+        val updated = Dictionaries.set(ctx.variables.get(name), key, args["value"])
+            ?: return ActionResult.Failure("%$name holds text that is not a dictionary")
+        ctx.variables.set(name, updated, sensitive = ctx.variables.isSensitive(name))
+        return ActionResult.Success
+    }
+}
+
+internal object Dictionaries {
+    private const val MAX_CHARS = 64 * 1024
+
+    /**
+     * The dictionary text with [key] set to [value]; a null or empty value removes the key. An
+     * unset or empty current value starts a new dictionary. Numbers, true/false and nested JSON
+     * keep their type; anything else is stored as text. Null when [current] isn't a JSON object.
+     */
+    fun set(current: String?, key: String, value: String?): String? {
+        val base = if (current.isNullOrBlank()) kotlinx.serialization.json.JsonObject(emptyMap()) else
+            runCatching { kotlinx.serialization.json.Json.parseToJsonElement(current) }.getOrNull()
+                as? kotlinx.serialization.json.JsonObject ?: return null
+        val entries = base.toMutableMap()
+        if (value.isNullOrEmpty()) entries.remove(key) else entries[key] = element(value)
+        return kotlinx.serialization.json.JsonObject(entries).toString().takeIf { it.length <= MAX_CHARS }
+    }
+
+    private fun element(value: String): kotlinx.serialization.json.JsonElement {
+        val trimmed = value.trim()
+        if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+            runCatching { return kotlinx.serialization.json.Json.parseToJsonElement(trimmed) }
+        }
+        return when {
+            trimmed == "true" || trimmed == "false" -> kotlinx.serialization.json.JsonPrimitive(trimmed == "true")
+            trimmed.toLongOrNull() != null -> kotlinx.serialization.json.JsonPrimitive(trimmed.toLong())
+            trimmed.toDoubleOrNull() != null && trimmed.none { it.isLetter() } -> kotlinx.serialization.json.JsonPrimitive(trimmed.toDouble())
+            else -> kotlinx.serialization.json.JsonPrimitive(value)
+        }
+    }
+}
