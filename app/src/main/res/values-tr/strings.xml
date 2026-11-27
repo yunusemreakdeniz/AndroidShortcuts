@@ -897,4 +897,13 @@
     <string name="wizard_next">İleri</string>
     <string name="shortcuts_run_done">Tamamlandı</string>
     <string name="shortcuts_run_failed">Tamamlanamadı</string>
+    <string name="welcome_title">Kısayollar\'a hoş geldin</string>
+    <string name="welcome_shortcuts_title">Kısayollar</string>
+    <string name="welcome_shortcuts_body">Birkaç adımı bir araya getir, tek dokunuşla çalıştır: uygulamadan, widget\'tan ya da ana ekrandan.</string>
+    <string name="welcome_automation_title">Otomasyon</string>
+    <string name="welcome_automation_body">Kısayol kendiliğinden çalışsın: bir saatte, şarja takılınca, bir uygulama açılınca.</string>
+    <string name="welcome_gallery_title">Galeri</string>
+    <string name="welcome_gallery_body">Hazır kısayollar; ekle, istediğin gibi değiştir.</string>
+    <string name="welcome_starters">Başlamak için birkaç tane ekle</string>
+    <string name="welcome_empty">Boş başla</string>
 </resources>

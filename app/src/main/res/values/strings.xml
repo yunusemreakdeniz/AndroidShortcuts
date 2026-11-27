@@ -2140,4 +2140,13 @@
     <string name="wizard_next">Next</string>
     <string name="shortcuts_run_done">Done</string>
     <string name="shortcuts_run_failed">Did not finish</string>
+    <string name="welcome_title">Welcome to Shortcuts</string>
+    <string name="welcome_shortcuts_title">Shortcuts</string>
+    <string name="welcome_shortcuts_body">Put a few steps together and run them with one tap, from the app, a widget or the home screen.</string>
+    <string name="welcome_automation_title">Automation</string>
+    <string name="welcome_automation_body">Let a shortcut run by itself: at a time, when charging, when an app opens.</string>
+    <string name="welcome_gallery_title">Gallery</string>
+    <string name="welcome_gallery_body">Ready-made shortcuts to add and change as you like.</string>
+    <string name="welcome_starters">Add a few to start</string>
+    <string name="welcome_empty">Start empty</string>
 </resources>

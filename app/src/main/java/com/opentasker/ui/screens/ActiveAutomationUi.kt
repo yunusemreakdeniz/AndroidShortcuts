@@ -277,10 +277,11 @@ fun ActiveAutomationUi(
     // would otherwise drop the focus and take the template's rows off screen with it.
     var setupFocusRequirements by rememberSaveable { mutableStateOf(emptyList<String>()) }
     var selectedTemplateId by rememberSaveable { mutableStateOf<String?>(null) }
+    var showWelcome by rememberSaveable { mutableStateOf(false) }
     val onboardingCompleted by OnboardingPreference.hasCompleted(context).collectAsState(initial = true)
     LaunchedEffect(onboardingCompleted) {
         if (shouldLaunchOnboarding(onboardingCompleted, selectedTemplateId)) {
-            showTemplateDialog = true
+            showWelcome = true // Kısayollar' own welcome instead of the automation template picker
             onboardingTemplateFlow = true
         }
     }
@@ -1268,6 +1269,16 @@ fun ActiveAutomationUi(
         )
     }
 
+    if (showWelcome) {
+        val res = LocalContext.current.resources
+        WelcomeDialog(onStarters = {
+            showWelcome = false
+            viewModel.createShortcutsFromTemplates(galleryShortcuts.filter { it.id in starterShortcutIds }
+                .map { res.getString(it.nameRes) to it.actions { id -> res.getString(id) } }, selectedProjectId ?: DEFAULT_PROJECT_ID)
+            screenOrdinal = OpenTaskerScreen.Shortcuts.ordinal
+            finishOnboarding(OnboardingExit.InstalledTemplate)
+        }, onEmpty = { showWelcome = false; finishOnboarding(OnboardingExit.Skipped) })
+    }
     if (showTemplateDialog) {
         TemplatePickerDialog(
             templates = availableBlueprints,

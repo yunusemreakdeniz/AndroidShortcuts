@@ -185,3 +185,10 @@ fun KisayollarInlineEdit() = Frame(false) {
         }
     }
 }
+
+@PreviewTest
+@Preview(name = "Kisayollar Welcome", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarWelcome() = Frame(false) {
+    WelcomeDialog(onStarters = {}, onEmpty = {})
+}
