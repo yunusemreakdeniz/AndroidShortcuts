@@ -895,4 +895,6 @@
     <string name="wizard_battery_value">%%%1$d ve altında</string>
     <string name="wizard_app">Bu uygulama açılınca</string>
     <string name="wizard_next">İleri</string>
+    <string name="shortcuts_run_done">Tamamlandı</string>
+    <string name="shortcuts_run_failed">Tamamlanamadı</string>
 </resources>

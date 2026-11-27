@@ -3,6 +3,7 @@ package com.opentasker.ui.screens
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +30,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.outlined.Alarm
 import androidx.compose.material.icons.outlined.BatteryStd
@@ -178,6 +181,14 @@ private fun ShortcutTile(
     onPin: (android.graphics.Bitmap) -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
+    // Shortcuts-style feedback: a spinner while it runs, then a tick (or a cross) for a moment.
+    val phase = ShortcutRunState.phases.collectAsState().value[task.id]
+    androidx.compose.runtime.LaunchedEffect(phase) {
+        if (phase == RunPhase.SUCCEEDED || phase == RunPhase.FAILED) {
+            kotlinx.coroutines.delay(1_500)
+            ShortcutRunState.clear(task.id)
+        }
+    }
     val pinIcon = rememberPinIcon(task, styles)
     val longPressLabel = stringResource(R.string.shortcuts_tile_menu)
     val color = styledColor(task, styles)
@@ -214,11 +225,28 @@ private fun ShortcutTile(
                     ),
                     modifier = Modifier.size(36.dp),
                 ) {
-                    Icon(
-                        Icons.Filled.PlayArrow,
-                        contentDescription = stringResource(R.string.shortcuts_run, task.name),
-                        modifier = Modifier.size(20.dp),
-                    )
+                    when (phase) {
+                        RunPhase.RUNNING -> androidx.compose.material3.CircularProgressIndicator(
+                            color = Color.White,
+                            strokeWidth = 2.5.dp,
+                            modifier = Modifier.size(20.dp),
+                        )
+                        RunPhase.SUCCEEDED -> Icon(
+                            Icons.Filled.Check,
+                            contentDescription = stringResource(R.string.shortcuts_run_done),
+                            modifier = Modifier.size(22.dp),
+                        )
+                        RunPhase.FAILED -> Icon(
+                            Icons.Filled.Close,
+                            contentDescription = stringResource(R.string.shortcuts_run_failed),
+                            modifier = Modifier.size(22.dp),
+                        )
+                        null -> Icon(
+                            Icons.Filled.PlayArrow,
+                            contentDescription = stringResource(R.string.shortcuts_run, task.name),
+                            modifier = Modifier.size(20.dp),
+                        )
+                    }
                 }
             }
             Spacer(Modifier.height(12.dp))

@@ -2138,4 +2138,6 @@
     <string name="wizard_battery_value">At or below %1$d%%</string>
     <string name="wizard_app">When this app opens</string>
     <string name="wizard_next">Next</string>
+    <string name="shortcuts_run_done">Done</string>
+    <string name="shortcuts_run_failed">Did not finish</string>
 </resources>

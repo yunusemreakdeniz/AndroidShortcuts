@@ -1492,7 +1492,7 @@ class ActiveAutomationViewModel(
     fun runTaskNow(task: Task) {
         viewModelScope.launch {
             if (_runActionBusy.value) { events.send(message(R.string.ui_message_run_busy)); return@launch }
-            _runActionBusy.value = true
+            _runActionBusy.value = true; ShortcutRunState.started(task.id)
             runCatching {
                 writeSettingsGuard.requireWriteSettingsReady(task.actions)
                 executeAndLogTask(
@@ -1505,7 +1505,7 @@ class ActiveAutomationViewModel(
                     admissionController = ExecutionAdmissionRegistry.current(appContext),
                     execution = ExecutionEnvelope.create(task, "Manual run"),
                 )
-            }.onSuccess { result ->
+            }.onSuccess { result -> ShortcutRunState.finished(task.id, result.report.success)
                 val status = when {
                     result.held -> appContext.getString(R.string.ui_run_status_held)
                     result.skippedReason != null -> appContext.getString(R.string.ui_run_status_skipped)
@@ -1515,7 +1515,7 @@ class ActiveAutomationViewModel(
                 events.send(message(R.string.ui_message_run_status, task.name, status, result.report.durationMs))
                 // A manual run can be held, which adds a row the run-log page should show.
                 runLog.refreshRunLogPage()
-            }.onFailure { events.send(errorMessage(it, R.string.ui_error_run_task)) }
+            }.onFailure { ShortcutRunState.finished(task.id, false); events.send(errorMessage(it, R.string.ui_error_run_task)) }
             _runActionBusy.value = false
         }
     }
