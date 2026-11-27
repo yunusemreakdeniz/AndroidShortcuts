@@ -70,7 +70,10 @@ internal fun ShortcutEditorScreen(
     onMoveAction: (Int, Int) -> Unit,
     onDeleteAction: (Int) -> Unit,
     onPin: (android.graphics.Bitmap) -> Unit = {},
+    onUpdateAction: (Int, ActionSpec) -> Unit = { _, _ -> },
 ) {
+    // The block open for editing in place, like Shortcuts; -1 when none.
+    var expanded by remember(task.id) { mutableStateOf(-1) }
     val context = androidx.compose.ui.platform.LocalContext.current
     val styles = rememberShortcutStyles()
     val pinIcon = rememberPinIcon(task, styles)
@@ -171,11 +174,35 @@ internal fun ShortcutEditorScreen(
                 }
             }
             itemsIndexed(task.actions, key = { index, action -> "${action.id}-$index" }) { index, action ->
+                val metadata = ActionMetadataRegistry.get(action.type)
+                val inline = metadata != null && metadata.fields.isNotEmpty() && editableInline(metadata)
                 ActionBlock(
                     action = action,
                     isFirst = index == 0,
                     isLast = index == task.actions.lastIndex,
-                    onEdit = { onEditAction(index, action) },
+                    expanded = expanded == index,
+                    onEdit = {
+                        if (inline) expanded = if (expanded == index) -1 else index else onEditAction(index, action)
+                    },
+                    onAdvanced = { onEditAction(index, action) },
+                    inlineEditor = if (inline && expanded == index && metadata != null) {
+                        {
+                            InlineActionFields(
+                                action = action,
+                                metadata = metadata,
+                                variables = remember(task.actions, index) {
+                                    task.actions.take(index).mapNotNull(::blockOutputName).distinct()
+                                },
+                                onDone = { updated ->
+                                    expanded = -1
+                                    if (updated != action) onUpdateAction(index, updated)
+                                },
+                                onMore = { expanded = -1; onEditAction(index, action) },
+                            )
+                        }
+                    } else {
+                        null
+                    },
                     onMoveUp = { onMoveAction(index, index - 1) },
                     onMoveDown = { onMoveAction(index, index + 1) },
                     onDelete = { onDeleteAction(index) },
@@ -205,7 +232,10 @@ private fun ActionBlock(
     action: ActionSpec,
     isFirst: Boolean,
     isLast: Boolean,
+    expanded: Boolean,
     onEdit: () -> Unit,
+    onAdvanced: () -> Unit,
+    inlineEditor: (@Composable () -> Unit)?,
     onMoveUp: () -> Unit,
     onMoveDown: () -> Unit,
     onDelete: () -> Unit,
@@ -222,6 +252,7 @@ private fun ActionBlock(
         tonalElevation = 1.dp,
         modifier = Modifier.fillMaxWidth(),
     ) {
+      Column {
         Row(
             modifier = Modifier.padding(start = 14.dp, top = 12.dp, bottom = 12.dp, end = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -290,10 +321,15 @@ private fun ActionBlock(
                     if (!isLast) {
                         DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_move_down)) }, onClick = { menuOpen = false; onMoveDown() })
                     }
+                    DropdownMenuItem(text = { Text(stringResource(R.string.inline_more)) }, onClick = { menuOpen = false; onAdvanced() })
                     DropdownMenuItem(text = { Text(stringResource(R.string.shortcut_editor_delete)) }, onClick = { menuOpen = false; onDelete() })
                 }
             }
         }
+        if (expanded && inlineEditor != null) {
+            Column(modifier = Modifier.padding(start = 14.dp, end = 14.dp, bottom = 14.dp)) { inlineEditor() }
+        }
+      }
     }
 }
 
@@ -336,7 +372,7 @@ private fun blockParts(action: ActionSpec): List<BlockPart> {
 }
 
 /** The variable the block writes first, as Shortcuts shows a step's result. */
-private fun blockOutputName(action: ActionSpec): String? {
+internal fun blockOutputName(action: ActionSpec): String? {
     val output = ActionMetadataRegistry.get(action.type)?.outputs?.firstOrNull() ?: return null
     val base = output.nameArgumentKeys.firstNotNullOfOrNull { key -> action.args[key]?.takeIf(String::isNotBlank) }
         ?: output.defaultName

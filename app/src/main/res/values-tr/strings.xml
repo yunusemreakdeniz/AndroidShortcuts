@@ -882,4 +882,8 @@
     <string name="gallery_tip_result" formatted="false">Bahşiş: {{ TipText }} ₺</string>
     <string name="gallery_collection_everyday_title">Günlük yardımcılar</string>
     <string name="gallery_collection_everyday_description">Ne yesek, bahşiş hesabı ve takvime hızlıca toplantı.</string>
+    <string name="inline_variables">Önceki adımın sonucunu eklemek için dokun</string>
+    <string name="inline_required">%1$s gerekli</string>
+    <string name="inline_done">Bitti</string>
+    <string name="inline_more">Gelişmiş düzenle</string>
 </resources>

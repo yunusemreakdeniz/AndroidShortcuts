@@ -755,6 +755,7 @@ fun ActiveAutomationUi(
                         onRename = { renamingShortcut = true },
                         onDelete = { deletingShortcut = true },
                         onPin = { viewModel.pinTaskShortcut(editing, it) },
+                        onUpdateAction = { i, a -> viewModel.updateTask(editing.copy(actions = editing.actions.mapIndexed { j, o -> if (j == i) a else o }), R.string.ui_message_action_updated) },
                         onAddAction = { openActionPicker(editing) },
                         onEditAction = { index, action ->
                             val metadata = ActionMetadataRegistry.get(action.type)

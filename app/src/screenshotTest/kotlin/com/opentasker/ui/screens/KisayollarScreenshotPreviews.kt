@@ -167,3 +167,21 @@ fun KisayollarActionPicker() = Frame(false) { PickerPreview("") }
 @Preview(name = "Kisayollar Action Picker Search Dark", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
 @Composable
 fun KisayollarActionPickerSearchDark() = Frame(true) { PickerPreview("pil") }
+
+@PreviewTest
+@Preview(name = "Kisayollar Inline Edit", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarInlineEdit() = Frame(false) {
+    val metadata = com.opentasker.core.actions.ActionMetadataRegistry.get("result.show")
+    if (metadata != null) {
+        androidx.compose.foundation.layout.Column(modifier = Modifier.fillMaxSize()) {
+            InlineActionFields(
+                action = sampleTasks[2].actions[1],
+                metadata = metadata,
+                variables = listOf("Battery", "Input"),
+                onDone = {},
+                onMore = {},
+            )
+        }
+    }
+}

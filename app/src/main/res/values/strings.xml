@@ -2125,4 +2125,8 @@
     <string name="gallery_tip_result" formatted="false">Tip: {{ TipText }}</string>
     <string name="gallery_collection_everyday_title">Everyday helpers</string>
     <string name="gallery_collection_everyday_description">What to eat, a tip calculator and a meeting straight into the calendar.</string>
+    <string name="inline_variables">Tap to insert a result from an earlier step</string>
+    <string name="inline_required">%1$s is needed</string>
+    <string name="inline_done">Done</string>
+    <string name="inline_more">Advanced edit</string>
 </resources>
