@@ -92,6 +92,8 @@ private val exactIcons: Map<String, ImageVector> = mapOf(
     "download" to Icons.Outlined.Download,
     "ping" to Icons.Outlined.Language,
     "contacts.lookup" to Icons.Outlined.Contacts,
+    "device.info" to Icons.Outlined.Info,
+    "network.info" to Icons.Outlined.Wifi,
 )
 
 private fun prefixIcon(type: String): ImageVector {

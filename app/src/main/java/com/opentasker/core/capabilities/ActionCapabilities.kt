@@ -63,6 +63,8 @@ object ActionCapabilityRegistry {
         "file.pick",
         // Read the battery broadcast or compute locally.
         "battery.get",
+        "device.info",
+        "network.info",
         "math.calculate",
         "random.number",
         "list.random",

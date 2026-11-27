@@ -86,6 +86,8 @@ object ActionCatalog {
         define("file.share", ActionCategory.FILE, ActionRetrySafety.NEVER, ::ShareFileAction),
         define("maps.directions", ActionCategory.APP, ActionRetrySafety.NEVER, ::DirectionsAction),
         define("battery.get", ActionCategory.SYSTEM, ActionRetrySafety.IDEMPOTENT, ::GetBatteryAction),
+        define("device.info", ActionCategory.SYSTEM, ActionRetrySafety.IDEMPOTENT, ::GetDeviceAction),
+        define("network.info", ActionCategory.NET, ActionRetrySafety.IDEMPOTENT, ::GetNetworkAction),
         define("math.calculate", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::CalculateAction),
         define("random.number", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomNumberAction),
         define("list.random", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomItemAction),

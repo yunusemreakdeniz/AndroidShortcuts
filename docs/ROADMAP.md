@@ -74,7 +74,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## H. Cihaz
 - [x] Wi-Fi, Bluetooth, Rahatsız etme, parlaklık, ses, fener, duvar kağıdı (var)
 - [x] Pil seviyesini al, şarj durumu
-- [ ] Ağ bilgisi (SSID, IP), cihaz bilgisi
+- [x] Ağ bilgisi (tür, IP, VPN, ücretli) ve cihaz bilgisi (ad, model, Android, dil, ekran); SSID konum izni ister, sonraya
 - [ ] Karanlık modu aç/kapat (izin gerektirir)
 - [ ] Ekranı kaydet / ekran görüntüsü (kısmen var)
 

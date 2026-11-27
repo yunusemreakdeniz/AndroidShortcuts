@@ -946,4 +946,12 @@
     <string name="catalog_action_file_share_field_path_hint" formatted="false">For example {{ Photo }} or Files/report.pdf</string>
     <string name="catalog_action_file_share_field_title_label" formatted="false">Title</string>
     <string name="catalog_action_file_share_field_title_hint" formatted="false">Optional</string>
+    <string name="catalog_action_device_info_name" formatted="false">Get Device Details</string>
+    <string name="catalog_action_device_info_description" formatted="false">Device name, model, maker, Android version, language and screen size</string>
+    <string name="catalog_action_device_info_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_device_info_field_var_hint" formatted="false">Variable name (default Device; also Device_model, Device_android and more)</string>
+    <string name="catalog_action_network_info_name" formatted="false">Get Network Details</string>
+    <string name="catalog_action_network_info_description" formatted="false">Connection type (wifi, cellular, none), IP address, metered and VPN</string>
+    <string name="catalog_action_network_info_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_network_info_field_var_hint" formatted="false">Variable name (default Network; also Network_ip, Network_vpn and more)</string>
 </resources>

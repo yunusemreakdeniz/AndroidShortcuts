@@ -41,6 +41,8 @@ data class AutomationRiskSummary(
 object AutomationSensitivityRegistry {
     private val localOnlyActionIds = setOf(
         "battery.get",
+        "device.info",
+        "network.info",
         "math.calculate",
         "random.number",
         "list.random",

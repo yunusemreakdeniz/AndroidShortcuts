@@ -349,6 +349,22 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
         output("enabled", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_ENABLED"),
         output("count", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "IME", suffix = "_COUNT"),
     )
+    "device.info" -> listOf(
+        output("name", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device"),
+        output("model", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_model"),
+        output("maker", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_maker"),
+        output("android", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_android"),
+        output("sdk", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_sdk"),
+        output("language", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_language"),
+        output("screen", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Device", suffix = "_screen"),
+    )
+    "network.info" -> listOf(
+        output("type", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Network"),
+        output("ip", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Network", suffix = "_ip"),
+        output("ipv6", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Network", suffix = "_ipv6"),
+        output("metered", ActionValueType.BOOLEAN, nameArgumentKeys = listOf("var"), defaultName = "Network", suffix = "_metered"),
+        output("vpn", ActionValueType.BOOLEAN, nameArgumentKeys = listOf("var"), defaultName = "Network", suffix = "_vpn"),
+    )
     "battery.get" -> listOf(
         output("level", ActionValueType.NUMBER, nameArgumentKeys = listOf("var"), defaultName = "Battery"),
         output("charging", ActionValueType.BOOLEAN, nameArgumentKeys = listOf("var"), defaultName = "Battery", suffix = "_charging"),

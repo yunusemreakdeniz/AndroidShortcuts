@@ -217,3 +217,50 @@ internal object NumberFormatting {
         return format.format(value)
     }
 }
+
+/** Get Device Details: model, maker, Android version, device name and language. */
+class GetDeviceAction : DeclaredAction(ActionCatalog.require("device.info")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = utilityOutput(args, "Device") ?: return ActionResult.Failure("invalid output variable")
+        val name = runCatching {
+            android.provider.Settings.Global.getString(ctx.app.contentResolver, android.provider.Settings.Global.DEVICE_NAME)
+        }.getOrNull().orEmpty().ifBlank { android.os.Build.MODEL }
+        val metrics = ctx.app.resources.displayMetrics
+        ctx.variables.set(output, name)
+        ctx.variables.set("${output}_model", android.os.Build.MODEL)
+        ctx.variables.set("${output}_maker", android.os.Build.MANUFACTURER)
+        ctx.variables.set("${output}_android", android.os.Build.VERSION.RELEASE)
+        ctx.variables.set("${output}_sdk", android.os.Build.VERSION.SDK_INT.toString())
+        ctx.variables.set("${output}_language", java.util.Locale.getDefault().toLanguageTag())
+        ctx.variables.set("${output}_screen", "${metrics.widthPixels}x${metrics.heightPixels}")
+        return ActionResult.Success
+    }
+}
+
+/** Get Network Details: connection type, metered, VPN and the device's IP addresses. */
+class GetNetworkAction : DeclaredAction(ActionCatalog.require("network.info")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = utilityOutput(args, "Network") ?: return ActionResult.Failure("invalid output variable")
+        val manager = ctx.app.getSystemService(android.net.ConnectivityManager::class.java)
+            ?: return ActionResult.Failure("connectivity is not available")
+        val network = manager.activeNetwork
+        val caps = network?.let(manager::getNetworkCapabilities)
+        val type = when {
+            caps == null -> "none"
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_WIFI) -> "wifi"
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_CELLULAR) -> "cellular"
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_ETHERNET) -> "ethernet"
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_BLUETOOTH) -> "bluetooth"
+            else -> "other"
+        }
+        val addresses = network?.let(manager::getLinkProperties)?.linkAddresses.orEmpty().map { it.address }
+        val ipv4 = addresses.firstOrNull { it is java.net.Inet4Address }?.hostAddress.orEmpty()
+        val ipv6 = addresses.firstOrNull { it is java.net.Inet6Address && !it.isLinkLocalAddress }?.hostAddress.orEmpty()
+        ctx.variables.set(output, type)
+        ctx.variables.set("${output}_ip", ipv4)
+        ctx.variables.set("${output}_ipv6", ipv6)
+        ctx.variables.set("${output}_metered", (caps != null && !caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_NOT_METERED)).toString())
+        ctx.variables.set("${output}_vpn", (caps?.hasTransport(android.net.NetworkCapabilities.TRANSPORT_VPN) == true).toString())
+        return ActionResult.Success
+    }
+}

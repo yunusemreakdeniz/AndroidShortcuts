@@ -944,4 +944,12 @@
     <string name="catalog_action_file_share_field_path_hint" formatted="false">Örneğin {{ Photo }} veya Files/rapor.pdf</string>
     <string name="catalog_action_file_share_field_title_label" formatted="false">Başlık</string>
     <string name="catalog_action_file_share_field_title_hint" formatted="false">İsteğe bağlı</string>
+    <string name="catalog_action_device_info_name" formatted="false">Cihaz bilgisini al</string>
+    <string name="catalog_action_device_info_description" formatted="false">Cihaz adı, model, üretici, Android sürümü, dil ve ekran boyutu</string>
+    <string name="catalog_action_device_info_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_device_info_field_var_hint" formatted="false">Değişken adı (varsayılan Device; ayrıca Device_model, Device_android ve diğerleri)</string>
+    <string name="catalog_action_network_info_name" formatted="false">Ağ bilgisini al</string>
+    <string name="catalog_action_network_info_description" formatted="false">Bağlantı türü (wifi, cellular, none), IP adresi, ücretli bağlantı ve VPN</string>
+    <string name="catalog_action_network_info_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_network_info_field_var_hint" formatted="false">Değişken adı (varsayılan Network; ayrıca Network_ip, Network_vpn ve diğerleri)</string>
 </resources>

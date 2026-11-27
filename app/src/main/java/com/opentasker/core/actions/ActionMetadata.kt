@@ -223,6 +223,8 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "photo.pick",
     "file.pick",
     "battery.get",
+    "device.info",
+    "network.info",
     "math.calculate",
     "random.number",
     "list.random",
@@ -2075,6 +2077,28 @@ private fun registerUtilityActionMetadata() {
             categoryRes = R.string.catalog_category_system,
             fields = listOf(
                 ActionField("var", R.string.catalog_action_battery_get_field_var_label, hintRes = R.string.catalog_action_battery_get_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "device.info",
+            nameRes = R.string.catalog_action_device_info_name,
+            descriptionRes = R.string.catalog_action_device_info_description,
+            categoryRes = R.string.catalog_category_system,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_device_info_field_var_label, hintRes = R.string.catalog_action_device_info_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "network.info",
+            nameRes = R.string.catalog_action_network_info_name,
+            descriptionRes = R.string.catalog_action_network_info_description,
+            categoryRes = R.string.catalog_category_network,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_network_info_field_var_label, hintRes = R.string.catalog_action_network_info_field_var_hint),
             ),
         )
     )
