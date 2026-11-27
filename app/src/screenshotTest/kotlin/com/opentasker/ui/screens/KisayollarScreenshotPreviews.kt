@@ -192,3 +192,17 @@ fun KisayollarInlineEdit() = Frame(false) {
 fun KisayollarWelcome() = Frame(false) {
     WelcomeDialog(onStarters = {}, onEmpty = {})
 }
+
+@PreviewTest
+@Preview(name = "Kisayollar Wizard Time", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarWizardTime() = Frame(false) {
+    AutomationWizardDialog(type = ContextType.TIME, tasks = sampleTasks, onDismiss = {}, onCreate = { _, _ -> })
+}
+
+@PreviewTest
+@Preview(name = "Kisayollar Wizard State Dark", locale = "tr", widthDp = 390, heightDp = 844, showBackground = true)
+@Composable
+fun KisayollarWizardStateDark() = Frame(true) {
+    AutomationWizardDialog(type = ContextType.STATE, tasks = sampleTasks, onDismiss = {}, onCreate = { _, _ -> })
+}
