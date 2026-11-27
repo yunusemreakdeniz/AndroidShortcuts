@@ -667,3 +667,69 @@ class ResizeImageAction : DeclaredAction(ActionCatalog.require("image.resize")) 
         return ActionResult.Success
     }
 }
+
+/** Make PDF: writes text (with an optional title) to an A4 PDF in the shortcut files (Files/). */
+class MakePdfAction : DeclaredAction(ActionCatalog.require("pdf.create")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val text = args["text"].orEmpty().take(MAX_PDF_CHARS)
+        if (text.isBlank()) return ActionResult.Failure("missing text")
+        val title = args["title"]?.trim().orEmpty().take(200)
+        val output = dialogOutput(args, "Pdf") ?: return ActionResult.Failure("invalid output variable")
+        val rawName = args["name"]?.trim().orEmpty().ifEmpty { title.ifEmpty { "document" } }
+        val name = rawName.replace(Regex("[^A-Za-z0-9._ -]"), "_").trim().trimStart('.').take(60).ifEmpty { "document" }
+            .removeSuffix(".pdf") + ".pdf"
+        val base = java.io.File(ctx.app.filesDir, "user_files").canonicalFile
+        val dir = java.io.File(base, "Files").apply { mkdirs() }
+        val target = java.io.File(dir, name)
+        val pages = writePdf(target, title, text)
+        ctx.variables.set(output, target.relativeTo(base).invariantSeparatorsPath)
+        ctx.logger("Make PDF: $pages page(s)")
+        return ActionResult.Success
+    }
+
+    private fun writePdf(target: java.io.File, title: String, text: String): Int {
+        val width = 595
+        val height = 842
+        val margin = 48
+        val body = android.text.TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply { textSize = 11f }
+        val heading = android.text.TextPaint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
+            textSize = 18f
+            isFakeBoldText = true
+        }
+        val content = width - 2 * margin
+        val layout = android.text.StaticLayout.Builder.obtain(text, 0, text.length, body, content).build()
+        val document = android.graphics.pdf.PdfDocument()
+        var line = 0
+        var pageNumber = 0
+        try {
+            while (line < layout.lineCount || pageNumber == 0) {
+                pageNumber++
+                val page = document.startPage(android.graphics.pdf.PdfDocument.PageInfo.Builder(width, height, pageNumber).create())
+                val canvas = page.canvas
+                var top = margin.toFloat()
+                if (pageNumber == 1 && title.isNotEmpty()) {
+                    canvas.drawText(title, margin.toFloat(), top + heading.textSize, heading)
+                    top += heading.textSize * 2
+                }
+                val first = line
+                val startY = layout.getLineTop(first).toFloat()
+                while (line < layout.lineCount && layout.getLineBottom(line) - startY <= height - margin - top) line++
+                if (line == first && line < layout.lineCount) line++
+                canvas.save()
+                canvas.translate(margin.toFloat(), top - startY)
+                canvas.clipRect(0f, startY, content.toFloat(), layout.getLineBottom(line - 1).toFloat())
+                layout.draw(canvas)
+                canvas.restore()
+                document.finishPage(page)
+            }
+            target.outputStream().use(document::writeTo)
+        } finally {
+            document.close()
+        }
+        return pageNumber
+    }
+
+    private companion object {
+        const val MAX_PDF_CHARS = 200_000
+    }
+}

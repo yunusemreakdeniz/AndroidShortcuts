@@ -68,7 +68,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [ ] QR kod oluştur ve oku
 - [ ] Ses kaydı
 - [~] Müzik kontrolü (oynat/duraklat/sonraki var)
-- [ ] PDF oluştur (metin/görselden)
+- [~] PDF oluştur: metinden çok sayfalı A4 (pdf.create); görselden PDF sırada
 - [ ] Metni çevir (çevrimdışı veya servis)
 
 ## H. Cihaz

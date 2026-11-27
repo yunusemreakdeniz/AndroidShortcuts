@@ -991,4 +991,14 @@
     <string name="catalog_action_dict_set_field_key_hint" formatted="false">Örneğin ad</string>
     <string name="catalog_action_dict_set_field_value_label" formatted="false">Değer</string>
     <string name="catalog_action_dict_set_field_value_hint" formatted="false">Metin, sayı, true/false veya JSON; boş bırakılırsa anahtar silinir</string>
+    <string name="catalog_action_pdf_create_name" formatted="false">PDF oluştur</string>
+    <string name="catalog_action_pdf_create_description" formatted="false">Metni kısayol dosyalarında bir PDF\'e yazar, gerekirse çok sayfalı</string>
+    <string name="catalog_action_pdf_create_field_title_label" formatted="false">Başlık</string>
+    <string name="catalog_action_pdf_create_field_title_hint" formatted="false">İsteğe bağlı, ilk sayfada başlık</string>
+    <string name="catalog_action_pdf_create_field_text_label" formatted="false">Metin</string>
+    <string name="catalog_action_pdf_create_field_text_hint" formatted="false">Örneğin {{ Input }}</string>
+    <string name="catalog_action_pdf_create_field_name_label" formatted="false">Dosya adı</string>
+    <string name="catalog_action_pdf_create_field_name_hint" formatted="false">Varsayılan: başlık ya da document</string>
+    <string name="catalog_action_pdf_create_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_pdf_create_field_var_hint" formatted="false">Değişken adı (varsayılan Pdf; Files/notlar.pdf gibi bir yol tutar)</string>
 </resources>

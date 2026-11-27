@@ -222,6 +222,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "dictate.text",
     "photo.pick",
     "image.resize",
+    "pdf.create",
     "calendar.add",
     "file.pick",
     "battery.get",
@@ -2030,6 +2031,20 @@ private fun registerInteractiveActionMetadata() {
             categoryRes = R.string.catalog_category_file,
             fields = listOf(
                 ActionField("var", R.string.catalog_action_file_pick_field_var_label, hintRes = R.string.catalog_action_file_pick_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "pdf.create",
+            nameRes = R.string.catalog_action_pdf_create_name,
+            descriptionRes = R.string.catalog_action_pdf_create_description,
+            categoryRes = R.string.catalog_category_file,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_pdf_create_field_title_label, hintRes = R.string.catalog_action_pdf_create_field_title_hint),
+                ActionField("text", R.string.catalog_action_pdf_create_field_text_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_pdf_create_field_text_hint),
+                ActionField("name", R.string.catalog_action_pdf_create_field_name_label, hintRes = R.string.catalog_action_pdf_create_field_name_hint),
+                ActionField("var", R.string.catalog_action_pdf_create_field_var_label, hintRes = R.string.catalog_action_pdf_create_field_var_hint),
             ),
         )
     )

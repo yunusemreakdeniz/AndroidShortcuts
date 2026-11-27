@@ -993,4 +993,14 @@
     <string name="catalog_action_dict_set_field_key_hint" formatted="false">For example name</string>
     <string name="catalog_action_dict_set_field_value_label" formatted="false">Value</string>
     <string name="catalog_action_dict_set_field_value_hint" formatted="false">Text, number, true/false or JSON; empty removes the key</string>
+    <string name="catalog_action_pdf_create_name" formatted="false">Make PDF</string>
+    <string name="catalog_action_pdf_create_description" formatted="false">Write text to a PDF in the shortcut files, page after page</string>
+    <string name="catalog_action_pdf_create_field_title_label" formatted="false">Title</string>
+    <string name="catalog_action_pdf_create_field_title_hint" formatted="false">Optional heading on the first page</string>
+    <string name="catalog_action_pdf_create_field_text_label" formatted="false">Text</string>
+    <string name="catalog_action_pdf_create_field_text_hint" formatted="false">For example {{ Input }}</string>
+    <string name="catalog_action_pdf_create_field_name_label" formatted="false">File name</string>
+    <string name="catalog_action_pdf_create_field_name_hint" formatted="false">Default: the title, or document</string>
+    <string name="catalog_action_pdf_create_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_pdf_create_field_var_hint" formatted="false">Variable name (default Pdf; holds a path like Files/notes.pdf)</string>
 </resources>

@@ -102,6 +102,7 @@ object ActionCatalog {
         define("dictate.text", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::DictateTextAction),
         define("photo.pick", ActionCategory.MEDIA, ActionRetrySafety.NEVER, ::PickPhotoAction),
         define("image.resize", ActionCategory.MEDIA, ActionRetrySafety.IDEMPOTENT, ::ResizeImageAction),
+        define("pdf.create", ActionCategory.FILE, ActionRetrySafety.IDEMPOTENT, ::MakePdfAction),
         define("calendar.add", ActionCategory.APP, ActionRetrySafety.NEVER, ::AddCalendarEventAction),
         define("file.pick", ActionCategory.FILE, ActionRetrySafety.NEVER, ::PickFileAction),
         define("result.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowResultAction),

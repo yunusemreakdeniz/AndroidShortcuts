@@ -61,6 +61,7 @@ object ActionCapabilityRegistry {
         "dictate.text",
         "photo.pick",
         "image.resize",
+        "pdf.create",
         "calendar.add",
         "file.pick",
         // Read the battery broadcast or compute locally.
