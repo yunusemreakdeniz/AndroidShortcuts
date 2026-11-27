@@ -16,7 +16,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Icon
+import androidx.compose.ui.semantics.Role
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Slider
@@ -115,12 +122,29 @@ internal fun AutomationWizardDialog(
                 }
                 if (type == ContextType.TIME || type == ContextType.DAY) {
                     Text(stringResource(R.string.wizard_days), style = MaterialTheme.typography.labelLarge)
+                    val all = DAY_CODES.map { it.first }.toSet()
+                    val weekdays = setOf("MON", "TUE", "WED", "THU", "FRI")
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        listOf(
+                            all to R.string.wizard_every_day,
+                            weekdays to R.string.wizard_weekdays,
+                            setOf("SAT", "SUN") to R.string.wizard_weekend,
+                        ).forEach { (set, label) ->
+                            FilterChip(
+                                selected = days == set,
+                                onClick = { days = set },
+                                label = { Text(stringResource(label)) },
+                                leadingIcon = if (days == set) { { Icon(Icons.Filled.Check, contentDescription = null, modifier = Modifier.size(16.dp)) } } else null,
+                            )
+                        }
+                    }
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         DAY_CODES.forEach { (code, label) ->
                             FilterChip(
                                 selected = code in days,
                                 onClick = { days = if (code in days) days - code else days + code },
                                 label = { Text(stringResource(label)) },
+                                leadingIcon = if (code in days) { { Icon(Icons.Filled.Check, contentDescription = null, modifier = Modifier.size(16.dp)) } } else null,
                             )
                         }
                     }
@@ -131,9 +155,14 @@ internal fun AutomationWizardDialog(
                         "charging_off" to R.string.wizard_charging_off,
                         "battery_low" to R.string.wizard_battery_low,
                     ).forEach { (key, label) ->
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            RadioButton(selected = stateChoice == key, onClick = { stateChoice = key })
-                            Text(stringResource(label))
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .selectable(selected = stateChoice == key, role = Role.RadioButton, onClick = { stateChoice = key }),
+                        ) {
+                            RadioButton(selected = stateChoice == key, onClick = null)
+                            Text(stringResource(label), modifier = Modifier.padding(start = 8.dp, top = 12.dp, bottom = 12.dp))
                         }
                     }
                     if (stateChoice == "battery_low") {
@@ -159,7 +188,7 @@ internal fun AutomationWizardDialog(
             }
         },
         confirmButton = {
-            TextButton(
+            FilledTonalButton(
                 enabled = when (type) {
                     ContextType.DAY -> days.isNotEmpty()
                     ContextType.APPLICATION -> app != null

@@ -906,4 +906,7 @@
     <string name="welcome_gallery_body">Hazır kısayollar; ekle, istediğin gibi değiştir.</string>
     <string name="welcome_starters">Başlamak için birkaç tane ekle</string>
     <string name="welcome_empty">Boş başla</string>
+    <string name="wizard_every_day">Her gün</string>
+    <string name="wizard_weekdays">Hafta içi</string>
+    <string name="wizard_weekend">Hafta sonu</string>
 </resources>

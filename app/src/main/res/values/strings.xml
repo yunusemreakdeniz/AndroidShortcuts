@@ -2149,4 +2149,7 @@
     <string name="welcome_gallery_body">Ready-made shortcuts to add and change as you like.</string>
     <string name="welcome_starters">Add a few to start</string>
     <string name="welcome_empty">Start empty</string>
+    <string name="wizard_every_day">Every day</string>
+    <string name="wizard_weekdays">Weekdays</string>
+    <string name="wizard_weekend">Weekend</string>
 </resources>
