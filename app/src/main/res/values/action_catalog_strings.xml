@@ -977,4 +977,12 @@
     <string name="catalog_action_calendar_add_field_location_hint" formatted="false">Optional</string>
     <string name="catalog_action_calendar_add_field_notes_label" formatted="false">Notes</string>
     <string name="catalog_action_calendar_add_field_notes_hint" formatted="false">Optional</string>
+    <string name="catalog_action_url_parts_name" formatted="false">Get Component of URL</string>
+    <string name="catalog_action_url_parts_description" formatted="false">Split a web address into host, path, query and one query value</string>
+    <string name="catalog_action_url_parts_field_url_label" formatted="false">URL</string>
+    <string name="catalog_action_url_parts_field_url_hint" formatted="false">For example {{ ShortcutInput }}</string>
+    <string name="catalog_action_url_parts_field_param_label" formatted="false">Query value</string>
+    <string name="catalog_action_url_parts_field_param_hint" formatted="false">Optional name, e.g. q in ?q=cats; result in Url_param</string>
+    <string name="catalog_action_url_parts_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_url_parts_field_var_hint" formatted="false">Variable name (default Url = host; also Url_path, Url_query and more)</string>
 </resources>

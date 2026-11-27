@@ -48,7 +48,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [~] Tarih biçimlendir / ekle (var)
 - [x] Rastgele sayı
 - [x] Listeden rastgele öğe
-- [ ] Base64/URL kodlama, hash (var.convert kısmen)
+- [x] Base64/URL kodlama, MD5/SHA-1 (Değişkeni dönüştür)
 
 ## E. Akış
 - [~] Eğer / değilse, Her biri için tekrarla, Bekle, Durdur, Kısayol çalıştır (motor var)
@@ -59,7 +59,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 ## F. Web
 - [x] URL aç, HTTP isteği (GET/POST/…), webhook
 - [~] Web sayfası içeriği / HTML'den metin (data.read HTML var)
-- [ ] URL bileşenlerini al, URL kodla
+- [x] URL bileşenlerini al (url.parts); URL kodlama Değişkeni dönüştür içinde
 - [x] Yol tarifi al (harita)
 
 ## G. Medya ve belgeler

@@ -376,6 +376,15 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "list.random" -> listOf(
         output("item", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Item"),
     )
+    "url.parts" -> listOf(
+        output("host", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url"),
+        output("scheme", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_scheme"),
+        output("port", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_port"),
+        output("path", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_path"),
+        output("query", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_query"),
+        output("fragment", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_fragment"),
+        output("param", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Url", suffix = "_param"),
+    )
     "number.format" -> listOf(
         output("text", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Formatted"),
     )

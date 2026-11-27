@@ -264,3 +264,37 @@ class GetNetworkAction : DeclaredAction(ActionCatalog.require("network.info")) {
         return ActionResult.Success
     }
 }
+
+/** Get Component of URL: scheme, host, port, path, query, fragment and one query value. */
+class UrlPartsAction : DeclaredAction(ActionCatalog.require("url.parts")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = utilityOutput(args, "Url") ?: return ActionResult.Failure("invalid output variable")
+        val parts = UrlParts.parse(args["url"].orEmpty(), args["param"].orEmpty())
+            ?: return ActionResult.Failure("url is not a web address like https://example.com/path?q=1")
+        parts.forEach { (suffix, value) -> ctx.variables.set(output + suffix, value) }
+        return ActionResult.Success
+    }
+}
+
+internal object UrlParts {
+    /** Suffix to value; "" is the host. Null when the text is not an absolute URL. */
+    fun parse(raw: String, param: String): Map<String, String>? {
+        val uri = runCatching { java.net.URI(raw.trim()) }.getOrNull() ?: return null
+        if (uri.scheme.isNullOrEmpty() || uri.host.isNullOrEmpty()) return null
+        val query = uri.rawQuery.orEmpty()
+        val wanted = param.trim()
+        val value = if (wanted.isEmpty()) "" else query.split('&').firstNotNullOfOrNull { pair ->
+            val key = pair.substringBefore('=')
+            if (java.net.URLDecoder.decode(key, "UTF-8") == wanted) java.net.URLDecoder.decode(pair.substringAfter('=', ""), "UTF-8") else null
+        }.orEmpty()
+        return linkedMapOf(
+            "" to uri.host,
+            "_scheme" to uri.scheme,
+            "_port" to (if (uri.port >= 0) uri.port.toString() else ""),
+            "_path" to uri.path.orEmpty(),
+            "_query" to (uri.query ?: ""),
+            "_fragment" to (uri.fragment ?: ""),
+            "_param" to value,
+        )
+    }
+}

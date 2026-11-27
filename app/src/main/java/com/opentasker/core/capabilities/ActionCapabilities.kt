@@ -71,6 +71,7 @@ object ActionCapabilityRegistry {
         "random.number",
         "list.random",
         "number.format",
+        "url.parts",
         "data.read",
         "datetime.format",
         "datetime.parse",

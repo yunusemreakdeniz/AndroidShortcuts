@@ -975,4 +975,12 @@
     <string name="catalog_action_calendar_add_field_location_hint" formatted="false">İsteğe bağlı</string>
     <string name="catalog_action_calendar_add_field_notes_label" formatted="false">Notlar</string>
     <string name="catalog_action_calendar_add_field_notes_hint" formatted="false">İsteğe bağlı</string>
+    <string name="catalog_action_url_parts_name" formatted="false">URL bileşenlerini al</string>
+    <string name="catalog_action_url_parts_description" formatted="false">Bir web adresini sunucu, yol, sorgu ve tek bir sorgu değerine ayırır</string>
+    <string name="catalog_action_url_parts_field_url_label" formatted="false">URL</string>
+    <string name="catalog_action_url_parts_field_url_hint" formatted="false">Örneğin {{ ShortcutInput }}</string>
+    <string name="catalog_action_url_parts_field_param_label" formatted="false">Sorgu değeri</string>
+    <string name="catalog_action_url_parts_field_param_hint" formatted="false">İsteğe bağlı ad, örn. ?q=kedi için q; sonuç Url_param içinde</string>
+    <string name="catalog_action_url_parts_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_url_parts_field_var_hint" formatted="false">Değişken adı (varsayılan Url = sunucu; ayrıca Url_path, Url_query ve diğerleri)</string>
 </resources>

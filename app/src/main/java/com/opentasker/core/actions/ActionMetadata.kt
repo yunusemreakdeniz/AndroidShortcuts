@@ -231,6 +231,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "random.number",
     "list.random",
     "number.format",
+    "url.parts",
     "alarm.set",
     "timer.set",
     "email.compose",
@@ -2168,6 +2169,19 @@ private fun registerUtilityActionMetadata() {
             fields = listOf(
                 ActionField("items", R.string.catalog_action_list_random_field_items_label, FieldType.MULTILINE, required = true, hintRes = R.string.catalog_action_list_random_field_items_hint),
                 ActionField("var", R.string.catalog_action_list_random_field_var_label, hintRes = R.string.catalog_action_list_random_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "url.parts",
+            nameRes = R.string.catalog_action_url_parts_name,
+            descriptionRes = R.string.catalog_action_url_parts_description,
+            categoryRes = R.string.catalog_category_variable,
+            fields = listOf(
+                ActionField("url", R.string.catalog_action_url_parts_field_url_label, required = true, hintRes = R.string.catalog_action_url_parts_field_url_hint),
+                ActionField("param", R.string.catalog_action_url_parts_field_param_label, hintRes = R.string.catalog_action_url_parts_field_param_hint),
+                ActionField("var", R.string.catalog_action_url_parts_field_var_label, hintRes = R.string.catalog_action_url_parts_field_var_hint),
             ),
         )
     )

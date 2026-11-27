@@ -92,6 +92,7 @@ object ActionCatalog {
         define("random.number", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomNumberAction),
         define("list.random", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::RandomItemAction),
         define("number.format", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::FormatNumberAction),
+        define("url.parts", ActionCategory.VARIABLE, ActionRetrySafety.IDEMPOTENT, ::UrlPartsAction),
         define("input.ask", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::AskForInputAction),
         define("menu.choose", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ChooseFromMenuAction),
         define("alert.show", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::ShowAlertAction),
