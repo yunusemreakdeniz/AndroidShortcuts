@@ -29,7 +29,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.opentasker.app.R
 import com.opentasker.core.actions.ActionField
@@ -92,6 +98,7 @@ internal fun InlineActionFields(
                     singleLine = field.fieldType != FieldType.MULTILINE,
                     minLines = if (field.fieldType == FieldType.MULTILINE) 2 else 1,
                     isError = missing == field,
+                    visualTransformation = if (field.fieldType == FieldType.NUMBER) VisualTransformation.None else VariableTokens,
                     keyboardOptions = if (field.fieldType == FieldType.NUMBER) KeyboardOptions(keyboardType = KeyboardType.Number) else KeyboardOptions.Default,
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
@@ -144,4 +151,19 @@ internal fun InlineActionFields(
             TextButton(onClick = onMore) { Text(stringResource(R.string.inline_more)) }
         }
     }
+}
+
+private val TOKEN = Regex("""\{\{\s*[A-Za-z_][A-Za-z0-9_.]*\s*\}\}""")
+
+/** Shows each {{ Name }} in a field as an orange token, like Shortcuts' variables. Text is unchanged. */
+internal val VariableTokens = VisualTransformation { text ->
+    val styled = AnnotatedString.Builder(text.text)
+    TOKEN.findAll(text.text).forEach { match ->
+        styled.addStyle(
+            SpanStyle(background = Color(0xFFFFE8D9), color = Color(0xFF9A3412), fontWeight = FontWeight.Bold),
+            match.range.first,
+            match.range.last + 1,
+        )
+    }
+    TransformedText(styled.toAnnotatedString(), OffsetMapping.Identity)
 }

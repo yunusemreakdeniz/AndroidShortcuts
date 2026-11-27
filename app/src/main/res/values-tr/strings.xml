@@ -886,4 +886,5 @@
     <string name="inline_required">%1$s gerekli</string>
     <string name="inline_done">Bitti</string>
     <string name="inline_more">Gelişmiş düzenle</string>
+    <string name="shortcut_editor_drag_hint">Düzenlemek için adıma dokun, taşımak için basılı tutup sürükle</string>
 </resources>

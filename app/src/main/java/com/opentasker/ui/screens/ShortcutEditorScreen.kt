@@ -1,7 +1,11 @@
 package com.opentasker.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.draw.zIndex
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -74,6 +78,21 @@ internal fun ShortcutEditorScreen(
 ) {
     // The block open for editing in place, like Shortcuts; -1 when none.
     var expanded by remember(task.id) { mutableStateOf(-1) }
+    // Long-press and drag a block to move it; it lands where it is dropped.
+    val listState = androidx.compose.foundation.lazy.rememberLazyListState()
+    var dragFrom by remember(task.id) { mutableStateOf(-1) }
+    var dragOffset by remember(task.id) { mutableStateOf(0f) }
+    val haptics = androidx.compose.ui.platform.LocalHapticFeedback.current
+    fun dropTarget(): Int {
+        // The hint row above the steps shifts list positions by one.
+        val shift = if (task.actions.size >= 2) 1 else 0
+        val visible = listState.layoutInfo.visibleItemsInfo.filter { it.index >= shift }
+        val me = visible.firstOrNull { it.index == dragFrom + shift } ?: return -1
+        val center = me.offset + me.size / 2 + dragOffset
+        val hit = visible.firstOrNull { center >= it.offset && center < it.offset + it.size }
+            ?: if (center < visible.first().offset) visible.first() else visible.last()
+        return (hit.index - shift).coerceIn(0, task.actions.lastIndex)
+    }
     val context = androidx.compose.ui.platform.LocalContext.current
     val styles = rememberShortcutStyles()
     val pinIcon = rememberPinIcon(task, styles)
@@ -159,6 +178,7 @@ internal fun ShortcutEditorScreen(
             }
         }
         LazyColumn(
+            state = listState,
             modifier = Modifier.weight(1f),
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
@@ -173,10 +193,52 @@ internal fun ShortcutEditorScreen(
                     )
                 }
             }
+            if (task.actions.size >= 2) {
+                item(key = "drag-hint") {
+                    Text(
+                        text = stringResource(R.string.shortcut_editor_drag_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
             itemsIndexed(task.actions, key = { index, action -> "${action.id}-$index" }) { index, action ->
                 val metadata = ActionMetadataRegistry.get(action.type)
                 val inline = metadata != null && metadata.fields.isNotEmpty() && editableInline(metadata)
+                val dragging = dragFrom == index
                 ActionBlock(
+                    modifier = Modifier
+                        .zIndex(if (dragging) 1f else 0f)
+                        .graphicsLayer {
+                            translationY = if (dragging) dragOffset else 0f
+                            val scale = if (dragging) 1.03f else 1f
+                            scaleX = scale
+                            scaleY = scale
+                        }
+                        .pointerInput(index, task.actions.size) {
+                            detectDragGesturesAfterLongPress(
+                                onDragStart = {
+                                    expanded = -1
+                                    dragFrom = index
+                                    dragOffset = 0f
+                                    haptics.performHapticFeedback(androidx.compose.ui.hapticfeedback.HapticFeedbackType.LongPress)
+                                },
+                                onDragEnd = {
+                                    val to = dropTarget()
+                                    if (to in task.actions.indices && to != dragFrom) onMoveAction(dragFrom, to)
+                                    dragFrom = -1
+                                    dragOffset = 0f
+                                },
+                                onDragCancel = {
+                                    dragFrom = -1
+                                    dragOffset = 0f
+                                },
+                                onDrag = { change, amount ->
+                                    change.consume()
+                                    dragOffset += amount.y
+                                },
+                            )
+                        },
                     action = action,
                     isFirst = index == 0,
                     isLast = index == task.actions.lastIndex,
@@ -229,6 +291,7 @@ internal fun ShortcutEditorScreen(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ActionBlock(
+    modifier: Modifier = Modifier,
     action: ActionSpec,
     isFirst: Boolean,
     isLast: Boolean,
@@ -250,7 +313,7 @@ private fun ActionBlock(
         shape = RoundedCornerShape(18.dp),
         color = shortcutCardColor(),
         tonalElevation = 1.dp,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
     ) {
       Column {
         Row(
