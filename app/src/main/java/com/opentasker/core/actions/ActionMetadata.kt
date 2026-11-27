@@ -221,6 +221,8 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "date.ask",
     "dictate.text",
     "photo.pick",
+    "image.resize",
+    "calendar.add",
     "file.pick",
     "battery.get",
     "device.info",
@@ -2026,6 +2028,36 @@ private fun registerInteractiveActionMetadata() {
             categoryRes = R.string.catalog_category_file,
             fields = listOf(
                 ActionField("var", R.string.catalog_action_file_pick_field_var_label, hintRes = R.string.catalog_action_file_pick_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "image.resize",
+            nameRes = R.string.catalog_action_image_resize_name,
+            descriptionRes = R.string.catalog_action_image_resize_description,
+            categoryRes = R.string.catalog_category_media,
+            fields = listOf(
+                ActionField("path", R.string.catalog_action_image_resize_field_path_label, required = true, hintRes = R.string.catalog_action_image_resize_field_path_hint),
+                ActionField("width", R.string.catalog_action_image_resize_field_width_label, FieldType.NUMBER, required = true, hintRes = R.string.catalog_action_image_resize_field_width_hint, numberRule = integerRule(16L, 8192L)),
+                ActionField("format", R.string.catalog_action_image_resize_field_format_label, hintRes = R.string.catalog_action_image_resize_field_format_hint),
+                ActionField("var", R.string.catalog_action_image_resize_field_var_label, hintRes = R.string.catalog_action_image_resize_field_var_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "calendar.add",
+            nameRes = R.string.catalog_action_calendar_add_name,
+            descriptionRes = R.string.catalog_action_calendar_add_description,
+            categoryRes = R.string.catalog_category_app,
+            fields = listOf(
+                ActionField("title", R.string.catalog_action_calendar_add_field_title_label, required = true, hintRes = R.string.catalog_action_calendar_add_field_title_hint),
+                ActionField("start", R.string.catalog_action_calendar_add_field_start_label, required = true, hintRes = R.string.catalog_action_calendar_add_field_start_hint),
+                ActionField("minutes", R.string.catalog_action_calendar_add_field_minutes_label, FieldType.NUMBER, hintRes = R.string.catalog_action_calendar_add_field_minutes_hint, numberRule = integerRule(1L, 44640L)),
+                ActionField("all_day", R.string.catalog_action_calendar_add_field_all_day_label, FieldType.CHECKBOX),
+                ActionField("location", R.string.catalog_action_calendar_add_field_location_label, hintRes = R.string.catalog_action_calendar_add_field_location_hint),
+                ActionField("notes", R.string.catalog_action_calendar_add_field_notes_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_calendar_add_field_notes_hint),
             ),
         )
     )

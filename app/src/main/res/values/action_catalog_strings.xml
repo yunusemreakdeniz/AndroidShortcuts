@@ -954,4 +954,27 @@
     <string name="catalog_action_network_info_description" formatted="false">Connection type (wifi, cellular, none), IP address, metered and VPN</string>
     <string name="catalog_action_network_info_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_network_info_field_var_hint" formatted="false">Variable name (default Network; also Network_ip, Network_vpn and more)</string>
+    <string name="catalog_action_image_resize_name" formatted="false">Resize Image</string>
+    <string name="catalog_action_image_resize_description" formatted="false">Scale a picture in the shortcut files to a width, keeping its shape</string>
+    <string name="catalog_action_image_resize_field_path_label" formatted="false">Image</string>
+    <string name="catalog_action_image_resize_field_path_hint" formatted="false">For example {{ Photo }}</string>
+    <string name="catalog_action_image_resize_field_width_label" formatted="false">Width</string>
+    <string name="catalog_action_image_resize_field_width_hint" formatted="false">Pixels, 16 to 8192</string>
+    <string name="catalog_action_image_resize_field_format_label" formatted="false">Format</string>
+    <string name="catalog_action_image_resize_field_format_hint" formatted="false">jpg (default) or png</string>
+    <string name="catalog_action_image_resize_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_image_resize_field_var_hint" formatted="false">Variable name (default Image; holds the new file path)</string>
+    <string name="catalog_action_calendar_add_name" formatted="false">Add New Event</string>
+    <string name="catalog_action_calendar_add_description" formatted="false">Open the calendar with an event filled in, ready to save</string>
+    <string name="catalog_action_calendar_add_field_title_label" formatted="false">Title</string>
+    <string name="catalog_action_calendar_add_field_title_hint" formatted="false">For example Dentist</string>
+    <string name="catalog_action_calendar_add_field_start_label" formatted="false">Starts</string>
+    <string name="catalog_action_calendar_add_field_start_hint" formatted="false">2026-12-31 18:30, a date alone for all day, or {{ Date }}</string>
+    <string name="catalog_action_calendar_add_field_minutes_label" formatted="false">Length in minutes</string>
+    <string name="catalog_action_calendar_add_field_minutes_hint" formatted="false">Default 60</string>
+    <string name="catalog_action_calendar_add_field_all_day_label" formatted="false">All day</string>
+    <string name="catalog_action_calendar_add_field_location_label" formatted="false">Location</string>
+    <string name="catalog_action_calendar_add_field_location_hint" formatted="false">Optional</string>
+    <string name="catalog_action_calendar_add_field_notes_label" formatted="false">Notes</string>
+    <string name="catalog_action_calendar_add_field_notes_hint" formatted="false">Optional</string>
 </resources>

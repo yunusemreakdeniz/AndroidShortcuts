@@ -55,6 +55,8 @@ object AutomationSensitivityRegistry {
         "date.ask",
         "dictate.text",
         "photo.pick",
+        "image.resize",
+        "calendar.add",
         "file.pick",
         "var.set",
         "var.set_multiple",

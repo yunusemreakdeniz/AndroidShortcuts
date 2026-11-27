@@ -64,7 +64,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 
 ## G. Medya ve belgeler
 - [ ] Fotoğraf çek / video kaydet
-- [ ] Görseli yeniden boyutlandır, dönüştür, kırp
+- [~] Görseli yeniden boyutlandır ve jpg/png dönüştür; kırpma sırada
 - [ ] QR kod oluştur ve oku
 - [ ] Ses kaydı
 - [~] Müzik kontrolü (oynat/duraklat/sonraki var)
@@ -82,7 +82,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Uygulama aç, Intent gönder, SMS
 - [x] E-posta oluştur, telefonla ara
 - [ ] WhatsApp / Telegram mesajı
-- [ ] Takvim etkinliği ekle, hatırlatıcı/not
+- [~] Takvim etkinliği ekle (takvim uygulamasında onayla); hatırlatıcı/not sırada
 - [x] Alarm ve zamanlayıcı kur
 - [x] Metni paylaş (paylaşım sayfası)
 - [x] Dosyayı paylaş: kısayol dosyalarından (Photos/, Files/) paylaşım menüsüyle

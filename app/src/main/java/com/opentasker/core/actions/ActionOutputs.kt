@@ -392,6 +392,9 @@ internal fun declaredActionOutputs(actionId: String): List<ActionOutputDefinitio
     "file.pick" -> listOf(
         output("path", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "File"),
     )
+    "image.resize" -> listOf(
+        output("path", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Image"),
+    )
     "photo.pick" -> listOf(
         output("path", ActionValueType.TEXT, nameArgumentKeys = listOf("var"), defaultName = "Photo"),
     )

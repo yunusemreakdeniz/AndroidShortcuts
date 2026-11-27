@@ -952,4 +952,27 @@
     <string name="catalog_action_network_info_description" formatted="false">Bağlantı türü (wifi, cellular, none), IP adresi, ücretli bağlantı ve VPN</string>
     <string name="catalog_action_network_info_field_var_label" formatted="false">Şuraya kaydet</string>
     <string name="catalog_action_network_info_field_var_hint" formatted="false">Değişken adı (varsayılan Network; ayrıca Network_ip, Network_vpn ve diğerleri)</string>
+    <string name="catalog_action_image_resize_name" formatted="false">Görseli yeniden boyutlandır</string>
+    <string name="catalog_action_image_resize_description" formatted="false">Kısayol dosyalarındaki bir görseli oranını koruyarak bir genişliğe ölçekler</string>
+    <string name="catalog_action_image_resize_field_path_label" formatted="false">Görsel</string>
+    <string name="catalog_action_image_resize_field_path_hint" formatted="false">Örneğin {{ Photo }}</string>
+    <string name="catalog_action_image_resize_field_width_label" formatted="false">Genişlik</string>
+    <string name="catalog_action_image_resize_field_width_hint" formatted="false">Piksel, 16 ile 8192 arası</string>
+    <string name="catalog_action_image_resize_field_format_label" formatted="false">Biçim</string>
+    <string name="catalog_action_image_resize_field_format_hint" formatted="false">jpg (varsayılan) veya png</string>
+    <string name="catalog_action_image_resize_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_image_resize_field_var_hint" formatted="false">Değişken adı (varsayılan Image; yeni dosyanın yolunu tutar)</string>
+    <string name="catalog_action_calendar_add_name" formatted="false">Takvime etkinlik ekle</string>
+    <string name="catalog_action_calendar_add_description" formatted="false">Takvimi etkinlik doldurulmuş olarak açar, kaydetmeye hazır</string>
+    <string name="catalog_action_calendar_add_field_title_label" formatted="false">Başlık</string>
+    <string name="catalog_action_calendar_add_field_title_hint" formatted="false">Örneğin Dişçi</string>
+    <string name="catalog_action_calendar_add_field_start_label" formatted="false">Başlangıç</string>
+    <string name="catalog_action_calendar_add_field_start_hint" formatted="false">2026-12-31 18:30, tüm gün için yalnızca tarih ya da {{ Date }}</string>
+    <string name="catalog_action_calendar_add_field_minutes_label" formatted="false">Süre (dakika)</string>
+    <string name="catalog_action_calendar_add_field_minutes_hint" formatted="false">Varsayılan 60</string>
+    <string name="catalog_action_calendar_add_field_all_day_label" formatted="false">Tüm gün</string>
+    <string name="catalog_action_calendar_add_field_location_label" formatted="false">Konum</string>
+    <string name="catalog_action_calendar_add_field_location_hint" formatted="false">İsteğe bağlı</string>
+    <string name="catalog_action_calendar_add_field_notes_label" formatted="false">Notlar</string>
+    <string name="catalog_action_calendar_add_field_notes_hint" formatted="false">İsteğe bağlı</string>
 </resources>

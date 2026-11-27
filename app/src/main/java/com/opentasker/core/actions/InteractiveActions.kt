@@ -632,3 +632,38 @@ class PickFileAction : DeclaredAction(ActionCatalog.require("file.pick")) {
         return ActionResult.Success
     }
 }
+
+/** Resize Image: scales a picture in the shortcut files to a width, keeping its shape. */
+class ResizeImageAction : DeclaredAction(ActionCatalog.require("image.resize")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val path = args["path"]?.trim()?.takeIf(String::isNotEmpty) ?: return ActionResult.Failure("missing image path")
+        val width = args["width"]?.trim()?.toIntOrNull()?.takeIf { it in 16..8192 }
+            ?: return ActionResult.Failure("width must be between 16 and 8192 pixels")
+        val png = args["format"]?.trim()?.lowercase() == "png"
+        val output = dialogOutput(args, "Image") ?: return ActionResult.Failure("invalid output variable")
+        val base = java.io.File(ctx.app.filesDir, "user_files").canonicalFile
+        val source = resolveSandboxTarget(base, path, mustExist = true)?.takeIf { it.isFile }
+            ?: return ActionResult.Failure("no image at $path in the shortcut files")
+        val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+        android.graphics.BitmapFactory.decodeFile(source.path, bounds)
+        if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return ActionResult.Failure("$path is not an image Android can read")
+        // Decode at the smallest power-of-two size still wider than the target, so a big photo
+        // never needs its full size in memory.
+        var sample = 1
+        while (bounds.outWidth / (sample * 2) >= width) sample *= 2
+        val decoded = android.graphics.BitmapFactory.decodeFile(source.path, android.graphics.BitmapFactory.Options().apply { inSampleSize = sample })
+            ?: return ActionResult.Failure("$path could not be decoded")
+        val height = (decoded.height.toLong() * width / decoded.width).toInt().coerceAtLeast(1)
+        val scaled = android.graphics.Bitmap.createScaledBitmap(decoded, width, height, true)
+        val name = source.nameWithoutExtension + "_" + width + (if (png) ".png" else ".jpg")
+        val target = java.io.File(source.parentFile, name)
+        target.outputStream().use { out ->
+            scaled.compress(if (png) android.graphics.Bitmap.CompressFormat.PNG else android.graphics.Bitmap.CompressFormat.JPEG, 90, out)
+        }
+        if (scaled !== decoded) scaled.recycle()
+        decoded.recycle()
+        ctx.variables.set(output, target.relativeTo(base).invariantSeparatorsPath)
+        ctx.logger("Resize Image: ${width}x$height")
+        return ActionResult.Success
+    }
+}

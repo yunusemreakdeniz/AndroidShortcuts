@@ -129,3 +129,39 @@ class ShareFileAction : DeclaredAction(ActionCatalog.require("file.share")) {
         return launch(ctx, chooser, "the share sheet")
     }
 }
+
+/** Add New Event: opens the calendar app with the event filled in, for the person to save. */
+class AddCalendarEventAction : DeclaredAction(ActionCatalog.require("calendar.add")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val title = args["title"]?.trim()?.takeIf(String::isNotEmpty) ?: return ActionResult.Failure("missing title")
+        val start = CalendarTimes.parse(args["start"].orEmpty())
+            ?: return ActionResult.Failure("start must look like 2026-12-31 18:30 or 2026-12-31")
+        val minutes = args["minutes"]?.trim().orEmpty().ifEmpty { "60" }.toLongOrNull()?.takeIf { it in 1..60L * 24 * 31 }
+            ?: return ActionResult.Failure("minutes must be between 1 and 44640")
+        val allDay = args.flag("all_day", false) || start.second
+        val insert = Intent(Intent.ACTION_INSERT, android.provider.CalendarContract.Events.CONTENT_URI)
+            .putExtra(android.provider.CalendarContract.Events.TITLE, title.take(500))
+            .putExtra(android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME, start.first)
+            .putExtra(android.provider.CalendarContract.EXTRA_EVENT_END_TIME, start.first + minutes * 60_000L)
+            .putExtra(android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY, allDay)
+        args["location"]?.trim()?.takeIf(String::isNotEmpty)?.let { insert.putExtra(android.provider.CalendarContract.Events.EVENT_LOCATION, it.take(500)) }
+        args["notes"]?.trim()?.takeIf(String::isNotEmpty)?.let { insert.putExtra(android.provider.CalendarContract.Events.DESCRIPTION, it.take(4000)) }
+        return launch(ctx, insert, "the calendar")
+    }
+}
+
+internal object CalendarTimes {
+    /** Epoch millis in the device time zone, and whether only a date was given. */
+    fun parse(raw: String, zone: java.time.ZoneId = java.time.ZoneId.systemDefault()): Pair<Long, Boolean>? {
+        val text = raw.trim()
+        runCatching {
+            val dateTime = java.time.LocalDateTime.parse(text.replace(' ', 'T'))
+            return dateTime.atZone(zone).toInstant().toEpochMilli() to false
+        }
+        runCatching {
+            val date = java.time.LocalDate.parse(text)
+            return date.atStartOfDay(zone).toInstant().toEpochMilli() to true
+        }
+        return null
+    }
+}
