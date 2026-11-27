@@ -258,6 +258,7 @@ fun ActiveAutomationUi(
     // New automation from the Automation tab: chosen trigger type, then the profile waiting for it.
     var newAutomationType by rememberSaveable { mutableStateOf<String?>(null) }
     var pendingTriggerProfile by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingTriggers by remember { mutableStateOf<List<com.opentasker.core.model.ContextSpec>?>(null) }
     // Kısayollar' own dialogs: new shortcut (then open it), rename and delete from the editor.
     var showNewShortcutDialog by rememberSaveable { mutableStateOf(false) }
     var pendingOpenShortcut by rememberSaveable { mutableStateOf<String?>(null) }
@@ -817,8 +818,9 @@ fun ActiveAutomationUi(
                 newAutomationType?.let { typeName ->
                     val type = ContextType.valueOf(typeName)
                     val triggerLabel = stringResource(contextTitleRes(type))
-                    NewAutomationShortcutDialog(type = type, tasks = projectTasks, onDismiss = { newAutomationType = null }, onPick = { task ->
+                    AutomationWizardDialog(type = type, tasks = projectTasks, onDismiss = { newAutomationType = null }, onCreate = { triggers, task ->
                         val name = "$triggerLabel → ${task.name}"
+                        pendingTriggers = triggers
                         // Created off until its trigger is set; the trigger editor opens once it exists.
                         viewModel.createProfile(name = name, enabled = false, enterTaskId = task.id, exitTaskId = null, cooldownSec = 0,
                             automationMode = AutomationMode.SINGLE, projectId = selectedProjectId ?: DEFAULT_PROJECT_ID)
@@ -830,7 +832,10 @@ fun ActiveAutomationUi(
                     val (typeName, name) = pendingTriggerProfile?.split('|', limit = 2) ?: return@LaunchedEffect
                     projectProfiles.filter { it.name == name && it.contexts.isEmpty() }.maxByOrNull { it.id }?.let {
                         pendingTriggerProfile = null
-                        openContextEdit(it, ContextType.valueOf(typeName))
+                        // The wizard already knows the trigger: save it and switch the automation on.
+                        pendingTriggers?.let { triggers -> viewModel.updateProfile(it.copy(contexts = triggers, enabled = true)) }
+                            ?: openContextEdit(it, ContextType.valueOf(typeName))
+                        pendingTriggers = null
                     }
                 }
                 AutomationScreen(

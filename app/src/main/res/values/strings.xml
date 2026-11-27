@@ -2130,4 +2130,12 @@
     <string name="inline_done">Done</string>
     <string name="inline_more">Advanced edit</string>
     <string name="shortcut_editor_drag_hint">Tap a step to edit it, long-press to move it</string>
+    <string name="wizard_when">When?</string>
+    <string name="wizard_days">On these days</string>
+    <string name="wizard_charging_on">When the charger is connected</string>
+    <string name="wizard_charging_off">When the charger is disconnected</string>
+    <string name="wizard_battery_low">When the battery is low</string>
+    <string name="wizard_battery_value">At or below %1$d%%</string>
+    <string name="wizard_app">When this app opens</string>
+    <string name="wizard_next">Next</string>
 </resources>

@@ -887,4 +887,12 @@
     <string name="inline_done">Bitti</string>
     <string name="inline_more">Gelişmiş düzenle</string>
     <string name="shortcut_editor_drag_hint">Düzenlemek için adıma dokun, taşımak için basılı tutup sürükle</string>
+    <string name="wizard_when">Ne zaman?</string>
+    <string name="wizard_days">Bu günlerde</string>
+    <string name="wizard_charging_on">Şarja takılınca</string>
+    <string name="wizard_charging_off">Şarjdan çıkarılınca</string>
+    <string name="wizard_battery_low">Pil azalınca</string>
+    <string name="wizard_battery_value">%%%1$d ve altında</string>
+    <string name="wizard_app">Bu uygulama açılınca</string>
+    <string name="wizard_next">İleri</string>
 </resources>
