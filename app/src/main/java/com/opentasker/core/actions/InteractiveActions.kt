@@ -45,6 +45,7 @@ internal object InteractiveDialogCoordinator {
     const val KIND_DICTATE = "dictate"
     const val KIND_PHOTO = "photo"
     const val KIND_FILE = "file"
+    const val KIND_CAMERA = "camera"
     const val EXTRA_DATE_MODE = "com.opentasker.dialog.DATE_MODE"
     const val EXTRA_LANGUAGE = "com.opentasker.dialog.LANGUAGE"
 
@@ -129,6 +130,7 @@ class InteractiveDialogActivity : Activity() {
             InteractiveDialogCoordinator.KIND_DICTATE -> startDictation()
             InteractiveDialogCoordinator.KIND_PHOTO -> startPhotoPicker()
             InteractiveDialogCoordinator.KIND_FILE -> startFilePicker()
+            InteractiveDialogCoordinator.KIND_CAMERA -> startCamera()
             else -> dialog = buildDialog().also { it.show() }
         }
     }
@@ -211,6 +213,32 @@ class InteractiveDialogActivity : Activity() {
         }
     }
 
+    private var capture: java.io.File? = null
+
+    /** The system camera app writes straight into Photos/ through our FileProvider. */
+    private fun startCamera() {
+        val dir = java.io.File(filesDir, "user_files/Photos").apply { mkdirs() }
+        val file = java.io.File(dir, "photo_${System.currentTimeMillis()}.jpg")
+        val uri = runCatching {
+            androidx.core.content.FileProvider.getUriForFile(this, "$packageName.files", file)
+        }.getOrElse {
+            reply(InteractiveDialogCoordinator.DialogAnswer.Failed("the photo file could not be prepared"))
+            return
+        }
+        capture = file
+        val take = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+            .putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri)
+            .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        take.clipData = android.content.ClipData.newRawUri(file.name, uri)
+        try {
+            @Suppress("DEPRECATION")
+            startActivityForResult(take, CAMERA_REQUEST)
+        } catch (_: android.content.ActivityNotFoundException) {
+            capture = null
+            reply(InteractiveDialogCoordinator.DialogAnswer.Failed("no camera app is available"))
+        }
+    }
+
     private fun startFilePicker() {
         val pick = Intent(Intent.ACTION_OPEN_DOCUMENT).setType("*/*").addCategory(Intent.CATEGORY_OPENABLE)
         try {
@@ -279,6 +307,17 @@ class InteractiveDialogActivity : Activity() {
     @Deprecated("Activity result callback for the platform speech recognizer and photo picker.")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CAMERA_REQUEST) {
+            val file = capture
+            capture = null
+            if (resultCode == RESULT_OK && file != null && file.length() > 0) {
+                reply(InteractiveDialogCoordinator.DialogAnswer.Accepted("Photos/${file.name}"))
+            } else {
+                file?.delete()
+                reply(InteractiveDialogCoordinator.DialogAnswer.Dismissed)
+            }
+            return
+        }
         if (requestCode == PHOTO_REQUEST || requestCode == FILE_REQUEST) {
             val uri = data?.data
             when {
@@ -415,6 +454,7 @@ class InteractiveDialogActivity : Activity() {
         private const val DICTATION_REQUEST = 7411
         private const val PHOTO_REQUEST = 7412
         private const val FILE_REQUEST = 7413
+        private const val CAMERA_REQUEST = 7414
         private const val MAX_PHOTO_BYTES = 50L * 1024 * 1024
         private val open = ConcurrentHashMap<String, InteractiveDialogActivity>()
 
@@ -731,5 +771,21 @@ class MakePdfAction : DeclaredAction(ActionCatalog.require("pdf.create")) {
 
     private companion object {
         const val MAX_PDF_CHARS = 200_000
+    }
+}
+
+/** Take Photo: the camera app takes a picture straight into the shortcut files (Photos/). */
+class TakePhotoAction : DeclaredAction(ActionCatalog.require("photo.take")) {
+    override suspend fun run(ctx: ActionContext, args: Map<String, String>): ActionResult {
+        val output = dialogOutput(args, "Photo") ?: return ActionResult.Failure("invalid output variable")
+        val outcome = InteractiveDialogCoordinator.ask(ctx.app) {
+            putExtra(InteractiveDialogCoordinator.EXTRA_KIND, InteractiveDialogCoordinator.KIND_CAMERA)
+        }
+        val answer = (outcome as? InteractiveDialogCoordinator.Outcome.Answered)?.answer
+            as? InteractiveDialogCoordinator.DialogAnswer.Accepted
+            ?: return dialogFailure(outcome)
+        ctx.variables.set(output, answer.text)
+        ctx.logger("Take Photo: saved ${answer.text}")
+        return ActionResult.Success
     }
 }

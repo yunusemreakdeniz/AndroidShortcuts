@@ -221,6 +221,7 @@ private fun declaredActionSummaryRes(actionId: String): Int = when (actionId) {
     "date.ask",
     "dictate.text",
     "photo.pick",
+    "photo.take",
     "image.resize",
     "pdf.create",
     "calendar.add",
@@ -2075,6 +2076,17 @@ private fun registerInteractiveActionMetadata() {
                 ActionField("all_day", R.string.catalog_action_calendar_add_field_all_day_label, FieldType.CHECKBOX),
                 ActionField("location", R.string.catalog_action_calendar_add_field_location_label, hintRes = R.string.catalog_action_calendar_add_field_location_hint),
                 ActionField("notes", R.string.catalog_action_calendar_add_field_notes_label, FieldType.MULTILINE, hintRes = R.string.catalog_action_calendar_add_field_notes_hint),
+            ),
+        )
+    )
+    ActionMetadataRegistry.register(
+        ActionMetadata(
+            id = "photo.take",
+            nameRes = R.string.catalog_action_photo_take_name,
+            descriptionRes = R.string.catalog_action_photo_take_description,
+            categoryRes = R.string.catalog_category_media,
+            fields = listOf(
+                ActionField("var", R.string.catalog_action_photo_take_field_var_label, hintRes = R.string.catalog_action_photo_take_field_var_hint),
             ),
         )
     )

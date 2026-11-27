@@ -1001,4 +1001,8 @@
     <string name="catalog_action_pdf_create_field_name_hint" formatted="false">Varsayılan: başlık ya da document</string>
     <string name="catalog_action_pdf_create_field_var_label" formatted="false">Şuraya kaydet</string>
     <string name="catalog_action_pdf_create_field_var_hint" formatted="false">Değişken adı (varsayılan Pdf; Files/notlar.pdf gibi bir yol tutar)</string>
+    <string name="catalog_action_photo_take_name" formatted="false">Fotoğraf çek</string>
+    <string name="catalog_action_photo_take_description" formatted="false">Kamerayı açar; fotoğraf kısayol dosyalarına kaydedilir</string>
+    <string name="catalog_action_photo_take_field_var_label" formatted="false">Şuraya kaydet</string>
+    <string name="catalog_action_photo_take_field_var_hint" formatted="false">Değişken adı (varsayılan Photo; Photos/photo.jpg gibi bir yol tutar)</string>
 </resources>

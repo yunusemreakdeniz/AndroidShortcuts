@@ -1285,7 +1285,7 @@ internal fun actionTimeoutMs(actionType: String): Long = when {
     actionType == "input.ask" || actionType == "menu.choose" ||
         actionType == "alert.show" || actionType == "result.show" ||
         actionType == "list.choose" || actionType == "date.ask" || actionType == "dictate.text" ||
-        actionType == "photo.pick" || actionType == "file.pick" -> MEDIA_ACTION_TIMEOUT_MS
+        actionType == "photo.pick" || actionType == "photo.take" || actionType == "file.pick" -> MEDIA_ACTION_TIMEOUT_MS
     else -> DEFAULT_ACTION_TIMEOUT_MS
 }
 

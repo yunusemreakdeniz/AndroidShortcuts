@@ -63,7 +63,7 @@ Her döngü turu bu listeden sıradaki işleri alır; biten satır işaretlenir.
 - [x] Yol tarifi al (harita)
 
 ## G. Medya ve belgeler
-- [ ] Fotoğraf çek / video kaydet
+- [~] Fotoğraf çek (sistem kamerası, Photos/); video kaydet sırada
 - [~] Görseli yeniden boyutlandır ve jpg/png dönüştür; kırpma sırada
 - [ ] QR kod oluştur ve oku
 - [ ] Ses kaydı

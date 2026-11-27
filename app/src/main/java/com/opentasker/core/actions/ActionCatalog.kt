@@ -101,6 +101,7 @@ object ActionCatalog {
         define("date.ask", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::AskForDateAction),
         define("dictate.text", ActionCategory.SYSTEM, ActionRetrySafety.NEVER, ::DictateTextAction),
         define("photo.pick", ActionCategory.MEDIA, ActionRetrySafety.NEVER, ::PickPhotoAction),
+        define("photo.take", ActionCategory.MEDIA, ActionRetrySafety.NEVER, ::TakePhotoAction),
         define("image.resize", ActionCategory.MEDIA, ActionRetrySafety.IDEMPOTENT, ::ResizeImageAction),
         define("pdf.create", ActionCategory.FILE, ActionRetrySafety.IDEMPOTENT, ::MakePdfAction),
         define("calendar.add", ActionCategory.APP, ActionRetrySafety.NEVER, ::AddCalendarEventAction),

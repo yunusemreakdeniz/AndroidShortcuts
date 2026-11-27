@@ -1003,4 +1003,8 @@
     <string name="catalog_action_pdf_create_field_name_hint" formatted="false">Default: the title, or document</string>
     <string name="catalog_action_pdf_create_field_var_label" formatted="false">Save to</string>
     <string name="catalog_action_pdf_create_field_var_hint" formatted="false">Variable name (default Pdf; holds a path like Files/notes.pdf)</string>
+    <string name="catalog_action_photo_take_name" formatted="false">Take Photo</string>
+    <string name="catalog_action_photo_take_description" formatted="false">Open the camera; the photo is saved in the shortcut files</string>
+    <string name="catalog_action_photo_take_field_var_label" formatted="false">Save to</string>
+    <string name="catalog_action_photo_take_field_var_hint" formatted="false">Variable name (default Photo; holds a path like Photos/photo.jpg)</string>
 </resources>
